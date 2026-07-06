@@ -1,3 +1,0 @@
-# select.yaml — danh sách version CORE (RetailRocket mặc định)
-run:
-  - core_trm_retailrocket.yaml

@@ -7,7 +7,7 @@
 logging:
   # Thư mục GỐC chứa log. Log của mỗi dự án được ghi vào <dir>/<tên dự án>/
   # (tên dự án lấy từ project.name trong config của dự án),
-  # ví dụ: Log/catsa/001-04-07-2026-09.log
+  # ví dụ: Log/retailrocket/001-04-07-2026-09.log
   dir: Log
 
   # Mức log tối thiểu được ghi: DEBUG | INFO | WARNING | ERROR

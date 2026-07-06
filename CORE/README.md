@@ -9,21 +9,19 @@ Baseline [CORE (SIGIR'22)](https://github.com/RUCAIBox/CORE) — chạy trên d�
 python tienxuly/main.py --suite diginetica
 
 # Train CORE
-python CORE/main.py --suite diginetica              # trm + ave
+python CORE/main.py                              # RetailRocket (mặc định)
 python CORE/main.py --suite diginetica --run core_trm.yaml
-python CORE/main.py --run core_trm_retailrocket.yaml
+python CORE/main.py --suite retailrocket --run core_trm_retailrocket.yaml
 ```
 
 ## Cấu hình
 
 Giống CatSA, trong `config/core/`:
 
-- `config/core/select.yaml` — RetailRocket mặc định
+- `config/core/retailrocket/select.yaml` — RetailRocket
 - `config/core/diginetica/select.yaml` — Diginetica
-- Mỗi file version gồm: `project`, `data`, `core_model`, `core_training`, `evaluation`
 
-Log: `Log/CORE/<custom_filename>`  
-Checkpoint: `checkpoints/CORE/...`
+Log: `Log/retailrocket/` hoặc `Log/diginetica/` (theo `project.name`)
 
 ## Khác bản gốc
 

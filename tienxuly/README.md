@@ -5,8 +5,11 @@ Module chạy **độc lập**, chuyển dataset thô thành sessions + lookup t
 ## Chạy
 
 ```bash
-# Chạy LẦN LƯỢT mọi file trong config/tienxuly/select.yaml
+# Chạy LẦN LƯỢT config/tienxuly/retailrocket/select.yaml (mặc định)
 python tienxuly/main.py
+
+# Diginetica
+python tienxuly/main.py --suite diginetica
 
 # Chỉ một phiên bản
 python tienxuly/main.py --run retailrocket_2_5.yaml
@@ -16,9 +19,9 @@ python tienxuly/main.py --run retailrocket_2_5.yaml
 
 | File | Ý nghĩa |
 |---|---|
-| `config/tienxuly/dataset.yaml` | nguồn dữ liệu (kagglehub / local) |
-| `config/tienxuly/select.yaml` | danh sách file preprocess sẽ chạy |
-| `config/tienxuly/retailrocket_*.yaml` | từng phiên bản tiền xử lý |
+| `config/tienxuly/retailrocket/dataset.yaml` | nguồn RetailRocket |
+| `config/tienxuly/retailrocket/select.yaml` | danh sách preprocess RR |
+| `config/tienxuly/diginetica/` | tương tự cho Diginetica |
 
 ### Tham số mới trong mỗi file `preprocess`
 

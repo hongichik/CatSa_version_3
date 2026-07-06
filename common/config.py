@@ -5,8 +5,8 @@ Cấu hình được tách thành các thư mục con theo từng phần của h
     config/common/wandb.yaml         — Weights & Biases (tracking online)
     config/tienxuly/dataset.yaml     — nguồn dữ liệu (tienxuly/download.py)
     config/tienxuly/preprocess.yaml  — tham số tiền xử lý (tienxuly/preprocess.py)
-    config/catsa/select.yaml         — CHỌN version cấu hình CatSA sẽ chạy
-    config/catsa/catsa_v1.yaml       — toàn bộ cấu hình CatSA version 1
+    config/catsa/retailrocket/select.yaml  — CHỌN version CatSA (RetailRocket)
+    config/catsa/retailrocket/catsa_v1.yaml — toàn bộ cấu hình CatSA version 1
                                        (project, data, model, augment, training, evaluation)
 
 Loader QUÉT ĐỆ QUY mọi file *.yaml / *.yml trong cây config/ rồi gộp các
@@ -247,10 +247,9 @@ def list_catsa_runs(
 ) -> list[str]:
     """Trả về danh sách file version CatSA trong select.yaml."""
     config_dir = Path(config_dir)
-    if suite:
-        select_path = config_dir / "catsa" / suite / SELECT_FILE
-    else:
-        select_path = config_dir / "catsa" / SELECT_FILE
+    if suite is None:
+        suite = "retailrocket"
+    select_path = config_dir / "catsa" / suite / SELECT_FILE
     if not select_path.exists():
         return []
     with open(select_path, encoding="utf-8") as f:
@@ -264,10 +263,9 @@ def list_core_runs(
 ) -> list[str]:
     """Trả về danh sách file version CORE trong select.yaml."""
     config_dir = Path(config_dir)
-    if suite:
-        select_path = config_dir / "core" / suite / SELECT_FILE
-    else:
-        select_path = config_dir / "core" / SELECT_FILE
+    if suite is None:
+        suite = "retailrocket"
+    select_path = config_dir / "core" / suite / SELECT_FILE
     if not select_path.exists():
         return []
     with open(select_path, encoding="utf-8") as f:
@@ -281,14 +279,13 @@ def list_preprocess_runs(
 ) -> list[str]:
     """Trả về danh sách file version tiền xử lý trong select.yaml.
 
-    suite=None  → config/tienxuly/select.yaml (RetailRocket, mặc định)
+    suite mặc định: retailrocket → config/tienxuly/retailrocket/select.yaml
     suite='diginetica' → config/tienxuly/diginetica/select.yaml
     """
     config_dir = Path(config_dir)
-    if suite:
-        select_path = config_dir / "tienxuly" / suite / SELECT_FILE
-    else:
-        select_path = config_dir / "tienxuly" / SELECT_FILE
+    if suite is None:
+        suite = "retailrocket"
+    select_path = config_dir / "tienxuly" / suite / SELECT_FILE
     if not select_path.exists():
         return []
     with open(select_path, encoding="utf-8") as f:
@@ -422,6 +419,10 @@ def _collect_config_files(
     - catsa_run / preprocess_run: chỉ nạp file version tương ứng trong thư mục đó.
     - Không chỉ định => nạp phần tử đầu trong run (load_config đơn lẻ).
     """
+    if catsa_suite is None and not core_only:
+        catsa_suite = "retailrocket"
+    if core_suite is None:
+        core_suite = "retailrocket"
     files: list[Path] = []
     dirs = [config_dir] + sorted(p for p in config_dir.rglob("*") if p.is_dir())
     for d in dirs:
@@ -476,6 +477,10 @@ def _collect_config_files(
                     if d != run_path.parent:
                         continue
                     chosen_run = preprocess_run
+                elif catsa_suite:
+                    if d != _tienxuly_root(config_dir) / catsa_suite:
+                        continue
+                    chosen_run = None
                 elif d != _tienxuly_root(config_dir):
                     continue
                 else:

@@ -1,0 +1,14 @@
+# select.yaml — danh sách version CatSA cho RetailRocket
+# python CatSA/main.py                              → chạy lần lượt (mặc định retailrocket)
+# python CatSA/main.py --suite retailrocket --run catsa_2_5.yaml
+#
+# tienxuly/main.py không train CatSA — khi load config chung chỉ dùng phần tử
+# đầu tiên trong list (dataset + preprocess).
+
+run:
+  # - catsa_v1.yaml              # item_hon_5 (baseline)
+  - catsa_2_5.yaml
+  - catsa_3_6.yaml
+  - catsa_4_7.yaml
+  - catsa_2_7.yaml
+  - catsa_category.yaml

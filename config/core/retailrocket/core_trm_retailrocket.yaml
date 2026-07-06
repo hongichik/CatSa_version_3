@@ -1,6 +1,6 @@
 # CORE-trm trên RetailRocket item_hon_5
 project:
-  name: CORE
+  name: retailrocket
   filename_mode: custom
   custom_filename: core_trm_retailrocket.log
 

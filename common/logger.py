@@ -1,6 +1,6 @@
 """Logger dùng chung cho toàn pipeline CatSA.
 
-Log ghi vào <logging.dir>/<project.name>/ (ví dụ Log/catsa/):
+Log ghi vào <logging.dir>/<project.name>/ (ví dụ Log/retailrocket/):
 - thư mục gốc lấy từ config/common/logging.yaml (dùng chung mọi dự án);
 - tên dự án + cách đặt tên file lấy từ config riêng của dự án
   (ví dụ config/catsa/project.yaml):

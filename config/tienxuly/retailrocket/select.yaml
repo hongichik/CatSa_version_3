@@ -1,0 +1,10 @@
+# select.yaml — danh sách version preprocess RetailRocket
+# python tienxuly/main.py                              → chạy lần lượt (mặc định retailrocket)
+# python tienxuly/main.py --suite retailrocket --run retailrocket_2_5.yaml
+run:
+  # - retailrocket_item_hon_5.yaml
+  - retailrocket_2_5.yaml
+  - retailrocket_3_6.yaml
+  - retailrocket_4_7.yaml
+  - retailrocket_2_7.yaml
+  - retailrocket_category.yaml

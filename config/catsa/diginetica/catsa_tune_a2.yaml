@@ -1,7 +1,7 @@
 # CatSA A2 (chỉ L_rec) — tune cho Diginetica flat category
 # Giả thuyết: contrastive + augment không giúp khi không có taxonomy
 project:
-  name: CatSA_v1
+  name: diginetica
   filename_mode: custom
   custom_filename: diginetica_tune_a2.log
 
@@ -39,7 +39,7 @@ training:
   device: auto
   num_workers: 0
   checkpoint_dir: checkpoints
-  save_dir: "checkpoints/CatSA_v1/catsa_v1/diginetica_tune_a2"
+  save_dir: "checkpoints/diginetica/catsa_v1/diginetica_tune_a2"
 
 evaluation:
   top_k: [10, 20]

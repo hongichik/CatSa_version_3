@@ -1,9 +1,9 @@
 """Entrypoint huấn luyện CORE — dùng dữ liệu đã tiền xử lý trong data/.
 
 Cách chạy (từ thư mục gốc dự án):
-    python CORE/main.py --suite diginetica
+    python CORE/main.py                              # config/core/retailrocket/select.yaml
     python CORE/main.py --suite diginetica --run core_trm.yaml
-    python CORE/main.py --run core_trm_retailrocket.yaml
+    python CORE/main.py --suite retailrocket --run core_trm_retailrocket.yaml
 
 Cấu hình: config/core/ (tương tự config/catsa/).
 Paper: https://github.com/RUCAIBox/CORE
@@ -91,9 +91,9 @@ def main() -> None:
     )
     parser.add_argument(
         "--suite",
-        default=None,
-        choices=["diginetica"],
-        help="Chạy select.yaml trong config/core/<suite>/",
+        default="retailrocket",
+        choices=["retailrocket", "diginetica"],
+        help="Chạy select.yaml trong config/core/<suite>/ (mặc định: retailrocket)",
     )
     args = parser.parse_args()
 

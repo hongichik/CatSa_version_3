@@ -15,7 +15,8 @@ from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
 
 REPO = Path(__file__).resolve().parents[1]
-LOG = REPO / "Log" / "CatSA_v1"
+LOG_RETAIL = REPO / "Log" / "retailrocket"
+LOG_DIGI = REPO / "Log" / "diginetica"
 TEST_ALL_JSONL = Path("/home/hongnguyen/test_all/Log/_queue/v1_core_eval/results-2026-07-03-01-53-23.jsonl")
 
 GREEN_F = PatternFill("solid", fgColor="C6EFCE")
@@ -125,33 +126,33 @@ def _parse_core_test(line: str) -> dict[str, float]:
 def _load_demo2_rows() -> list[dict]:
     rows: list[dict] = []
     mapping = [
-        ("diginetica", "CatSA", "diginetica_v1.log", "v1", "demo2"),
-        ("diginetica", "CatSA", "diginetica_v2.log", "v2", "demo2"),
-        ("diginetica", "CatSA", "diginetica_v3.log", "v3", "demo2"),
-        ("diginetica", "CatSA", "diginetica_v4.log", "v4", "demo2"),
-        ("diginetica", "CatSA", "diginetica_tune_a2.log", "tune_a2", "demo2"),
-        ("diginetica", "CatSA", "diginetica_tune_cl.log", "tune_cl", "demo2"),
-        ("diginetica", "CatSA", "diginetica_tune_batch256.log", "tune_batch256", "demo2"),
-        ("diginetica", "CatSA", "diginetica_tune_batch2048.log", "tune_batch2048", "demo2"),
-        ("diginetica", "CORE", "core_trm_diginetica.log", "core_trm", "demo2"),
-        ("diginetica", "CORE", "core_ave_diginetica.log", "core_ave", "demo2"),
-        ("retailrocket_item_hon_5", "CatSA", "CatSA_v1.log", "v1", "demo2"),
-        ("retailrocket_item_hon_5", "CatSA", "CatSA_v2.log", "v2", "demo2"),
-        ("retailrocket_item_hon_5", "CatSA", "CatSA_v3.log", "v3", "demo2"),
-        ("retailrocket_item_hon_5", "CatSA", "CatSA_v4.log", "v4", "demo2"),
-        ("retailrocket_2_5", "CatSA", "CatSA_2_5.log", "v1", "demo2"),
-        ("retailrocket_2_7", "CatSA", "CatSA_2_7.log", "v1", "demo2"),
-        ("retailrocket_3_6", "CatSA", "CatSA_3_6.log", "v1", "demo2"),
-        ("retailrocket_4_7", "CatSA", "CatSA_4_7.log", "v1", "demo2"),
-        ("retailrocket_category", "CatSA", "CatSA_category.log", "v1", "demo2"),
-        ("retailrocket_item_hon_5", "CORE", "core_trm_retailrocket.log", "core_trm", "demo2"),
-        ("retailrocket_1_4", "CORE", "core_trm_retailrocket_1_4.log", "core_trm", "demo2"),
-        ("retailrocket_3_7", "CORE", "core_trm_retailrocket_3_7.log", "core_trm", "demo2"),
-        ("retailrocket_same_leaf", "CORE", "core_trm_retailrocket_same_leaf.log", "core_trm", "demo2"),
-        ("retailrocket_cold", "CORE", "core_trm_retailrocket_cold.log", "core_trm", "demo2"),
+        ("diginetica", "CatSA", LOG_DIGI, "diginetica_v1.log", "v1", "demo2"),
+        ("diginetica", "CatSA", LOG_DIGI, "diginetica_v2.log", "v2", "demo2"),
+        ("diginetica", "CatSA", LOG_DIGI, "diginetica_v3.log", "v3", "demo2"),
+        ("diginetica", "CatSA", LOG_DIGI, "diginetica_v4.log", "v4", "demo2"),
+        ("diginetica", "CatSA", LOG_DIGI, "diginetica_tune_a2.log", "tune_a2", "demo2"),
+        ("diginetica", "CatSA", LOG_DIGI, "diginetica_tune_cl.log", "tune_cl", "demo2"),
+        ("diginetica", "CatSA", LOG_DIGI, "diginetica_tune_batch256.log", "tune_batch256", "demo2"),
+        ("diginetica", "CatSA", LOG_DIGI, "diginetica_tune_batch2048.log", "tune_batch2048", "demo2"),
+        ("diginetica", "CORE", LOG_DIGI, "core_trm_diginetica.log", "core_trm", "demo2"),
+        ("diginetica", "CORE", LOG_DIGI, "core_ave_diginetica.log", "core_ave", "demo2"),
+        ("retailrocket_item_hon_5", "CatSA", LOG_RETAIL, "CatSA_v1.log", "v1", "demo2"),
+        ("retailrocket_item_hon_5", "CatSA", LOG_RETAIL, "CatSA_v2.log", "v2", "demo2"),
+        ("retailrocket_item_hon_5", "CatSA", LOG_RETAIL, "CatSA_v3.log", "v3", "demo2"),
+        ("retailrocket_item_hon_5", "CatSA", LOG_RETAIL, "CatSA_v4.log", "v4", "demo2"),
+        ("retailrocket_2_5", "CatSA", LOG_RETAIL, "CatSA_2_5.log", "v1", "demo2"),
+        ("retailrocket_2_7", "CatSA", LOG_RETAIL, "CatSA_2_7.log", "v1", "demo2"),
+        ("retailrocket_3_6", "CatSA", LOG_RETAIL, "CatSA_3_6.log", "v1", "demo2"),
+        ("retailrocket_4_7", "CatSA", LOG_RETAIL, "CatSA_4_7.log", "v1", "demo2"),
+        ("retailrocket_category", "CatSA", LOG_RETAIL, "CatSA_category.log", "v1", "demo2"),
+        ("retailrocket_item_hon_5", "CORE", LOG_RETAIL, "core_trm_retailrocket.log", "core_trm", "demo2"),
+        ("retailrocket_1_4", "CORE", LOG_RETAIL, "core_trm_retailrocket_1_4.log", "core_trm", "demo2"),
+        ("retailrocket_3_7", "CORE", LOG_RETAIL, "core_trm_retailrocket_3_7.log", "core_trm", "demo2"),
+        ("retailrocket_same_leaf", "CORE", LOG_RETAIL, "core_trm_retailrocket_same_leaf.log", "core_trm", "demo2"),
+        ("retailrocket_cold", "CORE", LOG_RETAIL, "core_trm_retailrocket_cold.log", "core_trm", "demo2"),
     ]
-    for ds, model, logname, cfg, src in mapping:
-        path = LOG / logname
+    for ds, model, log_dir, logname, cfg, src in mapping:
+        path = log_dir / logname
         if not path.is_file():
             continue
         text = path.read_text()
@@ -382,7 +383,7 @@ def write_report(out: Path) -> None:
 
 def main() -> None:
     ts = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-    out = REPO / "Log" / "CatSA_v1" / f"bao_cao_catsa_core_{ts}.xlsx"
+    out = REPO / "Log" / f"bao_cao_catsa_core_{ts}.xlsx"
     write_report(out)
     print(f"Đã ghi: {out}")
 

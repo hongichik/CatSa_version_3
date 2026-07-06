@@ -14,12 +14,14 @@ config/             # TOÀN BỘ cấu hình (YAML, có chú thích từng mục
     logging.yaml    #     log: thư mục gốc, mức log, console
     wandb.yaml      #     Weights & Biases: api_key, project, run name, online/offline
   tienxuly/         #   cấu hình tiền xử lý
-    dataset.yaml    #     nguồn dữ liệu (kagglehub / local)
-    preprocess.yaml #     tham số xử lý (session gap, lọc, chia train/val/test)
-  catsa/            #   cấu hình dự án catsa - CHỈ 2 file
-    select.yaml     #     chọn version cấu hình sẽ chạy (run: catsa_v1.yaml)
-    catsa_v1.yaml   #     TOÀN BỘ cấu hình version 1: project, model (Module 1),
-                    #     augment (Module 2), training, evaluation
+    retailrocket/   #     dataset + preprocess RetailRocket
+    diginetica/     #     dataset + preprocess Diginetica
+  catsa/            #   cấu hình CatSA
+    retailrocket/   #     select.yaml + catsa_v1.yaml, catsa_2_5.yaml, ...
+    diginetica/     #     select.yaml + catsa_v1.yaml, catsa_tune_*.yaml, ...
+  core/             #   cấu hình CORE baseline
+    retailrocket/
+    diginetica/
 main.py             # lệnh gốc QUẢN LÝ CHẠY: đọc RUN/jobs.yaml, chạy job ngầm
 RUN/                # quản lý code chạy - xem RUN/README.md
   jobs.yaml         #   cấu hình job: lệnh gì, chạy lúc mấy giờ
@@ -42,7 +44,8 @@ CatSA/              # Giai đoạn 2-6: CHẠY RIÊNG - xem CatSA/README.md
   augment.py        #   Giai đoạn 5: Module 2 (same / sibling / hybrid)
   losses.py         #   Giai đoạn 6: session-level InfoNCE (symmetric)
   train.py          #   Giai đoạn 4+6: training loop, early stopping, checkpoint
-Log/                # file log (tự tạo), phân cấp Log/<dự án>/
+Log/                # file log (tự tạo), phân cấp Log/<dataset>/
+                    #   ví dụ Log/retailrocket/, Log/diginetica/
 checkpoints/        # checkpoint (tự tạo), phân cấp <dự án>/<version>/<run>/
                     #   mỗi run: best_model.pt + info.yaml (mô tả của cái gì)
 data/               # kết quả tiền xử lý (tự tạo): train.txt, val.txt,
@@ -103,11 +106,11 @@ version mới: copy `catsa_v1.yaml` → `catsa_v2.yaml`, chỉnh tham số, rồ
 Một số điểm chính:
 
 - **Logging**: `dir` trong `config/common/logging.yaml` là thư mục GỐC;
-  log của mỗi dự án ghi vào `<dir>/<tên dự án>/` (ví dụ `Log/catsa/`).
-  Tên dự án và cách đặt tên file log nằm trong section `project` của file
-  version đang chạy (`config/catsa/catsa_v1.yaml`): không khai báo gì = `auto` (tên
-  `stt-ngày-tháng-năm-giờ.log`, ví dụ `001-04-07-2026-08.log`);
-  khai báo `custom_filename` = đổi sang tên đó.
+  log ghi vào `<dir>/<dataset>/` (ví dụ `Log/retailrocket/`, `Log/diginetica/`).
+  Tên thư mục lấy từ `project.name` trong file version (`retailrocket` hoặc `diginetica`).
+  Tên file: `auto` (`stt-ngày-tháng-năm-giờ.log`) hoặc `custom_filename`.
+- **Chạy theo dataset**: `--suite retailrocket` (mặc định) hoặc `--suite diginetica`
+  cho `tienxuly/main.py`, `CatSA/main.py`, `CORE/main.py`.
 - **Weights & Biases**: bật/tắt qua `enabled` trong `config/common/wandb.yaml`;
   loss + metrics mỗi epoch và kết quả test được đẩy lên wandb song song với
   file log, tên run mặc định trùng tên file log để dễ đối chiếu.
@@ -118,9 +121,9 @@ Một số điểm chính:
   `training.save_dir`: để trống = mặc định theo version
   (`checkpoints/<dự án>/<version>/<run>/`); chỉ định đường dẫn = lưu đúng đó.
 - **Ablation A2** (Module 1 only, không CL): đặt `use_cl: false` trong
-  section `training` của `config/catsa/catsa_v1.yaml`.
-- **Chạy thử nhanh**: đặt `max_sessions` (ví dụ 5000) trong
-  `config/tienxuly/preprocess.yaml` để giới hạn dữ liệu.
+  section `training` của `config/catsa/retailrocket/catsa_v1.yaml`.
+- **Chạy thử nhanh**: đặt `max_sessions` (ví dụ 5000) trong file preprocess
+  tương ứng (vd `config/tienxuly/retailrocket/retailrocket_2_5.yaml`).
 - Hyperparameter mặc định theo tài liệu: `d=100`, `L=2`, `batch=100`, `lr=1e-3`,
   `λ=0.1`, `τ=0.5`, `η_aug=0.3`, `k_min=5`, seed 42.
 # CatSa_version_3

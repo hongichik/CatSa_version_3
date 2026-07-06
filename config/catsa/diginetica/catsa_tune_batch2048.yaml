@@ -1,6 +1,6 @@
 # CatSA A2 + batch 256 (song song tune_a2 batch 128) — align với CORE
 project:
-  name: CatSA_v1
+  name: diginetica
   filename_mode: custom
   custom_filename: diginetica_tune_batch2048.log
 
@@ -38,7 +38,7 @@ training:
   device: auto
   num_workers: 0
   checkpoint_dir: checkpoints
-  save_dir: "checkpoints/CatSA_v1/catsa_v1/diginetica_tune_batch2048"
+  save_dir: "checkpoints/diginetica/catsa_v1/diginetica_tune_batch2048"
 
 evaluation:
   top_k: [10, 20]

@@ -1,9 +1,9 @@
 """Entrypoint RIÊNG của bước huấn luyện CatSA — chạy độc lập, không qua main tập trung.
 
 Cách chạy (từ bất kỳ đâu, kết quả luôn ghi về thư mục gốc dự án):
-    python CatSA/main.py                        # chạy LẦN LƯỢT mọi file trong select.yaml
-    python CatSA/main.py --suite diginetica           # chạy select.yaml trong config/catsa/diginetica/
-    python CatSA/main.py --suite diginetica --run catsa_v1.yaml
+    python CatSA/main.py                        # chạy select.yaml trong config/catsa/retailrocket/
+    python CatSA/main.py --suite diginetica     # chạy config/catsa/diginetica/select.yaml
+    python CatSA/main.py --suite retailrocket --run catsa_v1.yaml
     python CatSA/main.py --config config_khac   # dùng cây cấu hình khác
 
 Yêu cầu: đã chạy tiền xử lý trước đó (python tienxuly/main.py) và khai báo
@@ -101,9 +101,9 @@ def main() -> None:
     )
     parser.add_argument(
         "--suite",
-        default=None,
-        choices=["diginetica"],
-        help="Chạy select.yaml trong config/catsa/<suite>/ (mặc định: config/catsa/select.yaml)",
+        default="retailrocket",
+        choices=["retailrocket", "diginetica"],
+        help="Chạy select.yaml trong config/catsa/<suite>/ (mặc định: retailrocket)",
     )
     args = parser.parse_args()
 

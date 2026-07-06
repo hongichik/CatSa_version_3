@@ -1,6 +1,6 @@
 # CatSA full CL nhẹ — batch lớn hơn, lambda_cl thấp, augment tối thiểu
 project:
-  name: CatSA_v1
+  name: diginetica
   filename_mode: custom
   custom_filename: diginetica_tune_cl.log
 
@@ -38,7 +38,7 @@ training:
   device: auto
   num_workers: 0
   checkpoint_dir: checkpoints
-  save_dir: "checkpoints/CatSA_v1/catsa_v1/diginetica_tune_cl"
+  save_dir: "checkpoints/diginetica/catsa_v1/diginetica_tune_cl"
 
 evaluation:
   top_k: [10, 20]

@@ -1,6 +1,6 @@
 # CORE-ave trên Diginetica (dữ liệu từ data/diginetica/)
 project:
-  name: CatSA_v1
+  name: diginetica
   filename_mode: custom
   custom_filename: core_ave_diginetica.log
 

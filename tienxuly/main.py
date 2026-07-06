@@ -75,9 +75,9 @@ def main() -> None:
     )
     parser.add_argument(
         "--suite",
-        default=None,
-        choices=["diginetica"],
-        help="Chạy select.yaml trong config/tienxuly/<suite>/ (mặc định: tienxuly/select.yaml)",
+        default="retailrocket",
+        choices=["retailrocket", "diginetica"],
+        help="Chạy select.yaml trong config/tienxuly/<suite>/ (mặc định: retailrocket)",
     )
     args = parser.parse_args()
 
@@ -97,7 +97,11 @@ def main() -> None:
         if len(runs) > 1:
             print(f"\n[tienxuly] ({i}/{len(runs)}) Bắt đầu: {preprocess_run}")
         try:
-            cfg = load_config(args.config, preprocess_run=preprocess_run)
+            cfg = load_config(
+                args.config,
+                preprocess_run=preprocess_run,
+                catsa_suite=args.suite,
+            )
             handle = (
                 cfg.dataset.kagglehub_handle
                 if cfg.dataset.source == "kagglehub"

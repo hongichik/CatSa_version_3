@@ -1,13 +1,17 @@
 # ============================================================================
-# CatSA_category — giống catsa_v1, data từ data/retailrocket_category
+# CATSA VERSION 1 - TOÀN BỘ cấu hình của dự án CatSA trong MỘT file
+# (được chọn chạy qua select.yaml cùng thư mục)
+# Gồm 6 phần: project, data, model (Module 1), augment (Module 2),
+# training, evaluation
+# ============================================================================
 
 # ----------------------------------------------------------------------------
 # PROJECT - tên dự án và cách đặt tên file log của dự án
 # ----------------------------------------------------------------------------
 project:
   # Tên dự án. Log sẽ được ghi vào <logging.dir>/<name>/
-  # (ví dụ: Log/catsa/001-04-07-2026-09.log)
-  name: CatSA_v1
+  # (ví dụ: Log/retailrocket/001-04-07-2026-09.log)
+  name: retailrocket
 
   # (TÙY CHỌN) Cách đặt tên file log của dự án này:
   #   - KHÔNG khai báo (hoặc để trống custom_filename) => mặc định "auto":
@@ -15,7 +19,7 @@ project:
   #   - Khai báo custom_filename => tức là có đổi tên: dùng đúng tên này
   # Có thể khai báo tường minh filename_mode: auto | custom nếu muốn rõ ràng.
   filename_mode: custom
-  custom_filename: CatSA_category.log
+  custom_filename: CatSA_v4.log
 
 # ----------------------------------------------------------------------------
 # DATA - dữ liệu ĐÃ TIỀN XỬ LÝ để train (đọc bởi CatSA/main.py)
@@ -24,7 +28,7 @@ project:
 # ----------------------------------------------------------------------------
 data:
   # Thư mục chứa train.txt, val.txt, test.txt, lookup_tables.pkl
-  data_dir: data/retailrocket_category
+  data_dir: data/retailrocket_item_hon_5
 
   # Tên file trong data_dir (đổi nếu thí nghiệm dùng tên khác)
   train_file: train.txt
@@ -64,7 +68,7 @@ augment:
   #             - chỉ dùng được khi dataset có taxonomy)
   #   hybrid  : same-leaf + random crop
   # Mỗi cặp (s, s~) sẽ chọn ngẫu nhiên 1 chiến lược trong danh sách.
-  strategies: [same, sibling, hybrid]
+  strategies: [hybrid]
 
   # Trọng số xác suất chọn từng chiến lược (cùng thứ tự với strategies).
   # Để [] = xác suất đều nhau. Ví dụ: [0.5, 0.25, 0.25]
@@ -142,11 +146,11 @@ training:
   #   - Để trống "" => MẶC ĐỊNH theo version, phân cấp tự động:
   #       <checkpoint_dir>/<tên dự án>/<version cấu hình>/<tên run>/
   #       ví dụ: checkpoints/catsa/catsa_v1/003-04-07-2026-09/best_model.pt
-  #       (tên run = tên file log, đối chiếu 1-1 với Log/<dự án>/)
+  #       (tên run = tên file log, đối chiếu 1-1 với Log/retailrocket/)
   #   - Chỉ định đường dẫn => lưu đúng thư mục đó, KHÔNG phân cấp thêm,
   #       ví dụ: save_dir: ket_qua/model_chinh_thuc
   #       (lưu ý: chạy nhiều lần với cùng save_dir sẽ ghi đè lên nhau)
-  save_dir: "checkpoints/CatSA_v1/catsa_v1/CatSA_category"
+  save_dir: "checkpoints/retailrocket/catsa_v1/CatSA_v4"
 
 # ----------------------------------------------------------------------------
 # EVALUATION - đánh giá full-ranking trên toàn vocabulary

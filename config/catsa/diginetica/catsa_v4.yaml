@@ -10,8 +10,8 @@
 # ----------------------------------------------------------------------------
 project:
   # Tên dự án. Log sẽ được ghi vào <logging.dir>/<name>/
-  # (ví dụ: Log/catsa/001-04-07-2026-09.log)
-  name: CatSA_v1
+  # (ví dụ: Log/diginetica/001-04-07-2026-09.log)
+  name: diginetica
 
   # (TÙY CHỌN) Cách đặt tên file log của dự án này:
   #   - KHÔNG khai báo (hoặc để trống custom_filename) => mặc định "auto":
@@ -146,11 +146,11 @@ training:
   #   - Để trống "" => MẶC ĐỊNH theo version, phân cấp tự động:
   #       <checkpoint_dir>/<tên dự án>/<version cấu hình>/<tên run>/
   #       ví dụ: checkpoints/catsa/catsa_v1/003-04-07-2026-09/best_model.pt
-  #       (tên run = tên file log, đối chiếu 1-1 với Log/<dự án>/)
+  #       (tên run = tên file log, đối chiếu 1-1 với Log/diginetica/)
   #   - Chỉ định đường dẫn => lưu đúng thư mục đó, KHÔNG phân cấp thêm,
   #       ví dụ: save_dir: ket_qua/model_chinh_thuc
   #       (lưu ý: chạy nhiều lần với cùng save_dir sẽ ghi đè lên nhau)
-  save_dir: "checkpoints/CatSA_v1/catsa_v1/diginetica_v4"
+  save_dir: "checkpoints/diginetica/catsa_v1/diginetica_v4"
 
 # ----------------------------------------------------------------------------
 # EVALUATION - đánh giá full-ranking trên toàn vocabulary
