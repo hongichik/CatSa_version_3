@@ -124,3 +124,4 @@ Một số điểm chính:
 - Hyperparameter mặc định theo tài liệu: `d=100`, `L=2`, `batch=100`, `lr=1e-3`,
   `λ=0.1`, `τ=0.5`, `η_aug=0.3`, `k_min=5`, seed 42.
 # CatSa_version_3
+# CatSa_version_3
