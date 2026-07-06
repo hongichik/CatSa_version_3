@@ -1,0 +1,133 @@
+2026-07-05 09:27:37 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/CatSA_v1/diginetica_tune_batch256.log
+2026-07-05 09:27:37 | INFO    | 
+====================================================================
+CẤU HÌNH LÚC CHẠY (config_dir: config | version: catsa_tune_batch256)
+====================================================================
+logging:
+  dir: Log
+  level: INFO
+  console: true
+project:
+  name: CatSA_v1
+  filename_mode: custom
+  custom_filename: diginetica_tune_batch256.log
+wandb:
+  enabled: true
+  api_key: '***da-che***'
+  project: ''
+  entity: ''
+  run_name: ''
+  mode: online
+dataset:
+  source: kagglehub
+  kagglehub_handle: retailrocket/ecommerce-dataset
+  local_path: data/raw
+  name: retailrocket
+preprocess:
+  output_dir: data/retailrocket_2_5
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+  event_types:
+  - view
+  session_same_day: true
+  session_gap_seconds: 1800
+  dedup_consecutive: false
+  min_item_support: 5
+  min_session_length: 2
+  max_session_length: 5
+  session_length_mode: filter
+  max_prefix_length: 50
+  require_item_category: false
+  val_ratio: 0.1
+  test_ratio: 0.1
+  max_sessions: 0
+data:
+  data_dir: data/diginetica
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+model:
+  embedding_dim: 100
+  num_layers: 1
+  use_taxonomy: false
+  dropout: 0.2
+augment:
+  strategies:
+  - same
+  strategy_weights: []
+  eta_aug: 0.2
+  eta_crop: 0.75
+  k_min: 5
+training:
+  use_cl: false
+  lambda_cl: 0.1
+  tau: 0.5
+  batch_size: 256
+  learning_rate: 0.001
+  weight_decay: 1.0e-05
+  max_epochs: 50
+  patience: 10
+  grad_clip: 5.0
+  seed: 42
+  device: auto
+  num_workers: 0
+  checkpoint_dir: checkpoints
+  save_dir: checkpoints/CatSA_v1/catsa_v1/diginetica_tune_batch256
+evaluation:
+  top_k:
+  - 10
+  - 20
+  primary_metric: mrr@20
+config_dir: config
+version: catsa_tune_batch256
+====================================================================
+2026-07-05 09:27:40 | INFO    | wandb: run 'diginetica_tune_batch256' — https://wandb.ai/hongichik321-aol/CatSA_v1/runs/z22b4zpa
+2026-07-05 09:27:40 | INFO    | Dữ liệu [data/diginetica]: |I|=44459, |C|=1019, train=164559 phiên
+2026-07-05 09:27:40 | INFO    | Thiết bị: cuda | use_cl=False (A2 - Module 1 only)
+2026-07-05 09:27:40 | INFO    | max_prefix_length=50 (giới hạn lịch sử khi tạo mẫu sliding window)
+2026-07-05 09:27:41 | INFO    | Số mẫu train/val/test (sliding window): 638009 / 77133 / 77988
+2026-07-05 09:27:41 | INFO    | Checkpoint của run này: /home/hongnguyen/demo2/checkpoints/CatSA_v1/catsa_v1/diginetica_tune_batch256
+2026-07-05 09:28:39 | INFO    | Epoch 1: total=7.6687, rec=7.6687, cl=0.0000 (58.1s)
+2026-07-05 09:28:48 | INFO    |   Val: hr@10=0.2682 | ndcg@10=0.1513 | mrr@10=0.1158 | hr@20=0.3730 | ndcg@20=0.1777 | mrr@20=0.1230
+2026-07-05 09:28:48 | INFO    |   → Model tốt nhất mới (mrr@20=0.1230), lưu checkpoints/CatSA_v1/catsa_v1/diginetica_tune_batch256/best_model.pt
+2026-07-05 09:29:46 | INFO    | Epoch 2: total=5.4443, rec=5.4443, cl=0.0000 (58.1s)
+2026-07-05 09:29:54 | INFO    |   Val: hr@10=0.3171 | ndcg@10=0.1775 | mrr@10=0.1351 | hr@20=0.4378 | ndcg@20=0.2080 | mrr@20=0.1434
+2026-07-05 09:29:54 | INFO    |   → Model tốt nhất mới (mrr@20=0.1434), lưu checkpoints/CatSA_v1/catsa_v1/diginetica_tune_batch256/best_model.pt
+2026-07-05 09:30:51 | INFO    | Epoch 3: total=5.0175, rec=5.0175, cl=0.0000 (57.5s)
+2026-07-05 09:31:00 | INFO    |   Val: hr@10=0.3317 | ndcg@10=0.1858 | mrr@10=0.1414 | hr@20=0.4588 | ndcg@20=0.2179 | mrr@20=0.1502
+2026-07-05 09:31:00 | INFO    |   → Model tốt nhất mới (mrr@20=0.1502), lưu checkpoints/CatSA_v1/catsa_v1/diginetica_tune_batch256/best_model.pt
+2026-07-05 09:31:57 | INFO    | Epoch 4: total=4.8263, rec=4.8263, cl=0.0000 (57.0s)
+2026-07-05 09:32:06 | INFO    |   Val: hr@10=0.3396 | ndcg@10=0.1904 | mrr@10=0.1450 | hr@20=0.4667 | ndcg@20=0.2225 | mrr@20=0.1538
+2026-07-05 09:32:06 | INFO    |   → Model tốt nhất mới (mrr@20=0.1538), lưu checkpoints/CatSA_v1/catsa_v1/diginetica_tune_batch256/best_model.pt
+2026-07-05 09:33:03 | INFO    | Epoch 5: total=4.7055, rec=4.7055, cl=0.0000 (57.2s)
+2026-07-05 09:33:11 | INFO    |   Val: hr@10=0.3465 | ndcg@10=0.1942 | mrr@10=0.1479 | hr@20=0.4726 | ndcg@20=0.2261 | mrr@20=0.1566
+2026-07-05 09:33:11 | INFO    |   → Model tốt nhất mới (mrr@20=0.1566), lưu checkpoints/CatSA_v1/catsa_v1/diginetica_tune_batch256/best_model.pt
+2026-07-05 09:34:10 | INFO    | Epoch 6: total=4.6123, rec=4.6123, cl=0.0000 (58.9s)
+2026-07-05 09:34:19 | INFO    |   Val: hr@10=0.3496 | ndcg@10=0.1957 | mrr@10=0.1487 | hr@20=0.4759 | ndcg@20=0.2275 | mrr@20=0.1574
+2026-07-05 09:34:19 | INFO    |   → Model tốt nhất mới (mrr@20=0.1574), lưu checkpoints/CatSA_v1/catsa_v1/diginetica_tune_batch256/best_model.pt
+2026-07-05 09:35:16 | INFO    | Epoch 7: total=4.5330, rec=4.5330, cl=0.0000 (56.7s)
+2026-07-05 09:35:24 | INFO    |   Val: hr@10=0.3494 | ndcg@10=0.1947 | mrr@10=0.1476 | hr@20=0.4768 | ndcg@20=0.2269 | mrr@20=0.1564
+2026-07-05 09:36:21 | INFO    | Epoch 8: total=4.4644, rec=4.4644, cl=0.0000 (56.6s)
+2026-07-05 09:36:30 | INFO    |   Val: hr@10=0.3467 | ndcg@10=0.1934 | mrr@10=0.1466 | hr@20=0.4756 | ndcg@20=0.2259 | mrr@20=0.1555
+2026-07-05 09:37:27 | INFO    | Epoch 9: total=4.4022, rec=4.4022, cl=0.0000 (56.9s)
+2026-07-05 09:37:35 | INFO    |   Val: hr@10=0.3450 | ndcg@10=0.1917 | mrr@10=0.1450 | hr@20=0.4745 | ndcg@20=0.2244 | mrr@20=0.1539
+2026-07-05 09:38:32 | INFO    | Epoch 10: total=4.3432, rec=4.3432, cl=0.0000 (56.7s)
+2026-07-05 09:38:41 | INFO    |   Val: hr@10=0.3451 | ndcg@10=0.1922 | mrr@10=0.1456 | hr@20=0.4726 | ndcg@20=0.2244 | mrr@20=0.1544
+2026-07-05 09:39:38 | INFO    | Epoch 11: total=4.2871, rec=4.2871, cl=0.0000 (57.0s)
+2026-07-05 09:39:46 | INFO    |   Val: hr@10=0.3421 | ndcg@10=0.1892 | mrr@10=0.1426 | hr@20=0.4717 | ndcg@20=0.2219 | mrr@20=0.1515
+2026-07-05 09:40:43 | INFO    | Epoch 12: total=4.2378, rec=4.2378, cl=0.0000 (57.2s)
+2026-07-05 09:40:51 | INFO    |   Val: hr@10=0.3402 | ndcg@10=0.1874 | mrr@10=0.1409 | hr@20=0.4687 | ndcg@20=0.2199 | mrr@20=0.1498
+2026-07-05 09:41:48 | INFO    | Epoch 13: total=4.1867, rec=4.1867, cl=0.0000 (57.1s)
+2026-07-05 09:41:57 | INFO    |   Val: hr@10=0.3398 | ndcg@10=0.1881 | mrr@10=0.1419 | hr@20=0.4674 | ndcg@20=0.2203 | mrr@20=0.1507
+2026-07-05 09:42:54 | INFO    | Epoch 14: total=4.1398, rec=4.1398, cl=0.0000 (57.4s)
+2026-07-05 09:43:03 | INFO    |   Val: hr@10=0.3396 | ndcg@10=0.1862 | mrr@10=0.1395 | hr@20=0.4673 | ndcg@20=0.2185 | mrr@20=0.1483
+2026-07-05 09:44:00 | INFO    | Epoch 15: total=4.1022, rec=4.1022, cl=0.0000 (57.3s)
+2026-07-05 09:44:09 | INFO    |   Val: hr@10=0.3361 | ndcg@10=0.1845 | mrr@10=0.1384 | hr@20=0.4626 | ndcg@20=0.2164 | mrr@20=0.1471
+2026-07-05 09:45:06 | INFO    | Epoch 16: total=4.0633, rec=4.0633, cl=0.0000 (56.8s)
+2026-07-05 09:45:14 | INFO    |   Val: hr@10=0.3331 | ndcg@10=0.1810 | mrr@10=0.1348 | hr@20=0.4607 | ndcg@20=0.2132 | mrr@20=0.1436
+2026-07-05 09:45:14 | INFO    | Early stopping tại epoch 16 (mrr@20 không cải thiện 10 epoch)
+2026-07-05 09:45:23 | INFO    | KẾT QUẢ TEST (best model): hr@10=0.3471 | ndcg@10=0.1940 | mrr@10=0.1473 | hr@20=0.4749 | ndcg@20=0.2263 | mrr@20=0.1561
+2026-07-05 09:45:23 | INFO    | [CatSA] Hoàn tất catsa_tune_batch256.yaml. Test metrics: hr@10=0.3471 | ndcg@10=0.1940 | mrr@10=0.1473 | hr@20=0.4749 | ndcg@20=0.2263 | mrr@20=0.1561

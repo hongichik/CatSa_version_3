@@ -1,0 +1,152 @@
+2026-07-04 03:15:23 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/CatSA_v1/CatSA_v1.log
+2026-07-04 03:15:23 | INFO    | 
+====================================================================
+CẤU HÌNH LÚC CHẠY (config_dir: config | version: catsa_v1)
+====================================================================
+logging:
+  dir: Log
+  level: INFO
+  console: true
+project:
+  name: CatSA_v1
+  filename_mode: custom
+  custom_filename: CatSA_v1.log
+wandb:
+  enabled: true
+  api_key: '***da-che***'
+  project: ''
+  entity: ''
+  run_name: ''
+  mode: online
+dataset:
+  source: kagglehub
+  kagglehub_handle: retailrocket/ecommerce-dataset
+  local_path: data/raw
+  name: retailrocket
+preprocess:
+  output_dir: data/retailrocket
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+  event_types:
+  - view
+  session_gap_seconds: 1800
+  min_item_support: 0
+  min_session_length: 2
+  max_session_length: 50
+  val_ratio: 0.1
+  test_ratio: 0.1
+  max_sessions: 0
+model:
+  embedding_dim: 100
+  num_layers: 2
+  use_taxonomy: true
+  dropout: 0.1
+augment:
+  strategies:
+  - same
+  - sibling
+  - hybrid
+  strategy_weights: []
+  eta_aug: 0.3
+  eta_crop: 0.75
+  k_min: 5
+training:
+  use_cl: true
+  lambda_cl: 0.1
+  tau: 0.5
+  batch_size: 100
+  learning_rate: 0.001
+  weight_decay: 1.0e-05
+  max_epochs: 30
+  patience: 5
+  grad_clip: 5.0
+  seed: 42
+  device: auto
+  num_workers: 0
+  checkpoint_dir: checkpoints
+  save_dir: ''
+evaluation:
+  top_k:
+  - 10
+  - 20
+  primary_metric: hr@20
+config_dir: config
+version: catsa_v1
+====================================================================
+wandb: [wandb.login()] Using explicit session credentials for https://api.wandb.ai.
+wandb: Appending key for api.wandb.ai to your netrc file: /home/hongnguyen/.netrc
+wandb: Currently logged in as: hongichik321 (hongichik321-aol) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.28.0
+wandb: Run data is saved locally in /home/hongnguyen/demo2/wandb/run-20260704_031525-78c1ny5q
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run CatSA_v1
+wandb: ⭐️ View project at https://wandb.ai/hongichik321-aol/CatSA_v1
+wandb: 🚀 View run at https://wandb.ai/hongichik321-aol/CatSA_v1/runs/78c1ny5q
+2026-07-04 03:15:26 | INFO    | wandb: run 'CatSA_v1' — https://wandb.ai/hongichik321-aol/CatSA_v1/runs/78c1ny5q
+2026-07-04 03:15:26 | INFO    | Dữ liệu: |I|=101912, |C|=1230, train=199344 phiên
+2026-07-04 03:15:26 | INFO    | Thiết bị: cuda | use_cl=True (CatSA đầy đủ)
+2026-07-04 03:15:26 | INFO    | Augmentation strategies: ['same', 'sibling', 'hybrid'] | eta_aug=0.30, k_min=5
+2026-07-04 03:15:27 | INFO    | Số mẫu train/val/test (sliding window): 529025 / 61174 / 52918
+2026-07-04 03:15:27 | INFO    | Checkpoint của run này: /home/hongnguyen/demo2/checkpoints/CatSA_v1/catsa_v1/CatSA_v1
+2026-07-04 03:18:02 | INFO    | Epoch 1: total=8.3326, rec=7.9753, cl=3.5728 (154.9s)
+2026-07-04 03:18:10 | INFO    |   Val: hr@10=0.2231 | ndcg@10=0.1258 | mrr@10=0.0960 | hr@20=0.3016 | ndcg@20=0.1456 | mrr@20=0.1014
+2026-07-04 03:18:10 | INFO    |   → Model tốt nhất mới (hr@20=0.3016), lưu checkpoints/CatSA_v1/catsa_v1/CatSA_v1/best_model.pt
+2026-07-04 03:20:44 | INFO    | Epoch 2: total=6.5237, rec=6.1636, cl=3.6007 (154.5s)
+2026-07-04 03:20:52 | INFO    |   Val: hr@10=0.2637 | ndcg@10=0.1497 | mrr@10=0.1148 | hr@20=0.3465 | ndcg@20=0.1706 | mrr@20=0.1205
+2026-07-04 03:20:52 | INFO    |   → Model tốt nhất mới (hr@20=0.3465), lưu checkpoints/CatSA_v1/catsa_v1/CatSA_v1/best_model.pt
+2026-07-04 03:23:26 | INFO    | Epoch 3: total=6.0068, rec=5.6466, cl=3.6026 (154.7s)
+2026-07-04 03:23:34 | INFO    |   Val: hr@10=0.2764 | ndcg@10=0.1596 | mrr@10=0.1237 | hr@20=0.3583 | ndcg@20=0.1802 | mrr@20=0.1293
+2026-07-04 03:23:34 | INFO    |   → Model tốt nhất mới (hr@20=0.3583), lưu checkpoints/CatSA_v1/catsa_v1/CatSA_v1/best_model.pt
+2026-07-04 03:26:09 | INFO    | Epoch 4: total=5.7076, rec=5.3473, cl=3.6026 (154.7s)
+2026-07-04 03:26:16 | INFO    |   Val: hr@10=0.2785 | ndcg@10=0.1638 | mrr@10=0.1285 | hr@20=0.3604 | ndcg@20=0.1845 | mrr@20=0.1342
+2026-07-04 03:26:16 | INFO    |   → Model tốt nhất mới (hr@20=0.3604), lưu checkpoints/CatSA_v1/catsa_v1/CatSA_v1/best_model.pt
+2026-07-04 03:28:51 | INFO    | Epoch 5: total=5.5049, rec=5.1447, cl=3.6022 (154.8s)
+2026-07-04 03:28:58 | INFO    |   Val: hr@10=0.2808 | ndcg@10=0.1664 | mrr@10=0.1312 | hr@20=0.3626 | ndcg@20=0.1871 | mrr@20=0.1369
+2026-07-04 03:28:58 | INFO    |   → Model tốt nhất mới (hr@20=0.3626), lưu checkpoints/CatSA_v1/catsa_v1/CatSA_v1/best_model.pt
+2026-07-04 03:31:33 | INFO    | Epoch 6: total=5.3531, rec=4.9929, cl=3.6027 (154.6s)
+2026-07-04 03:31:40 | INFO    |   Val: hr@10=0.2777 | ndcg@10=0.1653 | mrr@10=0.1308 | hr@20=0.3589 | ndcg@20=0.1859 | mrr@20=0.1365
+2026-07-04 03:34:15 | INFO    | Epoch 7: total=5.2344, rec=4.8740, cl=3.6036 (154.4s)
+2026-07-04 03:34:22 | INFO    |   Val: hr@10=0.2801 | ndcg@10=0.1676 | mrr@10=0.1330 | hr@20=0.3586 | ndcg@20=0.1875 | mrr@20=0.1385
+2026-07-04 03:36:57 | INFO    | Epoch 8: total=5.1356, rec=4.7751, cl=3.6051 (154.2s)
+2026-07-04 03:37:04 | INFO    |   Val: hr@10=0.2758 | ndcg@10=0.1654 | mrr@10=0.1315 | hr@20=0.3534 | ndcg@20=0.1850 | mrr@20=0.1368
+2026-07-04 03:39:38 | INFO    | Epoch 9: total=5.0545, rec=4.6939, cl=3.6061 (154.4s)
+2026-07-04 03:39:46 | INFO    |   Val: hr@10=0.2764 | ndcg@10=0.1667 | mrr@10=0.1329 | hr@20=0.3544 | ndcg@20=0.1864 | mrr@20=0.1384
+2026-07-04 03:42:20 | INFO    | Epoch 10: total=4.9839, rec=4.6232, cl=3.6066 (154.2s)
+2026-07-04 03:42:28 | INFO    |   Val: hr@10=0.2738 | ndcg@10=0.1649 | mrr@10=0.1314 | hr@20=0.3504 | ndcg@20=0.1843 | mrr@20=0.1368
+2026-07-04 03:42:28 | INFO    | Early stopping tại epoch 10 (hr@20 không cải thiện 5 epoch)
+2026-07-04 03:42:34 | INFO    | KẾT QUẢ TEST (best model): hr@10=0.2911 | ndcg@10=0.1717 | mrr@10=0.1350 | hr@20=0.3746 | ndcg@20=0.1929 | mrr@20=0.1408
+2026-07-04 03:42:34 | INFO    | [CatSA] Hoàn tất. Test metrics: hr@10=0.2911 | ndcg@10=0.1717 | mrr@10=0.1350 | hr@20=0.3746 | ndcg@20=0.1929 | mrr@20=0.1408
+wandb: updating run metadata
+wandb: uploading wandb-summary.json; uploading config.yaml; uploading output.log
+wandb: uploading history steps 8-9, summary, console lines 30-33
+wandb: 
+wandb: Run history:
+wandb:    train/loss_cl ▁▇▇▇▇▇▇███
+wandb:   train/loss_rec █▄▃▃▂▂▂▁▁▁
+wandb: train/loss_total █▄▃▃▂▂▂▁▁▁
+wandb:        val/hr@10 ▁▆▇████▇▇▇
+wandb:        val/hr@20 ▁▆█████▇▇▇
+wandb:       val/mrr@10 ▁▅▆▇██████
+wandb:       val/mrr@20 ▁▅▆▇██████
+wandb:      val/ndcg@10 ▁▅▇▇██████
+wandb:      val/ndcg@20 ▁▅▇██████▇
+wandb: 
+wandb: Run summary:
+wandb:       test/hr@10 0.29105
+wandb:       test/hr@20 0.37458
+wandb:      test/mrr@10 0.13503
+wandb:      test/mrr@20 0.14084
+wandb:     test/ndcg@10 0.17171
+wandb:     test/ndcg@20 0.19285
+wandb:    train/loss_cl 3.60655
+wandb:   train/loss_rec 4.62324
+wandb: train/loss_total 4.98389
+wandb:        val/hr@10 0.27384
+wandb:               +5 ...
+wandb: 
+wandb: 🚀 View run CatSA_v1 at: https://wandb.ai/hongichik321-aol/CatSA_v1/runs/78c1ny5q
+wandb: ⭐️ View project at: https://wandb.ai/hongichik321-aol/CatSA_v1
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260704_031525-78c1ny5q/logs

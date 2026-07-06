@@ -1,0 +1,354 @@
+[CORE] Sẽ chạy lần lượt 2 cấu hình: core_trm.yaml, core_ave.yaml
+
+[CORE] (1/2) Bắt đầu: core_trm.yaml
+2026-07-05 00:06:46 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/CatSA_v1/core_trm_diginetica.log
+2026-07-05 00:06:46 | INFO    | 
+====================================================================
+CẤU HÌNH CORE (config_dir: config | version: core_trm)
+====================================================================
+logging:
+  dir: Log
+  level: INFO
+  console: true
+project:
+  name: CatSA_v1
+  filename_mode: custom
+  custom_filename: core_trm_diginetica.log
+wandb:
+  enabled: true
+  api_key: '***da-che***'
+  project: ''
+  entity: ''
+  run_name: ''
+  mode: online
+data:
+  data_dir: data/diginetica
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+core_model:
+  type: trm
+  embedding_size: 100
+  inner_size: 256
+  n_layers: 2
+  n_heads: 2
+  hidden_dropout_prob: 0.5
+  attn_dropout_prob: 0.5
+  hidden_act: gelu
+  layer_norm_eps: 1.0e-12
+  initializer_range: 0.02
+  sess_dropout: 0.2
+  item_dropout: 0.2
+  temperature: 0.07
+  max_seq_length: 50
+core_training:
+  batch_size: 256
+  learning_rate: 0.001
+  weight_decay: 1.0e-05
+  max_epochs: 30
+  patience: 5
+  grad_clip: 5.0
+  seed: 42
+  device: auto
+  num_workers: 0
+  checkpoint_dir: checkpoints
+  save_dir: checkpoints/CORE/diginetica/core_trm
+evaluation:
+  top_k:
+  - 10
+  - 20
+  primary_metric: mrr@20
+config_dir: config
+version: core_trm
+====================================================================
+wandb: [wandb.login()] Using explicit session credentials for https://api.wandb.ai.
+wandb: Appending key for api.wandb.ai to your netrc file: /home/hongnguyen/.netrc
+wandb: Currently logged in as: hongichik321 (hongichik321-aol) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run w5rq668m
+wandb: Tracking run with wandb version 0.28.0
+wandb: Run data is saved locally in /home/hongnguyen/demo2/wandb/run-20260705_000648-w5rq668m
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run core_trm_diginetica
+wandb: ⭐️ View project at https://wandb.ai/hongichik321-aol/CatSA_v1
+wandb: 🚀 View run at https://wandb.ai/hongichik321-aol/CatSA_v1/runs/w5rq668m
+2026-07-05 00:06:49 | INFO    | wandb: run 'core_trm_diginetica' — https://wandb.ai/hongichik321-aol/CatSA_v1/runs/w5rq668m
+2026-07-05 00:06:49 | INFO    | Dữ liệu [data/diginetica]: |I|=44459, train=164559 phiên
+2026-07-05 00:06:49 | INFO    | Thiết bị: cuda | model=trm
+2026-07-05 00:06:49 | INFO    | max_prefix_length=50
+2026-07-05 00:06:50 | INFO    | Số mẫu train/val/test (sliding window): 638009 / 77133 / 77988
+2026-07-05 00:06:50 | INFO    | Checkpoint của run này: /home/hongnguyen/demo2/checkpoints/CORE/diginetica/core_trm
+2026-07-05 00:12:30 | INFO    | Epoch 1: loss=7.3390 (340.1s)
+2026-07-05 00:12:50 | INFO    |   Val: hr@10=0.3669 | ndcg@10=0.2151 | mrr@10=0.1685 | hr@20=0.4813 | ndcg@20=0.2440 | mrr@20=0.1765
+2026-07-05 00:12:50 | INFO    |   → Model tốt nhất mới (mrr@20=0.1765), lưu checkpoints/CORE/diginetica/core_trm/best_model.pt
+2026-07-05 00:18:46 | INFO    | Epoch 2: loss=5.1833 (356.3s)
+2026-07-05 00:19:38 | INFO    |   Val: hr@10=0.3796 | ndcg@10=0.2203 | mrr@10=0.1715 | hr@20=0.5032 | ndcg@20=0.2515 | mrr@20=0.1801
+2026-07-05 00:19:38 | INFO    |   → Model tốt nhất mới (mrr@20=0.1801), lưu checkpoints/CORE/diginetica/core_trm/best_model.pt
+2026-07-05 00:25:38 | INFO    | Epoch 3: loss=4.9345 (359.7s)
+2026-07-05 00:26:29 | INFO    |   Val: hr@10=0.3839 | ndcg@10=0.2223 | mrr@10=0.1727 | hr@20=0.5100 | ndcg@20=0.2541 | mrr@20=0.1815
+2026-07-05 00:26:29 | INFO    |   → Model tốt nhất mới (mrr@20=0.1815), lưu checkpoints/CORE/diginetica/core_trm/best_model.pt
+2026-07-05 00:32:29 | INFO    | Epoch 4: loss=4.8442 (359.8s)
+2026-07-05 00:33:20 | INFO    |   Val: hr@10=0.3851 | ndcg@10=0.2225 | mrr@10=0.1727 | hr@20=0.5118 | ndcg@20=0.2545 | mrr@20=0.1815
+2026-07-05 00:33:20 | INFO    |   → Model tốt nhất mới (mrr@20=0.1815), lưu checkpoints/CORE/diginetica/core_trm/best_model.pt
+2026-07-05 00:39:20 | INFO    | Epoch 5: loss=4.7913 (360.2s)
+2026-07-05 00:40:12 | INFO    |   Val: hr@10=0.3840 | ndcg@10=0.2224 | mrr@10=0.1728 | hr@20=0.5132 | ndcg@20=0.2550 | mrr@20=0.1817
+2026-07-05 00:40:12 | INFO    |   → Model tốt nhất mới (mrr@20=0.1817), lưu checkpoints/CORE/diginetica/core_trm/best_model.pt
+2026-07-05 00:46:12 | INFO    | Epoch 6: loss=4.7568 (360.4s)
+2026-07-05 00:47:04 | INFO    |   Val: hr@10=0.3870 | ndcg@10=0.2229 | mrr@10=0.1727 | hr@20=0.5126 | ndcg@20=0.2546 | mrr@20=0.1814
+2026-07-05 00:53:04 | INFO    | Epoch 7: loss=4.7296 (360.4s)
+2026-07-05 00:53:56 | INFO    |   Val: hr@10=0.3870 | ndcg@10=0.2232 | mrr@10=0.1730 | hr@20=0.5136 | ndcg@20=0.2552 | mrr@20=0.1818
+2026-07-05 00:53:56 | INFO    |   → Model tốt nhất mới (mrr@20=0.1818), lưu checkpoints/CORE/diginetica/core_trm/best_model.pt
+2026-07-05 00:58:58 | INFO    | Epoch 8: loss=4.7102 (302.4s)
+2026-07-05 00:59:40 | INFO    |   Val: hr@10=0.3890 | ndcg@10=0.2239 | mrr@10=0.1733 | hr@20=0.5161 | ndcg@20=0.2560 | mrr@20=0.1821
+2026-07-05 00:59:41 | INFO    |   → Model tốt nhất mới (mrr@20=0.1821), lưu checkpoints/CORE/diginetica/core_trm/best_model.pt
+2026-07-05 01:02:19 | INFO    | Epoch 9: loss=4.6944 (158.6s)
+2026-07-05 01:02:32 | INFO    |   Val: hr@10=0.3884 | ndcg@10=0.2239 | mrr@10=0.1735 | hr@20=0.5158 | ndcg@20=0.2561 | mrr@20=0.1823
+2026-07-05 01:02:32 | INFO    |   → Model tốt nhất mới (mrr@20=0.1823), lưu checkpoints/CORE/diginetica/core_trm/best_model.pt
+2026-07-05 01:04:27 | INFO    | Epoch 10: loss=4.6836 (114.9s)
+2026-07-05 01:04:40 | INFO    |   Val: hr@10=0.3892 | ndcg@10=0.2242 | mrr@10=0.1736 | hr@20=0.5158 | ndcg@20=0.2562 | mrr@20=0.1824
+2026-07-05 01:04:40 | INFO    |   → Model tốt nhất mới (mrr@20=0.1824), lưu checkpoints/CORE/diginetica/core_trm/best_model.pt
+2026-07-05 01:06:35 | INFO    | Epoch 11: loss=4.6735 (115.1s)
+2026-07-05 01:06:48 | INFO    |   Val: hr@10=0.3877 | ndcg@10=0.2235 | mrr@10=0.1732 | hr@20=0.5171 | ndcg@20=0.2562 | mrr@20=0.1822
+2026-07-05 01:08:43 | INFO    | Epoch 12: loss=4.6668 (115.0s)
+2026-07-05 01:08:56 | INFO    |   Val: hr@10=0.3895 | ndcg@10=0.2242 | mrr@10=0.1736 | hr@20=0.5175 | ndcg@20=0.2565 | mrr@20=0.1825
+2026-07-05 01:08:56 | INFO    |   → Model tốt nhất mới (mrr@20=0.1825), lưu checkpoints/CORE/diginetica/core_trm/best_model.pt
+2026-07-05 01:10:51 | INFO    | Epoch 13: loss=4.6586 (115.0s)
+2026-07-05 01:11:04 | INFO    |   Val: hr@10=0.3891 | ndcg@10=0.2239 | mrr@10=0.1733 | hr@20=0.5160 | ndcg@20=0.2560 | mrr@20=0.1821
+2026-07-05 01:12:59 | INFO    | Epoch 14: loss=4.6518 (114.9s)
+2026-07-05 01:13:12 | INFO    |   Val: hr@10=0.3876 | ndcg@10=0.2236 | mrr@10=0.1734 | hr@20=0.5163 | ndcg@20=0.2562 | mrr@20=0.1823
+2026-07-05 01:15:07 | INFO    | Epoch 15: loss=4.6495 (115.1s)
+2026-07-05 01:15:20 | INFO    |   Val: hr@10=0.3891 | ndcg@10=0.2241 | mrr@10=0.1735 | hr@20=0.5158 | ndcg@20=0.2561 | mrr@20=0.1823
+2026-07-05 01:17:15 | INFO    | Epoch 16: loss=4.6445 (115.1s)
+2026-07-05 01:17:28 | INFO    |   Val: hr@10=0.3892 | ndcg@10=0.2242 | mrr@10=0.1736 | hr@20=0.5164 | ndcg@20=0.2563 | mrr@20=0.1824
+2026-07-05 01:19:23 | INFO    | Epoch 17: loss=4.6438 (114.9s)
+2026-07-05 01:19:36 | INFO    |   Val: hr@10=0.3889 | ndcg@10=0.2241 | mrr@10=0.1736 | hr@20=0.5172 | ndcg@20=0.2565 | mrr@20=0.1825
+2026-07-05 01:19:36 | INFO    |   → Model tốt nhất mới (mrr@20=0.1825), lưu checkpoints/CORE/diginetica/core_trm/best_model.pt
+2026-07-05 01:21:31 | INFO    | Epoch 18: loss=4.6383 (115.1s)
+2026-07-05 01:21:44 | INFO    |   Val: hr@10=0.3884 | ndcg@10=0.2235 | mrr@10=0.1731 | hr@20=0.5167 | ndcg@20=0.2559 | mrr@20=0.1819
+2026-07-05 01:23:39 | INFO    | Epoch 19: loss=4.6356 (114.9s)
+2026-07-05 01:23:52 | INFO    |   Val: hr@10=0.3889 | ndcg@10=0.2240 | mrr@10=0.1735 | hr@20=0.5183 | ndcg@20=0.2567 | mrr@20=0.1824
+2026-07-05 01:25:47 | INFO    | Epoch 20: loss=4.6335 (115.0s)
+2026-07-05 01:26:00 | INFO    |   Val: hr@10=0.3882 | ndcg@10=0.2238 | mrr@10=0.1734 | hr@20=0.5148 | ndcg@20=0.2558 | mrr@20=0.1822
+2026-07-05 01:27:55 | INFO    | Epoch 21: loss=4.6309 (114.9s)
+2026-07-05 01:28:08 | INFO    |   Val: hr@10=0.3897 | ndcg@10=0.2245 | mrr@10=0.1739 | hr@20=0.5176 | ndcg@20=0.2568 | mrr@20=0.1827
+2026-07-05 01:28:08 | INFO    |   → Model tốt nhất mới (mrr@20=0.1827), lưu checkpoints/CORE/diginetica/core_trm/best_model.pt
+2026-07-05 01:30:03 | INFO    | Epoch 22: loss=4.6301 (114.8s)
+2026-07-05 01:30:16 | INFO    |   Val: hr@10=0.3901 | ndcg@10=0.2246 | mrr@10=0.1739 | hr@20=0.5178 | ndcg@20=0.2569 | mrr@20=0.1828
+2026-07-05 01:30:16 | INFO    |   → Model tốt nhất mới (mrr@20=0.1828), lưu checkpoints/CORE/diginetica/core_trm/best_model.pt
+2026-07-05 01:32:11 | INFO    | Epoch 23: loss=4.6286 (114.8s)
+2026-07-05 01:32:23 | INFO    |   Val: hr@10=0.3890 | ndcg@10=0.2243 | mrr@10=0.1738 | hr@20=0.5149 | ndcg@20=0.2561 | mrr@20=0.1825
+2026-07-05 01:34:18 | INFO    | Epoch 24: loss=4.6277 (114.7s)
+2026-07-05 01:34:23 | INFO    |   Val: hr@10=0.3888 | ndcg@10=0.2241 | mrr@10=0.1737 | hr@20=0.5168 | ndcg@20=0.2565 | mrr@20=0.1826
+2026-07-05 01:34:45 | INFO    | Epoch 25: loss=4.6254 (22.4s)
+2026-07-05 01:34:47 | INFO    |   Val: hr@10=0.3890 | ndcg@10=0.2243 | mrr@10=0.1738 | hr@20=0.5167 | ndcg@20=0.2565 | mrr@20=0.1827
+2026-07-05 01:35:09 | INFO    | Epoch 26: loss=4.6238 (22.4s)
+2026-07-05 01:35:10 | INFO    |   Val: hr@10=0.3881 | ndcg@10=0.2238 | mrr@10=0.1734 | hr@20=0.5161 | ndcg@20=0.2560 | mrr@20=0.1822
+2026-07-05 01:35:33 | INFO    | Epoch 27: loss=4.6218 (22.3s)
+2026-07-05 01:35:34 | INFO    |   Val: hr@10=0.3890 | ndcg@10=0.2239 | mrr@10=0.1734 | hr@20=0.5166 | ndcg@20=0.2561 | mrr@20=0.1822
+2026-07-05 01:35:34 | INFO    | Early stopping tại epoch 27 (mrr@20 không cải thiện 5 epoch)
+2026-07-05 01:35:36 | INFO    | KẾT QUẢ TEST (best model): hr@10=0.3900 | ndcg@10=0.2240 | mrr@10=0.1730 | hr@20=0.5137 | ndcg@20=0.2553 | mrr@20=0.1816
+2026-07-05 01:35:36 | INFO    | [CORE] Hoàn tất core_trm.yaml. Test metrics: hr@10=0.3900 | ndcg@10=0.2240 | mrr@10=0.1730 | hr@20=0.5137 | ndcg@20=0.2553 | mrr@20=0.1816
+wandb: updating run metadata
+wandb: uploading config.yaml; uploading output.log; uploading wandb-summary.json
+wandb: uploading history steps 25-26, summary, console lines 72-75
+wandb: 
+wandb: Run history:
+wandb:  train/loss █▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:   val/hr@10 ▁▅▆▆▆▇▇█▇█▇██▇███▇█▇█████▇█
+wandb:   val/hr@20 ▁▅▆▇▇▇▇████████████▇██▇████
+wandb:  val/mrr@10 ▁▅▆▆▇▆▇▇▇█▇█▇▇███▇▇▇█████▇▇
+wandb:  val/mrr@20 ▁▅▇▇▇▇▇▇██▇█▇████▇█▇█████▇▇
+wandb: val/ndcg@10 ▁▅▆▆▆▇▇▇██▇█▇▇███▇█▇█████▇▇
+wandb: val/ndcg@20 ▁▅▇▇▇▇▇██████████▇█▇███████
+wandb: 
+wandb: Run summary:
+wandb:   test/hr@10 0.39
+wandb:   test/hr@20 0.51371
+wandb:  test/mrr@10 0.17303
+wandb:  test/mrr@20 0.1816
+wandb: test/ndcg@10 0.224
+wandb: test/ndcg@20 0.25525
+wandb:   train/loss 4.62179
+wandb:    val/hr@10 0.38903
+wandb:    val/hr@20 0.51659
+wandb:   val/mrr@10 0.17337
+wandb:           +3 ...
+wandb: 
+wandb: 🚀 View run core_trm_diginetica at: https://wandb.ai/hongichik321-aol/CatSA_v1/runs/w5rq668m
+wandb: ⭐️ View project at: https://wandb.ai/hongichik321-aol/CatSA_v1
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260705_000648-w5rq668m/logs
+
+[CORE] (2/2) Bắt đầu: core_ave.yaml
+2026-07-05 01:35:37 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/CatSA_v1/core_ave_diginetica.log
+2026-07-05 01:35:37 | INFO    | 
+====================================================================
+CẤU HÌNH CORE (config_dir: config | version: core_ave)
+====================================================================
+logging:
+  dir: Log
+  level: INFO
+  console: true
+project:
+  name: CatSA_v1
+  filename_mode: custom
+  custom_filename: core_ave_diginetica.log
+wandb:
+  enabled: true
+  api_key: '***da-che***'
+  project: ''
+  entity: ''
+  run_name: ''
+  mode: online
+data:
+  data_dir: data/diginetica
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+core_model:
+  type: ave
+  embedding_size: 100
+  inner_size: 256
+  n_layers: 2
+  n_heads: 2
+  hidden_dropout_prob: 0.5
+  attn_dropout_prob: 0.5
+  hidden_act: gelu
+  layer_norm_eps: 1.0e-12
+  initializer_range: 0.02
+  sess_dropout: 0.2
+  item_dropout: 0.2
+  temperature: 0.07
+  max_seq_length: 50
+core_training:
+  batch_size: 256
+  learning_rate: 0.001
+  weight_decay: 1.0e-05
+  max_epochs: 30
+  patience: 5
+  grad_clip: 5.0
+  seed: 42
+  device: auto
+  num_workers: 0
+  checkpoint_dir: checkpoints
+  save_dir: checkpoints/CORE/diginetica/core_ave
+evaluation:
+  top_k:
+  - 10
+  - 20
+  primary_metric: mrr@20
+config_dir: config
+version: core_ave
+====================================================================
+wandb: WARNING [wandb.login()] Changing session credentials to explicit value for https://api.wandb.ai.
+wandb: Appending key for api.wandb.ai to your netrc file: /home/hongnguyen/.netrc
+wandb: setting up run ym4r9wyn
+wandb: Tracking run with wandb version 0.28.0
+wandb: Run data is saved locally in /home/hongnguyen/demo2/wandb/run-20260705_013539-ym4r9wyn
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run core_ave_diginetica
+wandb: ⭐️ View project at https://wandb.ai/hongichik321-aol/CatSA_v1
+wandb: 🚀 View run at https://wandb.ai/hongichik321-aol/CatSA_v1/runs/ym4r9wyn
+2026-07-05 01:35:40 | INFO    | wandb: run 'core_ave_diginetica' — https://wandb.ai/hongichik321-aol/CatSA_v1/runs/ym4r9wyn
+2026-07-05 01:35:40 | INFO    | Dữ liệu [data/diginetica]: |I|=44459, train=164559 phiên
+2026-07-05 01:35:40 | INFO    | Thiết bị: cuda | model=ave
+2026-07-05 01:35:40 | INFO    | max_prefix_length=50
+2026-07-05 01:35:41 | INFO    | Số mẫu train/val/test (sliding window): 638009 / 77133 / 77988
+2026-07-05 01:35:41 | INFO    | Checkpoint của run này: /home/hongnguyen/demo2/checkpoints/CORE/diginetica/core_ave
+2026-07-05 01:35:56 | INFO    | Epoch 1: loss=7.3982 (15.2s)
+2026-07-05 01:35:57 | INFO    |   Val: hr@10=0.3482 | ndcg@10=0.2043 | mrr@10=0.1602 | hr@20=0.4572 | ndcg@20=0.2318 | mrr@20=0.1677
+2026-07-05 01:35:57 | INFO    |   → Model tốt nhất mới (mrr@20=0.1677), lưu checkpoints/CORE/diginetica/core_ave/best_model.pt
+2026-07-05 01:36:12 | INFO    | Epoch 2: loss=5.3048 (15.2s)
+2026-07-05 01:36:14 | INFO    |   Val: hr@10=0.3570 | ndcg@10=0.2069 | mrr@10=0.1610 | hr@20=0.4755 | ndcg@20=0.2368 | mrr@20=0.1692
+2026-07-05 01:36:14 | INFO    |   → Model tốt nhất mới (mrr@20=0.1692), lưu checkpoints/CORE/diginetica/core_ave/best_model.pt
+2026-07-05 01:36:29 | INFO    | Epoch 3: loss=5.0530 (15.2s)
+2026-07-05 01:36:30 | INFO    |   Val: hr@10=0.3583 | ndcg@10=0.2076 | mrr@10=0.1615 | hr@20=0.4815 | ndcg@20=0.2387 | mrr@20=0.1700
+2026-07-05 01:36:30 | INFO    |   → Model tốt nhất mới (mrr@20=0.1700), lưu checkpoints/CORE/diginetica/core_ave/best_model.pt
+2026-07-05 01:36:45 | INFO    | Epoch 4: loss=4.9566 (15.2s)
+2026-07-05 01:36:47 | INFO    |   Val: hr@10=0.3604 | ndcg@10=0.2088 | mrr@10=0.1624 | hr@20=0.4816 | ndcg@20=0.2394 | mrr@20=0.1708
+2026-07-05 01:36:47 | INFO    |   → Model tốt nhất mới (mrr@20=0.1708), lưu checkpoints/CORE/diginetica/core_ave/best_model.pt
+2026-07-05 01:37:02 | INFO    | Epoch 5: loss=4.9026 (15.2s)
+2026-07-05 01:37:03 | INFO    |   Val: hr@10=0.3613 | ndcg@10=0.2088 | mrr@10=0.1621 | hr@20=0.4833 | ndcg@20=0.2395 | mrr@20=0.1705
+2026-07-05 01:37:18 | INFO    | Epoch 6: loss=4.8646 (15.2s)
+2026-07-05 01:37:20 | INFO    |   Val: hr@10=0.3618 | ndcg@10=0.2090 | mrr@10=0.1623 | hr@20=0.4841 | ndcg@20=0.2398 | mrr@20=0.1707
+2026-07-05 01:37:35 | INFO    | Epoch 7: loss=4.8404 (15.2s)
+2026-07-05 01:37:36 | INFO    |   Val: hr@10=0.3613 | ndcg@10=0.2090 | mrr@10=0.1624 | hr@20=0.4839 | ndcg@20=0.2399 | mrr@20=0.1708
+2026-07-05 01:37:36 | INFO    |   → Model tốt nhất mới (mrr@20=0.1708), lưu checkpoints/CORE/diginetica/core_ave/best_model.pt
+2026-07-05 01:37:51 | INFO    | Epoch 8: loss=4.8203 (15.2s)
+2026-07-05 01:37:52 | INFO    |   Val: hr@10=0.3619 | ndcg@10=0.2091 | mrr@10=0.1624 | hr@20=0.4839 | ndcg@20=0.2399 | mrr@20=0.1709
+2026-07-05 01:37:53 | INFO    |   → Model tốt nhất mới (mrr@20=0.1709), lưu checkpoints/CORE/diginetica/core_ave/best_model.pt
+2026-07-05 01:38:08 | INFO    | Epoch 9: loss=4.8051 (15.2s)
+2026-07-05 01:38:09 | INFO    |   Val: hr@10=0.3616 | ndcg@10=0.2090 | mrr@10=0.1624 | hr@20=0.4852 | ndcg@20=0.2403 | mrr@20=0.1710
+2026-07-05 01:38:09 | INFO    |   → Model tốt nhất mới (mrr@20=0.1710), lưu checkpoints/CORE/diginetica/core_ave/best_model.pt
+2026-07-05 01:38:24 | INFO    | Epoch 10: loss=4.7946 (15.2s)
+2026-07-05 01:38:25 | INFO    |   Val: hr@10=0.3611 | ndcg@10=0.2085 | mrr@10=0.1619 | hr@20=0.4858 | ndcg@20=0.2400 | mrr@20=0.1705
+2026-07-05 01:38:41 | INFO    | Epoch 11: loss=4.7845 (15.2s)
+2026-07-05 01:38:42 | INFO    |   Val: hr@10=0.3625 | ndcg@10=0.2093 | mrr@10=0.1625 | hr@20=0.4863 | ndcg@20=0.2405 | mrr@20=0.1710
+2026-07-05 01:38:42 | INFO    |   → Model tốt nhất mới (mrr@20=0.1710), lưu checkpoints/CORE/diginetica/core_ave/best_model.pt
+2026-07-05 01:38:57 | INFO    | Epoch 12: loss=4.7770 (15.2s)
+2026-07-05 01:38:58 | INFO    |   Val: hr@10=0.3626 | ndcg@10=0.2091 | mrr@10=0.1622 | hr@20=0.4844 | ndcg@20=0.2398 | mrr@20=0.1706
+2026-07-05 01:39:14 | INFO    | Epoch 13: loss=4.7702 (15.2s)
+2026-07-05 01:39:15 | INFO    |   Val: hr@10=0.3628 | ndcg@10=0.2093 | mrr@10=0.1624 | hr@20=0.4854 | ndcg@20=0.2403 | mrr@20=0.1709
+2026-07-05 01:39:30 | INFO    | Epoch 14: loss=4.7666 (15.2s)
+2026-07-05 01:39:31 | INFO    |   Val: hr@10=0.3629 | ndcg@10=0.2093 | mrr@10=0.1624 | hr@20=0.4855 | ndcg@20=0.2403 | mrr@20=0.1709
+2026-07-05 01:39:47 | INFO    | Epoch 15: loss=4.7604 (15.2s)
+2026-07-05 01:39:48 | INFO    |   Val: hr@10=0.3625 | ndcg@10=0.2093 | mrr@10=0.1625 | hr@20=0.4863 | ndcg@20=0.2406 | mrr@20=0.1711
+2026-07-05 01:39:48 | INFO    |   → Model tốt nhất mới (mrr@20=0.1711), lưu checkpoints/CORE/diginetica/core_ave/best_model.pt
+2026-07-05 01:40:03 | INFO    | Epoch 16: loss=4.7565 (15.2s)
+2026-07-05 01:40:04 | INFO    |   Val: hr@10=0.3616 | ndcg@10=0.2088 | mrr@10=0.1622 | hr@20=0.4863 | ndcg@20=0.2403 | mrr@20=0.1708
+2026-07-05 01:40:20 | INFO    | Epoch 17: loss=4.7546 (15.2s)
+2026-07-05 01:40:21 | INFO    |   Val: hr@10=0.3628 | ndcg@10=0.2093 | mrr@10=0.1624 | hr@20=0.4854 | ndcg@20=0.2403 | mrr@20=0.1709
+2026-07-05 01:40:36 | INFO    | Epoch 18: loss=4.7511 (15.2s)
+2026-07-05 01:40:37 | INFO    |   Val: hr@10=0.3627 | ndcg@10=0.2094 | mrr@10=0.1626 | hr@20=0.4866 | ndcg@20=0.2406 | mrr@20=0.1711
+2026-07-05 01:40:37 | INFO    |   → Model tốt nhất mới (mrr@20=0.1711), lưu checkpoints/CORE/diginetica/core_ave/best_model.pt
+2026-07-05 01:40:53 | INFO    | Epoch 19: loss=4.7479 (15.2s)
+2026-07-05 01:40:54 | INFO    |   Val: hr@10=0.3623 | ndcg@10=0.2091 | mrr@10=0.1624 | hr@20=0.4863 | ndcg@20=0.2405 | mrr@20=0.1710
+2026-07-05 01:41:09 | INFO    | Epoch 20: loss=4.7459 (15.2s)
+2026-07-05 01:41:10 | INFO    |   Val: hr@10=0.3633 | ndcg@10=0.2096 | mrr@10=0.1627 | hr@20=0.4857 | ndcg@20=0.2405 | mrr@20=0.1712
+2026-07-05 01:41:10 | INFO    |   → Model tốt nhất mới (mrr@20=0.1712), lưu checkpoints/CORE/diginetica/core_ave/best_model.pt
+2026-07-05 01:41:25 | INFO    | Epoch 21: loss=4.7447 (15.2s)
+2026-07-05 01:41:27 | INFO    |   Val: hr@10=0.3616 | ndcg@10=0.2089 | mrr@10=0.1623 | hr@20=0.4852 | ndcg@20=0.2402 | mrr@20=0.1709
+2026-07-05 01:41:42 | INFO    | Epoch 22: loss=4.7436 (15.2s)
+2026-07-05 01:41:43 | INFO    |   Val: hr@10=0.3624 | ndcg@10=0.2091 | mrr@10=0.1622 | hr@20=0.4858 | ndcg@20=0.2403 | mrr@20=0.1708
+2026-07-05 01:41:58 | INFO    | Epoch 23: loss=4.7412 (15.2s)
+2026-07-05 01:42:00 | INFO    |   Val: hr@10=0.3614 | ndcg@10=0.2089 | mrr@10=0.1623 | hr@20=0.4861 | ndcg@20=0.2404 | mrr@20=0.1709
+2026-07-05 01:42:15 | INFO    | Epoch 24: loss=4.7404 (15.2s)
+2026-07-05 01:42:16 | INFO    |   Val: hr@10=0.3625 | ndcg@10=0.2094 | mrr@10=0.1626 | hr@20=0.4861 | ndcg@20=0.2406 | mrr@20=0.1711
+2026-07-05 01:42:31 | INFO    | Epoch 25: loss=4.7380 (15.2s)
+2026-07-05 01:42:33 | INFO    |   Val: hr@10=0.3624 | ndcg@10=0.2090 | mrr@10=0.1622 | hr@20=0.4850 | ndcg@20=0.2400 | mrr@20=0.1707
+2026-07-05 01:42:33 | INFO    | Early stopping tại epoch 25 (mrr@20 không cải thiện 5 epoch)
+2026-07-05 01:42:34 | INFO    | KẾT QUẢ TEST (best model): hr@10=0.3659 | ndcg@10=0.2142 | mrr@10=0.1678 | hr@20=0.4868 | ndcg@20=0.2448 | mrr@20=0.1762
+2026-07-05 01:42:34 | INFO    | [CORE] Hoàn tất core_ave.yaml. Test metrics: hr@10=0.3659 | ndcg@10=0.2142 | mrr@10=0.1678 | hr@20=0.4868 | ndcg@20=0.2448 | mrr@20=0.1762
+wandb: updating run metadata
+wandb: uploading wandb-summary.json; uploading config.yaml; uploading output.log
+wandb: uploading history steps 23-24, summary, console lines 65-69
+wandb: 
+wandb: Run history:
+wandb:  train/loss █▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:   val/hr@10 ▁▅▆▇▇▇▇▇▇▇█████▇████▇█▇██
+wandb:   val/hr@20 ▁▅▇▇▇▇▇▇███▇█████████████
+wandb:  val/mrr@10 ▁▃▅▇▆▇▇▇▇▆▇▇▇▇▇▆▇█▇█▇▇▇█▆
+wandb:  val/mrr@20 ▁▄▆▇▇▇▇▇█▇█▇▇▇█▇▇███▇▇██▇
+wandb: val/ndcg@10 ▁▄▅▇▇▇▇▇▇▇█▇███▇██▇█▇▇▇█▇
+wandb: val/ndcg@20 ▁▅▆▇▇▇▇▇█▇█▇████████████▇
+wandb: 
+wandb: Run summary:
+wandb:   test/hr@10 0.36588
+wandb:   test/hr@20 0.48683
+wandb:  test/mrr@10 0.16783
+wandb:  test/mrr@20 0.17621
+wandb: test/ndcg@10 0.21422
+wandb: test/ndcg@20 0.24478
+wandb:   train/loss 4.73802
+wandb:    val/hr@10 0.36244
+wandb:    val/hr@20 0.48501
+wandb:   val/mrr@10 0.16219
+wandb:           +3 ...
+wandb: 
+wandb: 🚀 View run core_ave_diginetica at: https://wandb.ai/hongichik321-aol/CatSA_v1/runs/ym4r9wyn
+wandb: ⭐️ View project at: https://wandb.ai/hongichik321-aol/CatSA_v1
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260705_013539-ym4r9wyn/logs
+
+[CORE] Hoàn tất tất cả 2 cấu hình.

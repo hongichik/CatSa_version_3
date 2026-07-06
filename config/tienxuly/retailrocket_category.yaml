@@ -1,0 +1,20 @@
+# retailrocket_category — support>=5, chỉ item có category, keep + prefix≤50
+preprocess:
+  output_dir: data/retailrocket_category            # thư mục ghi train/val/test + lookup
+  train_file: train.txt                             # file phiên train
+  val_file: val.txt                                 # file phiên validation
+  test_file: test.txt                               # file phiên test
+  lookup_file: lookup_tables.pkl                    # pickle item2cat, cat2items, cat_parent
+  event_types: [view]                               # loại sự kiện giữ từ events.csv
+  session_same_day: true                            # true=cắt theo ngày lịch; false=dùng gap bên dưới
+  session_gap_seconds: 1800                         # giây; chỉ khi session_same_day=false (1800=30 phút)
+  dedup_consecutive: false                          # true=bỏ click liên tiếp; test_all=false
+  min_item_support: 5                               # item phải xuất hiện >= N lần mới được giữ
+  min_session_length: 2                             # phiên ngắn hơn bị loại
+  max_session_length: 50                            # chỉ dùng khi session_length_mode=filter
+  session_length_mode: keep                         # keep=không cắt phiên; filter=lọc phiên theo [min,max]
+  max_prefix_length: 50                             # giới hạn prefix lúc train/eval (≈ test_all)
+  require_item_category: true                       # true=bỏ item không có category; false=gán UNK
+  val_ratio: 0.1                                    # tỉ lệ val (chia theo thời gian phiên)
+  test_ratio: 0.1                                   # tỉ lệ test (chia theo thời gian phiên)
+  max_sessions: 0                                   # 0=không giới hạn; >0=chỉ lấy N phiên đầu (smoke test)

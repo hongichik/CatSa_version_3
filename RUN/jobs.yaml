@@ -1,0 +1,47 @@
+# ============================================================================
+# CẤU HÌNH CÁC JOB CHẠY NGẦM - dùng bởi main.py (gốc) + RUN/runner.py
+# ============================================================================
+# Mỗi job gồm:
+#   name    : tên job (đặt tên file log output trong RUN/logs/)
+#   command : lệnh chạy, tính từ THƯ MỤC GỐC dự án
+#             ví dụ: python CatSA/main.py --config config
+#   enabled : true = job được chạy khi gọi main.py; false = bỏ qua
+#   when    : thời gian chạy
+#             - now                    : chạy ngay khi gọi main.py
+#             - "HH:MM" / "HH:MM:SS"   : hôm nay lúc giờ đó (đã qua -> ngày mai)
+#             - "YYYY-MM-DD HH:MM[:SS]": đúng thời điểm đó
+#   after   : (TÙY CHỌN) tên job phải chạy xong trước — runner chờ job đó
+#             kết thúc rồi mới khởi chạy job này (vd after: train_core)
+#
+# TẤT CẢ job đều chạy NGẦM (nền): gọi main.py xong là thoát được terminal,
+# job vẫn chạy tiếp. Output của từng job ghi vào RUN/logs/<name>-<thời điểm>.log
+#
+# Quản lý process đang chạy:
+#   python main.py --run          # xem danh sách đang chạy (PID, log, lệnh)
+#   python main.py --kill=NAME    # dừng theo tên job hoặc runner
+#   python main.py --kill=PID     # dừng theo PID
+
+jobs:
+  # CORE Diginetica trước, CatSA sau (train_catsa.after = train_core)
+  # - name: train_core
+  #   command: python CORE/main.py --suite diginetica
+  #   enabled: true
+  #   when: now
+
+  - name: train_catsa
+    command: python CatSA/main.py --suite diginetica
+    enabled: true
+    when: now
+    after: train_core
+
+  # Ví dụ: tiền xử lý lại dữ liệu lúc 2h sáng (đang tắt)
+  # - name: tienxuly
+  #   command: python tienxuly/main.py
+  #   enabled: false
+  #   when: "02:00"
+
+  # Ví dụ: chạy đúng một thời điểm cụ thể (đang tắt)
+  # - name: train_dem
+  #   command: python CatSA/main.py --config config_khac
+  #   enabled: false
+  #   when: "2026-07-05 23:30"

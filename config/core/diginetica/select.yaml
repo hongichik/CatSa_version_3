@@ -1,0 +1,6 @@
+# select.yaml — danh sách version CORE cho Diginetica
+# python CORE/main.py --suite diginetica
+# python CORE/main.py --suite diginetica --run core_trm.yaml
+run:
+  - core_trm.yaml
+  - core_ave.yaml

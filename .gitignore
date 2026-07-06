@@ -1,0 +1,13 @@
+# Chứa wandb api_key — KHÔNG commit lên Git công khai
+config/common/wandb.yaml
+
+# Dữ liệu, kết quả chạy
+data/
+checkpoints/
+checkpoints_smoke/
+wandb/
+
+RUN/state/
+
+__pycache__/
+*.pyc

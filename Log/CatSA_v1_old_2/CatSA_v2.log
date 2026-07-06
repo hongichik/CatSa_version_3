@@ -1,0 +1,105 @@
+2026-07-04 11:20:13 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/CatSA_v1/CatSA_v2.log
+2026-07-04 11:20:13 | INFO    | 
+====================================================================
+CẤU HÌNH LÚC CHẠY (config_dir: config | version: catsa_v2)
+====================================================================
+logging:
+  dir: Log
+  level: INFO
+  console: true
+project:
+  name: CatSA_v1
+  filename_mode: custom
+  custom_filename: CatSA_v2.log
+wandb:
+  enabled: true
+  api_key: '***da-che***'
+  project: ''
+  entity: ''
+  run_name: ''
+  mode: online
+dataset:
+  source: kagglehub
+  kagglehub_handle: retailrocket/ecommerce-dataset
+  local_path: data/raw
+  name: retailrocket
+preprocess:
+  output_dir: data/retailrocket_item_hon_5
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+  event_types:
+  - view
+  session_same_day: true
+  session_gap_seconds: 1800
+  dedup_consecutive: true
+  min_item_support: 5
+  min_session_length: 2
+  max_session_length: 50
+  session_length_mode: keep
+  max_prefix_length: 50
+  require_item_category: false
+  val_ratio: 0.1
+  test_ratio: 0.1
+  max_sessions: 0
+data:
+  data_dir: data/retailrocket_item_hon_5
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+model:
+  embedding_dim: 100
+  num_layers: 2
+  use_taxonomy: true
+  dropout: 0.1
+augment:
+  strategies:
+  - same
+  strategy_weights: []
+  eta_aug: 0.3
+  eta_crop: 0.75
+  k_min: 5
+training:
+  use_cl: true
+  lambda_cl: 0.1
+  tau: 0.5
+  batch_size: 100
+  learning_rate: 0.001
+  weight_decay: 1.0e-05
+  max_epochs: 30
+  patience: 5
+  grad_clip: 5.0
+  seed: 42
+  device: auto
+  num_workers: 0
+  checkpoint_dir: checkpoints
+  save_dir: checkpoints/CatSA_v1/catsa_v1/CatSA_v2
+evaluation:
+  top_k:
+  - 10
+  - 20
+  primary_metric: mrr@20
+config_dir: config
+version: catsa_v2
+====================================================================
+2026-07-04 11:20:16 | INFO    | wandb: run 'CatSA_v2' — https://wandb.ai/hongichik321-aol/CatSA_v1/runs/556a2zct
+2026-07-04 11:20:16 | INFO    | Dữ liệu [data/retailrocket_item_hon_5]: |I|=71328, |C|=1157, train=189673 phiên
+2026-07-04 11:20:16 | INFO    | Thiết bị: cuda | use_cl=True (CatSA đầy đủ)
+2026-07-04 11:20:16 | INFO    | Augmentation strategies: ['same'] | eta_aug=0.30, k_min=5
+2026-07-04 11:20:16 | INFO    | max_prefix_length=50 (giới hạn lịch sử khi tạo mẫu sliding window)
+2026-07-04 11:20:17 | INFO    | Số mẫu train/val/test (sliding window): 551696 / 63761 / 58558
+2026-07-04 11:20:17 | INFO    | Checkpoint của run này: /home/hongnguyen/demo2/checkpoints/CatSA_v1/catsa_v1/CatSA_v2
+2026-07-04 11:23:03 | INFO    | Epoch 1: total=8.1912, rec=7.8422, cl=3.4907 (165.7s)
+2026-07-04 11:23:10 | INFO    |   Val: hr@10=0.2283 | ndcg@10=0.1275 | mrr@10=0.0966 | hr@20=0.3061 | ndcg@20=0.1471 | mrr@20=0.1020
+2026-07-04 11:23:10 | INFO    |   → Model tốt nhất mới (mrr@20=0.1020), lưu checkpoints/CatSA_v1/catsa_v1/CatSA_v2/best_model.pt
+2026-07-04 11:25:56 | INFO    | Epoch 2: total=6.4344, rec=6.0796, cl=3.5474 (165.3s)
+2026-07-04 11:26:04 | INFO    |   Val: hr@10=0.2701 | ndcg@10=0.1541 | mrr@10=0.1185 | hr@20=0.3511 | ndcg@20=0.1746 | mrr@20=0.1241
+2026-07-04 11:26:04 | INFO    |   → Model tốt nhất mới (mrr@20=0.1241), lưu checkpoints/CatSA_v1/catsa_v1/CatSA_v2/best_model.pt
+2026-07-04 11:28:50 | INFO    | Epoch 3: total=5.9640, rec=5.6086, cl=3.5547 (165.9s)
+2026-07-04 11:28:58 | INFO    |   Val: hr@10=0.2840 | ndcg@10=0.1643 | mrr@10=0.1276 | hr@20=0.3698 | ndcg@20=0.1861 | mrr@20=0.1336
+2026-07-04 11:28:58 | INFO    |   → Model tốt nhất mới (mrr@20=0.1336), lưu checkpoints/CatSA_v1/catsa_v1/CatSA_v2/best_model.pt
+2026-07-04 11:31:43 | INFO    | Epoch 4: total=5.7077, rec=5.3521, cl=3.5564 (165.6s)
+2026-07-04 11:31:51 | INFO    |   Val: hr@10=0.2895 | ndcg@10=0.1681 | mrr@10=0.1308 | hr@20=0.3719 | ndcg@20=0.1889 | mrr@20=0.1365
+2026-07-04 11:31:51 | INFO    |   → Model tốt nhất mới (mrr@20=0.1365), lưu checkpoints/CatSA_v1/catsa_v1/CatSA_v2/best_model.pt

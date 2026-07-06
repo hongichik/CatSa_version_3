@@ -1,0 +1,11 @@
+# select.yaml — danh sách version CatSA cho Diginetica
+# python CatSA/main.py --suite diginetica       → chạy lần lượt v1–v4
+# python CatSA/main.py --suite diginetica --run catsa_v1.yaml  → một bản
+run:
+  - catsa_tune_a2.yaml
+  - catsa_tune_cl.yaml
+  # baseline v1–v4 (đã chạy)
+  # - catsa_v1.yaml
+  # - catsa_v2.yaml
+  # - catsa_v3.yaml
+  # - catsa_v4.yaml

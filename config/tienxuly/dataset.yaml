@@ -1,0 +1,6 @@
+# dataset.yaml — nguồn dữ liệu thô (tienxuly/download.py)
+dataset:
+  source: kagglehub                                 # kagglehub=tải Kaggle; local=dùng local_path
+  kagglehub_handle: retailrocket/ecommerce-dataset  # handle Kaggle (khi source=kagglehub)
+  local_path: data/raw                              # thư mục events.csv, item_properties_*, category_tree.csv
+  name: retailrocket                                # tên dataset (retailrocket | diginetica)

@@ -1,0 +1,20 @@
+# retailrocket_4_7 — ablation: chỉ giữ phiên độ dài 4–7 (filter), prefix≤50 lúc train
+preprocess:
+  output_dir: data/retailrocket_4_7                 # thư mục ghi train/val/test + lookup
+  train_file: train.txt                             # file phiên train
+  val_file: val.txt                                 # file phiên validation
+  test_file: test.txt                               # file phiên test
+  lookup_file: lookup_tables.pkl                    # pickle item2cat, cat2items, cat_parent
+  event_types: [view]                               # loại sự kiện giữ từ events.csv
+  session_same_day: true                            # true=cắt theo ngày lịch; false=dùng gap bên dưới
+  session_gap_seconds: 1800                         # giây; chỉ khi session_same_day=false (1800=30 phút)
+  dedup_consecutive: false                          # true=bỏ click liên tiếp; test_all=false
+  min_item_support: 5                               # item phải xuất hiện >= N lần mới được giữ
+  min_session_length: 4                             # phiên ngắn hơn bị loại
+  max_session_length: 7                             # filter: phiên dài hơn bị loại (không cắt)
+  session_length_mode: filter                       # keep=không cắt phiên; filter=lọc phiên theo [min,max]
+  max_prefix_length: 50                             # giới hạn prefix lúc train/eval
+  require_item_category: false                       # true=bỏ item không có category; false=gán UNK
+  val_ratio: 0.1                                    # tỉ lệ val (chia theo thời gian phiên)
+  test_ratio: 0.1                                   # tỉ lệ test (chia theo thời gian phiên)
+  max_sessions: 0                                   # 0=không giới hạn; >0=chỉ lấy N phiên đầu (smoke test)

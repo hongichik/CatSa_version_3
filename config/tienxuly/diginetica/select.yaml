@@ -1,0 +1,5 @@
+# select.yaml — danh sách version preprocess Diginetica sẽ chạy
+# python tienxuly/main.py --suite diginetica       → chạy lần lượt tất cả
+# python tienxuly/main.py --run diginetica.yaml    → chỉ một bản
+run:
+  - diginetica.yaml

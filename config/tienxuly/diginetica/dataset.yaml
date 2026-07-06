@@ -1,0 +1,6 @@
+# dataset.yaml — nguồn dữ liệu thô Diginetica (tienxuly/download.py)
+dataset:
+  source: kagglehub                                              # kagglehub=tải Kaggle; local=dùng local_path
+  kagglehub_handle: profalbusdumbledore/diginetica-dataset       # handle Kaggle
+  local_path: data/raw/diginetica                                # thư mục train-item-views.csv, product-categories.csv
+  name: diginetica                                               # tên dataset (diginetica | retailrocket)

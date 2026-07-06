@@ -1,0 +1,17 @@
+# ============================================================================
+# CẤU HÌNH LOGGING - dùng chung cho mọi dự án
+# Lưu ý: cách đặt tên FILE log (filename_mode / custom_filename) nằm trong
+# config riêng của từng dự án (ví dụ config/catsa/project.yaml), không ở đây.
+# ============================================================================
+
+logging:
+  # Thư mục GỐC chứa log. Log của mỗi dự án được ghi vào <dir>/<tên dự án>/
+  # (tên dự án lấy từ project.name trong config của dự án),
+  # ví dụ: Log/catsa/001-04-07-2026-09.log
+  dir: Log
+
+  # Mức log tối thiểu được ghi: DEBUG | INFO | WARNING | ERROR
+  level: INFO
+
+  # Có in log ra màn hình (console) song song với file không
+  console: true
