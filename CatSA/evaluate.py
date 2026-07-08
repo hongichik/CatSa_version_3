@@ -11,12 +11,20 @@ import math
 import torch
 from torch.utils.data import DataLoader
 
-from .model import CatSAEncoder
+from .model import build_encoder
+
+
+def _model_scores(model, z_s: torch.Tensor, batch=None) -> torch.Tensor:
+    import inspect
+    sig = inspect.signature(model.scores)
+    if batch is not None and len(sig.parameters) >= 2:
+        return model.scores(z_s, batch)
+    return model.scores(z_s)
 
 
 @torch.no_grad()
 def evaluate_model(
-    model: CatSAEncoder,
+    model,
     loader: DataLoader,
     device: torch.device,
     top_k: list[int],
@@ -33,7 +41,7 @@ def evaluate_model(
         targets = targets.to(device)
 
         z_s = model(batch_orig)
-        logits = model.scores(z_s)  # (B, |I|) — full ranking
+        logits = _model_scores(model, z_s, batch_orig)
 
         # Hạng của target = số item có score cao hơn + 1
         target_scores = logits.gather(1, targets.view(-1, 1))

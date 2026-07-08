@@ -1,0 +1,111 @@
+[CatSA] Sẽ chạy lần lượt 25 cấu hình: catsa_v1.yaml, catsa_v1_eta_aug_0.2.yaml, catsa_v1_eta_aug_0.5.yaml, catsa_v1_eta_crop_0.5.yaml, catsa_v1_eta_crop_0.9.yaml, catsa_v1_d64.yaml, catsa_v1_d128.yaml, catsa_v1_d64_eta_aug_0.2.yaml, catsa_v1_d64_eta_aug_0.5.yaml, catsa_v1_d128_eta_aug_0.2.yaml, catsa_v1_d128_eta_aug_0.5.yaml, catsa_v1_d64_eta_crop_0.5.yaml, catsa_v1_d64_eta_crop_0.9.yaml, catsa_v1_d128_eta_crop_0.5.yaml, catsa_v1_d128_eta_crop_0.9.yaml, catsa_v1_batch256.yaml, catsa_v1_batch2048.yaml, catsa_v2.yaml, catsa_v3.yaml, catsa_v4.yaml, catsa_2_5.yaml, catsa_3_6.yaml, catsa_4_7.yaml, catsa_2_7.yaml, catsa_category.yaml
+
+[CatSA] (1/25) Bắt đầu: catsa_v1.yaml
+2026-07-06 14:29:27 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/retailrocket/CatSA_v1.log
+2026-07-06 14:29:27 | INFO    | 
+====================================================================
+CẤU HÌNH LÚC CHẠY (config_dir: config | version: catsa_v1)
+====================================================================
+logging:
+  dir: Log
+  level: INFO
+  console: true
+project:
+  name: retailrocket
+  filename_mode: custom
+  custom_filename: CatSA_v1.log
+wandb:
+  enabled: true
+  api_key: '***da-che***'
+  project: ''
+  entity: ''
+  run_name: ''
+  mode: online
+dataset:
+  source: kagglehub
+  kagglehub_handle: retailrocket/ecommerce-dataset
+  local_path: data/raw
+  name: retailrocket
+preprocess:
+  output_dir: data/retailrocket_2_5
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+  event_types:
+  - view
+  session_same_day: true
+  session_gap_seconds: 1800
+  dedup_consecutive: false
+  min_item_support: 5
+  min_session_length: 2
+  max_session_length: 5
+  session_length_mode: filter
+  max_prefix_length: 50
+  require_item_category: false
+  val_ratio: 0.1
+  test_ratio: 0.1
+  max_sessions: 0
+data:
+  data_dir: data/retailrocket_item_hon_5
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+model:
+  embedding_dim: 100
+  num_layers: 2
+  use_taxonomy: true
+  dropout: 0.1
+augment:
+  strategies:
+  - same
+  - sibling
+  - hybrid
+  strategy_weights: []
+  eta_aug: 0.3
+  eta_crop: 0.75
+  k_min: 5
+training:
+  use_cl: true
+  lambda_cl: 0.1
+  tau: 0.5
+  batch_size: 100
+  learning_rate: 0.001
+  weight_decay: 1.0e-05
+  max_epochs: 30
+  patience: 5
+  grad_clip: 5.0
+  seed: 42
+  device: auto
+  num_workers: 0
+  checkpoint_dir: checkpoints
+  save_dir: checkpoints/retailrocket/catsa_v1/CatSA_v1
+evaluation:
+  top_k:
+  - 10
+  - 20
+  primary_metric: mrr@20
+config_dir: config
+version: catsa_v1
+====================================================================
+wandb: [wandb.login()] Using explicit session credentials for https://api.wandb.ai.
+wandb: Appending key for api.wandb.ai to your netrc file: /home/hongnguyen/.netrc
+wandb: Currently logged in as: hongichik321 (hongichik321-aol) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run h29714dv
+wandb: Tracking run with wandb version 0.28.0
+wandb: Run data is saved locally in /home/hongnguyen/demo2/wandb/run-20260706_142929-h29714dv
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run CatSA_v1
+wandb: ⭐️ View project at https://wandb.ai/hongichik321-aol/retailrocket
+wandb: 🚀 View run at https://wandb.ai/hongichik321-aol/retailrocket/runs/h29714dv
+2026-07-06 14:29:30 | INFO    | wandb: run 'CatSA_v1' — https://wandb.ai/hongichik321-aol/retailrocket/runs/h29714dv
+2026-07-06 14:29:30 | INFO    | Dữ liệu [data/retailrocket_item_hon_5]: |I|=79649, |C|=1185, train=283023 phiên
+2026-07-06 14:29:30 | INFO    | Thiết bị: cuda | use_cl=True (CatSA đầy đủ)
+2026-07-06 14:29:30 | INFO    | Augmentation strategies: ['same', 'sibling', 'hybrid'] | eta_aug=0.30, eta_crop=0.75, k_min=5, unk_cat_idx=0
+2026-07-06 14:29:30 | INFO    | max_prefix_length=50 (giới hạn lịch sử khi tạo mẫu sliding window)
+2026-07-06 14:29:31 | INFO    | Số mẫu train/val/test (sliding window): 764873 / 87318 / 81372
+2026-07-06 14:29:31 | INFO    | Checkpoint của run này: /home/hongnguyen/demo2/checkpoints/retailrocket/catsa_v1/CatSA_v1
+2026-07-06 14:34:14 | INFO    | Epoch 1: total=7.3142, rec=6.9355, cl=3.7868 (283.0s)
+2026-07-06 14:34:29 | INFO    |   Val: hr@10=0.3951 | ndcg@10=0.2857 | mrr@10=0.2516 | hr@20=0.4560 | ndcg@20=0.3011 | mrr@20=0.2558
+2026-07-06 14:34:29 | INFO    |   → Model tốt nhất mới (mrr@20=0.2558), lưu checkpoints/retailrocket/catsa_v1/CatSA_v1/best_model.pt

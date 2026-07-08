@@ -29,10 +29,9 @@ jobs:
   #   when: now
 
   - name: train_catsa
-    command: python CatSA/main.py --suite diginetica
+    command: python CatSA/main.py
     enabled: true
     when: now
-    after: train_core
 
   # Ví dụ: tiền xử lý lại dữ liệu lúc 2h sáng (đang tắt)
   # - name: tienxuly

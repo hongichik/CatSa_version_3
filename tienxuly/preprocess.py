@@ -359,6 +359,7 @@ def _process_sessions(
         "n_cats": len(all_cats),
         "item_id_map": item_id_map,
         "cat_id_map": cat_id_map,
+        "unk_cat_idx": cat_id_map.get(_UNK_CAT_RAW),
         "max_prefix_length": cfg.max_prefix_length,
         "session_length_mode": cfg.session_length_mode,
     }

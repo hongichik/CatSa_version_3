@@ -1891,3 +1891,37 @@ ModuleNotFoundError: No module named 'RUN'
 2026-07-05 02:37:06 | Chờ job 'train_core' (pid=2328442) kết thúc...
 2026-07-05 02:37:11 | Chờ job 'train_core' (pid=2328442) kết thúc...
 2026-07-05 02:37:16 | Chờ job 'train_core' (pid=2328442) kết thúc...
+2026-07-06 14:28:09 | Runner khởi động (pid=2753864) — 1 job:
+2026-07-06 14:28:09 |   - train_catsa: 'python CatSA/main.py' lúc 2026-07-06 14:28:09 (sau 'train_core')
+Traceback (most recent call last):
+  File "/home/hongnguyen/demo2/RUN/runner.py", line 196, in <module>
+    main()
+    ~~~~^^
+  File "/home/hongnguyen/demo2/RUN/runner.py", line 179, in main
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: Job 'train_catsa': after='train_core' — job phụ thuộc chưa được chạy (kiểm tra thứ tự trong jobs.yaml)
+2026-07-06 14:29:25 | Runner khởi động (pid=2756018) — 1 job:
+2026-07-06 14:29:25 |   - train_catsa: 'python CatSA/main.py' lúc 2026-07-06 14:29:25
+2026-07-06 14:29:25 | ĐÃ CHẠY job 'train_catsa' (pid=2756020) — output: /home/hongnguyen/demo2/RUN/logs/train_catsa-20260706-142925.log
+2026-07-06 14:29:25 | Runner xong: mọi job đã được khởi chạy (job cuối vẫn có thể đang chạy nền).
+2026-07-06 14:37:53 | Runner khởi động (pid=2764717) — 1 job:
+2026-07-06 14:37:53 |   - train_catsa: 'python CatSA/main.py' lúc 2026-07-07 00:00:00
+2026-07-06 14:37:53 | Chờ 33727s đến giờ chạy job 'train_catsa'...
+2026-07-06 14:40:40 | Runner khởi động (pid=2767595) — 1 job:
+2026-07-06 14:40:40 |   - train_catsa: 'python CatSA/main.py' lúc 2026-07-06 17:00:00
+2026-07-06 14:40:40 | Chờ 8360s đến giờ chạy job 'train_catsa'...
+2026-07-06 14:41:57 | Runner khởi động (pid=2768938) — 1 job:
+2026-07-06 14:41:57 |   - train_catsa: 'python CatSA/main.py' lúc 2026-07-06 17:00:00
+2026-07-06 14:41:57 | Chờ 8283s đến giờ chạy job 'train_catsa'...
+2026-07-06 17:00:00 | ĐÃ CHẠY job 'train_catsa' (pid=2883742) — output: /home/hongnguyen/demo2/RUN/logs/train_catsa-20260706-170000.log
+2026-07-06 17:00:00 | Runner xong: mọi job đã được khởi chạy (job cuối vẫn có thể đang chạy nền).
+2026-07-07 02:40:51 | Runner khởi động (pid=3173211) — 1 job:
+2026-07-07 02:40:51 |   - train_catsa: 'python CatSA/main.py' lúc 2026-07-07 02:40:51
+2026-07-07 02:40:51 | ĐÃ CHẠY job 'train_catsa' (pid=3173213) — output: /home/hongnguyen/demo2/RUN/logs/train_catsa-20260707-024051.log
+2026-07-07 02:40:51 | Runner xong: mọi job đã được khởi chạy (job cuối vẫn có thể đang chạy nền).
+2026-07-08 01:31:43 | Runner khởi động (pid=3601028) — 1 job:
+2026-07-08 01:31:43 |   - train_catsa: 'python CatSA/main.py' lúc 2026-07-08 01:31:43
+2026-07-08 01:31:43 | ĐÃ CHẠY job 'train_catsa' (pid=3601049) — output: /home/hongnguyen/demo2/RUN/logs/train_catsa-20260708-013143.log
+2026-07-08 01:31:43 | Runner xong: mọi job đã được khởi chạy (job cuối vẫn có thể đang chạy nền).

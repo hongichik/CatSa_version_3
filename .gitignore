@@ -11,3 +11,13 @@ RUN/state/
 
 __pycache__/
 *.pyc
+
+# LINK_repo — artefact sinh ra khi chạy (dataset RecBole, teacher matrix, log, saved)
+LINK_repo/dataset/
+LINK_repo/saved/
+LINK_repo/saved_models_for_embedding/
+LINK_repo/log/
+
+# MSGIFSR_repo — dataset sinh ra khi chạy (giữ datasets/sample gốc)
+MSGIFSR_repo/datasets/*
+!MSGIFSR_repo/datasets/sample/

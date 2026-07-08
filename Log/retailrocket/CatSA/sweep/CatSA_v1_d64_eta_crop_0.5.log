@@ -1,0 +1,202 @@
+2026-07-07 02:32:31 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/retailrocket/CatSA_v1_d64_eta_crop_0.5.log
+2026-07-07 02:32:31 | INFO    | 
+====================================================================
+CẤU HÌNH LÚC CHẠY (config_dir: config | version: catsa_v1_d64_eta_crop_0.5)
+====================================================================
+logging:
+  dir: Log
+  level: INFO
+  console: true
+project:
+  name: retailrocket
+  filename_mode: custom
+  custom_filename: CatSA_v1_d64_eta_crop_0.5.log
+wandb:
+  enabled: true
+  api_key: '***da-che***'
+  project: ''
+  entity: ''
+  run_name: ''
+  mode: online
+dataset:
+  source: kagglehub
+  kagglehub_handle: retailrocket/ecommerce-dataset
+  local_path: data/raw
+  name: retailrocket
+preprocess:
+  output_dir: data/retailrocket_2_5
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+  event_types:
+  - view
+  session_same_day: true
+  session_gap_seconds: 1800
+  dedup_consecutive: false
+  min_item_support: 5
+  min_session_length: 2
+  max_session_length: 5
+  session_length_mode: filter
+  max_prefix_length: 50
+  require_item_category: false
+  val_ratio: 0.1
+  test_ratio: 0.1
+  max_sessions: 0
+data:
+  data_dir: data/retailrocket_item_hon_5
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+model:
+  embedding_dim: 64
+  num_layers: 2
+  use_taxonomy: true
+  dropout: 0.1
+augment:
+  strategies:
+  - same
+  - sibling
+  - hybrid
+  strategy_weights: []
+  eta_aug: 0.3
+  eta_crop: 0.5
+  k_min: 5
+training:
+  use_cl: true
+  lambda_cl: 0.1
+  tau: 0.5
+  batch_size: 100
+  learning_rate: 0.001
+  weight_decay: 1.0e-05
+  max_epochs: 30
+  patience: 5
+  grad_clip: 5.0
+  seed: 42
+  device: auto
+  num_workers: 0
+  checkpoint_dir: checkpoints
+  save_dir: checkpoints/retailrocket/catsa_v1/CatSA_v1_d64_eta_crop_0.5
+evaluation:
+  top_k:
+  - 10
+  - 20
+  primary_metric: mrr@20
+config_dir: config
+version: catsa_v1_d64_eta_crop_0.5
+====================================================================
+2026-07-07 02:32:33 | INFO    | wandb: run 'CatSA_v1_d64_eta_crop_0.5' — https://wandb.ai/hongichik321-aol/retailrocket/runs/88sfrrtz
+2026-07-07 02:32:33 | INFO    | Dữ liệu [data/retailrocket_item_hon_5]: |I|=79649, |C|=1185, train=283023 phiên
+2026-07-07 02:32:33 | INFO    | Thiết bị: cuda | use_cl=True (CatSA đầy đủ)
+2026-07-07 02:32:33 | INFO    | Augmentation strategies: ['same', 'sibling', 'hybrid'] | eta_aug=0.30, eta_crop=0.50, k_min=5, unk_cat_idx=0
+2026-07-07 02:32:33 | INFO    | max_prefix_length=50 (giới hạn lịch sử khi tạo mẫu sliding window)
+2026-07-07 02:32:34 | INFO    | Số mẫu train/val/test (sliding window): 764873 / 87318 / 81372
+2026-07-07 02:32:34 | INFO    | Checkpoint của run này: /home/hongnguyen/demo2/checkpoints/retailrocket/catsa_v1/CatSA_v1_d64_eta_crop_0.5
+2026-07-07 02:36:15 | INFO    | Epoch 1: total=7.6314, rec=7.2427, cl=3.8865 (220.4s)
+2026-07-07 02:36:25 | INFO    |   Val: hr@10=0.3804 | ndcg@10=0.2753 | mrr@10=0.2425 | hr@20=0.4399 | ndcg@20=0.2904 | mrr@20=0.2467
+2026-07-07 02:36:25 | INFO    |   → Model tốt nhất mới (mrr@20=0.2467), lưu checkpoints/retailrocket/catsa_v1/CatSA_v1_d64_eta_crop_0.5/best_model.pt
+2026-07-07 02:40:05 | INFO    | Epoch 2: total=5.6328, rec=5.2503, cl=3.8247 (219.7s)
+2026-07-07 02:40:15 | INFO    |   Val: hr@10=0.4253 | ndcg@10=0.3080 | mrr@10=0.2713 | hr@20=0.4903 | ndcg@20=0.3245 | mrr@20=0.2758
+2026-07-07 02:40:15 | INFO    |   → Model tốt nhất mới (mrr@20=0.2758), lưu checkpoints/retailrocket/catsa_v1/CatSA_v1_d64_eta_crop_0.5/best_model.pt
+2026-07-07 03:35:20 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/retailrocket/CatSA_v1_d64_eta_crop_0.5.log
+2026-07-07 03:35:20 | INFO    | 
+====================================================================
+CẤU HÌNH LÚC CHẠY (config_dir: config | version: catsa_v1_d64_eta_crop_0.5)
+====================================================================
+logging:
+  dir: Log
+  level: INFO
+  console: true
+project:
+  name: retailrocket
+  filename_mode: custom
+  custom_filename: CatSA_v1_d64_eta_crop_0.5.log
+wandb:
+  enabled: true
+  api_key: '***da-che***'
+  project: ''
+  entity: ''
+  run_name: ''
+  mode: online
+dataset:
+  source: kagglehub
+  kagglehub_handle: retailrocket/ecommerce-dataset
+  local_path: data/raw
+  name: retailrocket
+preprocess:
+  output_dir: data/retailrocket_2_5
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+  event_types:
+  - view
+  session_same_day: true
+  session_gap_seconds: 1800
+  dedup_consecutive: false
+  min_item_support: 5
+  min_session_length: 2
+  max_session_length: 5
+  session_length_mode: filter
+  max_prefix_length: 50
+  require_item_category: false
+  val_ratio: 0.1
+  test_ratio: 0.1
+  max_sessions: 0
+data:
+  data_dir: data/retailrocket_item_hon_5
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+model:
+  embedding_dim: 64
+  num_layers: 2
+  use_taxonomy: true
+  dropout: 0.1
+  encoder_type: rgcn
+  fusion_type: cross_attn
+  n_heads: 2
+  retrieval_topk: 5
+augment:
+  strategies:
+  - same
+  - sibling
+  - hybrid
+  strategy_weights: []
+  eta_aug: 0.3
+  eta_crop: 0.5
+  k_min: 5
+training:
+  use_cl: true
+  lambda_cl: 0.1
+  cl_type: infonce
+  lambda_proto: 0.1
+  aux_cat: false
+  aux_parent: false
+  lambda_aux_cat: 0.1
+  lambda_aux_parent: 0.1
+  tau: 0.5
+  batch_size: 100
+  learning_rate: 0.001
+  weight_decay: 1.0e-05
+  max_epochs: 30
+  patience: 5
+  grad_clip: 5.0
+  seed: 42
+  device: auto
+  num_workers: 0
+  checkpoint_dir: checkpoints
+  save_dir: checkpoints/retailrocket/catsa_v1/CatSA_v1_d64_eta_crop_0.5
+evaluation:
+  top_k:
+  - 10
+  - 20
+  primary_metric: mrr@20
+config_dir: config
+version: catsa_v1_d64_eta_crop_0.5
+====================================================================
+2026-07-07 03:35:22 | INFO    | wandb: run 'CatSA_v1_d64_eta_crop_0.5' — https://wandb.ai/hongichik321-aol/retailrocket/runs/cz4t969i
+2026-07-07 03:35:22 | INFO    | Dữ liệu [data/retailrocket_item_hon_5]: |I|=79649, |C|=1185, train=283023 phiên
+2026-07-07 03:35:22 | INFO    | Thiết bị: cuda | encoder=rgcn | fusion=cross_attn | use_cl=True | cl_type=infonce | aux_cat=False | aux_parent=False

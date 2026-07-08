@@ -1,0 +1,1939 @@
+2026-07-08 04:43:05 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/retailrocket/LINK_toy.log
+2026-07-08 04:43:05 | INFO    | ====================================================================
+2026-07-08 04:43:05 | INFO    | [LINK] Bắt đầu run=link_toy.yaml  suite=retailrocket  dataset=toy_link
+2026-07-08 04:43:05 | INFO    | [LINK] Cấu hình: {'project': {'name': 'retailrocket', 'filename_mode': 'custom', 'custom_filename': 'LINK_toy.log'}, 'data': {'data_dir': 'data/toy_link', 'train_file': 'train.txt', 'val_file': 'val.txt', 'test_file': 'test.txt', 'lookup_file': 'lookup_tables.pkl'}, 'link': {'dataset_name': 'toy_link', 'reuse_converted': False, 'reuse_teacher': False, 'teacher_model': 'core_trm', 'teacher_epochs': 2, 'train_batch_size': 256, 'eval_batch_size': 256, 'learning_rate': 0.001, 'stopping_step': 5, 'reg': 10.0, 'reg_teacher': 100, 'predict_weight': 4.0, 'slis_alpha': 0.9, 'teacher_normalize': True, 'teacher_temperature': 0.1, 'gpu_id': 0}, 'evaluation': {'topk': [5, 10, 20], 'metrics': ['Recall', 'MRR'], 'valid_metric': 'MRR@20'}, '_logging': {'dir': 'Log', 'level': 'INFO', 'console': True}}
+2026-07-08 04:43:05 | INFO    | [LINK] Dữ liệu [data/toy_link]: |I|=60, train=500 phiên
+2026-07-08 04:43:05 | INFO    | [adapter] Đã sinh dataset RecBole 'toy_link' tại /home/hongnguyen/demo2/LINK_repo/dataset/toy_link: train=1496 mẫu, valid=167, test=196, train.session=500 phiên
+2026-07-08 04:43:05 | INFO    | [teacher] $ /opt/miniconda3/bin/python main.py --model core_trm --dataset toy_link --config2 props/gpu0_1024.yaml --gpu_id 0 --epochs 2 --train_batch_size 256 --eval_batch_size 256 --learning_rate 0.001 --stopping_step 5
+2026-07-08 04:43:06 | INFO    | [teacher] Traceback (most recent call last):
+2026-07-08 04:43:06 | INFO    | [teacher]   File "/home/hongnguyen/demo2/LINK_repo/main.py", line 289, in <module>
+2026-07-08 04:43:06 | INFO    | [teacher]     run_single_model(args, args_unparsed)
+2026-07-08 04:43:06 | INFO    | [teacher]     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+2026-07-08 04:43:06 | INFO    | [teacher]   File "/home/hongnguyen/demo2/LINK_repo/main.py", line 54, in run_single_model
+2026-07-08 04:43:06 | INFO    | [teacher]     config = Config(
+2026-07-08 04:43:06 | INFO    | [teacher]         model=model,
+2026-07-08 04:43:06 | INFO    | [teacher]         dataset=args.dataset,
+2026-07-08 04:43:06 | INFO    | [teacher]         config_file_list=config_file_list,
+2026-07-08 04:43:06 | INFO    | [teacher]     )
+2026-07-08 04:43:06 | INFO    | [teacher]   File "/home/hongnguyen/.local/lib/python3.13/site-packages/recbole/config/configurator.py", line 80, in __init__
+2026-07-08 04:43:06 | INFO    | [teacher]     self.compatibility_settings()
+2026-07-08 04:43:06 | INFO    | [teacher]     ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+2026-07-08 04:43:06 | INFO    | [teacher]   File "/home/hongnguyen/.local/lib/python3.13/site-packages/recbole/config/configurator.py", line 630, in compatibility_settings
+2026-07-08 04:43:06 | INFO    | [teacher]     np.float = np.float_
+2026-07-08 04:43:06 | INFO    | [teacher]                ^^^^^^^^^
+2026-07-08 04:43:06 | INFO    | [teacher]   File "/opt/miniconda3/lib/python3.13/site-packages/numpy/__init__.py", line 778, in __getattr__
+2026-07-08 04:43:06 | INFO    | [teacher]     raise AttributeError(
+2026-07-08 04:43:06 | INFO    | [teacher]     ...<3 lines>...
+2026-07-08 04:43:06 | INFO    | [teacher]     )
+2026-07-08 04:43:06 | INFO    | [teacher] AttributeError: `np.float_` was removed in the NumPy 2.0 release. Use `np.float64` instead.
+2026-07-08 04:43:50 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/retailrocket/LINK_toy.log
+2026-07-08 04:43:50 | INFO    | ====================================================================
+2026-07-08 04:43:50 | INFO    | [LINK] Bắt đầu run=link_toy.yaml  suite=retailrocket  dataset=toy_link
+2026-07-08 04:43:50 | INFO    | [LINK] Cấu hình: {'project': {'name': 'retailrocket', 'filename_mode': 'custom', 'custom_filename': 'LINK_toy.log'}, 'data': {'data_dir': 'data/toy_link', 'train_file': 'train.txt', 'val_file': 'val.txt', 'test_file': 'test.txt', 'lookup_file': 'lookup_tables.pkl'}, 'link': {'dataset_name': 'toy_link', 'reuse_converted': False, 'reuse_teacher': False, 'teacher_model': 'core_trm', 'teacher_epochs': 2, 'train_batch_size': 256, 'eval_batch_size': 256, 'learning_rate': 0.001, 'stopping_step': 5, 'reg': 10.0, 'reg_teacher': 100, 'predict_weight': 4.0, 'slis_alpha': 0.9, 'teacher_normalize': True, 'teacher_temperature': 0.1, 'gpu_id': 0}, 'evaluation': {'topk': [5, 10, 20], 'metrics': ['Recall', 'MRR'], 'valid_metric': 'MRR@20'}, '_logging': {'dir': 'Log', 'level': 'INFO', 'console': True}}
+2026-07-08 04:43:50 | INFO    | [LINK] Dữ liệu [data/toy_link]: |I|=60, train=500 phiên
+2026-07-08 04:43:50 | INFO    | [adapter] Đã sinh dataset RecBole 'toy_link' tại /home/hongnguyen/demo2/LINK_repo/dataset/toy_link: train=1496 mẫu, valid=167, test=196, train.session=500 phiên
+2026-07-08 04:43:50 | INFO    | [teacher] $ /opt/miniconda3/bin/python main.py --model core_trm --dataset toy_link --config2 props/gpu0_1024.yaml --gpu_id 0 --epochs 2 --train_batch_size 256 --eval_batch_size 256 --learning_rate 0.001 --stopping_step 5
+2026-07-08 04:43:51 | INFO    | [teacher] command line args [--model core_trm --dataset toy_link --config2 props/gpu0_1024.yaml --gpu_id 0 --epochs 2 --train_batch_size 256 --eval_batch_size 256 --learning_rate 0.001 --stopping_step 5] will not be used in RecBole
+2026-07-08 04:43:51 | INFO    | [teacher] Traceback (most recent call last):
+2026-07-08 04:43:51 | INFO    | [teacher]   File "/home/hongnguyen/demo2/LINK_repo/main.py", line 298, in <module>
+2026-07-08 04:43:51 | INFO    | [teacher]     run_single_model(args, args_unparsed)
+2026-07-08 04:43:51 | INFO    | [teacher]     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+2026-07-08 04:43:51 | INFO    | [teacher]   File "/home/hongnguyen/demo2/LINK_repo/main.py", line 63, in run_single_model
+2026-07-08 04:43:51 | INFO    | [teacher]     config = Config(
+2026-07-08 04:43:51 | INFO    | [teacher]         model=model,
+2026-07-08 04:43:51 | INFO    | [teacher]         dataset=args.dataset,
+2026-07-08 04:43:51 | INFO    | [teacher]         config_file_list=config_file_list,
+2026-07-08 04:43:51 | INFO    | [teacher]     )
+2026-07-08 04:43:51 | INFO    | [teacher]   File "/home/hongnguyen/.local/lib/python3.13/site-packages/recbole/config/configurator.py", line 93, in __init__
+2026-07-08 04:43:51 | INFO    | [teacher]     self._set_default_parameters()
+2026-07-08 04:43:51 | INFO    | [teacher]     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+2026-07-08 04:43:51 | INFO    | [teacher]   File "/home/hongnguyen/.local/lib/python3.13/site-packages/recbole/config/configurator.py", line 349, in _set_default_parameters
+2026-07-08 04:43:51 | INFO    | [teacher]     raise ValueError(
+2026-07-08 04:43:51 | INFO    | [teacher]     ...<2 lines>...
+2026-07-08 04:43:51 | INFO    | [teacher]     )
+2026-07-08 04:43:51 | INFO    | [teacher] ValueError: train_neg_sample_args [{'distribution': 'uniform', 'sample_num': 1, 'alpha': 1.0, 'dynamic': False, 'candidate_num': 0}] should be None when the loss_type is CE.
+2026-07-08 04:44:16 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/retailrocket/LINK_toy.log
+2026-07-08 04:44:16 | INFO    | ====================================================================
+2026-07-08 04:44:16 | INFO    | [LINK] Bắt đầu run=link_toy.yaml  suite=retailrocket  dataset=toy_link
+2026-07-08 04:44:16 | INFO    | [LINK] Cấu hình: {'project': {'name': 'retailrocket', 'filename_mode': 'custom', 'custom_filename': 'LINK_toy.log'}, 'data': {'data_dir': 'data/toy_link', 'train_file': 'train.txt', 'val_file': 'val.txt', 'test_file': 'test.txt', 'lookup_file': 'lookup_tables.pkl'}, 'link': {'dataset_name': 'toy_link', 'reuse_converted': False, 'reuse_teacher': False, 'teacher_model': 'core_trm', 'teacher_epochs': 2, 'train_batch_size': 256, 'eval_batch_size': 256, 'learning_rate': 0.001, 'stopping_step': 5, 'reg': 10.0, 'reg_teacher': 100, 'predict_weight': 4.0, 'slis_alpha': 0.9, 'teacher_normalize': True, 'teacher_temperature': 0.1, 'gpu_id': 0}, 'evaluation': {'topk': [5, 10, 20], 'metrics': ['Recall', 'MRR'], 'valid_metric': 'MRR@20'}, '_logging': {'dir': 'Log', 'level': 'INFO', 'console': True}}
+2026-07-08 04:44:16 | INFO    | [LINK] Dữ liệu [data/toy_link]: |I|=60, train=500 phiên
+2026-07-08 04:44:16 | INFO    | [adapter] Đã sinh dataset RecBole 'toy_link' tại /home/hongnguyen/demo2/LINK_repo/dataset/toy_link: train=1496 mẫu, valid=167, test=196, train.session=500 phiên
+2026-07-08 04:44:16 | INFO    | [teacher] $ /opt/miniconda3/bin/python main.py --model core_trm --dataset toy_link --config2 props/gpu0_1024.yaml --gpu_id 0 --epochs 2 --train_batch_size 256 --eval_batch_size 256 --learning_rate 0.001 --stopping_step 5
+2026-07-08 04:44:18 | INFO    | [teacher] command line args [--model core_trm --dataset toy_link --config2 props/gpu0_1024.yaml --gpu_id 0 --epochs 2 --train_batch_size 256 --eval_batch_size 256 --learning_rate 0.001 --stopping_step 5] will not be used in RecBole
+2026-07-08 04:44:18 | INFO    | [teacher] 08 Jul 04:44    INFO  
+2026-07-08 04:44:18 | INFO    | [teacher] General Hyper Parameters:
+2026-07-08 04:44:18 | INFO    | [teacher] gpu_id = 0
+2026-07-08 04:44:18 | INFO    | [teacher] use_gpu = True
+2026-07-08 04:44:18 | INFO    | [teacher] seed = 2020
+2026-07-08 04:44:18 | INFO    | [teacher] state = INFO
+2026-07-08 04:44:18 | INFO    | [teacher] reproducibility = True
+2026-07-08 04:44:18 | INFO    | [teacher] data_path = dataset/toy_link
+2026-07-08 04:44:18 | INFO    | [teacher] checkpoint_dir = saved
+2026-07-08 04:44:18 | INFO    | [teacher] show_progress = True
+2026-07-08 04:44:18 | INFO    | [teacher] save_dataset = False
+2026-07-08 04:44:18 | INFO    | [teacher] dataset_save_path = None
+2026-07-08 04:44:18 | INFO    | [teacher] save_dataloaders = False
+2026-07-08 04:44:18 | INFO    | [teacher] dataloaders_save_path = None
+2026-07-08 04:44:18 | INFO    | [teacher] log_wandb = False
+2026-07-08 04:44:18 | INFO    | [teacher] 
+2026-07-08 04:44:18 | INFO    | [teacher] Training Hyper Parameters:
+2026-07-08 04:44:18 | INFO    | [teacher] epochs = 2
+2026-07-08 04:44:18 | INFO    | [teacher] train_batch_size = 256
+2026-07-08 04:44:18 | INFO    | [teacher] learner = adam
+2026-07-08 04:44:18 | INFO    | [teacher] learning_rate = 0.001
+2026-07-08 04:44:18 | INFO    | [teacher] train_neg_sample_args = {'distribution': 'none', 'sample_num': 'none', 'alpha': 'none', 'dynamic': False, 'candidate_num': 0}
+2026-07-08 04:44:18 | INFO    | [teacher] eval_step = 1
+2026-07-08 04:44:18 | INFO    | [teacher] stopping_step = 5
+2026-07-08 04:44:18 | INFO    | [teacher] clip_grad_norm = None
+2026-07-08 04:44:18 | INFO    | [teacher] weight_decay = 0.0
+2026-07-08 04:44:18 | INFO    | [teacher] loss_decimal_place = 4
+2026-07-08 04:44:18 | INFO    | [teacher] 
+2026-07-08 04:44:18 | INFO    | [teacher] Evaluation Hyper Parameters:
+2026-07-08 04:44:18 | INFO    | [teacher] eval_args = {'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}
+2026-07-08 04:44:18 | INFO    | [teacher] repeatable = True
+2026-07-08 04:44:18 | INFO    | [teacher] metrics = ['Recall', 'MRR']
+2026-07-08 04:44:18 | INFO    | [teacher] topk = [5, 10, 20]
+2026-07-08 04:44:18 | INFO    | [teacher] valid_metric = MRR@20
+2026-07-08 04:44:18 | INFO    | [teacher] valid_metric_bigger = True
+2026-07-08 04:44:18 | INFO    | [teacher] eval_batch_size = 256
+2026-07-08 04:44:18 | INFO    | [teacher] metric_decimal_place = 4
+2026-07-08 04:44:18 | INFO    | [teacher] 
+2026-07-08 04:44:18 | INFO    | [teacher] Dataset Hyper Parameters:
+2026-07-08 04:44:18 | INFO    | [teacher] field_separator = 	
+2026-07-08 04:44:18 | INFO    | [teacher] seq_separator =  
+2026-07-08 04:44:18 | INFO    | [teacher] USER_ID_FIELD = session_id
+2026-07-08 04:44:18 | INFO    | [teacher] ITEM_ID_FIELD = item_id
+2026-07-08 04:44:18 | INFO    | [teacher] RATING_FIELD = rating
+2026-07-08 04:44:18 | INFO    | [teacher] TIME_FIELD = timestamp
+2026-07-08 04:44:18 | INFO    | [teacher] seq_len = None
+2026-07-08 04:44:18 | INFO    | [teacher] LABEL_FIELD = label
+2026-07-08 04:44:18 | INFO    | [teacher] threshold = None
+2026-07-08 04:44:18 | INFO    | [teacher] NEG_PREFIX = neg_
+2026-07-08 04:44:18 | INFO    | [teacher] load_col = {'inter': ['session_id', 'item_id_list', 'item_id']}
+2026-07-08 04:44:18 | INFO    | [teacher] unload_col = None
+2026-07-08 04:44:18 | INFO    | [teacher] unused_col = None
+2026-07-08 04:44:18 | INFO    | [teacher] additional_feat_suffix = None
+2026-07-08 04:44:18 | INFO    | [teacher] rm_dup_inter = None
+2026-07-08 04:44:18 | INFO    | [teacher] val_interval = None
+2026-07-08 04:44:18 | INFO    | [teacher] filter_inter_by_user_or_item = True
+2026-07-08 04:44:18 | INFO    | [teacher] user_inter_num_interval = [0,inf)
+2026-07-08 04:44:18 | INFO    | [teacher] item_inter_num_interval = [0,inf)
+2026-07-08 04:44:18 | INFO    | [teacher] alias_of_user_id = None
+2026-07-08 04:44:18 | INFO    | [teacher] alias_of_item_id = ['item_id_list']
+2026-07-08 04:44:18 | INFO    | [teacher] alias_of_entity_id = None
+2026-07-08 04:44:18 | INFO    | [teacher] alias_of_relation_id = None
+2026-07-08 04:44:18 | INFO    | [teacher] preload_weight = None
+2026-07-08 04:44:18 | INFO    | [teacher] normalize_field = None
+2026-07-08 04:44:18 | INFO    | [teacher] normalize_all = None
+2026-07-08 04:44:18 | INFO    | [teacher] ITEM_LIST_LENGTH_FIELD = item_length
+2026-07-08 04:44:18 | INFO    | [teacher] LIST_SUFFIX = _list
+2026-07-08 04:44:18 | INFO    | [teacher] MAX_ITEM_LIST_LENGTH = 50
+2026-07-08 04:44:18 | INFO    | [teacher] POSITION_FIELD = position_id
+2026-07-08 04:44:18 | INFO    | [teacher] HEAD_ENTITY_ID_FIELD = head_id
+2026-07-08 04:44:18 | INFO    | [teacher] TAIL_ENTITY_ID_FIELD = tail_id
+2026-07-08 04:44:18 | INFO    | [teacher] RELATION_ID_FIELD = relation_id
+2026-07-08 04:44:18 | INFO    | [teacher] ENTITY_ID_FIELD = entity_id
+2026-07-08 04:44:18 | INFO    | [teacher] benchmark_filename = ['train', 'valid', 'test']
+2026-07-08 04:44:18 | INFO    | [teacher] 
+2026-07-08 04:44:18 | INFO    | [teacher] Other Hyper Parameters: 
+2026-07-08 04:44:18 | INFO    | [teacher] worker = 0
+2026-07-08 04:44:18 | INFO    | [teacher] wandb_project = recbole
+2026-07-08 04:44:18 | INFO    | [teacher] shuffle = True
+2026-07-08 04:44:18 | INFO    | [teacher] require_pow = False
+2026-07-08 04:44:18 | INFO    | [teacher] enable_amp = False
+2026-07-08 04:44:18 | INFO    | [teacher] enable_scaler = False
+2026-07-08 04:44:18 | INFO    | [teacher] transform = None
+2026-07-08 04:44:18 | INFO    | [teacher] numerical_features = []
+2026-07-08 04:44:18 | INFO    | [teacher] discretization = None
+2026-07-08 04:44:18 | INFO    | [teacher] kg_reverse_r = False
+2026-07-08 04:44:18 | INFO    | [teacher] entity_kg_num_interval = [0,inf)
+2026-07-08 04:44:18 | INFO    | [teacher] relation_kg_num_interval = [0,inf)
+2026-07-08 04:44:18 | INFO    | [teacher] MODEL_TYPE = ModelType.SEQUENTIAL
+2026-07-08 04:44:18 | INFO    | [teacher] neg_sampling = None
+2026-07-08 04:44:18 | INFO    | [teacher] embedding_size = 100
+2026-07-08 04:44:18 | INFO    | [teacher] inner_size = 256
+2026-07-08 04:44:18 | INFO    | [teacher] n_layers = 2
+2026-07-08 04:44:18 | INFO    | [teacher] n_heads = 2
+2026-07-08 04:44:18 | INFO    | [teacher] hidden_dropout_prob = 0.5
+2026-07-08 04:44:18 | INFO    | [teacher] attn_dropout_prob = 0.5
+2026-07-08 04:44:18 | INFO    | [teacher] hidden_act = gelu
+2026-07-08 04:44:18 | INFO    | [teacher] layer_norm_eps = 1e-12
+2026-07-08 04:44:18 | INFO    | [teacher] initializer_range = 0.02
+2026-07-08 04:44:18 | INFO    | [teacher] loss_type = CE
+2026-07-08 04:44:18 | INFO    | [teacher] sess_dropout = 0.2
+2026-07-08 04:44:18 | INFO    | [teacher] item_dropout = 0.2
+2026-07-08 04:44:18 | INFO    | [teacher] temperature = 0.07
+2026-07-08 04:44:18 | INFO    | [teacher] folder = base
+2026-07-08 04:44:18 | INFO    | [teacher] pop_eval = False
+2026-07-08 04:44:18 | INFO    | [teacher] save_teacher_matrix = True
+2026-07-08 04:44:18 | INFO    | [teacher] MODEL_INPUT_TYPE = InputType.POINTWISE
+2026-07-08 04:44:18 | INFO    | [teacher] eval_type = EvaluatorType.RANKING
+2026-07-08 04:44:18 | INFO    | [teacher] single_spec = True
+2026-07-08 04:44:18 | INFO    | [teacher] local_rank = 0
+2026-07-08 04:44:18 | INFO    | [teacher] device = cuda
+2026-07-08 04:44:18 | INFO    | [teacher] valid_neg_sample_args = {'distribution': 'uniform', 'sample_num': 'none'}
+2026-07-08 04:44:18 | INFO    | [teacher] test_neg_sample_args = {'distribution': 'uniform', 'sample_num': 'none'}
+2026-07-08 04:44:18 | INFO    | [teacher] 
+2026-07-08 04:44:18 | INFO    | [teacher] 
+2026-07-08 04:44:18 | INFO    | [teacher] /home/hongnguyen/.local/lib/python3.13/site-packages/recbole/data/dataset/dataset.py:648: ChainedAssignmentError: A value is being set on a copy of a DataFrame or Series through chained assignment using an inplace method.
+2026-07-08 04:44:18 | INFO    | [teacher] Such inplace method never works to update the original DataFrame or Series, because the intermediate object on which we are setting values always behaves as a copy (due to Copy-on-Write).
+2026-07-08 04:44:18 | INFO    | [teacher] 
+2026-07-08 04:44:18 | INFO    | [teacher] For example, when doing 'df[col].method(value, inplace=True)', try using 'df.method({col: value}, inplace=True)' instead, to perform the operation inplace on the original object, or try to avoid an inplace operation using 'df[col] = df[col].method(value)'.
+2026-07-08 04:44:18 | INFO    | [teacher] 
+2026-07-08 04:44:18 | INFO    | [teacher] See the documentation for a more detailed explanation: https://pandas.pydata.org/pandas-docs/stable/user_guide/copy_on_write.html
+2026-07-08 04:44:18 | INFO    | [teacher]   feat[field].fillna(value=0, inplace=True)
+2026-07-08 04:44:18 | INFO    | [teacher] 08 Jul 04:44    INFO  toy_link
+2026-07-08 04:44:18 | INFO    | [teacher] The number of users: 1497
+2026-07-08 04:44:18 | INFO    | [teacher] Average actions of users: 1.2426470588235294
+2026-07-08 04:44:18 | INFO    | [teacher] The number of items: 60
+2026-07-08 04:44:18 | INFO    | [teacher] Average actions of items: 31.508474576271187
+2026-07-08 04:44:18 | INFO    | [teacher] The number of inters: 1859
+2026-07-08 04:44:18 | INFO    | [teacher] The sparsity of the dataset: 97.93030505455356%
+2026-07-08 04:44:18 | INFO    | [teacher] Remain Fields: ['session_id', 'item_id_list', 'item_id', 'item_length']
+2026-07-08 04:44:18 | INFO    | [teacher] /home/hongnguyen/.local/lib/python3.13/site-packages/recbole/data/dataset/dataset.py:2136: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:203.)
+2026-07-08 04:44:18 | INFO    | [teacher]   new_data[k] = torch.LongTensor(value)
+2026-07-08 04:44:18 | INFO    | [teacher] 08 Jul 04:44    INFO  [Training]: train_batch_size = [256] train_neg_sample_args: [{'distribution': 'none', 'sample_num': 'none', 'alpha': 'none', 'dynamic': False, 'candidate_num': 0}]
+2026-07-08 04:44:18 | INFO    | [teacher] 08 Jul 04:44    INFO  [Evaluation]: eval_batch_size = [256] eval_args: [{'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}]
+2026-07-08 04:44:18 | INFO    | [teacher] 08 Jul 04:44    INFO  COREtrm(
+2026-07-08 04:44:18 | INFO    | [teacher]   (sess_dropout): Dropout(p=0.2, inplace=False)
+2026-07-08 04:44:18 | INFO    | [teacher]   (item_dropout): Dropout(p=0.2, inplace=False)
+2026-07-08 04:44:18 | INFO    | [teacher]   (item_embedding): Embedding(60, 100, padding_idx=0)
+2026-07-08 04:44:18 | INFO    | [teacher]   (loss_fct): CrossEntropyLoss()
+2026-07-08 04:44:18 | INFO    | [teacher]   (net): TransNet(
+2026-07-08 04:44:18 | INFO    | [teacher]     (position_embedding): Embedding(5, 100)
+2026-07-08 04:44:18 | INFO    | [teacher]     (trm_encoder): TransformerEncoder(
+2026-07-08 04:44:18 | INFO    | [teacher]       (layer): ModuleList(
+2026-07-08 04:44:18 | INFO    | [teacher]         (0-1): 2 x TransformerLayer(
+2026-07-08 04:44:18 | INFO    | [teacher]           (multi_head_attention): MultiHeadAttention(
+2026-07-08 04:44:18 | INFO    | [teacher]             (query): Linear(in_features=100, out_features=100, bias=True)
+2026-07-08 04:44:18 | INFO    | [teacher]             (key): Linear(in_features=100, out_features=100, bias=True)
+2026-07-08 04:44:18 | INFO    | [teacher]             (value): Linear(in_features=100, out_features=100, bias=True)
+2026-07-08 04:44:18 | INFO    | [teacher]             (softmax): Softmax(dim=-1)
+2026-07-08 04:44:18 | INFO    | [teacher]             (attn_dropout): Dropout(p=0.5, inplace=False)
+2026-07-08 04:44:18 | INFO    | [teacher]             (dense): Linear(in_features=100, out_features=100, bias=True)
+2026-07-08 04:44:18 | INFO    | [teacher]             (LayerNorm): LayerNorm((100,), eps=1e-12, elementwise_affine=True)
+2026-07-08 04:44:18 | INFO    | [teacher]             (out_dropout): Dropout(p=0.5, inplace=False)
+2026-07-08 04:44:18 | INFO    | [teacher]           )
+2026-07-08 04:44:18 | INFO    | [teacher]           (feed_forward): FeedForward(
+2026-07-08 04:44:18 | INFO    | [teacher]             (dense_1): Linear(in_features=100, out_features=256, bias=True)
+2026-07-08 04:44:18 | INFO    | [teacher]             (dense_2): Linear(in_features=256, out_features=100, bias=True)
+2026-07-08 04:44:18 | INFO    | [teacher]             (LayerNorm): LayerNorm((100,), eps=1e-12, elementwise_affine=True)
+2026-07-08 04:44:18 | INFO    | [teacher]             (dropout): Dropout(p=0.5, inplace=False)
+2026-07-08 04:44:18 | INFO    | [teacher]           )
+2026-07-08 04:44:18 | INFO    | [teacher]         )
+2026-07-08 04:44:18 | INFO    | [teacher]       )
+2026-07-08 04:44:18 | INFO    | [teacher]     )
+2026-07-08 04:44:18 | INFO    | [teacher]     (LayerNorm): LayerNorm((100,), eps=1e-12, elementwise_affine=True)
+2026-07-08 04:44:18 | INFO    | [teacher]     (dropout): Dropout(p=0.5, inplace=False)
+2026-07-08 04:44:18 | INFO    | [teacher]     (fn): Linear(in_features=100, out_features=1, bias=True)
+2026-07-08 04:44:18 | INFO    | [teacher]   )
+2026-07-08 04:44:18 | INFO    | [teacher] )
+2026-07-08 04:44:18 | INFO    | [teacher] Trainable parameters: 191513
+2026-07-08 04:44:18 | INFO    | [teacher] 
+2026-07-08 04:44:18 | INFO    | [teacher] Train     0:   0%|                                                            | 0/6 [00:00<?, ?it/s]/home/hongnguyen/.local/lib/python3.13/site-packages/recbole/trainer/trainer.py:235: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+2026-07-08 04:44:18 | INFO    | [teacher]   scaler = amp.GradScaler(enabled=self.enable_scaler)
+2026-07-08 04:44:18 | INFO    | [teacher] 
+2026-07-08 04:44:18 | INFO    | [teacher] Train     0:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:44:18 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:02,  2.26it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:44:18 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:02,  2.26it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:44:18 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:02,  2.26it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:44:19 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:02,  2.26it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:44:19 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:02,  2.26it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:44:19 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:02,  2.26it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:44:19 | INFO    | [teacher] Train     0: 100%|███████████████████████████| 6/6 [00:00<00:00, 11.42it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:44:19 | INFO    | [teacher] 08 Jul 04:44    INFO  epoch 0 training [time: 0.53s, train loss: 46.2615]
+2026-07-08 04:44:19 | INFO    | [teacher] 
+2026-07-08 04:44:19 | INFO    | [teacher] Evaluate   :   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2026-07-08 04:44:19 | INFO    | [teacher] Evaluate   :   0%|                                   | 0/1 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:44:19 | INFO    | [teacher] Evaluate   : 100%|███████████████████████████| 1/1 [00:00<00:00, 40.07it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:44:19 | INFO    | [teacher] 08 Jul 04:44    INFO  epoch 0 evaluating [time: 0.03s, valid_score: 0.240400]
+2026-07-08 04:44:19 | INFO    | [teacher] 08 Jul 04:44    INFO  valid result: 
+2026-07-08 04:44:19 | INFO    | [teacher] recall@5 : 0.3533    recall@10 : 0.4371    recall@20 : 0.5689    mrr@5 : 0.2211    mrr@10 : 0.2317    mrr@20 : 0.2404
+2026-07-08 04:44:19 | INFO    | [teacher] 08 Jul 04:44    INFO  Saving current: saved/COREtrm-Jul-08-2026_04-44-18.pth
+2026-07-08 04:44:19 | INFO    | [teacher] 
+2026-07-08 04:44:19 | INFO    | [teacher] Train     1:   0%|                                                            | 0/6 [00:00<?, ?it/s]
+2026-07-08 04:44:19 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:44:19 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:44:19 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:44:19 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:44:19 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:44:19 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:44:19 | INFO    | [teacher] Train     1: 100%|███████████████████████████| 6/6 [00:00<00:00, 64.91it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:44:19 | INFO    | [teacher] 08 Jul 04:44    INFO  epoch 1 training [time: 0.09s, train loss: 43.7596]
+2026-07-08 04:44:19 | INFO    | [teacher] 
+2026-07-08 04:44:19 | INFO    | [teacher] Evaluate   :   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2026-07-08 04:44:19 | INFO    | [teacher] Evaluate   :   0%|                                   | 0/1 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:44:19 | INFO    | [teacher] Evaluate   : 100%|██████████████████████████| 1/1 [00:00<00:00, 202.36it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:44:19 | INFO    | [teacher] 08 Jul 04:44    INFO  epoch 1 evaluating [time: 0.01s, valid_score: 0.261400]
+2026-07-08 04:44:19 | INFO    | [teacher] 08 Jul 04:44    INFO  valid result: 
+2026-07-08 04:44:19 | INFO    | [teacher] recall@5 : 0.4072    recall@10 : 0.5269    recall@20 : 0.6587    mrr@5 : 0.238    mrr@10 : 0.2526    mrr@20 : 0.2614
+2026-07-08 04:44:19 | INFO    | [teacher] 08 Jul 04:44    INFO  Saving current: saved/COREtrm-Jul-08-2026_04-44-18.pth
+2026-07-08 04:44:19 | INFO    | [teacher] 08 Jul 04:44    INFO  Loading model structure and parameters from saved/COREtrm-Jul-08-2026_04-44-18.pth
+2026-07-08 04:44:19 | INFO    | [teacher] 
+2026-07-08 04:44:19 | INFO    | [teacher] Evaluate   :   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2026-07-08 04:44:19 | INFO    | [teacher] Evaluate   :   0%|                                   | 0/1 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:44:19 | INFO    | [teacher] Evaluate   : 100%|██████████████████████████| 1/1 [00:00<00:00, 173.20it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:44:19 | INFO    | [teacher] 08 Jul 04:44    INFO  best valid : OrderedDict({'recall@5': np.float64(0.4072), 'recall@10': np.float64(0.5269), 'recall@20': np.float64(0.6587), 'mrr@5': np.float64(0.238), 'mrr@10': np.float64(0.2526), 'mrr@20': np.float64(0.2614)})
+2026-07-08 04:44:19 | INFO    | [teacher] 08 Jul 04:44    INFO  test result: OrderedDict({'recall@5': np.float64(0.449), 'recall@10': np.float64(0.6071), 'recall@20': np.float64(0.7704), 'mrr@5': np.float64(0.2622), 'mrr@10': np.float64(0.2812), 'mrr@20': np.float64(0.2923)})
+2026-07-08 04:44:19 | INFO    | [teacher] 
+2026-07-08 04:44:19 | INFO    | [teacher] Single-session data:   0%|                                                    | 0/6 [00:00<?, ?it/s]
+2026-07-08 04:44:19 | INFO    | [teacher] Single-session data:   0%|                                                    | 0/6 [00:00<?, ?it/s]
+2026-07-08 04:44:19 | INFO    | [teacher] Traceback (most recent call last):
+2026-07-08 04:44:19 | INFO    | [teacher]   File "/home/hongnguyen/demo2/LINK_repo/main.py", line 298, in <module>
+2026-07-08 04:44:19 | INFO    | [teacher]     run_single_model(args, args_unparsed)
+2026-07-08 04:44:19 | INFO    | [teacher]     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+2026-07-08 04:44:19 | INFO    | [teacher]   File "/home/hongnguyen/demo2/LINK_repo/main.py", line 150, in run_single_model
+2026-07-08 04:44:19 | INFO    | [teacher]     dense_item_item_matrix = make_teacher_matrix_for_link(args, config, model, train_data)
+2026-07-08 04:44:19 | INFO    | [teacher]   File "/home/hongnguyen/demo2/LINK_repo/main.py", line 179, in make_teacher_matrix_for_link
+2026-07-08 04:44:19 | INFO    | [teacher]     for batch_idx, interaction in enumerate(iter_data):
+2026-07-08 04:44:19 | INFO    | [teacher]                                   ~~~~~~~~~^^^^^^^^^^^
+2026-07-08 04:44:19 | INFO    | [teacher]   File "/opt/miniconda3/lib/python3.13/site-packages/tqdm/std.py", line 1181, in __iter__
+2026-07-08 04:44:19 | INFO    | [teacher]     for obj in iterable:
+2026-07-08 04:44:19 | INFO    | [teacher]                ^^^^^^^^
+2026-07-08 04:44:19 | INFO    | [teacher]   File "/home/hongnguyen/.local/lib/python3.13/site-packages/torch/utils/data/dataloader.py", line 708, in __next__
+2026-07-08 04:44:19 | INFO    | [teacher]     data = self._next_data()
+2026-07-08 04:44:19 | INFO    | [teacher]   File "/home/hongnguyen/.local/lib/python3.13/site-packages/torch/utils/data/dataloader.py", line 764, in _next_data
+2026-07-08 04:44:19 | INFO    | [teacher]     data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+2026-07-08 04:44:19 | INFO    | [teacher]   File "/home/hongnguyen/.local/lib/python3.13/site-packages/torch/utils/data/_utils/fetch.py", line 55, in fetch
+2026-07-08 04:44:19 | INFO    | [teacher]     return self.collate_fn(data)
+2026-07-08 04:44:19 | INFO    | [teacher]            ~~~~~~~~~~~~~~~^^^^^^
+2026-07-08 04:44:19 | INFO    | [teacher]   File "/home/hongnguyen/.local/lib/python3.13/site-packages/recbole/data/dataloader/general_dataloader.py", line 69, in collate_fn
+2026-07-08 04:44:19 | INFO    | [teacher]     data = self._dataset[index]
+2026-07-08 04:44:19 | INFO    | [teacher]            ~~~~~~~~~~~~~^^^^^^^
+2026-07-08 04:44:19 | INFO    | [teacher]   File "/home/hongnguyen/.local/lib/python3.13/site-packages/recbole/data/dataset/dataset.py", line 1525, in __getitem__
+2026-07-08 04:44:19 | INFO    | [teacher]     df = self.inter_feat[index]
+2026-07-08 04:44:19 | INFO    | [teacher]          ~~~~~~~~~~~~~~~^^^^^^^
+2026-07-08 04:44:19 | INFO    | [teacher]   File "/home/hongnguyen/.local/lib/python3.13/site-packages/recbole/data/interaction.py", line 141, in __getitem__
+2026-07-08 04:44:19 | INFO    | [teacher]     ret[k] = self.interaction[k][index]
+2026-07-08 04:44:19 | INFO    | [teacher]              ~~~~~~~~~~~~~~~~~~~^^^^^^^
+2026-07-08 04:44:19 | INFO    | [teacher] IndexError: index 407 is out of bounds for dimension 0 with size 60
+2026-07-08 04:45:23 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/retailrocket/LINK_toy.log
+2026-07-08 04:45:23 | INFO    | ====================================================================
+2026-07-08 04:45:23 | INFO    | [LINK] Bắt đầu run=link_toy.yaml  suite=retailrocket  dataset=toy_link
+2026-07-08 04:45:23 | INFO    | [LINK] Cấu hình: {'project': {'name': 'retailrocket', 'filename_mode': 'custom', 'custom_filename': 'LINK_toy.log'}, 'data': {'data_dir': 'data/toy_link', 'train_file': 'train.txt', 'val_file': 'val.txt', 'test_file': 'test.txt', 'lookup_file': 'lookup_tables.pkl'}, 'link': {'dataset_name': 'toy_link', 'reuse_converted': False, 'reuse_teacher': False, 'teacher_model': 'core_trm', 'teacher_epochs': 2, 'train_batch_size': 256, 'eval_batch_size': 256, 'learning_rate': 0.001, 'stopping_step': 5, 'reg': 10.0, 'reg_teacher': 100, 'predict_weight': 4.0, 'slis_alpha': 0.9, 'teacher_normalize': True, 'teacher_temperature': 0.1, 'gpu_id': 0}, 'evaluation': {'topk': [5, 10, 20], 'metrics': ['Recall', 'MRR'], 'valid_metric': 'MRR@20'}, '_logging': {'dir': 'Log', 'level': 'INFO', 'console': True}}
+2026-07-08 04:45:23 | INFO    | [LINK] Dữ liệu [data/toy_link]: |I|=60, train=500 phiên
+2026-07-08 04:45:23 | INFO    | [adapter] Đã sinh dataset RecBole 'toy_link' tại /home/hongnguyen/demo2/LINK_repo/dataset/toy_link: train=1496 mẫu, valid=167, test=196, train.session=500 phiên
+2026-07-08 04:45:23 | INFO    | [teacher] $ /opt/miniconda3/bin/python main.py --model core_trm --dataset toy_link --config2 props/gpu0_1024.yaml --gpu_id 0 --epochs 2 --train_batch_size 256 --eval_batch_size 256 --learning_rate 0.001 --stopping_step 5
+2026-07-08 04:45:24 | INFO    | [teacher] command line args [--model core_trm --dataset toy_link --config2 props/gpu0_1024.yaml --gpu_id 0 --epochs 2 --train_batch_size 256 --eval_batch_size 256 --learning_rate 0.001 --stopping_step 5] will not be used in RecBole
+2026-07-08 04:45:24 | INFO    | [teacher] 08 Jul 04:45    INFO  
+2026-07-08 04:45:24 | INFO    | [teacher] General Hyper Parameters:
+2026-07-08 04:45:24 | INFO    | [teacher] gpu_id = 0
+2026-07-08 04:45:24 | INFO    | [teacher] use_gpu = True
+2026-07-08 04:45:24 | INFO    | [teacher] seed = 2020
+2026-07-08 04:45:24 | INFO    | [teacher] state = INFO
+2026-07-08 04:45:24 | INFO    | [teacher] reproducibility = True
+2026-07-08 04:45:24 | INFO    | [teacher] data_path = dataset/toy_link
+2026-07-08 04:45:24 | INFO    | [teacher] checkpoint_dir = saved
+2026-07-08 04:45:24 | INFO    | [teacher] show_progress = True
+2026-07-08 04:45:24 | INFO    | [teacher] save_dataset = False
+2026-07-08 04:45:24 | INFO    | [teacher] dataset_save_path = None
+2026-07-08 04:45:24 | INFO    | [teacher] save_dataloaders = False
+2026-07-08 04:45:24 | INFO    | [teacher] dataloaders_save_path = None
+2026-07-08 04:45:24 | INFO    | [teacher] log_wandb = False
+2026-07-08 04:45:24 | INFO    | [teacher] 
+2026-07-08 04:45:24 | INFO    | [teacher] Training Hyper Parameters:
+2026-07-08 04:45:24 | INFO    | [teacher] epochs = 2
+2026-07-08 04:45:24 | INFO    | [teacher] train_batch_size = 256
+2026-07-08 04:45:24 | INFO    | [teacher] learner = adam
+2026-07-08 04:45:24 | INFO    | [teacher] learning_rate = 0.001
+2026-07-08 04:45:24 | INFO    | [teacher] train_neg_sample_args = {'distribution': 'none', 'sample_num': 'none', 'alpha': 'none', 'dynamic': False, 'candidate_num': 0}
+2026-07-08 04:45:24 | INFO    | [teacher] eval_step = 1
+2026-07-08 04:45:24 | INFO    | [teacher] stopping_step = 5
+2026-07-08 04:45:24 | INFO    | [teacher] clip_grad_norm = None
+2026-07-08 04:45:24 | INFO    | [teacher] weight_decay = 0.0
+2026-07-08 04:45:24 | INFO    | [teacher] loss_decimal_place = 4
+2026-07-08 04:45:24 | INFO    | [teacher] 
+2026-07-08 04:45:24 | INFO    | [teacher] Evaluation Hyper Parameters:
+2026-07-08 04:45:24 | INFO    | [teacher] eval_args = {'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}
+2026-07-08 04:45:24 | INFO    | [teacher] repeatable = True
+2026-07-08 04:45:24 | INFO    | [teacher] metrics = ['Recall', 'MRR']
+2026-07-08 04:45:24 | INFO    | [teacher] topk = [5, 10, 20]
+2026-07-08 04:45:24 | INFO    | [teacher] valid_metric = MRR@20
+2026-07-08 04:45:24 | INFO    | [teacher] valid_metric_bigger = True
+2026-07-08 04:45:24 | INFO    | [teacher] eval_batch_size = 256
+2026-07-08 04:45:24 | INFO    | [teacher] metric_decimal_place = 4
+2026-07-08 04:45:24 | INFO    | [teacher] 
+2026-07-08 04:45:24 | INFO    | [teacher] Dataset Hyper Parameters:
+2026-07-08 04:45:24 | INFO    | [teacher] field_separator = 	
+2026-07-08 04:45:24 | INFO    | [teacher] seq_separator =  
+2026-07-08 04:45:24 | INFO    | [teacher] USER_ID_FIELD = session_id
+2026-07-08 04:45:24 | INFO    | [teacher] ITEM_ID_FIELD = item_id
+2026-07-08 04:45:24 | INFO    | [teacher] RATING_FIELD = rating
+2026-07-08 04:45:24 | INFO    | [teacher] TIME_FIELD = timestamp
+2026-07-08 04:45:24 | INFO    | [teacher] seq_len = None
+2026-07-08 04:45:24 | INFO    | [teacher] LABEL_FIELD = label
+2026-07-08 04:45:24 | INFO    | [teacher] threshold = None
+2026-07-08 04:45:24 | INFO    | [teacher] NEG_PREFIX = neg_
+2026-07-08 04:45:24 | INFO    | [teacher] load_col = {'inter': ['session_id', 'item_id_list', 'item_id']}
+2026-07-08 04:45:24 | INFO    | [teacher] unload_col = None
+2026-07-08 04:45:24 | INFO    | [teacher] unused_col = None
+2026-07-08 04:45:24 | INFO    | [teacher] additional_feat_suffix = None
+2026-07-08 04:45:24 | INFO    | [teacher] rm_dup_inter = None
+2026-07-08 04:45:24 | INFO    | [teacher] val_interval = None
+2026-07-08 04:45:24 | INFO    | [teacher] filter_inter_by_user_or_item = True
+2026-07-08 04:45:24 | INFO    | [teacher] user_inter_num_interval = [0,inf)
+2026-07-08 04:45:24 | INFO    | [teacher] item_inter_num_interval = [0,inf)
+2026-07-08 04:45:24 | INFO    | [teacher] alias_of_user_id = None
+2026-07-08 04:45:24 | INFO    | [teacher] alias_of_item_id = ['item_id_list']
+2026-07-08 04:45:24 | INFO    | [teacher] alias_of_entity_id = None
+2026-07-08 04:45:24 | INFO    | [teacher] alias_of_relation_id = None
+2026-07-08 04:45:24 | INFO    | [teacher] preload_weight = None
+2026-07-08 04:45:24 | INFO    | [teacher] normalize_field = None
+2026-07-08 04:45:24 | INFO    | [teacher] normalize_all = None
+2026-07-08 04:45:24 | INFO    | [teacher] ITEM_LIST_LENGTH_FIELD = item_length
+2026-07-08 04:45:24 | INFO    | [teacher] LIST_SUFFIX = _list
+2026-07-08 04:45:24 | INFO    | [teacher] MAX_ITEM_LIST_LENGTH = 50
+2026-07-08 04:45:24 | INFO    | [teacher] POSITION_FIELD = position_id
+2026-07-08 04:45:24 | INFO    | [teacher] HEAD_ENTITY_ID_FIELD = head_id
+2026-07-08 04:45:24 | INFO    | [teacher] TAIL_ENTITY_ID_FIELD = tail_id
+2026-07-08 04:45:24 | INFO    | [teacher] RELATION_ID_FIELD = relation_id
+2026-07-08 04:45:24 | INFO    | [teacher] ENTITY_ID_FIELD = entity_id
+2026-07-08 04:45:24 | INFO    | [teacher] benchmark_filename = ['train', 'valid', 'test']
+2026-07-08 04:45:24 | INFO    | [teacher] 
+2026-07-08 04:45:24 | INFO    | [teacher] Other Hyper Parameters: 
+2026-07-08 04:45:24 | INFO    | [teacher] worker = 0
+2026-07-08 04:45:24 | INFO    | [teacher] wandb_project = recbole
+2026-07-08 04:45:24 | INFO    | [teacher] shuffle = True
+2026-07-08 04:45:24 | INFO    | [teacher] require_pow = False
+2026-07-08 04:45:24 | INFO    | [teacher] enable_amp = False
+2026-07-08 04:45:24 | INFO    | [teacher] enable_scaler = False
+2026-07-08 04:45:24 | INFO    | [teacher] transform = None
+2026-07-08 04:45:24 | INFO    | [teacher] numerical_features = []
+2026-07-08 04:45:24 | INFO    | [teacher] discretization = None
+2026-07-08 04:45:24 | INFO    | [teacher] kg_reverse_r = False
+2026-07-08 04:45:24 | INFO    | [teacher] entity_kg_num_interval = [0,inf)
+2026-07-08 04:45:24 | INFO    | [teacher] relation_kg_num_interval = [0,inf)
+2026-07-08 04:45:24 | INFO    | [teacher] MODEL_TYPE = ModelType.SEQUENTIAL
+2026-07-08 04:45:24 | INFO    | [teacher] neg_sampling = None
+2026-07-08 04:45:24 | INFO    | [teacher] embedding_size = 100
+2026-07-08 04:45:24 | INFO    | [teacher] inner_size = 256
+2026-07-08 04:45:24 | INFO    | [teacher] n_layers = 2
+2026-07-08 04:45:24 | INFO    | [teacher] n_heads = 2
+2026-07-08 04:45:24 | INFO    | [teacher] hidden_dropout_prob = 0.5
+2026-07-08 04:45:24 | INFO    | [teacher] attn_dropout_prob = 0.5
+2026-07-08 04:45:24 | INFO    | [teacher] hidden_act = gelu
+2026-07-08 04:45:24 | INFO    | [teacher] layer_norm_eps = 1e-12
+2026-07-08 04:45:24 | INFO    | [teacher] initializer_range = 0.02
+2026-07-08 04:45:24 | INFO    | [teacher] loss_type = CE
+2026-07-08 04:45:24 | INFO    | [teacher] sess_dropout = 0.2
+2026-07-08 04:45:24 | INFO    | [teacher] item_dropout = 0.2
+2026-07-08 04:45:24 | INFO    | [teacher] temperature = 0.07
+2026-07-08 04:45:24 | INFO    | [teacher] folder = base
+2026-07-08 04:45:24 | INFO    | [teacher] pop_eval = False
+2026-07-08 04:45:24 | INFO    | [teacher] save_teacher_matrix = True
+2026-07-08 04:45:24 | INFO    | [teacher] MODEL_INPUT_TYPE = InputType.POINTWISE
+2026-07-08 04:45:24 | INFO    | [teacher] eval_type = EvaluatorType.RANKING
+2026-07-08 04:45:24 | INFO    | [teacher] single_spec = True
+2026-07-08 04:45:24 | INFO    | [teacher] local_rank = 0
+2026-07-08 04:45:24 | INFO    | [teacher] device = cuda
+2026-07-08 04:45:24 | INFO    | [teacher] valid_neg_sample_args = {'distribution': 'uniform', 'sample_num': 'none'}
+2026-07-08 04:45:24 | INFO    | [teacher] test_neg_sample_args = {'distribution': 'uniform', 'sample_num': 'none'}
+2026-07-08 04:45:24 | INFO    | [teacher] 
+2026-07-08 04:45:24 | INFO    | [teacher] 
+2026-07-08 04:45:24 | INFO    | [teacher] /home/hongnguyen/.local/lib/python3.13/site-packages/recbole/data/dataset/dataset.py:648: ChainedAssignmentError: A value is being set on a copy of a DataFrame or Series through chained assignment using an inplace method.
+2026-07-08 04:45:24 | INFO    | [teacher] Such inplace method never works to update the original DataFrame or Series, because the intermediate object on which we are setting values always behaves as a copy (due to Copy-on-Write).
+2026-07-08 04:45:24 | INFO    | [teacher] 
+2026-07-08 04:45:24 | INFO    | [teacher] For example, when doing 'df[col].method(value, inplace=True)', try using 'df.method({col: value}, inplace=True)' instead, to perform the operation inplace on the original object, or try to avoid an inplace operation using 'df[col] = df[col].method(value)'.
+2026-07-08 04:45:24 | INFO    | [teacher] 
+2026-07-08 04:45:24 | INFO    | [teacher] See the documentation for a more detailed explanation: https://pandas.pydata.org/pandas-docs/stable/user_guide/copy_on_write.html
+2026-07-08 04:45:24 | INFO    | [teacher]   feat[field].fillna(value=0, inplace=True)
+2026-07-08 04:45:24 | INFO    | [teacher] 08 Jul 04:45    INFO  toy_link
+2026-07-08 04:45:24 | INFO    | [teacher] The number of users: 1497
+2026-07-08 04:45:24 | INFO    | [teacher] Average actions of users: 1.2426470588235294
+2026-07-08 04:45:24 | INFO    | [teacher] The number of items: 60
+2026-07-08 04:45:24 | INFO    | [teacher] Average actions of items: 31.508474576271187
+2026-07-08 04:45:24 | INFO    | [teacher] The number of inters: 1859
+2026-07-08 04:45:24 | INFO    | [teacher] The sparsity of the dataset: 97.93030505455356%
+2026-07-08 04:45:24 | INFO    | [teacher] Remain Fields: ['session_id', 'item_id_list', 'item_id', 'item_length']
+2026-07-08 04:45:24 | INFO    | [teacher] /home/hongnguyen/.local/lib/python3.13/site-packages/recbole/data/dataset/dataset.py:2136: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:203.)
+2026-07-08 04:45:24 | INFO    | [teacher]   new_data[k] = torch.LongTensor(value)
+2026-07-08 04:45:24 | INFO    | [teacher] 08 Jul 04:45    INFO  [Training]: train_batch_size = [256] train_neg_sample_args: [{'distribution': 'none', 'sample_num': 'none', 'alpha': 'none', 'dynamic': False, 'candidate_num': 0}]
+2026-07-08 04:45:24 | INFO    | [teacher] 08 Jul 04:45    INFO  [Evaluation]: eval_batch_size = [256] eval_args: [{'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}]
+2026-07-08 04:45:24 | INFO    | [teacher] 08 Jul 04:45    INFO  COREtrm(
+2026-07-08 04:45:24 | INFO    | [teacher]   (sess_dropout): Dropout(p=0.2, inplace=False)
+2026-07-08 04:45:24 | INFO    | [teacher]   (item_dropout): Dropout(p=0.2, inplace=False)
+2026-07-08 04:45:24 | INFO    | [teacher]   (item_embedding): Embedding(60, 100, padding_idx=0)
+2026-07-08 04:45:24 | INFO    | [teacher]   (loss_fct): CrossEntropyLoss()
+2026-07-08 04:45:24 | INFO    | [teacher]   (net): TransNet(
+2026-07-08 04:45:24 | INFO    | [teacher]     (position_embedding): Embedding(5, 100)
+2026-07-08 04:45:24 | INFO    | [teacher]     (trm_encoder): TransformerEncoder(
+2026-07-08 04:45:24 | INFO    | [teacher]       (layer): ModuleList(
+2026-07-08 04:45:24 | INFO    | [teacher]         (0-1): 2 x TransformerLayer(
+2026-07-08 04:45:24 | INFO    | [teacher]           (multi_head_attention): MultiHeadAttention(
+2026-07-08 04:45:24 | INFO    | [teacher]             (query): Linear(in_features=100, out_features=100, bias=True)
+2026-07-08 04:45:24 | INFO    | [teacher]             (key): Linear(in_features=100, out_features=100, bias=True)
+2026-07-08 04:45:24 | INFO    | [teacher]             (value): Linear(in_features=100, out_features=100, bias=True)
+2026-07-08 04:45:24 | INFO    | [teacher]             (softmax): Softmax(dim=-1)
+2026-07-08 04:45:24 | INFO    | [teacher]             (attn_dropout): Dropout(p=0.5, inplace=False)
+2026-07-08 04:45:24 | INFO    | [teacher]             (dense): Linear(in_features=100, out_features=100, bias=True)
+2026-07-08 04:45:24 | INFO    | [teacher]             (LayerNorm): LayerNorm((100,), eps=1e-12, elementwise_affine=True)
+2026-07-08 04:45:24 | INFO    | [teacher]             (out_dropout): Dropout(p=0.5, inplace=False)
+2026-07-08 04:45:24 | INFO    | [teacher]           )
+2026-07-08 04:45:24 | INFO    | [teacher]           (feed_forward): FeedForward(
+2026-07-08 04:45:24 | INFO    | [teacher]             (dense_1): Linear(in_features=100, out_features=256, bias=True)
+2026-07-08 04:45:24 | INFO    | [teacher]             (dense_2): Linear(in_features=256, out_features=100, bias=True)
+2026-07-08 04:45:24 | INFO    | [teacher]             (LayerNorm): LayerNorm((100,), eps=1e-12, elementwise_affine=True)
+2026-07-08 04:45:24 | INFO    | [teacher]             (dropout): Dropout(p=0.5, inplace=False)
+2026-07-08 04:45:24 | INFO    | [teacher]           )
+2026-07-08 04:45:24 | INFO    | [teacher]         )
+2026-07-08 04:45:24 | INFO    | [teacher]       )
+2026-07-08 04:45:24 | INFO    | [teacher]     )
+2026-07-08 04:45:24 | INFO    | [teacher]     (LayerNorm): LayerNorm((100,), eps=1e-12, elementwise_affine=True)
+2026-07-08 04:45:24 | INFO    | [teacher]     (dropout): Dropout(p=0.5, inplace=False)
+2026-07-08 04:45:24 | INFO    | [teacher]     (fn): Linear(in_features=100, out_features=1, bias=True)
+2026-07-08 04:45:24 | INFO    | [teacher]   )
+2026-07-08 04:45:24 | INFO    | [teacher] )
+2026-07-08 04:45:24 | INFO    | [teacher] Trainable parameters: 191513
+2026-07-08 04:45:25 | INFO    | [teacher] 
+2026-07-08 04:45:25 | INFO    | [teacher] Train     0:   0%|                                                            | 0/6 [00:00<?, ?it/s]/home/hongnguyen/.local/lib/python3.13/site-packages/recbole/trainer/trainer.py:235: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+2026-07-08 04:45:25 | INFO    | [teacher]   scaler = amp.GradScaler(enabled=self.enable_scaler)
+2026-07-08 04:45:25 | INFO    | [teacher] 
+2026-07-08 04:45:25 | INFO    | [teacher] Train     0:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:25 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:02,  2.15it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:25 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:02,  2.15it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:25 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:02,  2.15it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:25 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:02,  2.15it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:25 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:02,  2.15it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:25 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:02,  2.15it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:25 | INFO    | [teacher] Train     0: 100%|███████████████████████████| 6/6 [00:00<00:00, 11.04it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:25 | INFO    | [teacher] 08 Jul 04:45    INFO  epoch 0 training [time: 0.54s, train loss: 46.2615]
+2026-07-08 04:45:25 | INFO    | [teacher] 
+2026-07-08 04:45:25 | INFO    | [teacher] Evaluate   :   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2026-07-08 04:45:25 | INFO    | [teacher] Evaluate   :   0%|                                   | 0/1 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:25 | INFO    | [teacher] Evaluate   : 100%|███████████████████████████| 1/1 [00:00<00:00, 39.92it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:25 | INFO    | [teacher] 08 Jul 04:45    INFO  epoch 0 evaluating [time: 0.03s, valid_score: 0.240400]
+2026-07-08 04:45:25 | INFO    | [teacher] 08 Jul 04:45    INFO  valid result: 
+2026-07-08 04:45:25 | INFO    | [teacher] recall@5 : 0.3533    recall@10 : 0.4371    recall@20 : 0.5689    mrr@5 : 0.2211    mrr@10 : 0.2317    mrr@20 : 0.2404
+2026-07-08 04:45:25 | INFO    | [teacher] 08 Jul 04:45    INFO  Saving current: saved/COREtrm-Jul-08-2026_04-45-24.pth
+2026-07-08 04:45:25 | INFO    | [teacher] 
+2026-07-08 04:45:25 | INFO    | [teacher] Train     1:   0%|                                                            | 0/6 [00:00<?, ?it/s]
+2026-07-08 04:45:25 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:25 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:25 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:25 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:25 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:25 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:25 | INFO    | [teacher] Train     1: 100%|███████████████████████████| 6/6 [00:00<00:00, 68.20it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:25 | INFO    | [teacher] 08 Jul 04:45    INFO  epoch 1 training [time: 0.09s, train loss: 43.7596]
+2026-07-08 04:45:25 | INFO    | [teacher] 
+2026-07-08 04:45:25 | INFO    | [teacher] Evaluate   :   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2026-07-08 04:45:25 | INFO    | [teacher] Evaluate   :   0%|                                   | 0/1 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:25 | INFO    | [teacher] Evaluate   : 100%|██████████████████████████| 1/1 [00:00<00:00, 204.17it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:25 | INFO    | [teacher] 08 Jul 04:45    INFO  epoch 1 evaluating [time: 0.01s, valid_score: 0.261400]
+2026-07-08 04:45:25 | INFO    | [teacher] 08 Jul 04:45    INFO  valid result: 
+2026-07-08 04:45:25 | INFO    | [teacher] recall@5 : 0.4072    recall@10 : 0.5269    recall@20 : 0.6587    mrr@5 : 0.238    mrr@10 : 0.2526    mrr@20 : 0.2614
+2026-07-08 04:45:25 | INFO    | [teacher] 08 Jul 04:45    INFO  Saving current: saved/COREtrm-Jul-08-2026_04-45-24.pth
+2026-07-08 04:45:25 | INFO    | [teacher] 08 Jul 04:45    INFO  Loading model structure and parameters from saved/COREtrm-Jul-08-2026_04-45-24.pth
+2026-07-08 04:45:25 | INFO    | [teacher] 
+2026-07-08 04:45:25 | INFO    | [teacher] Evaluate   :   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2026-07-08 04:45:25 | INFO    | [teacher] Evaluate   :   0%|                                   | 0/1 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:25 | INFO    | [teacher] Evaluate   : 100%|███████████████████████████| 1/1 [00:00<00:00, 61.91it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:25 | INFO    | [teacher] 08 Jul 04:45    INFO  best valid : OrderedDict({'recall@5': np.float64(0.4072), 'recall@10': np.float64(0.5269), 'recall@20': np.float64(0.6587), 'mrr@5': np.float64(0.238), 'mrr@10': np.float64(0.2526), 'mrr@20': np.float64(0.2614)})
+2026-07-08 04:45:25 | INFO    | [teacher] 08 Jul 04:45    INFO  test result: OrderedDict({'recall@5': np.float64(0.449), 'recall@10': np.float64(0.6071), 'recall@20': np.float64(0.7704), 'mrr@5': np.float64(0.2622), 'mrr@10': np.float64(0.2812), 'mrr@20': np.float64(0.2923)})
+2026-07-08 04:45:25 | INFO    | [teacher] 
+2026-07-08 04:45:25 | INFO    | [teacher] Single-session data:   0%|          | 0/1 [00:00<?, ?it/s]
+2026-07-08 04:45:25 | INFO    | [teacher] Single-session data: 100%|██████████| 1/1 [00:00<00:00, 350.52it/s]
+2026-07-08 04:45:25 | INFO    | [teacher] Elapsed time for extraction teacher matrix: 0.00s
+2026-07-08 04:45:25 | INFO    | [teacher] saved_models_for_embedding/linear_teacher_toy_link_core_trm/dense_matrix.npy shape: (60, 60) saved!
+2026-07-08 04:45:26 | INFO    | [link] $ /opt/miniconda3/bin/python main.py --model link --dataset toy_link --gpu_id 0 --teacher_path saved_models_for_embedding/linear_teacher_toy_link_core_trm/dense_matrix.npy --reg 10.0 --reg_teacher 100 --predict_weight 4.0 --slis_alpha 0.9 --teacher_normalize True --teacher_temperature 0.1
+2026-07-08 04:45:27 | INFO    | [link] command line args [--model link --dataset toy_link --gpu_id 0 --teacher_path saved_models_for_embedding/linear_teacher_toy_link_core_trm/dense_matrix.npy --reg 10.0 --reg_teacher 100 --predict_weight 4.0 --slis_alpha 0.9 --teacher_normalize True --teacher_temperature 0.1] will not be used in RecBole
+2026-07-08 04:45:27 | INFO    | [link] 08 Jul 04:45    INFO  
+2026-07-08 04:45:27 | INFO    | [link] General Hyper Parameters:
+2026-07-08 04:45:27 | INFO    | [link] gpu_id = 0
+2026-07-08 04:45:27 | INFO    | [link] use_gpu = True
+2026-07-08 04:45:27 | INFO    | [link] seed = 2020
+2026-07-08 04:45:27 | INFO    | [link] state = INFO
+2026-07-08 04:45:27 | INFO    | [link] reproducibility = True
+2026-07-08 04:45:27 | INFO    | [link] data_path = dataset/toy_link
+2026-07-08 04:45:27 | INFO    | [link] checkpoint_dir = saved
+2026-07-08 04:45:27 | INFO    | [link] show_progress = True
+2026-07-08 04:45:27 | INFO    | [link] save_dataset = False
+2026-07-08 04:45:27 | INFO    | [link] dataset_save_path = None
+2026-07-08 04:45:27 | INFO    | [link] save_dataloaders = False
+2026-07-08 04:45:27 | INFO    | [link] dataloaders_save_path = None
+2026-07-08 04:45:27 | INFO    | [link] log_wandb = False
+2026-07-08 04:45:27 | INFO    | [link] 
+2026-07-08 04:45:27 | INFO    | [link] Training Hyper Parameters:
+2026-07-08 04:45:27 | INFO    | [link] epochs = 300
+2026-07-08 04:45:27 | INFO    | [link] train_batch_size = 2048
+2026-07-08 04:45:27 | INFO    | [link] learner = adam
+2026-07-08 04:45:27 | INFO    | [link] learning_rate = 0.001
+2026-07-08 04:45:27 | INFO    | [link] train_neg_sample_args = {'distribution': 'none', 'sample_num': 'none', 'alpha': 'none', 'dynamic': False, 'candidate_num': 0}
+2026-07-08 04:45:27 | INFO    | [link] eval_step = 1
+2026-07-08 04:45:27 | INFO    | [link] stopping_step = 5
+2026-07-08 04:45:27 | INFO    | [link] clip_grad_norm = None
+2026-07-08 04:45:27 | INFO    | [link] weight_decay = 0.0
+2026-07-08 04:45:27 | INFO    | [link] loss_decimal_place = 4
+2026-07-08 04:45:27 | INFO    | [link] 
+2026-07-08 04:45:27 | INFO    | [link] Evaluation Hyper Parameters:
+2026-07-08 04:45:27 | INFO    | [link] eval_args = {'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}
+2026-07-08 04:45:27 | INFO    | [link] repeatable = True
+2026-07-08 04:45:27 | INFO    | [link] metrics = ['Recall', 'MRR']
+2026-07-08 04:45:27 | INFO    | [link] topk = [5, 10, 20]
+2026-07-08 04:45:27 | INFO    | [link] valid_metric = MRR@20
+2026-07-08 04:45:27 | INFO    | [link] valid_metric_bigger = True
+2026-07-08 04:45:27 | INFO    | [link] eval_batch_size = 1024
+2026-07-08 04:45:27 | INFO    | [link] metric_decimal_place = 4
+2026-07-08 04:45:27 | INFO    | [link] 
+2026-07-08 04:45:27 | INFO    | [link] Dataset Hyper Parameters:
+2026-07-08 04:45:27 | INFO    | [link] field_separator = 	
+2026-07-08 04:45:27 | INFO    | [link] seq_separator =  
+2026-07-08 04:45:27 | INFO    | [link] USER_ID_FIELD = session_id
+2026-07-08 04:45:27 | INFO    | [link] ITEM_ID_FIELD = item_id
+2026-07-08 04:45:27 | INFO    | [link] RATING_FIELD = rating
+2026-07-08 04:45:27 | INFO    | [link] TIME_FIELD = timestamp
+2026-07-08 04:45:27 | INFO    | [link] seq_len = None
+2026-07-08 04:45:27 | INFO    | [link] LABEL_FIELD = label
+2026-07-08 04:45:27 | INFO    | [link] threshold = None
+2026-07-08 04:45:27 | INFO    | [link] NEG_PREFIX = neg_
+2026-07-08 04:45:27 | INFO    | [link] load_col = {'inter': ['session_id', 'item_id_list', 'item_id']}
+2026-07-08 04:45:27 | INFO    | [link] unload_col = None
+2026-07-08 04:45:27 | INFO    | [link] unused_col = None
+2026-07-08 04:45:27 | INFO    | [link] additional_feat_suffix = None
+2026-07-08 04:45:27 | INFO    | [link] rm_dup_inter = None
+2026-07-08 04:45:27 | INFO    | [link] val_interval = None
+2026-07-08 04:45:27 | INFO    | [link] filter_inter_by_user_or_item = True
+2026-07-08 04:45:27 | INFO    | [link] user_inter_num_interval = [0,inf)
+2026-07-08 04:45:27 | INFO    | [link] item_inter_num_interval = [0,inf)
+2026-07-08 04:45:27 | INFO    | [link] alias_of_user_id = None
+2026-07-08 04:45:27 | INFO    | [link] alias_of_item_id = ['item_id_list']
+2026-07-08 04:45:27 | INFO    | [link] alias_of_entity_id = None
+2026-07-08 04:45:27 | INFO    | [link] alias_of_relation_id = None
+2026-07-08 04:45:27 | INFO    | [link] preload_weight = None
+2026-07-08 04:45:27 | INFO    | [link] normalize_field = None
+2026-07-08 04:45:27 | INFO    | [link] normalize_all = None
+2026-07-08 04:45:27 | INFO    | [link] ITEM_LIST_LENGTH_FIELD = item_length
+2026-07-08 04:45:27 | INFO    | [link] LIST_SUFFIX = _list
+2026-07-08 04:45:27 | INFO    | [link] MAX_ITEM_LIST_LENGTH = 50
+2026-07-08 04:45:27 | INFO    | [link] POSITION_FIELD = position_id
+2026-07-08 04:45:27 | INFO    | [link] HEAD_ENTITY_ID_FIELD = head_id
+2026-07-08 04:45:27 | INFO    | [link] TAIL_ENTITY_ID_FIELD = tail_id
+2026-07-08 04:45:27 | INFO    | [link] RELATION_ID_FIELD = relation_id
+2026-07-08 04:45:27 | INFO    | [link] ENTITY_ID_FIELD = entity_id
+2026-07-08 04:45:27 | INFO    | [link] benchmark_filename = ['train', 'valid', 'test']
+2026-07-08 04:45:27 | INFO    | [link] 
+2026-07-08 04:45:27 | INFO    | [link] Other Hyper Parameters: 
+2026-07-08 04:45:27 | INFO    | [link] worker = 0
+2026-07-08 04:45:27 | INFO    | [link] wandb_project = recbole
+2026-07-08 04:45:27 | INFO    | [link] shuffle = True
+2026-07-08 04:45:27 | INFO    | [link] require_pow = False
+2026-07-08 04:45:27 | INFO    | [link] enable_amp = False
+2026-07-08 04:45:27 | INFO    | [link] enable_scaler = False
+2026-07-08 04:45:27 | INFO    | [link] transform = None
+2026-07-08 04:45:27 | INFO    | [link] numerical_features = []
+2026-07-08 04:45:27 | INFO    | [link] discretization = None
+2026-07-08 04:45:27 | INFO    | [link] kg_reverse_r = False
+2026-07-08 04:45:27 | INFO    | [link] entity_kg_num_interval = [0,inf)
+2026-07-08 04:45:27 | INFO    | [link] relation_kg_num_interval = [0,inf)
+2026-07-08 04:45:27 | INFO    | [link] MODEL_TYPE = ModelType.SEQUENTIAL
+2026-07-08 04:45:27 | INFO    | [link] neg_sampling = None
+2026-07-08 04:45:27 | INFO    | [link] normalize = l2
+2026-07-08 04:45:27 | INFO    | [link] reg = 10.0
+2026-07-08 04:45:27 | INFO    | [link] save_path = None
+2026-07-08 04:45:27 | INFO    | [link] reg_teacher = 100.0
+2026-07-08 04:45:27 | INFO    | [link] teacher_path = saved_models_for_embedding/linear_teacher_toy_link_core_trm/dense_matrix.npy
+2026-07-08 04:45:27 | INFO    | [link] learn_SLIT = False
+2026-07-08 04:45:27 | INFO    | [link] direction = sr
+2026-07-08 04:45:27 | INFO    | [link] train_weight = 1.0
+2026-07-08 04:45:27 | INFO    | [link] teacher_temperature = 0.1
+2026-07-08 04:45:27 | INFO    | [link] save_load_SLIST = True
+2026-07-08 04:45:27 | INFO    | [link] extend_beta = 1.0
+2026-07-08 04:45:27 | INFO    | [link] closed_normalize = X
+2026-07-08 04:45:27 | INFO    | [link] teacher_normalize = True
+2026-07-08 04:45:27 | INFO    | [link] slis_alpha = 0.9
+2026-07-08 04:45:27 | INFO    | [link] use_dropout = False
+2026-07-08 04:45:27 | INFO    | [link] p = 0.5
+2026-07-08 04:45:27 | INFO    | [link] predict_weight = 4.0
+2026-07-08 04:45:27 | INFO    | [link] loss_type = CE
+2026-07-08 04:45:27 | INFO    | [link] folder = base
+2026-07-08 04:45:27 | INFO    | [link] length_eval = True
+2026-07-08 04:45:27 | INFO    | [link] pop_eval = False
+2026-07-08 04:45:27 | INFO    | [link] MODEL_INPUT_TYPE = InputType.POINTWISE
+2026-07-08 04:45:27 | INFO    | [link] eval_type = EvaluatorType.RANKING
+2026-07-08 04:45:27 | INFO    | [link] single_spec = True
+2026-07-08 04:45:27 | INFO    | [link] local_rank = 0
+2026-07-08 04:45:27 | INFO    | [link] device = cuda
+2026-07-08 04:45:27 | INFO    | [link] valid_neg_sample_args = {'distribution': 'uniform', 'sample_num': 'none'}
+2026-07-08 04:45:27 | INFO    | [link] test_neg_sample_args = {'distribution': 'uniform', 'sample_num': 'none'}
+2026-07-08 04:45:27 | INFO    | [link] 
+2026-07-08 04:45:27 | INFO    | [link] 
+2026-07-08 04:45:27 | INFO    | [link] /home/hongnguyen/.local/lib/python3.13/site-packages/recbole/data/dataset/dataset.py:648: ChainedAssignmentError: A value is being set on a copy of a DataFrame or Series through chained assignment using an inplace method.
+2026-07-08 04:45:27 | INFO    | [link] Such inplace method never works to update the original DataFrame or Series, because the intermediate object on which we are setting values always behaves as a copy (due to Copy-on-Write).
+2026-07-08 04:45:27 | INFO    | [link] 
+2026-07-08 04:45:27 | INFO    | [link] For example, when doing 'df[col].method(value, inplace=True)', try using 'df.method({col: value}, inplace=True)' instead, to perform the operation inplace on the original object, or try to avoid an inplace operation using 'df[col] = df[col].method(value)'.
+2026-07-08 04:45:27 | INFO    | [link] 
+2026-07-08 04:45:27 | INFO    | [link] See the documentation for a more detailed explanation: https://pandas.pydata.org/pandas-docs/stable/user_guide/copy_on_write.html
+2026-07-08 04:45:27 | INFO    | [link]   feat[field].fillna(value=0, inplace=True)
+2026-07-08 04:45:27 | INFO    | [link] 08 Jul 04:45    INFO  toy_link
+2026-07-08 04:45:27 | INFO    | [link] The number of users: 1497
+2026-07-08 04:45:27 | INFO    | [link] Average actions of users: 1.2426470588235294
+2026-07-08 04:45:27 | INFO    | [link] The number of items: 60
+2026-07-08 04:45:27 | INFO    | [link] Average actions of items: 31.508474576271187
+2026-07-08 04:45:27 | INFO    | [link] The number of inters: 1859
+2026-07-08 04:45:27 | INFO    | [link] The sparsity of the dataset: 97.93030505455356%
+2026-07-08 04:45:27 | INFO    | [link] Remain Fields: ['session_id', 'item_id_list', 'item_id', 'item_length']
+2026-07-08 04:45:27 | INFO    | [link] /home/hongnguyen/.local/lib/python3.13/site-packages/recbole/data/dataset/dataset.py:2136: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:203.)
+2026-07-08 04:45:27 | INFO    | [link]   new_data[k] = torch.LongTensor(value)
+2026-07-08 04:45:27 | INFO    | [link] 08 Jul 04:45    INFO  [Training]: train_batch_size = [2048] train_neg_sample_args: [{'distribution': 'none', 'sample_num': 'none', 'alpha': 'none', 'dynamic': False, 'candidate_num': 0}]
+2026-07-08 04:45:27 | INFO    | [link] 08 Jul 04:45    INFO  [Evaluation]: eval_batch_size = [1024] eval_args: [{'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}]
+2026-07-08 04:45:27 | INFO    | [link] No save_path for Full Model (LINK)
+2026-07-08 04:45:27 | INFO    | [link] Make SLIS matrix for LIS
+2026-07-08 04:45:27 | INFO    | [link] SLIS matrix is not loaded. It will be made and saved to ./saved/toy_link_SLIS.npy
+2026-07-08 04:45:27 | INFO    | [link] [SLIS] input sparse matrix (500, 60) is made.  Sparsity:94.77667%
+2026-07-08 04:45:27 | INFO    | [link] [SLIS] target sparse matrix (500, 60) is made.  Sparsity:94.77667%
+2026-07-08 04:45:27 | INFO    | [link] [SLIS, 0.00s] matrix is made.
+2026-07-08 04:45:27 | INFO    | [link] [0.00s] G is made. Sparsity:80.52777777777777%
+2026-07-08 04:45:27 | INFO    | [link] [0.00s] P is made (reg:10.0)
+2026-07-08 04:45:27 | INFO    | [link] [0.00s] weight matrix is made.
+2026-07-08 04:45:27 | INFO    | [link] [0.00s] training is done
+2026-07-08 04:45:27 | INFO    | [link] Save SLIS matrix
+2026-07-08 04:45:27 | INFO    | [link] 
+2026-07-08 04:45:27 | INFO    | [link] Loading training data: 0it [00:00, ?it/s]
+2026-07-08 04:45:27 | INFO    | [link] Loading training data: 501it [00:00, 65346.47it/s]
+2026-07-08 04:45:27 | INFO    | [link] avg. num_session_item: 3.13
+2026-07-08 04:45:27 | INFO    | [link] avg. num_kd_item: 28.21
+2026-07-08 04:45:27 | INFO    | [link] [LIS] input sparse matrix (500, 60) is made.  Sparsity:55.62000%
+2026-07-08 04:45:27 | INFO    | [link] [LIS] target sparse matrix (500, 60) is made.  Sparsity:55.62000%
+2026-07-08 04:45:27 | INFO    | [link] [LIS, 0.01s] matrix is made.
+2026-07-08 04:45:27 | INFO    | [link] [SLIT] input sparse matrix (1496, 60) is made.  Sparsity:98.33333%
+2026-07-08 04:45:27 | INFO    | [link] [SLIT] target sparse matrix (1496, 60) is made.  Sparsity:96.59425%
+2026-07-08 04:45:27 | INFO    | [link] [SLIT, 0.00s] matrix is made.
+2026-07-08 04:45:27 | INFO    | [link] [0.00s] normalization is done
+2026-07-08 04:45:27 | INFO    | [link] input_matrix: (1996, 60), target_matrix: (1996, 60)
+2026-07-08 04:45:27 | INFO    | [link] slis_alpha: 0.9, reg_teacher:100.0
+2026-07-08 04:45:27 | INFO    | [link] extend_beta: 1.0
+2026-07-08 04:45:27 | INFO    | [link] 08 Jul 04:45    INFO  Train weight matrix...
+2026-07-08 04:45:27 | INFO    | [link] 08 Jul 04:45    INFO  [0.00s] G is made. Sparsity:3.3055555555555505%
+2026-07-08 04:45:27 | INFO    | [link] 08 Jul 04:45    INFO  [0.00s] P is made
+2026-07-08 04:45:27 | INFO    | [link] closed-form aggregation (reg_teacher: 100.0)
+2026-07-08 04:45:27 | INFO    | [link] 08 Jul 04:45    INFO  [0.00s] weight matrix is made.
+2026-07-08 04:45:27 | INFO    | [link] 08 Jul 04:45    INFO  [0.00s] training is done
+2026-07-08 04:45:27 | INFO    | [link] 08 Jul 04:45    INFO  LINK()
+2026-07-08 04:45:27 | INFO    | [link] Trainable parameters: 1
+2026-07-08 04:45:28 | INFO    | [link] 
+2026-07-08 04:45:28 | INFO    | [link] Evaluate   :   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2026-07-08 04:45:28 | INFO    | [link] Evaluate   :   0%|                                   | 0/1 [00:00<?, ?it/s, GPU RAM: 0.00 G/22.19 G]
+2026-07-08 04:45:28 | INFO    | [link] Evaluate   : 100%|██████████████████████████| 1/1 [00:00<00:00, 484.67it/s, GPU RAM: 0.00 G/22.19 G]
+2026-07-08 04:45:28 | INFO    | [link] 08 Jul 04:45    INFO  best valid : None
+2026-07-08 04:45:28 | INFO    | [link] 08 Jul 04:45    INFO  test result: OrderedDict({'recall@5': np.float64(0.6327), 'recall@10': np.float64(0.9082), 'recall@20': np.float64(0.9898), 'mrr@5': np.float64(0.3292), 'mrr@10': np.float64(0.366), 'mrr@20': np.float64(0.3725)})
+2026-07-08 04:45:28 | WARNING | [LINK] Không trích được metric từ output.
+2026-07-08 04:45:42 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/retailrocket/LINK_toy.log
+2026-07-08 04:45:42 | INFO    | ====================================================================
+2026-07-08 04:45:42 | INFO    | [LINK] Bắt đầu run=link_toy.yaml  suite=retailrocket  dataset=toy_link
+2026-07-08 04:45:42 | INFO    | [LINK] Cấu hình: {'project': {'name': 'retailrocket', 'filename_mode': 'custom', 'custom_filename': 'LINK_toy.log'}, 'data': {'data_dir': 'data/toy_link', 'train_file': 'train.txt', 'val_file': 'val.txt', 'test_file': 'test.txt', 'lookup_file': 'lookup_tables.pkl'}, 'link': {'dataset_name': 'toy_link', 'reuse_converted': False, 'reuse_teacher': False, 'teacher_model': 'core_trm', 'teacher_epochs': 2, 'train_batch_size': 256, 'eval_batch_size': 256, 'learning_rate': 0.001, 'stopping_step': 5, 'reg': 10.0, 'reg_teacher': 100, 'predict_weight': 4.0, 'slis_alpha': 0.9, 'teacher_normalize': True, 'teacher_temperature': 0.1, 'gpu_id': 0}, 'evaluation': {'topk': [5, 10, 20], 'metrics': ['Recall', 'MRR'], 'valid_metric': 'MRR@20'}, '_logging': {'dir': 'Log', 'level': 'INFO', 'console': True}}
+2026-07-08 04:45:42 | INFO    | [LINK] Dữ liệu [data/toy_link]: |I|=60, train=500 phiên
+2026-07-08 04:45:42 | INFO    | [adapter] Đã sinh dataset RecBole 'toy_link' tại /home/hongnguyen/demo2/LINK_repo/dataset/toy_link: train=1496 mẫu, valid=167, test=196, train.session=500 phiên
+2026-07-08 04:45:42 | INFO    | [teacher] $ /opt/miniconda3/bin/python main.py --model core_trm --dataset toy_link --config2 props/gpu0_1024.yaml --gpu_id 0 --epochs 2 --train_batch_size 256 --eval_batch_size 256 --learning_rate 0.001 --stopping_step 5
+2026-07-08 04:45:43 | INFO    | [teacher] command line args [--model core_trm --dataset toy_link --config2 props/gpu0_1024.yaml --gpu_id 0 --epochs 2 --train_batch_size 256 --eval_batch_size 256 --learning_rate 0.001 --stopping_step 5] will not be used in RecBole
+2026-07-08 04:45:43 | INFO    | [teacher] 08 Jul 04:45    INFO  
+2026-07-08 04:45:43 | INFO    | [teacher] General Hyper Parameters:
+2026-07-08 04:45:43 | INFO    | [teacher] gpu_id = 0
+2026-07-08 04:45:43 | INFO    | [teacher] use_gpu = True
+2026-07-08 04:45:43 | INFO    | [teacher] seed = 2020
+2026-07-08 04:45:43 | INFO    | [teacher] state = INFO
+2026-07-08 04:45:43 | INFO    | [teacher] reproducibility = True
+2026-07-08 04:45:43 | INFO    | [teacher] data_path = dataset/toy_link
+2026-07-08 04:45:43 | INFO    | [teacher] checkpoint_dir = saved
+2026-07-08 04:45:43 | INFO    | [teacher] show_progress = True
+2026-07-08 04:45:43 | INFO    | [teacher] save_dataset = False
+2026-07-08 04:45:43 | INFO    | [teacher] dataset_save_path = None
+2026-07-08 04:45:43 | INFO    | [teacher] save_dataloaders = False
+2026-07-08 04:45:43 | INFO    | [teacher] dataloaders_save_path = None
+2026-07-08 04:45:43 | INFO    | [teacher] log_wandb = False
+2026-07-08 04:45:43 | INFO    | [teacher] 
+2026-07-08 04:45:43 | INFO    | [teacher] Training Hyper Parameters:
+2026-07-08 04:45:43 | INFO    | [teacher] epochs = 2
+2026-07-08 04:45:43 | INFO    | [teacher] train_batch_size = 256
+2026-07-08 04:45:43 | INFO    | [teacher] learner = adam
+2026-07-08 04:45:43 | INFO    | [teacher] learning_rate = 0.001
+2026-07-08 04:45:43 | INFO    | [teacher] train_neg_sample_args = {'distribution': 'none', 'sample_num': 'none', 'alpha': 'none', 'dynamic': False, 'candidate_num': 0}
+2026-07-08 04:45:43 | INFO    | [teacher] eval_step = 1
+2026-07-08 04:45:43 | INFO    | [teacher] stopping_step = 5
+2026-07-08 04:45:43 | INFO    | [teacher] clip_grad_norm = None
+2026-07-08 04:45:43 | INFO    | [teacher] weight_decay = 0.0
+2026-07-08 04:45:43 | INFO    | [teacher] loss_decimal_place = 4
+2026-07-08 04:45:43 | INFO    | [teacher] 
+2026-07-08 04:45:43 | INFO    | [teacher] Evaluation Hyper Parameters:
+2026-07-08 04:45:43 | INFO    | [teacher] eval_args = {'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}
+2026-07-08 04:45:43 | INFO    | [teacher] repeatable = True
+2026-07-08 04:45:43 | INFO    | [teacher] metrics = ['Recall', 'MRR']
+2026-07-08 04:45:43 | INFO    | [teacher] topk = [5, 10, 20]
+2026-07-08 04:45:43 | INFO    | [teacher] valid_metric = MRR@20
+2026-07-08 04:45:43 | INFO    | [teacher] valid_metric_bigger = True
+2026-07-08 04:45:43 | INFO    | [teacher] eval_batch_size = 256
+2026-07-08 04:45:43 | INFO    | [teacher] metric_decimal_place = 4
+2026-07-08 04:45:43 | INFO    | [teacher] 
+2026-07-08 04:45:43 | INFO    | [teacher] Dataset Hyper Parameters:
+2026-07-08 04:45:43 | INFO    | [teacher] field_separator = 	
+2026-07-08 04:45:43 | INFO    | [teacher] seq_separator =  
+2026-07-08 04:45:43 | INFO    | [teacher] USER_ID_FIELD = session_id
+2026-07-08 04:45:43 | INFO    | [teacher] ITEM_ID_FIELD = item_id
+2026-07-08 04:45:43 | INFO    | [teacher] RATING_FIELD = rating
+2026-07-08 04:45:43 | INFO    | [teacher] TIME_FIELD = timestamp
+2026-07-08 04:45:43 | INFO    | [teacher] seq_len = None
+2026-07-08 04:45:43 | INFO    | [teacher] LABEL_FIELD = label
+2026-07-08 04:45:43 | INFO    | [teacher] threshold = None
+2026-07-08 04:45:43 | INFO    | [teacher] NEG_PREFIX = neg_
+2026-07-08 04:45:43 | INFO    | [teacher] load_col = {'inter': ['session_id', 'item_id_list', 'item_id']}
+2026-07-08 04:45:43 | INFO    | [teacher] unload_col = None
+2026-07-08 04:45:43 | INFO    | [teacher] unused_col = None
+2026-07-08 04:45:43 | INFO    | [teacher] additional_feat_suffix = None
+2026-07-08 04:45:43 | INFO    | [teacher] rm_dup_inter = None
+2026-07-08 04:45:43 | INFO    | [teacher] val_interval = None
+2026-07-08 04:45:43 | INFO    | [teacher] filter_inter_by_user_or_item = True
+2026-07-08 04:45:43 | INFO    | [teacher] user_inter_num_interval = [0,inf)
+2026-07-08 04:45:43 | INFO    | [teacher] item_inter_num_interval = [0,inf)
+2026-07-08 04:45:43 | INFO    | [teacher] alias_of_user_id = None
+2026-07-08 04:45:43 | INFO    | [teacher] alias_of_item_id = ['item_id_list']
+2026-07-08 04:45:43 | INFO    | [teacher] alias_of_entity_id = None
+2026-07-08 04:45:43 | INFO    | [teacher] alias_of_relation_id = None
+2026-07-08 04:45:43 | INFO    | [teacher] preload_weight = None
+2026-07-08 04:45:43 | INFO    | [teacher] normalize_field = None
+2026-07-08 04:45:43 | INFO    | [teacher] normalize_all = None
+2026-07-08 04:45:43 | INFO    | [teacher] ITEM_LIST_LENGTH_FIELD = item_length
+2026-07-08 04:45:43 | INFO    | [teacher] LIST_SUFFIX = _list
+2026-07-08 04:45:43 | INFO    | [teacher] MAX_ITEM_LIST_LENGTH = 50
+2026-07-08 04:45:43 | INFO    | [teacher] POSITION_FIELD = position_id
+2026-07-08 04:45:43 | INFO    | [teacher] HEAD_ENTITY_ID_FIELD = head_id
+2026-07-08 04:45:43 | INFO    | [teacher] TAIL_ENTITY_ID_FIELD = tail_id
+2026-07-08 04:45:43 | INFO    | [teacher] RELATION_ID_FIELD = relation_id
+2026-07-08 04:45:43 | INFO    | [teacher] ENTITY_ID_FIELD = entity_id
+2026-07-08 04:45:43 | INFO    | [teacher] benchmark_filename = ['train', 'valid', 'test']
+2026-07-08 04:45:43 | INFO    | [teacher] 
+2026-07-08 04:45:43 | INFO    | [teacher] Other Hyper Parameters: 
+2026-07-08 04:45:43 | INFO    | [teacher] worker = 0
+2026-07-08 04:45:43 | INFO    | [teacher] wandb_project = recbole
+2026-07-08 04:45:43 | INFO    | [teacher] shuffle = True
+2026-07-08 04:45:43 | INFO    | [teacher] require_pow = False
+2026-07-08 04:45:43 | INFO    | [teacher] enable_amp = False
+2026-07-08 04:45:43 | INFO    | [teacher] enable_scaler = False
+2026-07-08 04:45:43 | INFO    | [teacher] transform = None
+2026-07-08 04:45:43 | INFO    | [teacher] numerical_features = []
+2026-07-08 04:45:43 | INFO    | [teacher] discretization = None
+2026-07-08 04:45:43 | INFO    | [teacher] kg_reverse_r = False
+2026-07-08 04:45:43 | INFO    | [teacher] entity_kg_num_interval = [0,inf)
+2026-07-08 04:45:43 | INFO    | [teacher] relation_kg_num_interval = [0,inf)
+2026-07-08 04:45:43 | INFO    | [teacher] MODEL_TYPE = ModelType.SEQUENTIAL
+2026-07-08 04:45:43 | INFO    | [teacher] neg_sampling = None
+2026-07-08 04:45:43 | INFO    | [teacher] embedding_size = 100
+2026-07-08 04:45:43 | INFO    | [teacher] inner_size = 256
+2026-07-08 04:45:43 | INFO    | [teacher] n_layers = 2
+2026-07-08 04:45:43 | INFO    | [teacher] n_heads = 2
+2026-07-08 04:45:43 | INFO    | [teacher] hidden_dropout_prob = 0.5
+2026-07-08 04:45:43 | INFO    | [teacher] attn_dropout_prob = 0.5
+2026-07-08 04:45:43 | INFO    | [teacher] hidden_act = gelu
+2026-07-08 04:45:43 | INFO    | [teacher] layer_norm_eps = 1e-12
+2026-07-08 04:45:43 | INFO    | [teacher] initializer_range = 0.02
+2026-07-08 04:45:43 | INFO    | [teacher] loss_type = CE
+2026-07-08 04:45:43 | INFO    | [teacher] sess_dropout = 0.2
+2026-07-08 04:45:43 | INFO    | [teacher] item_dropout = 0.2
+2026-07-08 04:45:43 | INFO    | [teacher] temperature = 0.07
+2026-07-08 04:45:43 | INFO    | [teacher] folder = base
+2026-07-08 04:45:43 | INFO    | [teacher] pop_eval = False
+2026-07-08 04:45:43 | INFO    | [teacher] save_teacher_matrix = True
+2026-07-08 04:45:43 | INFO    | [teacher] MODEL_INPUT_TYPE = InputType.POINTWISE
+2026-07-08 04:45:43 | INFO    | [teacher] eval_type = EvaluatorType.RANKING
+2026-07-08 04:45:43 | INFO    | [teacher] single_spec = True
+2026-07-08 04:45:43 | INFO    | [teacher] local_rank = 0
+2026-07-08 04:45:43 | INFO    | [teacher] device = cuda
+2026-07-08 04:45:43 | INFO    | [teacher] valid_neg_sample_args = {'distribution': 'uniform', 'sample_num': 'none'}
+2026-07-08 04:45:43 | INFO    | [teacher] test_neg_sample_args = {'distribution': 'uniform', 'sample_num': 'none'}
+2026-07-08 04:45:43 | INFO    | [teacher] 
+2026-07-08 04:45:43 | INFO    | [teacher] 
+2026-07-08 04:45:43 | INFO    | [teacher] /home/hongnguyen/.local/lib/python3.13/site-packages/recbole/data/dataset/dataset.py:648: ChainedAssignmentError: A value is being set on a copy of a DataFrame or Series through chained assignment using an inplace method.
+2026-07-08 04:45:43 | INFO    | [teacher] Such inplace method never works to update the original DataFrame or Series, because the intermediate object on which we are setting values always behaves as a copy (due to Copy-on-Write).
+2026-07-08 04:45:43 | INFO    | [teacher] 
+2026-07-08 04:45:43 | INFO    | [teacher] For example, when doing 'df[col].method(value, inplace=True)', try using 'df.method({col: value}, inplace=True)' instead, to perform the operation inplace on the original object, or try to avoid an inplace operation using 'df[col] = df[col].method(value)'.
+2026-07-08 04:45:43 | INFO    | [teacher] 
+2026-07-08 04:45:43 | INFO    | [teacher] See the documentation for a more detailed explanation: https://pandas.pydata.org/pandas-docs/stable/user_guide/copy_on_write.html
+2026-07-08 04:45:43 | INFO    | [teacher]   feat[field].fillna(value=0, inplace=True)
+2026-07-08 04:45:43 | INFO    | [teacher] 08 Jul 04:45    INFO  toy_link
+2026-07-08 04:45:43 | INFO    | [teacher] The number of users: 1497
+2026-07-08 04:45:43 | INFO    | [teacher] Average actions of users: 1.2426470588235294
+2026-07-08 04:45:43 | INFO    | [teacher] The number of items: 60
+2026-07-08 04:45:43 | INFO    | [teacher] Average actions of items: 31.508474576271187
+2026-07-08 04:45:43 | INFO    | [teacher] The number of inters: 1859
+2026-07-08 04:45:43 | INFO    | [teacher] The sparsity of the dataset: 97.93030505455356%
+2026-07-08 04:45:43 | INFO    | [teacher] Remain Fields: ['session_id', 'item_id_list', 'item_id', 'item_length']
+2026-07-08 04:45:43 | INFO    | [teacher] /home/hongnguyen/.local/lib/python3.13/site-packages/recbole/data/dataset/dataset.py:2136: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:203.)
+2026-07-08 04:45:43 | INFO    | [teacher]   new_data[k] = torch.LongTensor(value)
+2026-07-08 04:45:43 | INFO    | [teacher] 08 Jul 04:45    INFO  [Training]: train_batch_size = [256] train_neg_sample_args: [{'distribution': 'none', 'sample_num': 'none', 'alpha': 'none', 'dynamic': False, 'candidate_num': 0}]
+2026-07-08 04:45:43 | INFO    | [teacher] 08 Jul 04:45    INFO  [Evaluation]: eval_batch_size = [256] eval_args: [{'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}]
+2026-07-08 04:45:43 | INFO    | [teacher] 08 Jul 04:45    INFO  COREtrm(
+2026-07-08 04:45:43 | INFO    | [teacher]   (sess_dropout): Dropout(p=0.2, inplace=False)
+2026-07-08 04:45:43 | INFO    | [teacher]   (item_dropout): Dropout(p=0.2, inplace=False)
+2026-07-08 04:45:43 | INFO    | [teacher]   (item_embedding): Embedding(60, 100, padding_idx=0)
+2026-07-08 04:45:43 | INFO    | [teacher]   (loss_fct): CrossEntropyLoss()
+2026-07-08 04:45:43 | INFO    | [teacher]   (net): TransNet(
+2026-07-08 04:45:43 | INFO    | [teacher]     (position_embedding): Embedding(5, 100)
+2026-07-08 04:45:43 | INFO    | [teacher]     (trm_encoder): TransformerEncoder(
+2026-07-08 04:45:43 | INFO    | [teacher]       (layer): ModuleList(
+2026-07-08 04:45:43 | INFO    | [teacher]         (0-1): 2 x TransformerLayer(
+2026-07-08 04:45:43 | INFO    | [teacher]           (multi_head_attention): MultiHeadAttention(
+2026-07-08 04:45:43 | INFO    | [teacher]             (query): Linear(in_features=100, out_features=100, bias=True)
+2026-07-08 04:45:43 | INFO    | [teacher]             (key): Linear(in_features=100, out_features=100, bias=True)
+2026-07-08 04:45:43 | INFO    | [teacher]             (value): Linear(in_features=100, out_features=100, bias=True)
+2026-07-08 04:45:43 | INFO    | [teacher]             (softmax): Softmax(dim=-1)
+2026-07-08 04:45:43 | INFO    | [teacher]             (attn_dropout): Dropout(p=0.5, inplace=False)
+2026-07-08 04:45:43 | INFO    | [teacher]             (dense): Linear(in_features=100, out_features=100, bias=True)
+2026-07-08 04:45:43 | INFO    | [teacher]             (LayerNorm): LayerNorm((100,), eps=1e-12, elementwise_affine=True)
+2026-07-08 04:45:43 | INFO    | [teacher]             (out_dropout): Dropout(p=0.5, inplace=False)
+2026-07-08 04:45:43 | INFO    | [teacher]           )
+2026-07-08 04:45:43 | INFO    | [teacher]           (feed_forward): FeedForward(
+2026-07-08 04:45:43 | INFO    | [teacher]             (dense_1): Linear(in_features=100, out_features=256, bias=True)
+2026-07-08 04:45:44 | INFO    | [teacher]             (dense_2): Linear(in_features=256, out_features=100, bias=True)
+2026-07-08 04:45:44 | INFO    | [teacher]             (LayerNorm): LayerNorm((100,), eps=1e-12, elementwise_affine=True)
+2026-07-08 04:45:44 | INFO    | [teacher]             (dropout): Dropout(p=0.5, inplace=False)
+2026-07-08 04:45:44 | INFO    | [teacher]           )
+2026-07-08 04:45:44 | INFO    | [teacher]         )
+2026-07-08 04:45:44 | INFO    | [teacher]       )
+2026-07-08 04:45:44 | INFO    | [teacher]     )
+2026-07-08 04:45:44 | INFO    | [teacher]     (LayerNorm): LayerNorm((100,), eps=1e-12, elementwise_affine=True)
+2026-07-08 04:45:44 | INFO    | [teacher]     (dropout): Dropout(p=0.5, inplace=False)
+2026-07-08 04:45:44 | INFO    | [teacher]     (fn): Linear(in_features=100, out_features=1, bias=True)
+2026-07-08 04:45:44 | INFO    | [teacher]   )
+2026-07-08 04:45:44 | INFO    | [teacher] )
+2026-07-08 04:45:44 | INFO    | [teacher] Trainable parameters: 191513
+2026-07-08 04:45:44 | INFO    | [teacher] 
+2026-07-08 04:45:44 | INFO    | [teacher] Train     0:   0%|                                                            | 0/6 [00:00<?, ?it/s]/home/hongnguyen/.local/lib/python3.13/site-packages/recbole/trainer/trainer.py:235: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+2026-07-08 04:45:44 | INFO    | [teacher]   scaler = amp.GradScaler(enabled=self.enable_scaler)
+2026-07-08 04:45:44 | INFO    | [teacher] 
+2026-07-08 04:45:44 | INFO    | [teacher] Train     0:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:44 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:01,  2.84it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:44 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:01,  2.84it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:44 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:01,  2.84it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:44 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:01,  2.84it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:44 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:01,  2.84it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:44 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:01,  2.84it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:44 | INFO    | [teacher] Train     0: 100%|███████████████████████████| 6/6 [00:00<00:00, 13.88it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:44 | INFO    | [teacher] 08 Jul 04:45    INFO  epoch 0 training [time: 0.43s, train loss: 46.2615]
+2026-07-08 04:45:44 | INFO    | [teacher] 
+2026-07-08 04:45:44 | INFO    | [teacher] Evaluate   :   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2026-07-08 04:45:44 | INFO    | [teacher] Evaluate   :   0%|                                   | 0/1 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:44 | INFO    | [teacher] Evaluate   : 100%|███████████████████████████| 1/1 [00:00<00:00, 39.63it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:44 | INFO    | [teacher] 08 Jul 04:45    INFO  epoch 0 evaluating [time: 0.03s, valid_score: 0.240400]
+2026-07-08 04:45:44 | INFO    | [teacher] 08 Jul 04:45    INFO  valid result: 
+2026-07-08 04:45:44 | INFO    | [teacher] recall@5 : 0.3533    recall@10 : 0.4371    recall@20 : 0.5689    mrr@5 : 0.2211    mrr@10 : 0.2317    mrr@20 : 0.2404
+2026-07-08 04:45:44 | INFO    | [teacher] 08 Jul 04:45    INFO  Saving current: saved/COREtrm-Jul-08-2026_04-45-44.pth
+2026-07-08 04:45:44 | INFO    | [teacher] 
+2026-07-08 04:45:44 | INFO    | [teacher] Train     1:   0%|                                                            | 0/6 [00:00<?, ?it/s]
+2026-07-08 04:45:44 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:44 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:44 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:44 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:44 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:44 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:44 | INFO    | [teacher] Train     1: 100%|███████████████████████████| 6/6 [00:00<00:00, 65.74it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:44 | INFO    | [teacher] 08 Jul 04:45    INFO  epoch 1 training [time: 0.09s, train loss: 43.7596]
+2026-07-08 04:45:44 | INFO    | [teacher] 
+2026-07-08 04:45:44 | INFO    | [teacher] Evaluate   :   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2026-07-08 04:45:44 | INFO    | [teacher] Evaluate   :   0%|                                   | 0/1 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:44 | INFO    | [teacher] Evaluate   : 100%|██████████████████████████| 1/1 [00:00<00:00, 200.87it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:44 | INFO    | [teacher] 08 Jul 04:45    INFO  epoch 1 evaluating [time: 0.01s, valid_score: 0.261400]
+2026-07-08 04:45:44 | INFO    | [teacher] 08 Jul 04:45    INFO  valid result: 
+2026-07-08 04:45:44 | INFO    | [teacher] recall@5 : 0.4072    recall@10 : 0.5269    recall@20 : 0.6587    mrr@5 : 0.238    mrr@10 : 0.2526    mrr@20 : 0.2614
+2026-07-08 04:45:44 | INFO    | [teacher] 08 Jul 04:45    INFO  Saving current: saved/COREtrm-Jul-08-2026_04-45-44.pth
+2026-07-08 04:45:44 | INFO    | [teacher] 08 Jul 04:45    INFO  Loading model structure and parameters from saved/COREtrm-Jul-08-2026_04-45-44.pth
+2026-07-08 04:45:44 | INFO    | [teacher] 
+2026-07-08 04:45:44 | INFO    | [teacher] Evaluate   :   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2026-07-08 04:45:44 | INFO    | [teacher] Evaluate   :   0%|                                   | 0/1 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:44 | INFO    | [teacher] Evaluate   : 100%|███████████████████████████| 1/1 [00:00<00:00, 49.57it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 04:45:44 | INFO    | [teacher] 08 Jul 04:45    INFO  best valid : OrderedDict({'recall@5': np.float64(0.4072), 'recall@10': np.float64(0.5269), 'recall@20': np.float64(0.6587), 'mrr@5': np.float64(0.238), 'mrr@10': np.float64(0.2526), 'mrr@20': np.float64(0.2614)})
+2026-07-08 04:45:44 | INFO    | [teacher] 08 Jul 04:45    INFO  test result: OrderedDict({'recall@5': np.float64(0.449), 'recall@10': np.float64(0.6071), 'recall@20': np.float64(0.7704), 'mrr@5': np.float64(0.2622), 'mrr@10': np.float64(0.2812), 'mrr@20': np.float64(0.2923)})
+2026-07-08 04:45:44 | INFO    | [teacher] 
+2026-07-08 04:45:45 | INFO    | [teacher] Single-session data:   0%|          | 0/1 [00:00<?, ?it/s]
+2026-07-08 04:45:45 | INFO    | [teacher] Single-session data: 100%|██████████| 1/1 [00:00<00:00, 354.46it/s]
+2026-07-08 04:45:45 | INFO    | [teacher] Elapsed time for extraction teacher matrix: 0.00s
+2026-07-08 04:45:45 | INFO    | [teacher] saved_models_for_embedding/linear_teacher_toy_link_core_trm/dense_matrix.npy shape: (60, 60) saved!
+2026-07-08 04:45:45 | INFO    | [link] $ /opt/miniconda3/bin/python main.py --model link --dataset toy_link --gpu_id 0 --teacher_path saved_models_for_embedding/linear_teacher_toy_link_core_trm/dense_matrix.npy --reg 10.0 --reg_teacher 100 --predict_weight 4.0 --slis_alpha 0.9 --teacher_normalize True --teacher_temperature 0.1
+2026-07-08 04:45:46 | INFO    | [link] command line args [--model link --dataset toy_link --gpu_id 0 --teacher_path saved_models_for_embedding/linear_teacher_toy_link_core_trm/dense_matrix.npy --reg 10.0 --reg_teacher 100 --predict_weight 4.0 --slis_alpha 0.9 --teacher_normalize True --teacher_temperature 0.1] will not be used in RecBole
+2026-07-08 04:45:46 | INFO    | [link] 08 Jul 04:45    INFO  
+2026-07-08 04:45:46 | INFO    | [link] General Hyper Parameters:
+2026-07-08 04:45:46 | INFO    | [link] gpu_id = 0
+2026-07-08 04:45:46 | INFO    | [link] use_gpu = True
+2026-07-08 04:45:46 | INFO    | [link] seed = 2020
+2026-07-08 04:45:46 | INFO    | [link] state = INFO
+2026-07-08 04:45:46 | INFO    | [link] reproducibility = True
+2026-07-08 04:45:46 | INFO    | [link] data_path = dataset/toy_link
+2026-07-08 04:45:46 | INFO    | [link] checkpoint_dir = saved
+2026-07-08 04:45:46 | INFO    | [link] show_progress = True
+2026-07-08 04:45:46 | INFO    | [link] save_dataset = False
+2026-07-08 04:45:46 | INFO    | [link] dataset_save_path = None
+2026-07-08 04:45:46 | INFO    | [link] save_dataloaders = False
+2026-07-08 04:45:46 | INFO    | [link] dataloaders_save_path = None
+2026-07-08 04:45:46 | INFO    | [link] log_wandb = False
+2026-07-08 04:45:46 | INFO    | [link] 
+2026-07-08 04:45:46 | INFO    | [link] Training Hyper Parameters:
+2026-07-08 04:45:46 | INFO    | [link] epochs = 300
+2026-07-08 04:45:46 | INFO    | [link] train_batch_size = 2048
+2026-07-08 04:45:46 | INFO    | [link] learner = adam
+2026-07-08 04:45:46 | INFO    | [link] learning_rate = 0.001
+2026-07-08 04:45:46 | INFO    | [link] train_neg_sample_args = {'distribution': 'none', 'sample_num': 'none', 'alpha': 'none', 'dynamic': False, 'candidate_num': 0}
+2026-07-08 04:45:46 | INFO    | [link] eval_step = 1
+2026-07-08 04:45:46 | INFO    | [link] stopping_step = 5
+2026-07-08 04:45:46 | INFO    | [link] clip_grad_norm = None
+2026-07-08 04:45:46 | INFO    | [link] weight_decay = 0.0
+2026-07-08 04:45:46 | INFO    | [link] loss_decimal_place = 4
+2026-07-08 04:45:46 | INFO    | [link] 
+2026-07-08 04:45:46 | INFO    | [link] Evaluation Hyper Parameters:
+2026-07-08 04:45:46 | INFO    | [link] eval_args = {'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}
+2026-07-08 04:45:46 | INFO    | [link] repeatable = True
+2026-07-08 04:45:46 | INFO    | [link] metrics = ['Recall', 'MRR']
+2026-07-08 04:45:46 | INFO    | [link] topk = [5, 10, 20]
+2026-07-08 04:45:46 | INFO    | [link] valid_metric = MRR@20
+2026-07-08 04:45:46 | INFO    | [link] valid_metric_bigger = True
+2026-07-08 04:45:46 | INFO    | [link] eval_batch_size = 1024
+2026-07-08 04:45:46 | INFO    | [link] metric_decimal_place = 4
+2026-07-08 04:45:46 | INFO    | [link] 
+2026-07-08 04:45:46 | INFO    | [link] Dataset Hyper Parameters:
+2026-07-08 04:45:46 | INFO    | [link] field_separator = 	
+2026-07-08 04:45:46 | INFO    | [link] seq_separator =  
+2026-07-08 04:45:46 | INFO    | [link] USER_ID_FIELD = session_id
+2026-07-08 04:45:46 | INFO    | [link] ITEM_ID_FIELD = item_id
+2026-07-08 04:45:46 | INFO    | [link] RATING_FIELD = rating
+2026-07-08 04:45:46 | INFO    | [link] TIME_FIELD = timestamp
+2026-07-08 04:45:46 | INFO    | [link] seq_len = None
+2026-07-08 04:45:46 | INFO    | [link] LABEL_FIELD = label
+2026-07-08 04:45:46 | INFO    | [link] threshold = None
+2026-07-08 04:45:46 | INFO    | [link] NEG_PREFIX = neg_
+2026-07-08 04:45:46 | INFO    | [link] load_col = {'inter': ['session_id', 'item_id_list', 'item_id']}
+2026-07-08 04:45:46 | INFO    | [link] unload_col = None
+2026-07-08 04:45:46 | INFO    | [link] unused_col = None
+2026-07-08 04:45:46 | INFO    | [link] additional_feat_suffix = None
+2026-07-08 04:45:46 | INFO    | [link] rm_dup_inter = None
+2026-07-08 04:45:46 | INFO    | [link] val_interval = None
+2026-07-08 04:45:46 | INFO    | [link] filter_inter_by_user_or_item = True
+2026-07-08 04:45:46 | INFO    | [link] user_inter_num_interval = [0,inf)
+2026-07-08 04:45:46 | INFO    | [link] item_inter_num_interval = [0,inf)
+2026-07-08 04:45:46 | INFO    | [link] alias_of_user_id = None
+2026-07-08 04:45:46 | INFO    | [link] alias_of_item_id = ['item_id_list']
+2026-07-08 04:45:46 | INFO    | [link] alias_of_entity_id = None
+2026-07-08 04:45:46 | INFO    | [link] alias_of_relation_id = None
+2026-07-08 04:45:46 | INFO    | [link] preload_weight = None
+2026-07-08 04:45:46 | INFO    | [link] normalize_field = None
+2026-07-08 04:45:46 | INFO    | [link] normalize_all = None
+2026-07-08 04:45:46 | INFO    | [link] ITEM_LIST_LENGTH_FIELD = item_length
+2026-07-08 04:45:46 | INFO    | [link] LIST_SUFFIX = _list
+2026-07-08 04:45:46 | INFO    | [link] MAX_ITEM_LIST_LENGTH = 50
+2026-07-08 04:45:46 | INFO    | [link] POSITION_FIELD = position_id
+2026-07-08 04:45:46 | INFO    | [link] HEAD_ENTITY_ID_FIELD = head_id
+2026-07-08 04:45:46 | INFO    | [link] TAIL_ENTITY_ID_FIELD = tail_id
+2026-07-08 04:45:46 | INFO    | [link] RELATION_ID_FIELD = relation_id
+2026-07-08 04:45:46 | INFO    | [link] ENTITY_ID_FIELD = entity_id
+2026-07-08 04:45:46 | INFO    | [link] benchmark_filename = ['train', 'valid', 'test']
+2026-07-08 04:45:46 | INFO    | [link] 
+2026-07-08 04:45:46 | INFO    | [link] Other Hyper Parameters: 
+2026-07-08 04:45:46 | INFO    | [link] worker = 0
+2026-07-08 04:45:46 | INFO    | [link] wandb_project = recbole
+2026-07-08 04:45:46 | INFO    | [link] shuffle = True
+2026-07-08 04:45:46 | INFO    | [link] require_pow = False
+2026-07-08 04:45:46 | INFO    | [link] enable_amp = False
+2026-07-08 04:45:46 | INFO    | [link] enable_scaler = False
+2026-07-08 04:45:46 | INFO    | [link] transform = None
+2026-07-08 04:45:46 | INFO    | [link] numerical_features = []
+2026-07-08 04:45:46 | INFO    | [link] discretization = None
+2026-07-08 04:45:46 | INFO    | [link] kg_reverse_r = False
+2026-07-08 04:45:46 | INFO    | [link] entity_kg_num_interval = [0,inf)
+2026-07-08 04:45:46 | INFO    | [link] relation_kg_num_interval = [0,inf)
+2026-07-08 04:45:46 | INFO    | [link] MODEL_TYPE = ModelType.SEQUENTIAL
+2026-07-08 04:45:46 | INFO    | [link] neg_sampling = None
+2026-07-08 04:45:46 | INFO    | [link] normalize = l2
+2026-07-08 04:45:46 | INFO    | [link] reg = 10.0
+2026-07-08 04:45:46 | INFO    | [link] save_path = None
+2026-07-08 04:45:46 | INFO    | [link] reg_teacher = 100.0
+2026-07-08 04:45:46 | INFO    | [link] teacher_path = saved_models_for_embedding/linear_teacher_toy_link_core_trm/dense_matrix.npy
+2026-07-08 04:45:46 | INFO    | [link] learn_SLIT = False
+2026-07-08 04:45:46 | INFO    | [link] direction = sr
+2026-07-08 04:45:46 | INFO    | [link] train_weight = 1.0
+2026-07-08 04:45:46 | INFO    | [link] teacher_temperature = 0.1
+2026-07-08 04:45:46 | INFO    | [link] save_load_SLIST = True
+2026-07-08 04:45:46 | INFO    | [link] extend_beta = 1.0
+2026-07-08 04:45:46 | INFO    | [link] closed_normalize = X
+2026-07-08 04:45:46 | INFO    | [link] teacher_normalize = True
+2026-07-08 04:45:46 | INFO    | [link] slis_alpha = 0.9
+2026-07-08 04:45:46 | INFO    | [link] use_dropout = False
+2026-07-08 04:45:46 | INFO    | [link] p = 0.5
+2026-07-08 04:45:46 | INFO    | [link] predict_weight = 4.0
+2026-07-08 04:45:46 | INFO    | [link] loss_type = CE
+2026-07-08 04:45:46 | INFO    | [link] folder = base
+2026-07-08 04:45:46 | INFO    | [link] length_eval = True
+2026-07-08 04:45:46 | INFO    | [link] pop_eval = False
+2026-07-08 04:45:46 | INFO    | [link] MODEL_INPUT_TYPE = InputType.POINTWISE
+2026-07-08 04:45:46 | INFO    | [link] eval_type = EvaluatorType.RANKING
+2026-07-08 04:45:46 | INFO    | [link] single_spec = True
+2026-07-08 04:45:46 | INFO    | [link] local_rank = 0
+2026-07-08 04:45:46 | INFO    | [link] device = cuda
+2026-07-08 04:45:46 | INFO    | [link] valid_neg_sample_args = {'distribution': 'uniform', 'sample_num': 'none'}
+2026-07-08 04:45:46 | INFO    | [link] test_neg_sample_args = {'distribution': 'uniform', 'sample_num': 'none'}
+2026-07-08 04:45:46 | INFO    | [link] 
+2026-07-08 04:45:46 | INFO    | [link] 
+2026-07-08 04:45:46 | INFO    | [link] /home/hongnguyen/.local/lib/python3.13/site-packages/recbole/data/dataset/dataset.py:648: ChainedAssignmentError: A value is being set on a copy of a DataFrame or Series through chained assignment using an inplace method.
+2026-07-08 04:45:46 | INFO    | [link] Such inplace method never works to update the original DataFrame or Series, because the intermediate object on which we are setting values always behaves as a copy (due to Copy-on-Write).
+2026-07-08 04:45:46 | INFO    | [link] 
+2026-07-08 04:45:46 | INFO    | [link] For example, when doing 'df[col].method(value, inplace=True)', try using 'df.method({col: value}, inplace=True)' instead, to perform the operation inplace on the original object, or try to avoid an inplace operation using 'df[col] = df[col].method(value)'.
+2026-07-08 04:45:46 | INFO    | [link] 
+2026-07-08 04:45:46 | INFO    | [link] See the documentation for a more detailed explanation: https://pandas.pydata.org/pandas-docs/stable/user_guide/copy_on_write.html
+2026-07-08 04:45:46 | INFO    | [link]   feat[field].fillna(value=0, inplace=True)
+2026-07-08 04:45:46 | INFO    | [link] 08 Jul 04:45    INFO  toy_link
+2026-07-08 04:45:46 | INFO    | [link] The number of users: 1497
+2026-07-08 04:45:46 | INFO    | [link] Average actions of users: 1.2426470588235294
+2026-07-08 04:45:46 | INFO    | [link] The number of items: 60
+2026-07-08 04:45:46 | INFO    | [link] Average actions of items: 31.508474576271187
+2026-07-08 04:45:46 | INFO    | [link] The number of inters: 1859
+2026-07-08 04:45:46 | INFO    | [link] The sparsity of the dataset: 97.93030505455356%
+2026-07-08 04:45:46 | INFO    | [link] Remain Fields: ['session_id', 'item_id_list', 'item_id', 'item_length']
+2026-07-08 04:45:46 | INFO    | [link] /home/hongnguyen/.local/lib/python3.13/site-packages/recbole/data/dataset/dataset.py:2136: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:203.)
+2026-07-08 04:45:46 | INFO    | [link]   new_data[k] = torch.LongTensor(value)
+2026-07-08 04:45:46 | INFO    | [link] 08 Jul 04:45    INFO  [Training]: train_batch_size = [2048] train_neg_sample_args: [{'distribution': 'none', 'sample_num': 'none', 'alpha': 'none', 'dynamic': False, 'candidate_num': 0}]
+2026-07-08 04:45:46 | INFO    | [link] 08 Jul 04:45    INFO  [Evaluation]: eval_batch_size = [1024] eval_args: [{'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}]
+2026-07-08 04:45:46 | INFO    | [link] No save_path for Full Model (LINK)
+2026-07-08 04:45:46 | INFO    | [link] Make SLIS matrix for LIS
+2026-07-08 04:45:46 | INFO    | [link] Load SLIS matrix
+2026-07-08 04:45:46 | INFO    | [link] 
+2026-07-08 04:45:46 | INFO    | [link] Loading training data: 0it [00:00, ?it/s]
+2026-07-08 04:45:46 | INFO    | [link] Loading training data: 501it [00:00, 71280.40it/s]
+2026-07-08 04:45:46 | INFO    | [link] avg. num_session_item: 3.13
+2026-07-08 04:45:46 | INFO    | [link] avg. num_kd_item: 28.21
+2026-07-08 04:45:46 | INFO    | [link] [LIS] input sparse matrix (500, 60) is made.  Sparsity:55.62000%
+2026-07-08 04:45:46 | INFO    | [link] [LIS] target sparse matrix (500, 60) is made.  Sparsity:55.62000%
+2026-07-08 04:45:46 | INFO    | [link] [LIS, 0.01s] matrix is made.
+2026-07-08 04:45:46 | INFO    | [link] [SLIT] input sparse matrix (1496, 60) is made.  Sparsity:98.33333%
+2026-07-08 04:45:46 | INFO    | [link] [SLIT] target sparse matrix (1496, 60) is made.  Sparsity:96.59425%
+2026-07-08 04:45:46 | INFO    | [link] [SLIT, 0.00s] matrix is made.
+2026-07-08 04:45:46 | INFO    | [link] [0.00s] normalization is done
+2026-07-08 04:45:46 | INFO    | [link] input_matrix: (1996, 60), target_matrix: (1996, 60)
+2026-07-08 04:45:46 | INFO    | [link] slis_alpha: 0.9, reg_teacher:100.0
+2026-07-08 04:45:46 | INFO    | [link] extend_beta: 1.0
+2026-07-08 04:45:46 | INFO    | [link] 08 Jul 04:45    INFO  Train weight matrix...
+2026-07-08 04:45:46 | INFO    | [link] 08 Jul 04:45    INFO  [0.00s] G is made. Sparsity:3.3055555555555505%
+2026-07-08 04:45:46 | INFO    | [link] 08 Jul 04:45    INFO  [0.00s] P is made
+2026-07-08 04:45:46 | INFO    | [link] closed-form aggregation (reg_teacher: 100.0)
+2026-07-08 04:45:46 | INFO    | [link] 08 Jul 04:45    INFO  [0.00s] weight matrix is made.
+2026-07-08 04:45:46 | INFO    | [link] 08 Jul 04:45    INFO  [0.00s] training is done
+2026-07-08 04:45:46 | INFO    | [link] 08 Jul 04:45    INFO  LINK()
+2026-07-08 04:45:46 | INFO    | [link] Trainable parameters: 1
+2026-07-08 04:45:47 | INFO    | [link] 
+2026-07-08 04:45:47 | INFO    | [link] Evaluate   :   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2026-07-08 04:45:47 | INFO    | [link] Evaluate   :   0%|                                   | 0/1 [00:00<?, ?it/s, GPU RAM: 0.00 G/22.19 G]
+2026-07-08 04:45:47 | INFO    | [link] Evaluate   : 100%|██████████████████████████| 1/1 [00:00<00:00, 481.16it/s, GPU RAM: 0.00 G/22.19 G]
+2026-07-08 04:45:47 | INFO    | [link] 08 Jul 04:45    INFO  best valid : None
+2026-07-08 04:45:47 | INFO    | [link] 08 Jul 04:45    INFO  test result: OrderedDict({'recall@5': np.float64(0.6327), 'recall@10': np.float64(0.9082), 'recall@20': np.float64(0.9898), 'mrr@5': np.float64(0.3292), 'mrr@10': np.float64(0.366), 'mrr@20': np.float64(0.3725)})
+2026-07-08 04:45:47 | INFO    | [LINK] Hoàn tất link_toy.yaml. Test metrics: recall@5=0.6327 | recall@10=0.9082 | recall@20=0.9898 | mrr@5=0.3292 | mrr@10=0.3660 | mrr@20=0.3725
+2026-07-08 04:45:47 | INFO    | [LINK]   → hr@20 = 0.9898
+2026-07-08 04:45:47 | INFO    | [LINK]   → mrr@20 = 0.3725
+2026-07-08 11:07:07 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/retailrocket/LINK_toy.log
+2026-07-08 11:07:07 | INFO    | ====================================================================
+2026-07-08 11:07:07 | INFO    | [LINK] Bắt đầu run=link_toy.yaml  suite=retailrocket  dataset=toy_link
+2026-07-08 11:07:07 | INFO    | [LINK] Cấu hình: {'project': {'name': 'retailrocket', 'filename_mode': 'custom', 'custom_filename': 'LINK_toy.log'}, 'data': {'data_dir': 'data/toy_link', 'train_file': 'train.txt', 'val_file': 'val.txt', 'test_file': 'test.txt', 'lookup_file': 'lookup_tables.pkl'}, 'link': {'dataset_name': 'toy_link', 'reuse_converted': False, 'reuse_teacher': False, 'teacher_model': 'core_trm', 'teacher_epochs': 2, 'train_batch_size': 256, 'eval_batch_size': 256, 'learning_rate': 0.001, 'stopping_step': 5, 'reg': 10.0, 'reg_teacher': 100, 'predict_weight': 4.0, 'slis_alpha': 0.9, 'teacher_normalize': True, 'teacher_temperature': 0.1, 'gpu_id': 0}, 'evaluation': {'topk': [5, 10, 20], 'metrics': ['Recall', 'MRR'], 'valid_metric': 'MRR@20'}, '_logging': {'dir': 'Log', 'level': 'INFO', 'console': True}}
+2026-07-08 11:07:07 | INFO    | [LINK] Dữ liệu [data/toy_link]: |I|=60, train=500 phiên
+2026-07-08 11:07:07 | INFO    | [adapter] Đã sinh dataset RecBole 'toy_link' tại /home/hongnguyen/demo2/LINK_repo/dataset/toy_link: train=1496 mẫu, valid=167, test=196, train.session=500 phiên
+2026-07-08 11:07:07 | INFO    | [teacher] $ /opt/miniconda3/bin/python main.py --model core_trm --dataset toy_link --config2 props/gpu0_1024.yaml --gpu_id 0 --epochs 2 --train_batch_size 256 --eval_batch_size 256 --learning_rate 0.001 --stopping_step 5
+2026-07-08 11:07:09 | INFO    | [teacher] command line args [--model core_trm --dataset toy_link --config2 props/gpu0_1024.yaml --gpu_id 0 --epochs 2 --train_batch_size 256 --eval_batch_size 256 --learning_rate 0.001 --stopping_step 5] will not be used in RecBole
+2026-07-08 11:07:09 | INFO    | [teacher] 08 Jul 11:07    INFO  
+2026-07-08 11:07:09 | INFO    | [teacher] General Hyper Parameters:
+2026-07-08 11:07:09 | INFO    | [teacher] gpu_id = 0
+2026-07-08 11:07:09 | INFO    | [teacher] use_gpu = True
+2026-07-08 11:07:09 | INFO    | [teacher] seed = 2020
+2026-07-08 11:07:09 | INFO    | [teacher] state = INFO
+2026-07-08 11:07:09 | INFO    | [teacher] reproducibility = True
+2026-07-08 11:07:09 | INFO    | [teacher] data_path = dataset/toy_link
+2026-07-08 11:07:09 | INFO    | [teacher] checkpoint_dir = saved
+2026-07-08 11:07:09 | INFO    | [teacher] show_progress = True
+2026-07-08 11:07:09 | INFO    | [teacher] save_dataset = False
+2026-07-08 11:07:09 | INFO    | [teacher] dataset_save_path = None
+2026-07-08 11:07:09 | INFO    | [teacher] save_dataloaders = False
+2026-07-08 11:07:09 | INFO    | [teacher] dataloaders_save_path = None
+2026-07-08 11:07:09 | INFO    | [teacher] log_wandb = False
+2026-07-08 11:07:09 | INFO    | [teacher] 
+2026-07-08 11:07:09 | INFO    | [teacher] Training Hyper Parameters:
+2026-07-08 11:07:09 | INFO    | [teacher] epochs = 2
+2026-07-08 11:07:09 | INFO    | [teacher] train_batch_size = 256
+2026-07-08 11:07:09 | INFO    | [teacher] learner = adam
+2026-07-08 11:07:09 | INFO    | [teacher] learning_rate = 0.001
+2026-07-08 11:07:09 | INFO    | [teacher] train_neg_sample_args = {'distribution': 'none', 'sample_num': 'none', 'alpha': 'none', 'dynamic': False, 'candidate_num': 0}
+2026-07-08 11:07:09 | INFO    | [teacher] eval_step = 1
+2026-07-08 11:07:09 | INFO    | [teacher] stopping_step = 5
+2026-07-08 11:07:09 | INFO    | [teacher] clip_grad_norm = None
+2026-07-08 11:07:09 | INFO    | [teacher] weight_decay = 0.0
+2026-07-08 11:07:09 | INFO    | [teacher] loss_decimal_place = 4
+2026-07-08 11:07:09 | INFO    | [teacher] 
+2026-07-08 11:07:09 | INFO    | [teacher] Evaluation Hyper Parameters:
+2026-07-08 11:07:09 | INFO    | [teacher] eval_args = {'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}
+2026-07-08 11:07:09 | INFO    | [teacher] repeatable = True
+2026-07-08 11:07:09 | INFO    | [teacher] metrics = ['Recall', 'MRR']
+2026-07-08 11:07:09 | INFO    | [teacher] topk = [5, 10, 20]
+2026-07-08 11:07:09 | INFO    | [teacher] valid_metric = MRR@20
+2026-07-08 11:07:09 | INFO    | [teacher] valid_metric_bigger = True
+2026-07-08 11:07:09 | INFO    | [teacher] eval_batch_size = 256
+2026-07-08 11:07:09 | INFO    | [teacher] metric_decimal_place = 4
+2026-07-08 11:07:09 | INFO    | [teacher] 
+2026-07-08 11:07:09 | INFO    | [teacher] Dataset Hyper Parameters:
+2026-07-08 11:07:09 | INFO    | [teacher] field_separator = 	
+2026-07-08 11:07:09 | INFO    | [teacher] seq_separator =  
+2026-07-08 11:07:09 | INFO    | [teacher] USER_ID_FIELD = session_id
+2026-07-08 11:07:09 | INFO    | [teacher] ITEM_ID_FIELD = item_id
+2026-07-08 11:07:09 | INFO    | [teacher] RATING_FIELD = rating
+2026-07-08 11:07:09 | INFO    | [teacher] TIME_FIELD = timestamp
+2026-07-08 11:07:09 | INFO    | [teacher] seq_len = None
+2026-07-08 11:07:09 | INFO    | [teacher] LABEL_FIELD = label
+2026-07-08 11:07:09 | INFO    | [teacher] threshold = None
+2026-07-08 11:07:09 | INFO    | [teacher] NEG_PREFIX = neg_
+2026-07-08 11:07:09 | INFO    | [teacher] load_col = {'inter': ['session_id', 'item_id_list', 'item_id']}
+2026-07-08 11:07:09 | INFO    | [teacher] unload_col = None
+2026-07-08 11:07:09 | INFO    | [teacher] unused_col = None
+2026-07-08 11:07:09 | INFO    | [teacher] additional_feat_suffix = None
+2026-07-08 11:07:09 | INFO    | [teacher] rm_dup_inter = None
+2026-07-08 11:07:09 | INFO    | [teacher] val_interval = None
+2026-07-08 11:07:09 | INFO    | [teacher] filter_inter_by_user_or_item = True
+2026-07-08 11:07:09 | INFO    | [teacher] user_inter_num_interval = [0,inf)
+2026-07-08 11:07:09 | INFO    | [teacher] item_inter_num_interval = [0,inf)
+2026-07-08 11:07:09 | INFO    | [teacher] alias_of_user_id = None
+2026-07-08 11:07:09 | INFO    | [teacher] alias_of_item_id = ['item_id_list']
+2026-07-08 11:07:09 | INFO    | [teacher] alias_of_entity_id = None
+2026-07-08 11:07:09 | INFO    | [teacher] alias_of_relation_id = None
+2026-07-08 11:07:09 | INFO    | [teacher] preload_weight = None
+2026-07-08 11:07:09 | INFO    | [teacher] normalize_field = None
+2026-07-08 11:07:09 | INFO    | [teacher] normalize_all = None
+2026-07-08 11:07:09 | INFO    | [teacher] ITEM_LIST_LENGTH_FIELD = item_length
+2026-07-08 11:07:09 | INFO    | [teacher] LIST_SUFFIX = _list
+2026-07-08 11:07:09 | INFO    | [teacher] MAX_ITEM_LIST_LENGTH = 50
+2026-07-08 11:07:09 | INFO    | [teacher] POSITION_FIELD = position_id
+2026-07-08 11:07:09 | INFO    | [teacher] HEAD_ENTITY_ID_FIELD = head_id
+2026-07-08 11:07:09 | INFO    | [teacher] TAIL_ENTITY_ID_FIELD = tail_id
+2026-07-08 11:07:09 | INFO    | [teacher] RELATION_ID_FIELD = relation_id
+2026-07-08 11:07:09 | INFO    | [teacher] ENTITY_ID_FIELD = entity_id
+2026-07-08 11:07:09 | INFO    | [teacher] benchmark_filename = ['train', 'valid', 'test']
+2026-07-08 11:07:09 | INFO    | [teacher] 
+2026-07-08 11:07:09 | INFO    | [teacher] Other Hyper Parameters: 
+2026-07-08 11:07:09 | INFO    | [teacher] worker = 0
+2026-07-08 11:07:09 | INFO    | [teacher] wandb_project = recbole
+2026-07-08 11:07:09 | INFO    | [teacher] shuffle = True
+2026-07-08 11:07:09 | INFO    | [teacher] require_pow = False
+2026-07-08 11:07:09 | INFO    | [teacher] enable_amp = False
+2026-07-08 11:07:09 | INFO    | [teacher] enable_scaler = False
+2026-07-08 11:07:09 | INFO    | [teacher] transform = None
+2026-07-08 11:07:09 | INFO    | [teacher] numerical_features = []
+2026-07-08 11:07:09 | INFO    | [teacher] discretization = None
+2026-07-08 11:07:09 | INFO    | [teacher] kg_reverse_r = False
+2026-07-08 11:07:09 | INFO    | [teacher] entity_kg_num_interval = [0,inf)
+2026-07-08 11:07:09 | INFO    | [teacher] relation_kg_num_interval = [0,inf)
+2026-07-08 11:07:09 | INFO    | [teacher] MODEL_TYPE = ModelType.SEQUENTIAL
+2026-07-08 11:07:09 | INFO    | [teacher] neg_sampling = None
+2026-07-08 11:07:09 | INFO    | [teacher] embedding_size = 100
+2026-07-08 11:07:09 | INFO    | [teacher] inner_size = 256
+2026-07-08 11:07:09 | INFO    | [teacher] n_layers = 2
+2026-07-08 11:07:09 | INFO    | [teacher] n_heads = 2
+2026-07-08 11:07:09 | INFO    | [teacher] hidden_dropout_prob = 0.5
+2026-07-08 11:07:09 | INFO    | [teacher] attn_dropout_prob = 0.5
+2026-07-08 11:07:09 | INFO    | [teacher] hidden_act = gelu
+2026-07-08 11:07:09 | INFO    | [teacher] layer_norm_eps = 1e-12
+2026-07-08 11:07:09 | INFO    | [teacher] initializer_range = 0.02
+2026-07-08 11:07:09 | INFO    | [teacher] loss_type = CE
+2026-07-08 11:07:09 | INFO    | [teacher] sess_dropout = 0.2
+2026-07-08 11:07:09 | INFO    | [teacher] item_dropout = 0.2
+2026-07-08 11:07:09 | INFO    | [teacher] temperature = 0.07
+2026-07-08 11:07:09 | INFO    | [teacher] folder = base
+2026-07-08 11:07:09 | INFO    | [teacher] pop_eval = False
+2026-07-08 11:07:09 | INFO    | [teacher] save_teacher_matrix = True
+2026-07-08 11:07:09 | INFO    | [teacher] MODEL_INPUT_TYPE = InputType.POINTWISE
+2026-07-08 11:07:09 | INFO    | [teacher] eval_type = EvaluatorType.RANKING
+2026-07-08 11:07:09 | INFO    | [teacher] single_spec = True
+2026-07-08 11:07:09 | INFO    | [teacher] local_rank = 0
+2026-07-08 11:07:09 | INFO    | [teacher] device = cuda
+2026-07-08 11:07:09 | INFO    | [teacher] valid_neg_sample_args = {'distribution': 'uniform', 'sample_num': 'none'}
+2026-07-08 11:07:09 | INFO    | [teacher] test_neg_sample_args = {'distribution': 'uniform', 'sample_num': 'none'}
+2026-07-08 11:07:09 | INFO    | [teacher] 
+2026-07-08 11:07:09 | INFO    | [teacher] 
+2026-07-08 11:07:09 | INFO    | [teacher] /home/hongnguyen/.local/lib/python3.13/site-packages/recbole/data/dataset/dataset.py:648: ChainedAssignmentError: A value is being set on a copy of a DataFrame or Series through chained assignment using an inplace method.
+2026-07-08 11:07:09 | INFO    | [teacher] Such inplace method never works to update the original DataFrame or Series, because the intermediate object on which we are setting values always behaves as a copy (due to Copy-on-Write).
+2026-07-08 11:07:09 | INFO    | [teacher] 
+2026-07-08 11:07:09 | INFO    | [teacher] For example, when doing 'df[col].method(value, inplace=True)', try using 'df.method({col: value}, inplace=True)' instead, to perform the operation inplace on the original object, or try to avoid an inplace operation using 'df[col] = df[col].method(value)'.
+2026-07-08 11:07:09 | INFO    | [teacher] 
+2026-07-08 11:07:09 | INFO    | [teacher] See the documentation for a more detailed explanation: https://pandas.pydata.org/pandas-docs/stable/user_guide/copy_on_write.html
+2026-07-08 11:07:09 | INFO    | [teacher]   feat[field].fillna(value=0, inplace=True)
+2026-07-08 11:07:09 | INFO    | [teacher] 08 Jul 11:07    INFO  toy_link
+2026-07-08 11:07:09 | INFO    | [teacher] The number of users: 1497
+2026-07-08 11:07:09 | INFO    | [teacher] Average actions of users: 1.2426470588235294
+2026-07-08 11:07:09 | INFO    | [teacher] The number of items: 60
+2026-07-08 11:07:09 | INFO    | [teacher] Average actions of items: 31.508474576271187
+2026-07-08 11:07:09 | INFO    | [teacher] The number of inters: 1859
+2026-07-08 11:07:09 | INFO    | [teacher] The sparsity of the dataset: 97.93030505455356%
+2026-07-08 11:07:09 | INFO    | [teacher] Remain Fields: ['session_id', 'item_id_list', 'item_id', 'item_length']
+2026-07-08 11:07:09 | INFO    | [teacher] /home/hongnguyen/.local/lib/python3.13/site-packages/recbole/data/dataset/dataset.py:2136: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:203.)
+2026-07-08 11:07:09 | INFO    | [teacher]   new_data[k] = torch.LongTensor(value)
+2026-07-08 11:07:09 | INFO    | [teacher] 08 Jul 11:07    INFO  [Training]: train_batch_size = [256] train_neg_sample_args: [{'distribution': 'none', 'sample_num': 'none', 'alpha': 'none', 'dynamic': False, 'candidate_num': 0}]
+2026-07-08 11:07:09 | INFO    | [teacher] 08 Jul 11:07    INFO  [Evaluation]: eval_batch_size = [256] eval_args: [{'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}]
+2026-07-08 11:07:09 | INFO    | [teacher] 08 Jul 11:07    INFO  COREtrm(
+2026-07-08 11:07:09 | INFO    | [teacher]   (sess_dropout): Dropout(p=0.2, inplace=False)
+2026-07-08 11:07:09 | INFO    | [teacher]   (item_dropout): Dropout(p=0.2, inplace=False)
+2026-07-08 11:07:09 | INFO    | [teacher]   (item_embedding): Embedding(60, 100, padding_idx=0)
+2026-07-08 11:07:09 | INFO    | [teacher]   (loss_fct): CrossEntropyLoss()
+2026-07-08 11:07:09 | INFO    | [teacher]   (net): TransNet(
+2026-07-08 11:07:09 | INFO    | [teacher]     (position_embedding): Embedding(5, 100)
+2026-07-08 11:07:09 | INFO    | [teacher]     (trm_encoder): TransformerEncoder(
+2026-07-08 11:07:09 | INFO    | [teacher]       (layer): ModuleList(
+2026-07-08 11:07:09 | INFO    | [teacher]         (0-1): 2 x TransformerLayer(
+2026-07-08 11:07:09 | INFO    | [teacher]           (multi_head_attention): MultiHeadAttention(
+2026-07-08 11:07:09 | INFO    | [teacher]             (query): Linear(in_features=100, out_features=100, bias=True)
+2026-07-08 11:07:09 | INFO    | [teacher]             (key): Linear(in_features=100, out_features=100, bias=True)
+2026-07-08 11:07:09 | INFO    | [teacher]             (value): Linear(in_features=100, out_features=100, bias=True)
+2026-07-08 11:07:09 | INFO    | [teacher]             (softmax): Softmax(dim=-1)
+2026-07-08 11:07:09 | INFO    | [teacher]             (attn_dropout): Dropout(p=0.5, inplace=False)
+2026-07-08 11:07:09 | INFO    | [teacher]             (dense): Linear(in_features=100, out_features=100, bias=True)
+2026-07-08 11:07:09 | INFO    | [teacher]             (LayerNorm): LayerNorm((100,), eps=1e-12, elementwise_affine=True)
+2026-07-08 11:07:09 | INFO    | [teacher]             (out_dropout): Dropout(p=0.5, inplace=False)
+2026-07-08 11:07:09 | INFO    | [teacher]           )
+2026-07-08 11:07:09 | INFO    | [teacher]           (feed_forward): FeedForward(
+2026-07-08 11:07:09 | INFO    | [teacher]             (dense_1): Linear(in_features=100, out_features=256, bias=True)
+2026-07-08 11:07:09 | INFO    | [teacher]             (dense_2): Linear(in_features=256, out_features=100, bias=True)
+2026-07-08 11:07:09 | INFO    | [teacher]             (LayerNorm): LayerNorm((100,), eps=1e-12, elementwise_affine=True)
+2026-07-08 11:07:09 | INFO    | [teacher]             (dropout): Dropout(p=0.5, inplace=False)
+2026-07-08 11:07:09 | INFO    | [teacher]           )
+2026-07-08 11:07:09 | INFO    | [teacher]         )
+2026-07-08 11:07:09 | INFO    | [teacher]       )
+2026-07-08 11:07:09 | INFO    | [teacher]     )
+2026-07-08 11:07:09 | INFO    | [teacher]     (LayerNorm): LayerNorm((100,), eps=1e-12, elementwise_affine=True)
+2026-07-08 11:07:09 | INFO    | [teacher]     (dropout): Dropout(p=0.5, inplace=False)
+2026-07-08 11:07:09 | INFO    | [teacher]     (fn): Linear(in_features=100, out_features=1, bias=True)
+2026-07-08 11:07:09 | INFO    | [teacher]   )
+2026-07-08 11:07:09 | INFO    | [teacher] )
+2026-07-08 11:07:09 | INFO    | [teacher] Trainable parameters: 191513
+2026-07-08 11:07:10 | INFO    | [teacher] 
+2026-07-08 11:07:10 | INFO    | [teacher] Train     0:   0%|                                                            | 0/6 [00:00<?, ?it/s]/home/hongnguyen/.local/lib/python3.13/site-packages/recbole/trainer/trainer.py:235: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+2026-07-08 11:07:10 | INFO    | [teacher]   scaler = amp.GradScaler(enabled=self.enable_scaler)
+2026-07-08 11:07:10 | INFO    | [teacher] 
+2026-07-08 11:07:10 | INFO    | [teacher] Train     0:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:07:10 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:02,  2.29it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:07:10 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:02,  2.29it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:07:10 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:02,  2.29it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:07:10 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:02,  2.29it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:07:10 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:02,  2.29it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:07:10 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:02,  2.29it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:07:10 | INFO    | [teacher] Train     0: 100%|███████████████████████████| 6/6 [00:00<00:00, 11.59it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:07:10 | INFO    | [teacher] 08 Jul 11:07    INFO  epoch 0 training [time: 0.52s, train loss: 46.2615]
+2026-07-08 11:07:10 | INFO    | [teacher] 
+2026-07-08 11:07:10 | INFO    | [teacher] Evaluate   :   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2026-07-08 11:07:10 | INFO    | [teacher] Evaluate   :   0%|                                   | 0/1 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:07:10 | INFO    | [teacher] Evaluate   : 100%|███████████████████████████| 1/1 [00:00<00:00, 32.29it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:07:10 | INFO    | [teacher] 08 Jul 11:07    INFO  epoch 0 evaluating [time: 0.03s, valid_score: 0.240400]
+2026-07-08 11:07:10 | INFO    | [teacher] 08 Jul 11:07    INFO  valid result: 
+2026-07-08 11:07:10 | INFO    | [teacher] recall@5 : 0.3533    recall@10 : 0.4371    recall@20 : 0.5689    mrr@5 : 0.2211    mrr@10 : 0.2317    mrr@20 : 0.2404
+2026-07-08 11:07:10 | INFO    | [teacher] 08 Jul 11:07    INFO  Saving current: saved/COREtrm-Jul-08-2026_11-07-09.pth
+2026-07-08 11:07:10 | INFO    | [teacher] 
+2026-07-08 11:07:10 | INFO    | [teacher] Train     1:   0%|                                                            | 0/6 [00:00<?, ?it/s]
+2026-07-08 11:07:10 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:07:10 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:07:11 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:07:11 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:07:11 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:07:11 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:07:11 | INFO    | [teacher] Train     1: 100%|██████████████████████████| 6/6 [00:00<00:00, 118.99it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:07:11 | INFO    | [teacher] 08 Jul 11:07    INFO  epoch 1 training [time: 0.05s, train loss: 43.7596]
+2026-07-08 11:07:11 | INFO    | [teacher] 
+2026-07-08 11:07:11 | INFO    | [teacher] Evaluate   :   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2026-07-08 11:07:11 | INFO    | [teacher] Evaluate   :   0%|                                   | 0/1 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:07:11 | INFO    | [teacher] Evaluate   : 100%|██████████████████████████| 1/1 [00:00<00:00, 203.39it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:07:11 | INFO    | [teacher] 08 Jul 11:07    INFO  epoch 1 evaluating [time: 0.01s, valid_score: 0.261400]
+2026-07-08 11:07:11 | INFO    | [teacher] 08 Jul 11:07    INFO  valid result: 
+2026-07-08 11:07:11 | INFO    | [teacher] recall@5 : 0.4072    recall@10 : 0.5269    recall@20 : 0.6587    mrr@5 : 0.238    mrr@10 : 0.2526    mrr@20 : 0.2614
+2026-07-08 11:07:11 | INFO    | [teacher] 08 Jul 11:07    INFO  Saving current: saved/COREtrm-Jul-08-2026_11-07-09.pth
+2026-07-08 11:07:11 | INFO    | [teacher] 08 Jul 11:07    INFO  Loading model structure and parameters from saved/COREtrm-Jul-08-2026_11-07-09.pth
+2026-07-08 11:07:11 | INFO    | [teacher] 
+2026-07-08 11:07:11 | INFO    | [teacher] Evaluate   :   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2026-07-08 11:07:11 | INFO    | [teacher] Evaluate   :   0%|                                   | 0/1 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:07:11 | INFO    | [teacher] Evaluate   : 100%|██████████████████████████| 1/1 [00:00<00:00, 170.69it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:07:11 | INFO    | [teacher] 08 Jul 11:07    INFO  best valid : OrderedDict({'recall@5': np.float64(0.4072), 'recall@10': np.float64(0.5269), 'recall@20': np.float64(0.6587), 'mrr@5': np.float64(0.238), 'mrr@10': np.float64(0.2526), 'mrr@20': np.float64(0.2614)})
+2026-07-08 11:07:11 | INFO    | [teacher] 08 Jul 11:07    INFO  test result: OrderedDict({'recall@5': np.float64(0.449), 'recall@10': np.float64(0.6071), 'recall@20': np.float64(0.7704), 'mrr@5': np.float64(0.2622), 'mrr@10': np.float64(0.2812), 'mrr@20': np.float64(0.2923)})
+2026-07-08 11:07:11 | INFO    | [teacher] 
+2026-07-08 11:07:11 | INFO    | [teacher] Single-session data:   0%|          | 0/1 [00:00<?, ?it/s]
+2026-07-08 11:07:11 | INFO    | [teacher] Single-session data: 100%|██████████| 1/1 [00:00<00:00, 452.70it/s]
+2026-07-08 11:07:11 | INFO    | [teacher] Elapsed time for extraction teacher matrix: 0.00s
+2026-07-08 11:07:11 | INFO    | [teacher] saved_models_for_embedding/linear_teacher_toy_link_core_trm/dense_matrix.npy shape: (60, 60) saved!
+2026-07-08 11:07:11 | INFO    | [link] $ /opt/miniconda3/bin/python main.py --model link --dataset toy_link --gpu_id 0 --teacher_path saved_models_for_embedding/linear_teacher_toy_link_core_trm/dense_matrix.npy --reg 10.0 --reg_teacher 100 --predict_weight 4.0 --slis_alpha 0.9 --teacher_normalize True --teacher_temperature 0.1
+2026-07-08 11:07:12 | INFO    | [link] command line args [--model link --dataset toy_link --gpu_id 0 --teacher_path saved_models_for_embedding/linear_teacher_toy_link_core_trm/dense_matrix.npy --reg 10.0 --reg_teacher 100 --predict_weight 4.0 --slis_alpha 0.9 --teacher_normalize True --teacher_temperature 0.1] will not be used in RecBole
+2026-07-08 11:07:12 | INFO    | [link] 08 Jul 11:07    INFO  
+2026-07-08 11:07:12 | INFO    | [link] General Hyper Parameters:
+2026-07-08 11:07:12 | INFO    | [link] gpu_id = 0
+2026-07-08 11:07:12 | INFO    | [link] use_gpu = True
+2026-07-08 11:07:12 | INFO    | [link] seed = 2020
+2026-07-08 11:07:12 | INFO    | [link] state = INFO
+2026-07-08 11:07:12 | INFO    | [link] reproducibility = True
+2026-07-08 11:07:12 | INFO    | [link] data_path = dataset/toy_link
+2026-07-08 11:07:12 | INFO    | [link] checkpoint_dir = saved
+2026-07-08 11:07:12 | INFO    | [link] show_progress = True
+2026-07-08 11:07:12 | INFO    | [link] save_dataset = False
+2026-07-08 11:07:12 | INFO    | [link] dataset_save_path = None
+2026-07-08 11:07:12 | INFO    | [link] save_dataloaders = False
+2026-07-08 11:07:12 | INFO    | [link] dataloaders_save_path = None
+2026-07-08 11:07:12 | INFO    | [link] log_wandb = False
+2026-07-08 11:07:12 | INFO    | [link] 
+2026-07-08 11:07:12 | INFO    | [link] Training Hyper Parameters:
+2026-07-08 11:07:12 | INFO    | [link] epochs = 300
+2026-07-08 11:07:12 | INFO    | [link] train_batch_size = 2048
+2026-07-08 11:07:12 | INFO    | [link] learner = adam
+2026-07-08 11:07:12 | INFO    | [link] learning_rate = 0.001
+2026-07-08 11:07:12 | INFO    | [link] train_neg_sample_args = {'distribution': 'none', 'sample_num': 'none', 'alpha': 'none', 'dynamic': False, 'candidate_num': 0}
+2026-07-08 11:07:12 | INFO    | [link] eval_step = 1
+2026-07-08 11:07:12 | INFO    | [link] stopping_step = 5
+2026-07-08 11:07:12 | INFO    | [link] clip_grad_norm = None
+2026-07-08 11:07:12 | INFO    | [link] weight_decay = 0.0
+2026-07-08 11:07:12 | INFO    | [link] loss_decimal_place = 4
+2026-07-08 11:07:12 | INFO    | [link] 
+2026-07-08 11:07:12 | INFO    | [link] Evaluation Hyper Parameters:
+2026-07-08 11:07:12 | INFO    | [link] eval_args = {'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}
+2026-07-08 11:07:12 | INFO    | [link] repeatable = True
+2026-07-08 11:07:12 | INFO    | [link] metrics = ['Recall', 'MRR']
+2026-07-08 11:07:12 | INFO    | [link] topk = [5, 10, 20]
+2026-07-08 11:07:12 | INFO    | [link] valid_metric = MRR@20
+2026-07-08 11:07:12 | INFO    | [link] valid_metric_bigger = True
+2026-07-08 11:07:12 | INFO    | [link] eval_batch_size = 1024
+2026-07-08 11:07:12 | INFO    | [link] metric_decimal_place = 4
+2026-07-08 11:07:12 | INFO    | [link] 
+2026-07-08 11:07:12 | INFO    | [link] Dataset Hyper Parameters:
+2026-07-08 11:07:12 | INFO    | [link] field_separator = 	
+2026-07-08 11:07:12 | INFO    | [link] seq_separator =  
+2026-07-08 11:07:12 | INFO    | [link] USER_ID_FIELD = session_id
+2026-07-08 11:07:12 | INFO    | [link] ITEM_ID_FIELD = item_id
+2026-07-08 11:07:12 | INFO    | [link] RATING_FIELD = rating
+2026-07-08 11:07:12 | INFO    | [link] TIME_FIELD = timestamp
+2026-07-08 11:07:12 | INFO    | [link] seq_len = None
+2026-07-08 11:07:12 | INFO    | [link] LABEL_FIELD = label
+2026-07-08 11:07:12 | INFO    | [link] threshold = None
+2026-07-08 11:07:12 | INFO    | [link] NEG_PREFIX = neg_
+2026-07-08 11:07:12 | INFO    | [link] load_col = {'inter': ['session_id', 'item_id_list', 'item_id']}
+2026-07-08 11:07:12 | INFO    | [link] unload_col = None
+2026-07-08 11:07:12 | INFO    | [link] unused_col = None
+2026-07-08 11:07:12 | INFO    | [link] additional_feat_suffix = None
+2026-07-08 11:07:12 | INFO    | [link] rm_dup_inter = None
+2026-07-08 11:07:12 | INFO    | [link] val_interval = None
+2026-07-08 11:07:12 | INFO    | [link] filter_inter_by_user_or_item = True
+2026-07-08 11:07:12 | INFO    | [link] user_inter_num_interval = [0,inf)
+2026-07-08 11:07:12 | INFO    | [link] item_inter_num_interval = [0,inf)
+2026-07-08 11:07:12 | INFO    | [link] alias_of_user_id = None
+2026-07-08 11:07:12 | INFO    | [link] alias_of_item_id = ['item_id_list']
+2026-07-08 11:07:12 | INFO    | [link] alias_of_entity_id = None
+2026-07-08 11:07:12 | INFO    | [link] alias_of_relation_id = None
+2026-07-08 11:07:12 | INFO    | [link] preload_weight = None
+2026-07-08 11:07:12 | INFO    | [link] normalize_field = None
+2026-07-08 11:07:12 | INFO    | [link] normalize_all = None
+2026-07-08 11:07:12 | INFO    | [link] ITEM_LIST_LENGTH_FIELD = item_length
+2026-07-08 11:07:12 | INFO    | [link] LIST_SUFFIX = _list
+2026-07-08 11:07:12 | INFO    | [link] MAX_ITEM_LIST_LENGTH = 50
+2026-07-08 11:07:12 | INFO    | [link] POSITION_FIELD = position_id
+2026-07-08 11:07:12 | INFO    | [link] HEAD_ENTITY_ID_FIELD = head_id
+2026-07-08 11:07:12 | INFO    | [link] TAIL_ENTITY_ID_FIELD = tail_id
+2026-07-08 11:07:12 | INFO    | [link] RELATION_ID_FIELD = relation_id
+2026-07-08 11:07:12 | INFO    | [link] ENTITY_ID_FIELD = entity_id
+2026-07-08 11:07:12 | INFO    | [link] benchmark_filename = ['train', 'valid', 'test']
+2026-07-08 11:07:12 | INFO    | [link] 
+2026-07-08 11:07:12 | INFO    | [link] Other Hyper Parameters: 
+2026-07-08 11:07:12 | INFO    | [link] worker = 0
+2026-07-08 11:07:12 | INFO    | [link] wandb_project = recbole
+2026-07-08 11:07:12 | INFO    | [link] shuffle = True
+2026-07-08 11:07:12 | INFO    | [link] require_pow = False
+2026-07-08 11:07:12 | INFO    | [link] enable_amp = False
+2026-07-08 11:07:12 | INFO    | [link] enable_scaler = False
+2026-07-08 11:07:12 | INFO    | [link] transform = None
+2026-07-08 11:07:12 | INFO    | [link] numerical_features = []
+2026-07-08 11:07:12 | INFO    | [link] discretization = None
+2026-07-08 11:07:12 | INFO    | [link] kg_reverse_r = False
+2026-07-08 11:07:12 | INFO    | [link] entity_kg_num_interval = [0,inf)
+2026-07-08 11:07:12 | INFO    | [link] relation_kg_num_interval = [0,inf)
+2026-07-08 11:07:12 | INFO    | [link] MODEL_TYPE = ModelType.SEQUENTIAL
+2026-07-08 11:07:12 | INFO    | [link] neg_sampling = None
+2026-07-08 11:07:12 | INFO    | [link] normalize = l2
+2026-07-08 11:07:12 | INFO    | [link] reg = 10.0
+2026-07-08 11:07:12 | INFO    | [link] save_path = None
+2026-07-08 11:07:12 | INFO    | [link] reg_teacher = 100.0
+2026-07-08 11:07:12 | INFO    | [link] teacher_path = saved_models_for_embedding/linear_teacher_toy_link_core_trm/dense_matrix.npy
+2026-07-08 11:07:12 | INFO    | [link] learn_SLIT = False
+2026-07-08 11:07:12 | INFO    | [link] direction = sr
+2026-07-08 11:07:12 | INFO    | [link] train_weight = 1.0
+2026-07-08 11:07:12 | INFO    | [link] teacher_temperature = 0.1
+2026-07-08 11:07:12 | INFO    | [link] save_load_SLIST = True
+2026-07-08 11:07:12 | INFO    | [link] extend_beta = 1.0
+2026-07-08 11:07:12 | INFO    | [link] closed_normalize = X
+2026-07-08 11:07:12 | INFO    | [link] teacher_normalize = True
+2026-07-08 11:07:12 | INFO    | [link] slis_alpha = 0.9
+2026-07-08 11:07:12 | INFO    | [link] use_dropout = False
+2026-07-08 11:07:12 | INFO    | [link] p = 0.5
+2026-07-08 11:07:12 | INFO    | [link] predict_weight = 4.0
+2026-07-08 11:07:12 | INFO    | [link] loss_type = CE
+2026-07-08 11:07:12 | INFO    | [link] folder = base
+2026-07-08 11:07:12 | INFO    | [link] length_eval = True
+2026-07-08 11:07:12 | INFO    | [link] pop_eval = False
+2026-07-08 11:07:12 | INFO    | [link] MODEL_INPUT_TYPE = InputType.POINTWISE
+2026-07-08 11:07:12 | INFO    | [link] eval_type = EvaluatorType.RANKING
+2026-07-08 11:07:12 | INFO    | [link] single_spec = True
+2026-07-08 11:07:12 | INFO    | [link] local_rank = 0
+2026-07-08 11:07:12 | INFO    | [link] device = cuda
+2026-07-08 11:07:12 | INFO    | [link] valid_neg_sample_args = {'distribution': 'uniform', 'sample_num': 'none'}
+2026-07-08 11:07:12 | INFO    | [link] test_neg_sample_args = {'distribution': 'uniform', 'sample_num': 'none'}
+2026-07-08 11:07:12 | INFO    | [link] 
+2026-07-08 11:07:12 | INFO    | [link] 
+2026-07-08 11:07:12 | INFO    | [link] /home/hongnguyen/.local/lib/python3.13/site-packages/recbole/data/dataset/dataset.py:648: ChainedAssignmentError: A value is being set on a copy of a DataFrame or Series through chained assignment using an inplace method.
+2026-07-08 11:07:12 | INFO    | [link] Such inplace method never works to update the original DataFrame or Series, because the intermediate object on which we are setting values always behaves as a copy (due to Copy-on-Write).
+2026-07-08 11:07:12 | INFO    | [link] 
+2026-07-08 11:07:12 | INFO    | [link] For example, when doing 'df[col].method(value, inplace=True)', try using 'df.method({col: value}, inplace=True)' instead, to perform the operation inplace on the original object, or try to avoid an inplace operation using 'df[col] = df[col].method(value)'.
+2026-07-08 11:07:12 | INFO    | [link] 
+2026-07-08 11:07:12 | INFO    | [link] See the documentation for a more detailed explanation: https://pandas.pydata.org/pandas-docs/stable/user_guide/copy_on_write.html
+2026-07-08 11:07:12 | INFO    | [link]   feat[field].fillna(value=0, inplace=True)
+2026-07-08 11:07:12 | INFO    | [link] 08 Jul 11:07    INFO  toy_link
+2026-07-08 11:07:12 | INFO    | [link] The number of users: 1497
+2026-07-08 11:07:12 | INFO    | [link] Average actions of users: 1.2426470588235294
+2026-07-08 11:07:12 | INFO    | [link] The number of items: 60
+2026-07-08 11:07:12 | INFO    | [link] Average actions of items: 31.508474576271187
+2026-07-08 11:07:12 | INFO    | [link] The number of inters: 1859
+2026-07-08 11:07:12 | INFO    | [link] The sparsity of the dataset: 97.93030505455356%
+2026-07-08 11:07:12 | INFO    | [link] Remain Fields: ['session_id', 'item_id_list', 'item_id', 'item_length']
+2026-07-08 11:07:12 | INFO    | [link] /home/hongnguyen/.local/lib/python3.13/site-packages/recbole/data/dataset/dataset.py:2136: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:203.)
+2026-07-08 11:07:12 | INFO    | [link]   new_data[k] = torch.LongTensor(value)
+2026-07-08 11:07:12 | INFO    | [link] 08 Jul 11:07    INFO  [Training]: train_batch_size = [2048] train_neg_sample_args: [{'distribution': 'none', 'sample_num': 'none', 'alpha': 'none', 'dynamic': False, 'candidate_num': 0}]
+2026-07-08 11:07:12 | INFO    | [link] 08 Jul 11:07    INFO  [Evaluation]: eval_batch_size = [1024] eval_args: [{'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}]
+2026-07-08 11:07:12 | INFO    | [link] No save_path for Full Model (LINK)
+2026-07-08 11:07:12 | INFO    | [link] Make SLIS matrix for LIS
+2026-07-08 11:07:12 | INFO    | [link] Load SLIS matrix (mmap)
+2026-07-08 11:07:12 | INFO    | [link] 
+2026-07-08 11:07:12 | INFO    | [link] Loading training data: 0it [00:00, ?it/s]
+2026-07-08 11:07:12 | INFO    | [link] Loading training data: 501it [00:00, 61122.96it/s]
+2026-07-08 11:07:12 | INFO    | [link] avg. num_session_item: 3.13
+2026-07-08 11:07:12 | INFO    | [link] avg. num_kd_item: 28.21
+2026-07-08 11:07:12 | INFO    | [link] [LIS] input sparse matrix (500, 60) is made.  Sparsity:55.62000%
+2026-07-08 11:07:12 | INFO    | [link] [LIS] target sparse matrix (500, 60) is made.  Sparsity:55.62000%
+2026-07-08 11:07:12 | INFO    | [link] [LIS, 0.01s] matrix is made.
+2026-07-08 11:07:12 | INFO    | [link] [SLIT] input sparse matrix (1496, 60) is made.  Sparsity:98.33333%
+2026-07-08 11:07:12 | INFO    | [link] [SLIT] target sparse matrix (1496, 60) is made.  Sparsity:96.59425%
+2026-07-08 11:07:12 | INFO    | [link] [SLIT, 0.00s] matrix is made.
+2026-07-08 11:07:12 | INFO    | [link] [0.00s] normalization is done
+2026-07-08 11:07:12 | INFO    | [link] input_matrix: (1996, 60), target_matrix: (1996, 60)
+2026-07-08 11:07:12 | INFO    | [link] slis_alpha: 0.9, reg_teacher:100.0
+2026-07-08 11:07:12 | INFO    | [link] extend_beta: 1.0
+2026-07-08 11:07:12 | INFO    | [link] 08 Jul 11:07    INFO  Train weight matrix...
+2026-07-08 11:07:12 | INFO    | [link] 08 Jul 11:07    INFO  [0.05s] G is made. Sparsity:3.3055555555555505%
+2026-07-08 11:07:13 | INFO    | [link] Traceback (most recent call last):
+2026-07-08 11:07:13 | INFO    | [link]   File "/home/hongnguyen/demo2/LINK_repo/main.py", line 305, in <module>
+2026-07-08 11:07:13 | INFO    | [link]     run_single_model(args, args_unparsed)
+2026-07-08 11:07:13 | INFO    | [link]     ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+2026-07-08 11:07:13 | INFO    | [link]   File "/home/hongnguyen/demo2/LINK_repo/main.py", line 109, in run_single_model
+2026-07-08 11:07:13 | INFO    | [link]     model = LINK(config, train_data.dataset).to(config['device'])
+2026-07-08 11:07:13 | INFO    | [link]             ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-07-08 11:07:13 | INFO    | [link]   File "/home/hongnguyen/demo2/LINK_repo/link.py", line 79, in __init__
+2026-07-08 11:07:13 | INFO    | [link]     self.fit(config, dataset)
+2026-07-08 11:07:13 | INFO    | [link]     ~~~~~~~~^^^^^^^^^^^^^^^^^
+2026-07-08 11:07:13 | INFO    | [link]   File "/home/hongnguyen/demo2/LINK_repo/link.py", line 142, in fit
+2026-07-08 11:07:13 | INFO    | [link]     self.enc_w = np.linalg.solve(G, rhs)
+2026-07-08 11:07:13 | INFO    | [link]                  ~~~~~~~~~~~~~~~^^^^^^^^
+2026-07-08 11:07:13 | INFO    | [link]   File "/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py", line 452, in solve
+2026-07-08 11:07:13 | INFO    | [link]     r = gufunc(a, b, signature=signature)
+2026-07-08 11:07:13 | INFO    | [link]   File "/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py", line 145, in _raise_linalgerror_singular
+2026-07-08 11:07:13 | INFO    | [link]     raise LinAlgError("Singular matrix")
+2026-07-08 11:07:13 | INFO    | [link] numpy.linalg.LinAlgError: Singular matrix
+2026-07-08 11:08:03 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/retailrocket/LINK_toy.log
+2026-07-08 11:08:03 | INFO    | ====================================================================
+2026-07-08 11:08:03 | INFO    | [LINK] Bắt đầu run=link_toy.yaml  suite=retailrocket  dataset=toy_link
+2026-07-08 11:08:03 | INFO    | [LINK] Cấu hình: {'project': {'name': 'retailrocket', 'filename_mode': 'custom', 'custom_filename': 'LINK_toy.log'}, 'data': {'data_dir': 'data/toy_link', 'train_file': 'train.txt', 'val_file': 'val.txt', 'test_file': 'test.txt', 'lookup_file': 'lookup_tables.pkl'}, 'link': {'dataset_name': 'toy_link', 'reuse_converted': False, 'reuse_teacher': False, 'teacher_model': 'core_trm', 'teacher_epochs': 2, 'train_batch_size': 256, 'eval_batch_size': 256, 'learning_rate': 0.001, 'stopping_step': 5, 'reg': 10.0, 'reg_teacher': 100, 'predict_weight': 4.0, 'slis_alpha': 0.9, 'teacher_normalize': True, 'teacher_temperature': 0.1, 'gpu_id': 0}, 'evaluation': {'topk': [5, 10, 20], 'metrics': ['Recall', 'MRR'], 'valid_metric': 'MRR@20'}, '_logging': {'dir': 'Log', 'level': 'INFO', 'console': True}}
+2026-07-08 11:08:03 | INFO    | [LINK] Dữ liệu [data/toy_link]: |I|=60, train=500 phiên
+2026-07-08 11:08:03 | INFO    | [adapter] Đã sinh dataset RecBole 'toy_link' tại /home/hongnguyen/demo2/LINK_repo/dataset/toy_link: train=1496 mẫu, valid=167, test=196, train.session=500 phiên
+2026-07-08 11:08:03 | INFO    | [teacher] $ /opt/miniconda3/bin/python main.py --model core_trm --dataset toy_link --config2 props/gpu0_1024.yaml --gpu_id 0 --epochs 2 --train_batch_size 256 --eval_batch_size 256 --learning_rate 0.001 --stopping_step 5
+2026-07-08 11:08:04 | INFO    | [teacher] command line args [--model core_trm --dataset toy_link --config2 props/gpu0_1024.yaml --gpu_id 0 --epochs 2 --train_batch_size 256 --eval_batch_size 256 --learning_rate 0.001 --stopping_step 5] will not be used in RecBole
+2026-07-08 11:08:04 | INFO    | [teacher] 08 Jul 11:08    INFO  
+2026-07-08 11:08:04 | INFO    | [teacher] General Hyper Parameters:
+2026-07-08 11:08:04 | INFO    | [teacher] gpu_id = 0
+2026-07-08 11:08:04 | INFO    | [teacher] use_gpu = True
+2026-07-08 11:08:04 | INFO    | [teacher] seed = 2020
+2026-07-08 11:08:04 | INFO    | [teacher] state = INFO
+2026-07-08 11:08:04 | INFO    | [teacher] reproducibility = True
+2026-07-08 11:08:04 | INFO    | [teacher] data_path = dataset/toy_link
+2026-07-08 11:08:04 | INFO    | [teacher] checkpoint_dir = saved
+2026-07-08 11:08:04 | INFO    | [teacher] show_progress = True
+2026-07-08 11:08:04 | INFO    | [teacher] save_dataset = False
+2026-07-08 11:08:04 | INFO    | [teacher] dataset_save_path = None
+2026-07-08 11:08:04 | INFO    | [teacher] save_dataloaders = False
+2026-07-08 11:08:04 | INFO    | [teacher] dataloaders_save_path = None
+2026-07-08 11:08:04 | INFO    | [teacher] log_wandb = False
+2026-07-08 11:08:04 | INFO    | [teacher] 
+2026-07-08 11:08:04 | INFO    | [teacher] Training Hyper Parameters:
+2026-07-08 11:08:04 | INFO    | [teacher] epochs = 2
+2026-07-08 11:08:04 | INFO    | [teacher] train_batch_size = 256
+2026-07-08 11:08:04 | INFO    | [teacher] learner = adam
+2026-07-08 11:08:04 | INFO    | [teacher] learning_rate = 0.001
+2026-07-08 11:08:04 | INFO    | [teacher] train_neg_sample_args = {'distribution': 'none', 'sample_num': 'none', 'alpha': 'none', 'dynamic': False, 'candidate_num': 0}
+2026-07-08 11:08:04 | INFO    | [teacher] eval_step = 1
+2026-07-08 11:08:04 | INFO    | [teacher] stopping_step = 5
+2026-07-08 11:08:04 | INFO    | [teacher] clip_grad_norm = None
+2026-07-08 11:08:04 | INFO    | [teacher] weight_decay = 0.0
+2026-07-08 11:08:04 | INFO    | [teacher] loss_decimal_place = 4
+2026-07-08 11:08:04 | INFO    | [teacher] 
+2026-07-08 11:08:04 | INFO    | [teacher] Evaluation Hyper Parameters:
+2026-07-08 11:08:04 | INFO    | [teacher] eval_args = {'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}
+2026-07-08 11:08:04 | INFO    | [teacher] repeatable = True
+2026-07-08 11:08:04 | INFO    | [teacher] metrics = ['Recall', 'MRR']
+2026-07-08 11:08:04 | INFO    | [teacher] topk = [5, 10, 20]
+2026-07-08 11:08:04 | INFO    | [teacher] valid_metric = MRR@20
+2026-07-08 11:08:04 | INFO    | [teacher] valid_metric_bigger = True
+2026-07-08 11:08:04 | INFO    | [teacher] eval_batch_size = 256
+2026-07-08 11:08:04 | INFO    | [teacher] metric_decimal_place = 4
+2026-07-08 11:08:04 | INFO    | [teacher] 
+2026-07-08 11:08:04 | INFO    | [teacher] Dataset Hyper Parameters:
+2026-07-08 11:08:04 | INFO    | [teacher] field_separator = 	
+2026-07-08 11:08:04 | INFO    | [teacher] seq_separator =  
+2026-07-08 11:08:04 | INFO    | [teacher] USER_ID_FIELD = session_id
+2026-07-08 11:08:04 | INFO    | [teacher] ITEM_ID_FIELD = item_id
+2026-07-08 11:08:04 | INFO    | [teacher] RATING_FIELD = rating
+2026-07-08 11:08:04 | INFO    | [teacher] TIME_FIELD = timestamp
+2026-07-08 11:08:04 | INFO    | [teacher] seq_len = None
+2026-07-08 11:08:04 | INFO    | [teacher] LABEL_FIELD = label
+2026-07-08 11:08:04 | INFO    | [teacher] threshold = None
+2026-07-08 11:08:04 | INFO    | [teacher] NEG_PREFIX = neg_
+2026-07-08 11:08:04 | INFO    | [teacher] load_col = {'inter': ['session_id', 'item_id_list', 'item_id']}
+2026-07-08 11:08:04 | INFO    | [teacher] unload_col = None
+2026-07-08 11:08:04 | INFO    | [teacher] unused_col = None
+2026-07-08 11:08:04 | INFO    | [teacher] additional_feat_suffix = None
+2026-07-08 11:08:04 | INFO    | [teacher] rm_dup_inter = None
+2026-07-08 11:08:04 | INFO    | [teacher] val_interval = None
+2026-07-08 11:08:04 | INFO    | [teacher] filter_inter_by_user_or_item = True
+2026-07-08 11:08:04 | INFO    | [teacher] user_inter_num_interval = [0,inf)
+2026-07-08 11:08:04 | INFO    | [teacher] item_inter_num_interval = [0,inf)
+2026-07-08 11:08:04 | INFO    | [teacher] alias_of_user_id = None
+2026-07-08 11:08:04 | INFO    | [teacher] alias_of_item_id = ['item_id_list']
+2026-07-08 11:08:04 | INFO    | [teacher] alias_of_entity_id = None
+2026-07-08 11:08:04 | INFO    | [teacher] alias_of_relation_id = None
+2026-07-08 11:08:04 | INFO    | [teacher] preload_weight = None
+2026-07-08 11:08:04 | INFO    | [teacher] normalize_field = None
+2026-07-08 11:08:04 | INFO    | [teacher] normalize_all = None
+2026-07-08 11:08:04 | INFO    | [teacher] ITEM_LIST_LENGTH_FIELD = item_length
+2026-07-08 11:08:04 | INFO    | [teacher] LIST_SUFFIX = _list
+2026-07-08 11:08:04 | INFO    | [teacher] MAX_ITEM_LIST_LENGTH = 50
+2026-07-08 11:08:04 | INFO    | [teacher] POSITION_FIELD = position_id
+2026-07-08 11:08:04 | INFO    | [teacher] HEAD_ENTITY_ID_FIELD = head_id
+2026-07-08 11:08:04 | INFO    | [teacher] TAIL_ENTITY_ID_FIELD = tail_id
+2026-07-08 11:08:04 | INFO    | [teacher] RELATION_ID_FIELD = relation_id
+2026-07-08 11:08:04 | INFO    | [teacher] ENTITY_ID_FIELD = entity_id
+2026-07-08 11:08:04 | INFO    | [teacher] benchmark_filename = ['train', 'valid', 'test']
+2026-07-08 11:08:04 | INFO    | [teacher] 
+2026-07-08 11:08:04 | INFO    | [teacher] Other Hyper Parameters: 
+2026-07-08 11:08:04 | INFO    | [teacher] worker = 0
+2026-07-08 11:08:04 | INFO    | [teacher] wandb_project = recbole
+2026-07-08 11:08:04 | INFO    | [teacher] shuffle = True
+2026-07-08 11:08:04 | INFO    | [teacher] require_pow = False
+2026-07-08 11:08:04 | INFO    | [teacher] enable_amp = False
+2026-07-08 11:08:04 | INFO    | [teacher] enable_scaler = False
+2026-07-08 11:08:04 | INFO    | [teacher] transform = None
+2026-07-08 11:08:04 | INFO    | [teacher] numerical_features = []
+2026-07-08 11:08:04 | INFO    | [teacher] discretization = None
+2026-07-08 11:08:04 | INFO    | [teacher] kg_reverse_r = False
+2026-07-08 11:08:04 | INFO    | [teacher] entity_kg_num_interval = [0,inf)
+2026-07-08 11:08:04 | INFO    | [teacher] relation_kg_num_interval = [0,inf)
+2026-07-08 11:08:04 | INFO    | [teacher] MODEL_TYPE = ModelType.SEQUENTIAL
+2026-07-08 11:08:04 | INFO    | [teacher] neg_sampling = None
+2026-07-08 11:08:04 | INFO    | [teacher] embedding_size = 100
+2026-07-08 11:08:04 | INFO    | [teacher] inner_size = 256
+2026-07-08 11:08:04 | INFO    | [teacher] n_layers = 2
+2026-07-08 11:08:04 | INFO    | [teacher] n_heads = 2
+2026-07-08 11:08:04 | INFO    | [teacher] hidden_dropout_prob = 0.5
+2026-07-08 11:08:04 | INFO    | [teacher] attn_dropout_prob = 0.5
+2026-07-08 11:08:04 | INFO    | [teacher] hidden_act = gelu
+2026-07-08 11:08:04 | INFO    | [teacher] layer_norm_eps = 1e-12
+2026-07-08 11:08:04 | INFO    | [teacher] initializer_range = 0.02
+2026-07-08 11:08:04 | INFO    | [teacher] loss_type = CE
+2026-07-08 11:08:04 | INFO    | [teacher] sess_dropout = 0.2
+2026-07-08 11:08:04 | INFO    | [teacher] item_dropout = 0.2
+2026-07-08 11:08:04 | INFO    | [teacher] temperature = 0.07
+2026-07-08 11:08:04 | INFO    | [teacher] folder = base
+2026-07-08 11:08:04 | INFO    | [teacher] pop_eval = False
+2026-07-08 11:08:04 | INFO    | [teacher] save_teacher_matrix = True
+2026-07-08 11:08:04 | INFO    | [teacher] MODEL_INPUT_TYPE = InputType.POINTWISE
+2026-07-08 11:08:04 | INFO    | [teacher] eval_type = EvaluatorType.RANKING
+2026-07-08 11:08:04 | INFO    | [teacher] single_spec = True
+2026-07-08 11:08:04 | INFO    | [teacher] local_rank = 0
+2026-07-08 11:08:04 | INFO    | [teacher] device = cuda
+2026-07-08 11:08:04 | INFO    | [teacher] valid_neg_sample_args = {'distribution': 'uniform', 'sample_num': 'none'}
+2026-07-08 11:08:04 | INFO    | [teacher] test_neg_sample_args = {'distribution': 'uniform', 'sample_num': 'none'}
+2026-07-08 11:08:04 | INFO    | [teacher] 
+2026-07-08 11:08:04 | INFO    | [teacher] 
+2026-07-08 11:08:04 | INFO    | [teacher] /home/hongnguyen/.local/lib/python3.13/site-packages/recbole/data/dataset/dataset.py:648: ChainedAssignmentError: A value is being set on a copy of a DataFrame or Series through chained assignment using an inplace method.
+2026-07-08 11:08:04 | INFO    | [teacher] Such inplace method never works to update the original DataFrame or Series, because the intermediate object on which we are setting values always behaves as a copy (due to Copy-on-Write).
+2026-07-08 11:08:04 | INFO    | [teacher] 
+2026-07-08 11:08:04 | INFO    | [teacher] For example, when doing 'df[col].method(value, inplace=True)', try using 'df.method({col: value}, inplace=True)' instead, to perform the operation inplace on the original object, or try to avoid an inplace operation using 'df[col] = df[col].method(value)'.
+2026-07-08 11:08:04 | INFO    | [teacher] 
+2026-07-08 11:08:04 | INFO    | [teacher] See the documentation for a more detailed explanation: https://pandas.pydata.org/pandas-docs/stable/user_guide/copy_on_write.html
+2026-07-08 11:08:04 | INFO    | [teacher]   feat[field].fillna(value=0, inplace=True)
+2026-07-08 11:08:04 | INFO    | [teacher] 08 Jul 11:08    INFO  toy_link
+2026-07-08 11:08:04 | INFO    | [teacher] The number of users: 1497
+2026-07-08 11:08:04 | INFO    | [teacher] Average actions of users: 1.2426470588235294
+2026-07-08 11:08:04 | INFO    | [teacher] The number of items: 60
+2026-07-08 11:08:04 | INFO    | [teacher] Average actions of items: 31.508474576271187
+2026-07-08 11:08:04 | INFO    | [teacher] The number of inters: 1859
+2026-07-08 11:08:04 | INFO    | [teacher] The sparsity of the dataset: 97.93030505455356%
+2026-07-08 11:08:04 | INFO    | [teacher] Remain Fields: ['session_id', 'item_id_list', 'item_id', 'item_length']
+2026-07-08 11:08:04 | INFO    | [teacher] /home/hongnguyen/.local/lib/python3.13/site-packages/recbole/data/dataset/dataset.py:2136: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:203.)
+2026-07-08 11:08:04 | INFO    | [teacher]   new_data[k] = torch.LongTensor(value)
+2026-07-08 11:08:04 | INFO    | [teacher] 08 Jul 11:08    INFO  [Training]: train_batch_size = [256] train_neg_sample_args: [{'distribution': 'none', 'sample_num': 'none', 'alpha': 'none', 'dynamic': False, 'candidate_num': 0}]
+2026-07-08 11:08:04 | INFO    | [teacher] 08 Jul 11:08    INFO  [Evaluation]: eval_batch_size = [256] eval_args: [{'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}]
+2026-07-08 11:08:04 | INFO    | [teacher] 08 Jul 11:08    INFO  COREtrm(
+2026-07-08 11:08:04 | INFO    | [teacher]   (sess_dropout): Dropout(p=0.2, inplace=False)
+2026-07-08 11:08:04 | INFO    | [teacher]   (item_dropout): Dropout(p=0.2, inplace=False)
+2026-07-08 11:08:04 | INFO    | [teacher]   (item_embedding): Embedding(60, 100, padding_idx=0)
+2026-07-08 11:08:04 | INFO    | [teacher]   (loss_fct): CrossEntropyLoss()
+2026-07-08 11:08:04 | INFO    | [teacher]   (net): TransNet(
+2026-07-08 11:08:04 | INFO    | [teacher]     (position_embedding): Embedding(5, 100)
+2026-07-08 11:08:04 | INFO    | [teacher]     (trm_encoder): TransformerEncoder(
+2026-07-08 11:08:04 | INFO    | [teacher]       (layer): ModuleList(
+2026-07-08 11:08:04 | INFO    | [teacher]         (0-1): 2 x TransformerLayer(
+2026-07-08 11:08:04 | INFO    | [teacher]           (multi_head_attention): MultiHeadAttention(
+2026-07-08 11:08:04 | INFO    | [teacher]             (query): Linear(in_features=100, out_features=100, bias=True)
+2026-07-08 11:08:04 | INFO    | [teacher]             (key): Linear(in_features=100, out_features=100, bias=True)
+2026-07-08 11:08:04 | INFO    | [teacher]             (value): Linear(in_features=100, out_features=100, bias=True)
+2026-07-08 11:08:04 | INFO    | [teacher]             (softmax): Softmax(dim=-1)
+2026-07-08 11:08:04 | INFO    | [teacher]             (attn_dropout): Dropout(p=0.5, inplace=False)
+2026-07-08 11:08:04 | INFO    | [teacher]             (dense): Linear(in_features=100, out_features=100, bias=True)
+2026-07-08 11:08:04 | INFO    | [teacher]             (LayerNorm): LayerNorm((100,), eps=1e-12, elementwise_affine=True)
+2026-07-08 11:08:04 | INFO    | [teacher]             (out_dropout): Dropout(p=0.5, inplace=False)
+2026-07-08 11:08:04 | INFO    | [teacher]           )
+2026-07-08 11:08:04 | INFO    | [teacher]           (feed_forward): FeedForward(
+2026-07-08 11:08:04 | INFO    | [teacher]             (dense_1): Linear(in_features=100, out_features=256, bias=True)
+2026-07-08 11:08:04 | INFO    | [teacher]             (dense_2): Linear(in_features=256, out_features=100, bias=True)
+2026-07-08 11:08:04 | INFO    | [teacher]             (LayerNorm): LayerNorm((100,), eps=1e-12, elementwise_affine=True)
+2026-07-08 11:08:04 | INFO    | [teacher]             (dropout): Dropout(p=0.5, inplace=False)
+2026-07-08 11:08:04 | INFO    | [teacher]           )
+2026-07-08 11:08:04 | INFO    | [teacher]         )
+2026-07-08 11:08:04 | INFO    | [teacher]       )
+2026-07-08 11:08:04 | INFO    | [teacher]     )
+2026-07-08 11:08:04 | INFO    | [teacher]     (LayerNorm): LayerNorm((100,), eps=1e-12, elementwise_affine=True)
+2026-07-08 11:08:04 | INFO    | [teacher]     (dropout): Dropout(p=0.5, inplace=False)
+2026-07-08 11:08:04 | INFO    | [teacher]     (fn): Linear(in_features=100, out_features=1, bias=True)
+2026-07-08 11:08:04 | INFO    | [teacher]   )
+2026-07-08 11:08:04 | INFO    | [teacher] )
+2026-07-08 11:08:04 | INFO    | [teacher] Trainable parameters: 191513
+2026-07-08 11:08:04 | INFO    | [teacher] 
+2026-07-08 11:08:04 | INFO    | [teacher] Train     0:   0%|                                                            | 0/6 [00:00<?, ?it/s]/home/hongnguyen/.local/lib/python3.13/site-packages/recbole/trainer/trainer.py:235: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+2026-07-08 11:08:04 | INFO    | [teacher]   scaler = amp.GradScaler(enabled=self.enable_scaler)
+2026-07-08 11:08:05 | INFO    | [teacher] 
+2026-07-08 11:08:05 | INFO    | [teacher] Train     0:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:08:05 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:01,  2.79it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:08:05 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:01,  2.79it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:08:05 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:01,  2.79it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:08:05 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:01,  2.79it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:08:05 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:01,  2.79it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:08:05 | INFO    | [teacher] Train     0:  17%|████▌                      | 1/6 [00:00<00:01,  2.79it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:08:05 | INFO    | [teacher] Train     0: 100%|███████████████████████████| 6/6 [00:00<00:00, 14.97it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:08:05 | INFO    | [teacher] 08 Jul 11:08    INFO  epoch 0 training [time: 0.40s, train loss: 46.2615]
+2026-07-08 11:08:05 | INFO    | [teacher] 
+2026-07-08 11:08:05 | INFO    | [teacher] Evaluate   :   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2026-07-08 11:08:05 | INFO    | [teacher] Evaluate   :   0%|                                   | 0/1 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:08:05 | INFO    | [teacher] Evaluate   : 100%|███████████████████████████| 1/1 [00:00<00:00, 42.76it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:08:05 | INFO    | [teacher] 08 Jul 11:08    INFO  epoch 0 evaluating [time: 0.02s, valid_score: 0.240400]
+2026-07-08 11:08:05 | INFO    | [teacher] 08 Jul 11:08    INFO  valid result: 
+2026-07-08 11:08:05 | INFO    | [teacher] recall@5 : 0.3533    recall@10 : 0.4371    recall@20 : 0.5689    mrr@5 : 0.2211    mrr@10 : 0.2317    mrr@20 : 0.2404
+2026-07-08 11:08:05 | INFO    | [teacher] 08 Jul 11:08    INFO  Saving current: saved/COREtrm-Jul-08-2026_11-08-04.pth
+2026-07-08 11:08:05 | INFO    | [teacher] 
+2026-07-08 11:08:05 | INFO    | [teacher] Train     1:   0%|                                                            | 0/6 [00:00<?, ?it/s]
+2026-07-08 11:08:05 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:08:05 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:08:05 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:08:05 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:08:05 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:08:05 | INFO    | [teacher] Train     1:   0%|                                   | 0/6 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:08:05 | INFO    | [teacher] Train     1: 100%|██████████████████████████| 6/6 [00:00<00:00, 118.02it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:08:05 | INFO    | [teacher] 08 Jul 11:08    INFO  epoch 1 training [time: 0.05s, train loss: 43.7596]
+2026-07-08 11:08:05 | INFO    | [teacher] 
+2026-07-08 11:08:05 | INFO    | [teacher] Evaluate   :   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2026-07-08 11:08:05 | INFO    | [teacher] Evaluate   :   0%|                                   | 0/1 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:08:05 | INFO    | [teacher] Evaluate   : 100%|██████████████████████████| 1/1 [00:00<00:00, 205.87it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:08:05 | INFO    | [teacher] 08 Jul 11:08    INFO  epoch 1 evaluating [time: 0.01s, valid_score: 0.261400]
+2026-07-08 11:08:05 | INFO    | [teacher] 08 Jul 11:08    INFO  valid result: 
+2026-07-08 11:08:05 | INFO    | [teacher] recall@5 : 0.4072    recall@10 : 0.5269    recall@20 : 0.6587    mrr@5 : 0.238    mrr@10 : 0.2526    mrr@20 : 0.2614
+2026-07-08 11:08:05 | INFO    | [teacher] 08 Jul 11:08    INFO  Saving current: saved/COREtrm-Jul-08-2026_11-08-04.pth
+2026-07-08 11:08:05 | INFO    | [teacher] 08 Jul 11:08    INFO  Loading model structure and parameters from saved/COREtrm-Jul-08-2026_11-08-04.pth
+2026-07-08 11:08:05 | INFO    | [teacher] 
+2026-07-08 11:08:05 | INFO    | [teacher] Evaluate   :   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2026-07-08 11:08:05 | INFO    | [teacher] Evaluate   :   0%|                                   | 0/1 [00:00<?, ?it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:08:05 | INFO    | [teacher] Evaluate   : 100%|██████████████████████████| 1/1 [00:00<00:00, 173.75it/s, GPU RAM: 0.05 G/22.19 G]
+2026-07-08 11:08:05 | INFO    | [teacher] 08 Jul 11:08    INFO  best valid : OrderedDict({'recall@5': np.float64(0.4072), 'recall@10': np.float64(0.5269), 'recall@20': np.float64(0.6587), 'mrr@5': np.float64(0.238), 'mrr@10': np.float64(0.2526), 'mrr@20': np.float64(0.2614)})
+2026-07-08 11:08:05 | INFO    | [teacher] 08 Jul 11:08    INFO  test result: OrderedDict({'recall@5': np.float64(0.449), 'recall@10': np.float64(0.6071), 'recall@20': np.float64(0.7704), 'mrr@5': np.float64(0.2622), 'mrr@10': np.float64(0.2812), 'mrr@20': np.float64(0.2923)})
+2026-07-08 11:08:05 | INFO    | [teacher] 
+2026-07-08 11:08:05 | INFO    | [teacher] Single-session data:   0%|          | 0/1 [00:00<?, ?it/s]
+2026-07-08 11:08:05 | INFO    | [teacher] Single-session data: 100%|██████████| 1/1 [00:00<00:00, 362.05it/s]
+2026-07-08 11:08:05 | INFO    | [teacher] Elapsed time for extraction teacher matrix: 0.00s
+2026-07-08 11:08:05 | INFO    | [teacher] saved_models_for_embedding/linear_teacher_toy_link_core_trm/dense_matrix.npy shape: (60, 60) saved!
+2026-07-08 11:08:05 | INFO    | [link] $ /opt/miniconda3/bin/python main.py --model link --dataset toy_link --gpu_id 0 --teacher_path saved_models_for_embedding/linear_teacher_toy_link_core_trm/dense_matrix.npy --reg 10.0 --reg_teacher 100 --predict_weight 4.0 --slis_alpha 0.9 --teacher_normalize True --teacher_temperature 0.1
+2026-07-08 11:08:07 | INFO    | [link] command line args [--model link --dataset toy_link --gpu_id 0 --teacher_path saved_models_for_embedding/linear_teacher_toy_link_core_trm/dense_matrix.npy --reg 10.0 --reg_teacher 100 --predict_weight 4.0 --slis_alpha 0.9 --teacher_normalize True --teacher_temperature 0.1] will not be used in RecBole
+2026-07-08 11:08:07 | INFO    | [link] 08 Jul 11:08    INFO  
+2026-07-08 11:08:07 | INFO    | [link] General Hyper Parameters:
+2026-07-08 11:08:07 | INFO    | [link] gpu_id = 0
+2026-07-08 11:08:07 | INFO    | [link] use_gpu = True
+2026-07-08 11:08:07 | INFO    | [link] seed = 2020
+2026-07-08 11:08:07 | INFO    | [link] state = INFO
+2026-07-08 11:08:07 | INFO    | [link] reproducibility = True
+2026-07-08 11:08:07 | INFO    | [link] data_path = dataset/toy_link
+2026-07-08 11:08:07 | INFO    | [link] checkpoint_dir = saved
+2026-07-08 11:08:07 | INFO    | [link] show_progress = True
+2026-07-08 11:08:07 | INFO    | [link] save_dataset = False
+2026-07-08 11:08:07 | INFO    | [link] dataset_save_path = None
+2026-07-08 11:08:07 | INFO    | [link] save_dataloaders = False
+2026-07-08 11:08:07 | INFO    | [link] dataloaders_save_path = None
+2026-07-08 11:08:07 | INFO    | [link] log_wandb = False
+2026-07-08 11:08:07 | INFO    | [link] 
+2026-07-08 11:08:07 | INFO    | [link] Training Hyper Parameters:
+2026-07-08 11:08:07 | INFO    | [link] epochs = 300
+2026-07-08 11:08:07 | INFO    | [link] train_batch_size = 2048
+2026-07-08 11:08:07 | INFO    | [link] learner = adam
+2026-07-08 11:08:07 | INFO    | [link] learning_rate = 0.001
+2026-07-08 11:08:07 | INFO    | [link] train_neg_sample_args = {'distribution': 'none', 'sample_num': 'none', 'alpha': 'none', 'dynamic': False, 'candidate_num': 0}
+2026-07-08 11:08:07 | INFO    | [link] eval_step = 1
+2026-07-08 11:08:07 | INFO    | [link] stopping_step = 5
+2026-07-08 11:08:07 | INFO    | [link] clip_grad_norm = None
+2026-07-08 11:08:07 | INFO    | [link] weight_decay = 0.0
+2026-07-08 11:08:07 | INFO    | [link] loss_decimal_place = 4
+2026-07-08 11:08:07 | INFO    | [link] 
+2026-07-08 11:08:07 | INFO    | [link] Evaluation Hyper Parameters:
+2026-07-08 11:08:07 | INFO    | [link] eval_args = {'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}
+2026-07-08 11:08:07 | INFO    | [link] repeatable = True
+2026-07-08 11:08:07 | INFO    | [link] metrics = ['Recall', 'MRR']
+2026-07-08 11:08:07 | INFO    | [link] topk = [5, 10, 20]
+2026-07-08 11:08:07 | INFO    | [link] valid_metric = MRR@20
+2026-07-08 11:08:07 | INFO    | [link] valid_metric_bigger = True
+2026-07-08 11:08:07 | INFO    | [link] eval_batch_size = 1024
+2026-07-08 11:08:07 | INFO    | [link] metric_decimal_place = 4
+2026-07-08 11:08:07 | INFO    | [link] 
+2026-07-08 11:08:07 | INFO    | [link] Dataset Hyper Parameters:
+2026-07-08 11:08:07 | INFO    | [link] field_separator = 	
+2026-07-08 11:08:07 | INFO    | [link] seq_separator =  
+2026-07-08 11:08:07 | INFO    | [link] USER_ID_FIELD = session_id
+2026-07-08 11:08:07 | INFO    | [link] ITEM_ID_FIELD = item_id
+2026-07-08 11:08:07 | INFO    | [link] RATING_FIELD = rating
+2026-07-08 11:08:07 | INFO    | [link] TIME_FIELD = timestamp
+2026-07-08 11:08:07 | INFO    | [link] seq_len = None
+2026-07-08 11:08:07 | INFO    | [link] LABEL_FIELD = label
+2026-07-08 11:08:07 | INFO    | [link] threshold = None
+2026-07-08 11:08:07 | INFO    | [link] NEG_PREFIX = neg_
+2026-07-08 11:08:07 | INFO    | [link] load_col = {'inter': ['session_id', 'item_id_list', 'item_id']}
+2026-07-08 11:08:07 | INFO    | [link] unload_col = None
+2026-07-08 11:08:07 | INFO    | [link] unused_col = None
+2026-07-08 11:08:07 | INFO    | [link] additional_feat_suffix = None
+2026-07-08 11:08:07 | INFO    | [link] rm_dup_inter = None
+2026-07-08 11:08:07 | INFO    | [link] val_interval = None
+2026-07-08 11:08:07 | INFO    | [link] filter_inter_by_user_or_item = True
+2026-07-08 11:08:07 | INFO    | [link] user_inter_num_interval = [0,inf)
+2026-07-08 11:08:07 | INFO    | [link] item_inter_num_interval = [0,inf)
+2026-07-08 11:08:07 | INFO    | [link] alias_of_user_id = None
+2026-07-08 11:08:07 | INFO    | [link] alias_of_item_id = ['item_id_list']
+2026-07-08 11:08:07 | INFO    | [link] alias_of_entity_id = None
+2026-07-08 11:08:07 | INFO    | [link] alias_of_relation_id = None
+2026-07-08 11:08:07 | INFO    | [link] preload_weight = None
+2026-07-08 11:08:07 | INFO    | [link] normalize_field = None
+2026-07-08 11:08:07 | INFO    | [link] normalize_all = None
+2026-07-08 11:08:07 | INFO    | [link] ITEM_LIST_LENGTH_FIELD = item_length
+2026-07-08 11:08:07 | INFO    | [link] LIST_SUFFIX = _list
+2026-07-08 11:08:07 | INFO    | [link] MAX_ITEM_LIST_LENGTH = 50
+2026-07-08 11:08:07 | INFO    | [link] POSITION_FIELD = position_id
+2026-07-08 11:08:07 | INFO    | [link] HEAD_ENTITY_ID_FIELD = head_id
+2026-07-08 11:08:07 | INFO    | [link] TAIL_ENTITY_ID_FIELD = tail_id
+2026-07-08 11:08:07 | INFO    | [link] RELATION_ID_FIELD = relation_id
+2026-07-08 11:08:07 | INFO    | [link] ENTITY_ID_FIELD = entity_id
+2026-07-08 11:08:07 | INFO    | [link] benchmark_filename = ['train', 'valid', 'test']
+2026-07-08 11:08:07 | INFO    | [link] 
+2026-07-08 11:08:07 | INFO    | [link] Other Hyper Parameters: 
+2026-07-08 11:08:07 | INFO    | [link] worker = 0
+2026-07-08 11:08:07 | INFO    | [link] wandb_project = recbole
+2026-07-08 11:08:07 | INFO    | [link] shuffle = True
+2026-07-08 11:08:07 | INFO    | [link] require_pow = False
+2026-07-08 11:08:07 | INFO    | [link] enable_amp = False
+2026-07-08 11:08:07 | INFO    | [link] enable_scaler = False
+2026-07-08 11:08:07 | INFO    | [link] transform = None
+2026-07-08 11:08:07 | INFO    | [link] numerical_features = []
+2026-07-08 11:08:07 | INFO    | [link] discretization = None
+2026-07-08 11:08:07 | INFO    | [link] kg_reverse_r = False
+2026-07-08 11:08:07 | INFO    | [link] entity_kg_num_interval = [0,inf)
+2026-07-08 11:08:07 | INFO    | [link] relation_kg_num_interval = [0,inf)
+2026-07-08 11:08:07 | INFO    | [link] MODEL_TYPE = ModelType.SEQUENTIAL
+2026-07-08 11:08:07 | INFO    | [link] neg_sampling = None
+2026-07-08 11:08:07 | INFO    | [link] normalize = l2
+2026-07-08 11:08:07 | INFO    | [link] reg = 10.0
+2026-07-08 11:08:07 | INFO    | [link] save_path = None
+2026-07-08 11:08:07 | INFO    | [link] reg_teacher = 100.0
+2026-07-08 11:08:07 | INFO    | [link] teacher_path = saved_models_for_embedding/linear_teacher_toy_link_core_trm/dense_matrix.npy
+2026-07-08 11:08:07 | INFO    | [link] learn_SLIT = False
+2026-07-08 11:08:07 | INFO    | [link] direction = sr
+2026-07-08 11:08:07 | INFO    | [link] train_weight = 1.0
+2026-07-08 11:08:07 | INFO    | [link] teacher_temperature = 0.1
+2026-07-08 11:08:07 | INFO    | [link] save_load_SLIST = True
+2026-07-08 11:08:07 | INFO    | [link] extend_beta = 1.0
+2026-07-08 11:08:07 | INFO    | [link] closed_normalize = X
+2026-07-08 11:08:07 | INFO    | [link] teacher_normalize = True
+2026-07-08 11:08:07 | INFO    | [link] slis_alpha = 0.9
+2026-07-08 11:08:07 | INFO    | [link] use_dropout = False
+2026-07-08 11:08:07 | INFO    | [link] p = 0.5
+2026-07-08 11:08:07 | INFO    | [link] predict_weight = 4.0
+2026-07-08 11:08:07 | INFO    | [link] loss_type = CE
+2026-07-08 11:08:07 | INFO    | [link] folder = base
+2026-07-08 11:08:07 | INFO    | [link] length_eval = True
+2026-07-08 11:08:07 | INFO    | [link] pop_eval = False
+2026-07-08 11:08:07 | INFO    | [link] MODEL_INPUT_TYPE = InputType.POINTWISE
+2026-07-08 11:08:07 | INFO    | [link] eval_type = EvaluatorType.RANKING
+2026-07-08 11:08:07 | INFO    | [link] single_spec = True
+2026-07-08 11:08:07 | INFO    | [link] local_rank = 0
+2026-07-08 11:08:07 | INFO    | [link] device = cuda
+2026-07-08 11:08:07 | INFO    | [link] valid_neg_sample_args = {'distribution': 'uniform', 'sample_num': 'none'}
+2026-07-08 11:08:07 | INFO    | [link] test_neg_sample_args = {'distribution': 'uniform', 'sample_num': 'none'}
+2026-07-08 11:08:07 | INFO    | [link] 
+2026-07-08 11:08:07 | INFO    | [link] 
+2026-07-08 11:08:07 | INFO    | [link] /home/hongnguyen/.local/lib/python3.13/site-packages/recbole/data/dataset/dataset.py:648: ChainedAssignmentError: A value is being set on a copy of a DataFrame or Series through chained assignment using an inplace method.
+2026-07-08 11:08:07 | INFO    | [link] Such inplace method never works to update the original DataFrame or Series, because the intermediate object on which we are setting values always behaves as a copy (due to Copy-on-Write).
+2026-07-08 11:08:07 | INFO    | [link] 
+2026-07-08 11:08:07 | INFO    | [link] For example, when doing 'df[col].method(value, inplace=True)', try using 'df.method({col: value}, inplace=True)' instead, to perform the operation inplace on the original object, or try to avoid an inplace operation using 'df[col] = df[col].method(value)'.
+2026-07-08 11:08:07 | INFO    | [link] 
+2026-07-08 11:08:07 | INFO    | [link] See the documentation for a more detailed explanation: https://pandas.pydata.org/pandas-docs/stable/user_guide/copy_on_write.html
+2026-07-08 11:08:07 | INFO    | [link]   feat[field].fillna(value=0, inplace=True)
+2026-07-08 11:08:07 | INFO    | [link] 08 Jul 11:08    INFO  toy_link
+2026-07-08 11:08:07 | INFO    | [link] The number of users: 1497
+2026-07-08 11:08:07 | INFO    | [link] Average actions of users: 1.2426470588235294
+2026-07-08 11:08:07 | INFO    | [link] The number of items: 60
+2026-07-08 11:08:07 | INFO    | [link] Average actions of items: 31.508474576271187
+2026-07-08 11:08:07 | INFO    | [link] The number of inters: 1859
+2026-07-08 11:08:07 | INFO    | [link] The sparsity of the dataset: 97.93030505455356%
+2026-07-08 11:08:07 | INFO    | [link] Remain Fields: ['session_id', 'item_id_list', 'item_id', 'item_length']
+2026-07-08 11:08:07 | INFO    | [link] /home/hongnguyen/.local/lib/python3.13/site-packages/recbole/data/dataset/dataset.py:2136: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /pytorch/torch/csrc/utils/tensor_numpy.cpp:203.)
+2026-07-08 11:08:07 | INFO    | [link]   new_data[k] = torch.LongTensor(value)
+2026-07-08 11:08:07 | INFO    | [link] 08 Jul 11:08    INFO  [Training]: train_batch_size = [2048] train_neg_sample_args: [{'distribution': 'none', 'sample_num': 'none', 'alpha': 'none', 'dynamic': False, 'candidate_num': 0}]
+2026-07-08 11:08:07 | INFO    | [link] 08 Jul 11:08    INFO  [Evaluation]: eval_batch_size = [1024] eval_args: [{'split': {'RS': [0.8, 0.1, 0.1]}, 'order': 'TO', 'group_by': 'user', 'mode': {'valid': 'full', 'test': 'full'}}]
+2026-07-08 11:08:07 | INFO    | [link] No save_path for Full Model (LINK)
+2026-07-08 11:08:07 | INFO    | [link] Make SLIS matrix for LIS
+2026-07-08 11:08:07 | INFO    | [link] SLIS matrix is not loaded. It will be made and saved to ./saved/toy_link_SLIS.npy
+2026-07-08 11:08:07 | INFO    | [link] [SLIS] input sparse matrix (500, 60) is made.  Sparsity:94.77667%
+2026-07-08 11:08:07 | INFO    | [link] [SLIS] target sparse matrix (500, 60) is made.  Sparsity:94.77667%
+2026-07-08 11:08:07 | INFO    | [link] [SLIS, 0.00s] matrix is made.
+2026-07-08 11:08:07 | INFO    | [link] [0.06s] G is made. Sparsity:80.52777777777777%
+2026-07-08 11:08:07 | INFO    | [link] [0.10s] closed-form solve done (reg:10.0)
+2026-07-08 11:08:07 | INFO    | [link] [0.16s] training is done
+2026-07-08 11:08:07 | INFO    | [link] Save SLIS matrix → mmap ./saved/toy_link_SLIS.npy
+2026-07-08 11:08:07 | INFO    | [link] 
+2026-07-08 11:08:07 | INFO    | [link] Loading training data: 0it [00:00, ?it/s]
+2026-07-08 11:08:07 | INFO    | [link] Loading training data: 501it [00:00, 64405.13it/s]
+2026-07-08 11:08:07 | INFO    | [link] avg. num_session_item: 3.13
+2026-07-08 11:08:07 | INFO    | [link] avg. num_kd_item: 28.21
+2026-07-08 11:08:07 | INFO    | [link] [LIS] input sparse matrix (500, 60) is made.  Sparsity:55.62000%
+2026-07-08 11:08:07 | INFO    | [link] [LIS] target sparse matrix (500, 60) is made.  Sparsity:55.62000%
+2026-07-08 11:08:07 | INFO    | [link] [LIS, 0.01s] matrix is made.
+2026-07-08 11:08:07 | INFO    | [link] [SLIT] input sparse matrix (1496, 60) is made.  Sparsity:98.33333%
+2026-07-08 11:08:07 | INFO    | [link] [SLIT] target sparse matrix (1496, 60) is made.  Sparsity:96.59425%
+2026-07-08 11:08:07 | INFO    | [link] [SLIT, 0.00s] matrix is made.
+2026-07-08 11:08:07 | INFO    | [link] [0.00s] normalization is done
+2026-07-08 11:08:07 | INFO    | [link] input_matrix: (1996, 60), target_matrix: (1996, 60)
+2026-07-08 11:08:07 | INFO    | [link] slis_alpha: 0.9, reg_teacher:100.0
+2026-07-08 11:08:07 | INFO    | [link] extend_beta: 1.0
+2026-07-08 11:08:07 | INFO    | [link] 08 Jul 11:08    INFO  Train weight matrix...
+2026-07-08 11:08:07 | INFO    | [link] 08 Jul 11:08    INFO  [0.05s] G is made. Sparsity:3.3055555555555505%
+2026-07-08 11:08:07 | INFO    | [link] 08 Jul 11:08    INFO  [0.10s] closed-form solve done
+2026-07-08 11:08:07 | INFO    | [link] 08 Jul 11:08    INFO  [0.19s] training is done
+2026-07-08 11:08:07 | INFO    | [link] 08 Jul 11:08    INFO  LINK()
+2026-07-08 11:08:07 | INFO    | [link] Trainable parameters: 1
+2026-07-08 11:08:08 | INFO    | [link] 
+2026-07-08 11:08:08 | INFO    | [link] Evaluate   :   0%|                                                            | 0/1 [00:00<?, ?it/s]
+2026-07-08 11:08:08 | INFO    | [link] Evaluate   :   0%|                                   | 0/1 [00:00<?, ?it/s, GPU RAM: 0.00 G/22.19 G]
+2026-07-08 11:08:08 | INFO    | [link] Evaluate   : 100%|██████████████████████████| 1/1 [00:00<00:00, 361.80it/s, GPU RAM: 0.00 G/22.19 G]
+2026-07-08 11:08:08 | INFO    | [link] 08 Jul 11:08    INFO  best valid : None
+2026-07-08 11:08:08 | INFO    | [link] 08 Jul 11:08    INFO  test result: OrderedDict({'recall@5': np.float64(0.6327), 'recall@10': np.float64(0.9082), 'recall@20': np.float64(0.9898), 'mrr@5': np.float64(0.3292), 'mrr@10': np.float64(0.366), 'mrr@20': np.float64(0.3725)})
+2026-07-08 11:08:08 | INFO    | [LINK] Hoàn tất link_toy.yaml. Test metrics: recall@5=0.6327 | recall@10=0.9082 | recall@20=0.9898 | mrr@5=0.3292 | mrr@10=0.3660 | mrr@20=0.3725
+2026-07-08 11:08:08 | INFO    | [LINK]   → hr@20 = 0.9898
+2026-07-08 11:08:08 | INFO    | [LINK]   → mrr@20 = 0.3725

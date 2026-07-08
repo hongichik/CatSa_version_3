@@ -1,0 +1,38 @@
+# LINK trên Diginetica (n_items≈44k). Siêu tham số theo run_link.sh gốc cho diginetica.
+project:
+  name: diginetica
+  filename_mode: custom
+  custom_filename: LINK_diginetica.log
+
+data:
+  data_dir: data/diginetica
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+
+link:
+  dataset_name: diginetica
+  reuse_converted: true
+  reuse_teacher: true
+
+  teacher_model: core_trm
+  teacher_epochs: 20
+  train_batch_size: 1024
+  eval_batch_size: 512
+  learning_rate: 0.001
+  stopping_step: 5
+
+  reg: 10.0
+  reg_teacher: 100
+  predict_weight: 2.0
+  slis_alpha: 0.9
+  teacher_normalize: true
+  teacher_temperature: 0.1
+
+  gpu_id: 0
+
+evaluation:
+  topk: [5, 10, 20]
+  metrics: [Recall, MRR]
+  valid_metric: MRR@20

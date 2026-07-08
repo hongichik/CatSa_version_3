@@ -110,6 +110,21 @@ class ModelConfig:
     num_layers: int
     use_taxonomy: bool
     dropout: float
+    # Encoder: rgcn | concat | dual_path | hgt | retrieval | transition | soft_cat | mg_core
+    encoder_type: str
+    # Fusion (dual_path): cross_attn | gate | sum
+    fusion_type: str
+    n_heads: int
+    retrieval_topk: int
+    # mg_core (CatSA v2)
+    max_seq_length: int = 50
+    trm_layers: int = 2
+    trm_inner_size: int = 256
+    temperature: float = 0.07
+    sess_dropout: float = 0.2
+    item_dropout: float = 0.2
+    extra_rerank: bool = True
+    extra_beta: float = 12.0
 
 
 @dataclass
@@ -125,6 +140,14 @@ class AugmentConfig:
 class TrainingConfig:
     use_cl: bool
     lambda_cl: float
+    # CL: infonce | prototype | both (khi use_cl=true)
+    cl_type: str
+    lambda_proto: float
+    # Auxiliary: dự đoán category/parent của item tiếp theo
+    aux_cat: bool
+    aux_parent: bool
+    lambda_aux_cat: float
+    lambda_aux_parent: float
     tau: float
     batch_size: int
     learning_rate: float
@@ -232,7 +255,7 @@ def _parse_select_runs(sel: dict) -> list[str]:
         name = _normalize_run_filename(run)
         return [name]
     if isinstance(run, list):
-        runs = [_normalize_run_filename(r) for r in run]
+        runs = [_normalize_run_filename(r) for r in run if r and not str(r).strip().startswith("#")]
         if not runs:
             raise ValueError("select.yaml: run: [] rỗng")
         return runs
@@ -309,6 +332,27 @@ def _is_core_select_dir(d: Path, config_dir: Path) -> bool:
     return d == root or d.parent == root
 
 
+def _resolve_under(root: Path, run_name: str, label: str) -> Path:
+    """Tìm YAML trong root: cho phép đường dẫn con (v1/x.yaml) hoặc chỉ basename."""
+    target = _normalize_run_filename(run_name)
+    direct = root / target
+    if direct.is_file():
+        return direct
+    # basename-only: tìm đệ quy (vd catsa_v1.yaml → .../baseline/catsa_v1.yaml)
+    name = Path(target).name
+    hits = sorted(p for p in root.rglob(name) if p.is_file())
+    if not hits:
+        raise FileNotFoundError(
+            f"Không tìm thấy {label} config '{target}' trong {root}"
+        )
+    if len(hits) > 1:
+        raise ValueError(
+            f"{label} config '{name}' trùng tên: {hits} — dùng đường dẫn tương đối "
+            f"(vd baseline/{name})"
+        )
+    return hits[0]
+
+
 def find_core_yaml(
     config_dir: Path,
     run_name: str,
@@ -316,28 +360,9 @@ def find_core_yaml(
 ) -> Path:
     """Tìm file CORE trong config/core/ (suite=None: root; suite: subfolder)."""
     root = _core_root(config_dir)
-    target = _normalize_run_filename(run_name)
     if suite:
-        search = root / suite
-        chosen = search / target
-        if not chosen.exists():
-            raise FileNotFoundError(
-                f"Không tìm thấy CORE config '{target}' trong {search}"
-            )
-        return chosen
-    direct = root / target
-    if direct.exists():
-        return direct
-    hits = sorted(p for p in root.rglob(target) if p.is_file())
-    if not hits:
-        raise FileNotFoundError(
-            f"Không tìm thấy CORE config '{target}' trong {root}"
-        )
-    if len(hits) > 1:
-        raise ValueError(
-            f"CORE config '{target}' trùng tên: {hits} — dùng --suite để chọn"
-        )
-    return hits[0]
+        return _resolve_under(root / suite, run_name, "CORE")
+    return _resolve_under(root, run_name, "CORE")
 
 
 def _catsa_root(config_dir: Path) -> Path:
@@ -354,30 +379,11 @@ def find_catsa_yaml(
     run_name: str,
     suite: str | None = None,
 ) -> Path:
-    """Tìm file CatSA trong config/catsa/ (suite=None: root; suite: subfolder)."""
+    """Tìm file CatSA trong config/catsa/ (hỗ trợ thư mục con trong suite)."""
     root = _catsa_root(config_dir)
-    target = _normalize_run_filename(run_name)
     if suite:
-        search = root / suite
-        chosen = search / target
-        if not chosen.exists():
-            raise FileNotFoundError(
-                f"Không tìm thấy CatSA config '{target}' trong {search}"
-            )
-        return chosen
-    direct = root / target
-    if direct.exists():
-        return direct
-    hits = sorted(p for p in root.rglob(target) if p.is_file())
-    if not hits:
-        raise FileNotFoundError(
-            f"Không tìm thấy CatSA config '{target}' trong {root}"
-        )
-    if len(hits) > 1:
-        raise ValueError(
-            f"CatSA config '{target}' trùng tên: {hits} — dùng --suite để chọn"
-        )
-    return hits[0]
+        return _resolve_under(root / suite, run_name, "CatSA")
+    return _resolve_under(root, run_name, "CatSA")
 
 
 def _tienxuly_root(config_dir: Path) -> Path:
@@ -390,17 +396,51 @@ def _is_tienxuly_select_dir(d: Path, config_dir: Path) -> bool:
 
 
 def find_preprocess_yaml(config_dir: Path, run_name: str) -> Path:
-    """Tìm file preprocess trong config/tienxuly/ (kể cả subfolder diginetica/)."""
-    root = _tienxuly_root(config_dir)
-    target = _normalize_run_filename(run_name)
-    hits = sorted(p for p in root.rglob(target) if p.is_file())
-    if not hits:
-        raise FileNotFoundError(
-            f"Không tìm thấy preprocess config '{target}' trong {root}"
-        )
-    if len(hits) > 1:
-        raise ValueError(f"Preprocess config '{target}' trùng tên: {hits}")
-    return hits[0]
+    """Tìm file preprocess trong config/tienxuly/ (kể cả subfolder suite/)."""
+    return _resolve_under(_tienxuly_root(config_dir), run_name, "Preprocess")
+
+
+def _under_select_tree(d: Path, config_dir: Path) -> bool:
+    """True nếu d nằm dưới một suite đã có select.yaml (catsa/core/tienxuly/...).
+
+    Dùng để KHÔNG nạp tự động mọi YAML trong thư mục con nhóm (baseline/, sweep/)
+    — chỉ nạp file được chọn qua select.yaml / --run.
+    """
+    for root_fn, is_sel in (
+        (_catsa_root, _is_catsa_select_dir),
+        (_core_root, _is_core_select_dir),
+        (_tienxuly_root, _is_tienxuly_select_dir),
+    ):
+        root = root_fn(config_dir)
+        try:
+            d.relative_to(root)
+        except ValueError:
+            continue
+        # d hoặc tổ tiên là thư mục suite (có select.yaml)
+        cur = d
+        while True:
+            if is_sel(cur, config_dir) and (cur / SELECT_FILE).is_file():
+                return True
+            if cur == root or cur.parent == cur:
+                break
+            cur = cur.parent
+    # link / msgifsr cũng theo kiểu suite/select.yaml
+    for name in ("link", "msgifsr"):
+        root = config_dir / name
+        try:
+            d.relative_to(root)
+        except ValueError:
+            continue
+        cur = d
+        while True:
+            if (cur / SELECT_FILE).is_file() and (
+                cur == root or cur.parent == root
+            ):
+                return True
+            if cur == root or cur.parent == cur:
+                break
+            cur = cur.parent
+    return False
 
 
 def _collect_config_files(
@@ -432,8 +472,12 @@ def _collect_config_files(
         if select_path in yamls:
             with open(select_path, encoding="utf-8") as f:
                 sel = yaml.safe_load(f) or {}
-            runs = _parse_select_runs(sel)
-            if not runs:
+            run_val = sel.get("run")
+            if run_val is None or (isinstance(run_val, list) and len(run_val) == 0):
+                runs = []
+            else:
+                runs = _parse_select_runs(sel)
+            if not runs and catsa_run is None and core_run is None and preprocess_run is None:
                 raise ValueError(f"{select_path} thiếu khóa 'run:' (file hoặc danh sách)")
             run_names = {_normalize_run_filename(r) for r in runs}
 
@@ -442,7 +486,9 @@ def _collect_config_files(
                     continue
                 if core_run is not None:
                     run_path = find_core_yaml(config_dir, core_run, core_suite)
-                    if d != run_path.parent:
+                    try:
+                        run_path.relative_to(d)
+                    except ValueError:
                         continue
                     chosen_run = core_run
                 elif core_suite:
@@ -458,7 +504,9 @@ def _collect_config_files(
                     continue
                 if catsa_run is not None:
                     run_path = find_catsa_yaml(config_dir, catsa_run, catsa_suite)
-                    if d != run_path.parent:
+                    try:
+                        run_path.relative_to(d)
+                    except ValueError:
                         continue
                     chosen_run = catsa_run
                 elif catsa_suite:
@@ -474,7 +522,9 @@ def _collect_config_files(
                     continue
                 if preprocess_run is not None:
                     run_path = find_preprocess_yaml(config_dir, preprocess_run)
-                    if d != run_path.parent:
+                    try:
+                        run_path.relative_to(d)
+                    except ValueError:
                         continue
                     chosen_run = preprocess_run
                 elif catsa_suite:
@@ -494,27 +544,25 @@ def _collect_config_files(
             if chosen_run is not None:
                 if _is_core_select_dir(d, config_dir):
                     chosen = find_core_yaml(config_dir, chosen_run, core_suite)
-                    if d != chosen.parent:
-                        continue
                 elif _is_catsa_select_dir(d, config_dir):
                     chosen = find_catsa_yaml(config_dir, chosen_run, catsa_suite)
-                    if d != chosen.parent:
-                        continue
                 else:
-                    target = _normalize_run_filename(chosen_run)
-                    if target not in run_names:
-                        raise FileNotFoundError(
-                            f"{select_path}: '{target}' không có trong run: {sorted(run_names)}"
-                        )
                     chosen = find_preprocess_yaml(config_dir, chosen_run)
+                try:
+                    chosen.relative_to(d)
+                except ValueError:
+                    continue
             else:
+                if not runs:
+                    continue
                 chosen = d / runs[0]
             if not chosen.exists():
                 raise FileNotFoundError(
-                    f"{select_path} chọn '{chosen.name}' nhưng file không tồn tại trong {d}"
+                    f"{select_path} chọn '{runs[0] if chosen_run is None else chosen_run}' "
+                    f"nhưng file không tồn tại: {chosen}"
                 )
             files.append(chosen)
-        else:
+        elif not _under_select_tree(d, config_dir):
             files.extend(yamls)
     return files
 
@@ -703,6 +751,18 @@ def load_config(
             num_layers=int(model.get("num_layers", 2)),
             use_taxonomy=bool(model.get("use_taxonomy", True)),
             dropout=float(model.get("dropout", 0.1)),
+            encoder_type=str(model.get("encoder_type", "rgcn")).lower(),
+            fusion_type=str(model.get("fusion_type", "cross_attn")).lower(),
+            n_heads=int(model.get("n_heads", 2)),
+            retrieval_topk=int(model.get("retrieval_topk", 5)),
+            max_seq_length=int(model.get("max_seq_length", 50)),
+            trm_layers=int(model.get("trm_layers", 2)),
+            trm_inner_size=int(model.get("trm_inner_size", 256)),
+            temperature=float(model.get("temperature", 0.07)),
+            sess_dropout=float(model.get("sess_dropout", 0.2)),
+            item_dropout=float(model.get("item_dropout", 0.2)),
+            extra_rerank=bool(model.get("extra_rerank", True)),
+            extra_beta=float(model.get("extra_beta", 12.0)),
         ),
         augment=AugmentConfig(
             strategies=[str(s) for s in aug.get("strategies", ["same", "sibling", "hybrid"])],
@@ -714,6 +774,12 @@ def load_config(
         training=TrainingConfig(
             use_cl=bool(train.get("use_cl", True)),
             lambda_cl=float(train.get("lambda_cl", 0.1)),
+            cl_type=str(train.get("cl_type", "infonce")).lower(),
+            lambda_proto=float(train.get("lambda_proto", 0.1)),
+            aux_cat=bool(train.get("aux_cat", False)),
+            aux_parent=bool(train.get("aux_parent", False)),
+            lambda_aux_cat=float(train.get("lambda_aux_cat", 0.1)),
+            lambda_aux_parent=float(train.get("lambda_aux_parent", 0.1)),
             tau=float(train.get("tau", 0.5)),
             batch_size=int(train.get("batch_size", 100)),
             learning_rate=float(train.get("learning_rate", 0.001)),

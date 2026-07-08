@@ -1,0 +1,3 @@
+# select.yaml — danh sách version MSGIFSR (Diginetica)
+run:
+  - msgifsr_diginetica.yaml

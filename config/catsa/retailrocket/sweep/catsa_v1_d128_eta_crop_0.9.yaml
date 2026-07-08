@@ -1,0 +1,164 @@
+# ============================================================================
+# CATSA VERSION 1 - TOÀN BỘ cấu hình của dự án CatSA trong MỘT file
+# (được chọn chạy qua select.yaml cùng thư mục)
+# Gồm 6 phần: project, data, model (Module 1), augment (Module 2),
+# training, evaluation
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# PROJECT - tên dự án và cách đặt tên file log của dự án
+# ----------------------------------------------------------------------------
+project:
+  # Tên dự án. Log sẽ được ghi vào <logging.dir>/<name>/
+  # (ví dụ: Log/retailrocket/001-04-07-2026-09.log)
+  name: retailrocket
+
+  # (TÙY CHỌN) Cách đặt tên file log của dự án này:
+  #   - KHÔNG khai báo (hoặc để trống custom_filename) => mặc định "auto":
+  #     tên tự sinh theo mẫu stt-ngày-tháng-năm-giờ.log
+  #   - Khai báo custom_filename => tức là có đổi tên: dùng đúng tên này
+  # Có thể khai báo tường minh filename_mode: auto | custom nếu muốn rõ ràng.
+  filename_mode: custom
+  custom_filename: CatSA/sweep/CatSA_v1_d128_eta_crop_0.9.log
+
+# ----------------------------------------------------------------------------
+# DATA - dữ liệu ĐÃ TIỀN XỬ LÝ để train (đọc bởi CatSA/main.py)
+# Mỗi version CatSA có thể trỏ tới dataset khác nhau — độc lập với
+# preprocess.yaml (preprocess chỉ quyết định nơi GHI khi chạy tienxuly).
+# ----------------------------------------------------------------------------
+data:
+  # Thư mục chứa train.txt, val.txt, test.txt, lookup_tables.pkl
+  data_dir: data/retailrocket_item_hon_5
+
+  # Tên file trong data_dir (đổi nếu thí nghiệm dùng tên khác)
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+
+# ----------------------------------------------------------------------------
+# MODEL - Module 1: heterogeneous graph + RGCN encoder (Giai đoạn 2-3)
+# Dùng bởi CatSA/graph.py và CatSA/model.py
+# ----------------------------------------------------------------------------
+model:
+  # Chiều embedding d cho item/category. Tài liệu khuyến nghị 100,
+  # grid search trong {64, 100, 128}
+  embedding_dim: 128
+  # Số lớp message passing L của RGCN. Khuyến nghị bắt đầu L = 2
+  # (L lớn gây over-smoothing), grid search trong {1, 2, 3}
+  num_layers: 2
+
+  # Có dùng taxonomy (parent node + cạnh taxonomy) trong graph không.
+  # true với RetailRocket (có category_tree); false với dataset flat
+  # như Yoochoose/Diginetica
+  use_taxonomy: true
+
+  # Dropout áp lên node embedding giữa các lớp GNN (0 = tắt)
+  dropout: 0.1
+
+# ----------------------------------------------------------------------------
+# AUGMENT - Module 2: category-guided augmentation (Giai đoạn 5)
+# Dùng bởi CatSA/augment.py (chỉ có tác dụng khi training.use_cl = true)
+# ----------------------------------------------------------------------------
+augment:
+  # Danh sách chiến lược augmentation:
+  #   same    : same-leaf substitution (thay item bằng item cùng leaf category)
+  #   sibling : sibling-leaf substitution (thay bằng item của category anh em
+  #             - chỉ dùng được khi dataset có taxonomy)
+  #   hybrid  : same-leaf + random crop
+  # Mỗi cặp (s, s~) sẽ chọn ngẫu nhiên 1 chiến lược trong danh sách.
+  strategies: [same, sibling, hybrid]
+
+  # Trọng số xác suất chọn từng chiến lược (cùng thứ tự với strategies).
+  # Để [] = xác suất đều nhau. Ví dụ: [0.5, 0.25, 0.25]
+  strategy_weights: []
+
+  # Tỷ lệ item trong phiên bị thay thế: k = max(1, round(eta_aug * n)).
+  # Mặc định 0.3; sweep {0.2, 0.3, 0.5, 0.7}
+  eta_aug: 0.3
+
+  # Tỷ lệ độ dài giữ lại khi random crop trong chiến lược hybrid.
+  # Mặc định 0.75 (giữ 75% phiên)
+  eta_crop: 0.9
+
+  # Ngưỡng fallback k_min: nếu category có ít hơn k_min item ứng viên
+  # thì KHÔNG thay thế (giữ nguyên item) - tránh thay bằng item quá hiếm.
+  # Mặc định 5; sweep {3, 5, 10, 20}
+  k_min: 5
+
+# ----------------------------------------------------------------------------
+# TRAINING - Giai đoạn 4 (L_rec) và 6 (multi-task L_rec + lambda*L_CL)
+# Dùng bởi CatSA/train.py
+# ----------------------------------------------------------------------------
+training:
+  # Bật/tắt contrastive learning (Module 2 + InfoNCE):
+  #   false : chỉ train L_rec => biến thể A2 (Module 1 only) trong ablation
+  #   true  : CatSA đầy đủ với L = L_rec + lambda * L_CL-session
+  use_cl: true
+
+  # Trọng số lambda của loss contrastive trong multi-task objective.
+  # Mặc định 0.1; sweep {0.001, 0.01, 0.1, 0.5, 1.0}
+  lambda_cl: 0.1
+
+  # Temperature tau của InfoNCE (tau nhỏ => phân biệt sắc nét hơn).
+  # Mặc định 0.5; sweep {0.05, 0.1, 0.2, 0.5, 1.0}
+  tau: 0.5
+
+  # Kích thước batch (số phiên mỗi batch). Mặc định 100 theo SR-GNN.
+  batch_size: 100
+
+  # Learning rate của optimizer Adam. Mặc định 1e-3;
+  # sweep {1e-4, 5e-4, 1e-3, 5e-3}
+  learning_rate: 0.001
+
+  # Hệ số weight decay (L2 regularization) của Adam. Mặc định 1e-5.
+  weight_decay: 0.00001
+
+  # Số epoch tối đa. Mặc định 30.
+  max_epochs: 30
+
+  # Early stopping: dừng nếu val HR@20 không cải thiện sau bấy nhiêu
+  # epoch liên tiếp. Mặc định 5.
+  patience: 5
+
+  # Ngưỡng gradient clipping (max_norm). Mặc định 5.0.
+  grad_clip: 5.0
+
+  # Random seed để tái lập kết quả (reproducibility). Mặc định 42.
+  seed: 42
+
+  # Thiết bị tính toán: cuda | cpu | auto (tự chọn cuda nếu có)
+  device: auto
+
+  # Số worker của DataLoader (0 = load trong main process)
+  num_workers: 0
+
+  # --- LƯU MODEL TỐT NHẤT ---
+  # Model tốt nhất (theo primary_metric trên validation) LUÔN được lưu khi
+  # train: best_model.pt + info.yaml (ghi rõ dự án, version, run, epoch tốt
+  # nhất, metrics val/test và toàn bộ cấu hình lúc train).
+
+  # Thư mục GỐC lưu checkpoint (dùng khi save_dir để trống).
+  checkpoint_dir: checkpoints
+
+  # Vị trí lưu model tốt nhất:
+  #   - Để trống "" => MẶC ĐỊNH theo version, phân cấp tự động:
+  #       <checkpoint_dir>/<tên dự án>/<version cấu hình>/<tên run>/
+  #       ví dụ: checkpoints/catsa/catsa_v1/003-04-07-2026-09/best_model.pt
+  #       (tên run = tên file log, đối chiếu 1-1 với Log/retailrocket/)
+  #   - Chỉ định đường dẫn => lưu đúng thư mục đó, KHÔNG phân cấp thêm,
+  #       ví dụ: save_dir: ket_qua/model_chinh_thuc
+  #       (lưu ý: chạy nhiều lần với cùng save_dir sẽ ghi đè lên nhau)
+  save_dir: "checkpoints/retailrocket/catsa_v1/CatSA_v1_d128_eta_crop_0.9"
+
+# ----------------------------------------------------------------------------
+# EVALUATION - đánh giá full-ranking trên toàn vocabulary
+# Dùng bởi CatSA/evaluate.py
+# ----------------------------------------------------------------------------
+evaluation:
+  # Các giá trị K để tính HR@K, NDCG@K, MRR@K. Chuẩn SBR: 10 và 20.
+  top_k: [10, 20]
+
+  # Metric dùng cho early stopping / chọn model tốt nhất.
+  # Dạng "tên@K": hr@20 | ndcg@20 | mrr@20
+  primary_metric: mrr@20

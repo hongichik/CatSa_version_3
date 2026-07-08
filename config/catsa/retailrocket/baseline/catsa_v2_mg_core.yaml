@@ -1,0 +1,63 @@
+# CatSA v2 — mg_core (CORE Transformer + dual-path GNN + category GRU + extra rerank)
+project:
+  name: retailrocket
+  filename_mode: custom
+  custom_filename: CatSA/baseline/CatSA_v2_mg_core.log
+
+data:
+  data_dir: data/retailrocket_item_hon_5
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+
+model:
+  embedding_dim: 100
+  num_layers: 2
+  use_taxonomy: true
+  dropout: 0.1
+  encoder_type: mg_core
+  fusion_type: gate
+  n_heads: 2
+  retrieval_topk: 5
+  max_seq_length: 50
+  trm_layers: 2
+  trm_inner_size: 256
+  temperature: 0.07
+  sess_dropout: 0.2
+  item_dropout: 0.2
+  extra_rerank: true
+  extra_beta: 12.0
+
+augment:
+  strategies: [same, sibling, hybrid]
+  strategy_weights: [0.4, 0.3, 0.3]
+  eta_aug: 0.3
+  eta_crop: 0.75
+  k_min: 5
+
+training:
+  use_cl: true
+  cl_type: both
+  lambda_cl: 0.1
+  lambda_proto: 0.2
+  aux_cat: true
+  aux_parent: true
+  lambda_aux_cat: 0.1
+  lambda_aux_parent: 0.05
+  tau: 0.2
+  batch_size: 100
+  learning_rate: 0.001
+  weight_decay: 0.00001
+  max_epochs: 30
+  patience: 5
+  grad_clip: 5.0
+  seed: 42
+  device: auto
+  num_workers: 0
+  checkpoint_dir: checkpoints
+  save_dir: "checkpoints/CatSA/retailrocket/v2_mg_core"
+
+evaluation:
+  top_k: [10, 20]
+  primary_metric: mrr@20

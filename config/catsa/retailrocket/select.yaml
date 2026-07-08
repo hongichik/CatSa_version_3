@@ -1,14 +1,51 @@
 # select.yaml — danh sách version CatSA cho RetailRocket
-# python CatSA/main.py                              → chạy lần lượt (mặc định retailrocket)
-# python CatSA/main.py --suite retailrocket --run catsa_2_5.yaml
+# Cây thư mục:
+#   baseline/      — v1..v4 + v2_mg_core
+#   sweep/         — hyperparam ablation (eta, dim, batch)
+#   encoder/       — encoder ablation
+#   ablation_len/  — filter độ dài phiên / category-only
+#   research/      — mẫu research đầy đủ
 #
-# tienxuly/main.py không train CatSA — khi load config chung chỉ dùng phần tử
-# đầu tiên trong list (dataset + preprocess).
+# Cách chạy:
+#   python CatSA/main.py                              → lần lượt mọi mục trong run:
+#   python CatSA/main.py --run baseline/catsa_v1.yaml → một bản (đường dẫn tương đối)
+#   python CatSA/main.py --run catsa_v1.yaml          → cũng OK (tìm theo basename)
+#
+# [2026-07-08] TẠM DỪNG sweep — chuyển sang cải thiện logic model.
 
-run:
-  # - catsa_v1.yaml              # item_hon_5 (baseline)
-  - catsa_2_5.yaml
-  - catsa_3_6.yaml
-  - catsa_4_7.yaml
-  - catsa_2_7.yaml
-  - catsa_category.yaml
+run: []
+  # CatSA v2 — bật khi sẵn sàng train logic mới
+  # - baseline/catsa_v2_mg_core.yaml
+
+# baseline item_hon_5
+# - baseline/catsa_v1.yaml
+# - baseline/catsa_v2.yaml
+# - baseline/catsa_v3.yaml
+# - baseline/catsa_v4.yaml
+
+# sweep (đã chạy xong)
+# - sweep/catsa_v1_eta_aug_0.2.yaml
+# - sweep/catsa_v1_eta_aug_0.5.yaml
+# - sweep/catsa_v1_eta_crop_0.5.yaml
+# - sweep/catsa_v1_eta_crop_0.9.yaml
+# - sweep/catsa_v1_d64.yaml
+# - sweep/catsa_v1_d128.yaml
+# - sweep/catsa_v1_d64_eta_aug_0.2.yaml
+# - sweep/catsa_v1_d64_eta_aug_0.5.yaml
+# - sweep/catsa_v1_d128_eta_aug_0.2.yaml
+# - sweep/catsa_v1_d128_eta_aug_0.5.yaml
+
+# encoder ablation — tạm dừng
+# - encoder/catsa_enc_concat.yaml
+# - encoder/catsa_enc_dual_path.yaml
+# - encoder/catsa_enc_hgt.yaml
+# - encoder/catsa_enc_retrieval.yaml
+# - encoder/catsa_enc_transition.yaml
+# - encoder/catsa_enc_soft_cat.yaml
+
+# ablation độ dài phiên
+# - ablation_len/catsa_2_5.yaml
+# - ablation_len/catsa_2_7.yaml
+# - ablation_len/catsa_3_6.yaml
+# - ablation_len/catsa_4_7.yaml
+# - ablation_len/catsa_category.yaml

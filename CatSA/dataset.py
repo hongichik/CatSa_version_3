@@ -66,6 +66,7 @@ class GraphCollator:
         batch_orig = sessions_to_batch(
             sessions, self.item2cat, self.cat_parent, self.use_taxonomy
         )
+        batch_orig.session_lists = sessions
 
         batch_aug = None
         if self.augmenter is not None:
@@ -73,6 +74,7 @@ class GraphCollator:
             batch_aug = sessions_to_batch(
                 sessions_aug, self.item2cat, self.cat_parent, self.use_taxonomy
             )
+            batch_aug.session_lists = sessions_aug
 
         return batch_orig, batch_aug, targets
 

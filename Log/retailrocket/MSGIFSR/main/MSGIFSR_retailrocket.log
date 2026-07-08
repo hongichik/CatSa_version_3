@@ -1,0 +1,53 @@
+2026-07-08 05:36:25 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/retailrocket/MSGIFSR_retailrocket.log
+2026-07-08 05:36:25 | INFO    | ====================================================================
+2026-07-08 05:36:25 | INFO    | [MSGIFSR] Bắt đầu run=msgifsr_retailrocket.yaml  suite=retailrocket
+2026-07-08 05:36:25 | INFO    | [MSGIFSR] Cấu hình: {'project': {'name': 'retailrocket', 'filename_mode': 'custom', 'custom_filename': 'MSGIFSR_retailrocket.log'}, 'data': {'data_dir': 'data/retailrocket_item_hon_5', 'train_file': 'train.txt', 'val_file': 'val.txt', 'test_file': 'test.txt', 'lookup_file': 'lookup_tables.pkl'}, 'msgifsr': {'dataset_name': 'retailrocket_item_hon_5', 'reuse_converted': True}, 'msgifsr_model': {'embedding_dim': 256, 'num_layers': 1, 'order': 1, 'feat_drop': 0.1, 'reducer': 'mean', 'norm': True, 'extra': True, 'fusion': True}, 'msgifsr_training': {'batch_size': 512, 'learning_rate': 0.001, 'weight_decay': 0.0001, 'max_epochs': 30, 'patience': 3, 'seed': 42, 'device': 'auto', 'num_workers': 0, 'log_interval': 200, 'lr_step_size': 3, 'lr_gamma': 0.1, 'checkpoint_dir': 'checkpoints', 'save_dir': 'checkpoints/MSGIFSR/retailrocket/msgifsr'}, 'evaluation': {'top_k': [10, 20], 'primary_metric': 'mrr@20'}, '_logging': {'dir': 'Log', 'level': 'INFO', 'console': True}}
+2026-07-08 05:36:26 | INFO    | [MSGIFSR] Dữ liệu [data/retailrocket_item_hon_5]: |I|=79649, train=283023 phiên
+2026-07-08 05:36:26 | INFO    | [adapter] Đã sinh dataset MSGIFSR 'retailrocket_item_hon_5' tại /home/hongnguyen/demo2/MSGIFSR_repo/datasets/retailrocket_item_hon_5: train=283023, val=35377, test=33263, n_items=79649
+2026-07-08 05:36:26 | INFO    | MSGIFSR [/home/hongnguyen/demo2/MSGIFSR_repo/datasets/retailrocket_item_hon_5]: |I|=79649, train=764873 val=87318 test=81372 mẫu (ước lượng)
+2026-07-08 05:36:26 | INFO    | MSGIFSR model: order=1, layers=1, dim=256, params=23367426
+2026-07-08 05:36:58 | INFO    |   Epoch 1 batch 200: loss=7.3889
+2026-07-08 05:37:29 | INFO    |   Epoch 1 batch 400: loss=6.8330
+2026-07-08 05:37:59 | INFO    |   Epoch 1 batch 600: loss=6.1851
+2026-07-08 05:38:30 | INFO    |   Epoch 1 batch 800: loss=5.9383
+2026-07-08 05:39:01 | INFO    |   Epoch 1 batch 1000: loss=5.7502
+2026-07-08 05:39:32 | INFO    |   Epoch 1 batch 1200: loss=5.5618
+2026-07-08 05:40:03 | INFO    |   Epoch 1 batch 1400: loss=5.3722
+2026-07-08 05:40:40 | INFO    |   Epoch 1 (253.7s) Val: hr@10=0.5433 | ndcg@10=0.4254 | mrr@10=0.3880 | hr@20=0.5973 | ndcg@20=0.4391 | mrr@20=0.3918
+2026-07-08 05:40:40 | INFO    |   → Model tốt nhất mới (mrr@20=0.3918)
+2026-07-08 05:41:11 | INFO    |   Epoch 2 batch 200: loss=5.0234
+2026-07-08 05:41:42 | INFO    |   Epoch 2 batch 400: loss=4.6520
+2026-07-08 05:42:13 | INFO    |   Epoch 2 batch 600: loss=4.3957
+2026-07-08 05:42:44 | INFO    |   Epoch 2 batch 800: loss=4.3970
+2026-07-08 05:43:15 | INFO    |   Epoch 2 batch 1000: loss=4.4075
+2026-07-08 05:43:46 | INFO    |   Epoch 2 batch 1200: loss=4.3975
+2026-07-08 05:44:17 | INFO    |   Epoch 2 batch 1400: loss=4.3944
+2026-07-08 05:44:54 | INFO    |   Epoch 2 (253.1s) Val: hr@10=0.5604 | ndcg@10=0.4337 | mrr@10=0.3936 | hr@20=0.6206 | ndcg@20=0.4489 | mrr@20=0.3977
+2026-07-08 05:44:54 | INFO    |   → Model tốt nhất mới (mrr@20=0.3977)
+2026-07-08 05:45:24 | INFO    |   Epoch 3 batch 200: loss=4.3116
+2026-07-08 05:45:55 | INFO    |   Epoch 3 batch 400: loss=4.2068
+2026-07-08 05:46:26 | INFO    |   Epoch 3 batch 600: loss=4.1047
+2026-07-08 05:46:57 | INFO    |   Epoch 3 batch 800: loss=4.1654
+2026-07-08 05:47:28 | INFO    |   Epoch 3 batch 1000: loss=4.2173
+2026-07-08 05:48:00 | INFO    |   Epoch 3 batch 1200: loss=4.2398
+2026-07-08 05:48:30 | INFO    |   Epoch 3 batch 1400: loss=4.2530
+2026-07-08 05:49:07 | INFO    |   Epoch 3 (253.6s) Val: hr@10=0.5614 | ndcg@10=0.4333 | mrr@10=0.3929 | hr@20=0.6222 | ndcg@20=0.4488 | mrr@20=0.3971
+2026-07-08 05:49:38 | INFO    |   Epoch 4 batch 200: loss=4.2611
+2026-07-08 05:50:09 | INFO    |   Epoch 4 batch 400: loss=4.0812
+2026-07-08 05:50:40 | INFO    |   Epoch 4 batch 600: loss=3.8721
+2026-07-08 05:51:11 | INFO    |   Epoch 4 batch 800: loss=3.7794
+2026-07-08 05:51:42 | INFO    |   Epoch 4 batch 1000: loss=3.6545
+2026-07-08 05:52:13 | INFO    |   Epoch 4 batch 1200: loss=3.5078
+2026-07-08 05:52:44 | INFO    |   Epoch 4 batch 1400: loss=3.2975
+2026-07-08 05:53:21 | INFO    |   Epoch 4 (253.8s) Val: hr@10=0.5701 | ndcg@10=0.4352 | mrr@10=0.3925 | hr@20=0.6307 | ndcg@20=0.4506 | mrr@20=0.3968
+2026-07-08 05:53:52 | INFO    |   Epoch 5 batch 200: loss=3.9082
+2026-07-08 05:54:23 | INFO    |   Epoch 5 batch 400: loss=3.7690
+2026-07-08 05:54:54 | INFO    |   Epoch 5 batch 600: loss=3.6188
+2026-07-08 05:55:25 | INFO    |   Epoch 5 batch 800: loss=3.5680
+2026-07-08 05:55:56 | INFO    |   Epoch 5 batch 1000: loss=3.4859
+2026-07-08 05:56:27 | INFO    |   Epoch 5 batch 1200: loss=3.3927
+2026-07-08 05:56:58 | INFO    |   Epoch 5 batch 1400: loss=3.2457
+2026-07-08 05:57:35 | INFO    |   Epoch 5 (253.8s) Val: hr@10=0.5708 | ndcg@10=0.4332 | mrr@10=0.3896 | hr@20=0.6324 | ndcg@20=0.4488 | mrr@20=0.3939
+2026-07-08 05:57:35 | INFO    |   Early stopping sau 3 epoch không cải thiện.
+2026-07-08 05:57:56 | INFO    |   Test: hr@10=0.5315 | ndcg@10=0.4093 | mrr@10=0.3707 | hr@20=0.5930 | ndcg@20=0.4249 | mrr@20=0.3749
+2026-07-08 05:57:56 | INFO    | [MSGIFSR] Hoàn tất msgifsr_retailrocket.yaml. Test: hr@10=0.5315 | ndcg@10=0.4093 | mrr@10=0.3707 | hr@20=0.5930 | ndcg@20=0.4249 | mrr@20=0.3749

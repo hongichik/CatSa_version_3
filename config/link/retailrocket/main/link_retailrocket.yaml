@@ -1,0 +1,41 @@
+# LINK trên RetailRocket (bản 4_7 — n_items≈47k, chạy được trong RAM ~62GB)
+# Siêu tham số LINK lấy theo run_link.sh gốc cho retailrocket.
+project:
+  name: retailrocket
+  filename_mode: custom
+  custom_filename: LINK/main/LINK_retailrocket.log
+
+data:
+  data_dir: data/retailrocket_4_7
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+
+link:
+  dataset_name: retailrocket        # tên dataset RecBole sinh trong LINK_repo/dataset/
+  reuse_converted: true             # dùng lại atomic files nếu đã sinh
+  reuse_teacher: true               # dùng lại teacher matrix nếu đã có
+
+  # --- Teacher core_trm (mô hình neural sinh ma trận tri thức) ---
+  teacher_model: core_trm
+  teacher_epochs: 20
+  train_batch_size: 1024
+  eval_batch_size: 512
+  learning_rate: 0.001
+  stopping_step: 5
+
+  # --- Siêu tham số LINK (closed-form) ---
+  reg: 10.0
+  reg_teacher: 100
+  predict_weight: 4.0
+  slis_alpha: 0.9
+  teacher_normalize: true
+  teacher_temperature: 0.1
+
+  gpu_id: 0
+
+evaluation:
+  topk: [5, 10, 20]
+  metrics: [Recall, MRR]
+  valid_metric: MRR@20

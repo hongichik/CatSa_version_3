@@ -1,0 +1,13 @@
+# select.yaml — danh sách version LINK (RetailRocket)
+# Cây: main/ (4_7 + full), toy/
+# python LINK/main.py --suite retailrocket
+# python LINK/main.py --run main/link_retailrocket.yaml
+#
+# Mặc định: retailrocket_4_7 (RAM ~62GB). item_hon_5 dễ OOM.
+run:
+  - main/link_retailrocket.yaml
+
+# Bản đầy đủ item_hon_5 — bật khi máy đủ bộ nhớ:
+#  - main/link_retailrocket_full.yaml
+# Smoke:
+#  - toy/link_toy.yaml

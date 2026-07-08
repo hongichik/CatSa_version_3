@@ -1,0 +1,16 @@
+2026-07-08 05:16:03 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/retailrocket/MSGIFSR_toy.log
+2026-07-08 05:16:03 | INFO    | ====================================================================
+2026-07-08 05:16:03 | INFO    | [MSGIFSR] Bắt đầu run=msgifsr_toy.yaml  suite=retailrocket
+2026-07-08 05:16:03 | INFO    | [MSGIFSR] Cấu hình: {'project': {'name': 'retailrocket', 'filename_mode': 'custom', 'custom_filename': 'MSGIFSR_toy.log'}, 'data': {'data_dir': 'data/toy_link', 'train_file': 'train.txt', 'val_file': 'val.txt', 'test_file': 'test.txt', 'lookup_file': 'lookup_tables.pkl'}, 'msgifsr': {'dataset_name': 'toy_msgifsr', 'reuse_converted': False}, 'msgifsr_model': {'embedding_dim': 64, 'num_layers': 1, 'order': 1, 'feat_drop': 0.1, 'reducer': 'mean', 'norm': True, 'extra': True, 'fusion': True}, 'msgifsr_training': {'batch_size': 64, 'learning_rate': 0.001, 'weight_decay': 0.0001, 'max_epochs': 3, 'patience': 2, 'seed': 42, 'device': 'auto', 'num_workers': 0, 'log_interval': 50, 'checkpoint_dir': 'checkpoints', 'save_dir': 'checkpoints/MSGIFSR/toy'}, 'evaluation': {'top_k': [10, 20], 'primary_metric': 'mrr@20'}, '_logging': {'dir': 'Log', 'level': 'INFO', 'console': True}}
+2026-07-08 05:16:03 | INFO    | [MSGIFSR] Dữ liệu [data/toy_link]: |I|=60, train=500 phiên
+2026-07-08 05:16:03 | INFO    | [adapter] Đã sinh dataset MSGIFSR 'toy_msgifsr' tại /home/hongnguyen/demo2/MSGIFSR_repo/datasets/toy_msgifsr: train=500, val=60, test=60, n_items=60
+2026-07-08 05:16:03 | INFO    | MSGIFSR [/home/hongnguyen/demo2/MSGIFSR_repo/datasets/toy_msgifsr]: |I|=60, train=1496 val=167 test=196 mẫu (ước lượng)
+2026-07-08 05:16:03 | INFO    | MSGIFSR model: order=1, layers=1, dim=64, params=195202
+2026-07-08 05:16:05 | INFO    |   Epoch 1 (1.3s) Val: hr@10=0.4731 | ndcg@10=0.3027 | mrr@10=0.2495 | hr@20=0.6287 | ndcg@20=0.3419 | mrr@20=0.2602
+2026-07-08 05:16:05 | INFO    |   → Model tốt nhất mới (mrr@20=0.2602)
+2026-07-08 05:16:06 | INFO    |   Epoch 2 (0.5s) Val: hr@10=0.6108 | ndcg@10=0.3573 | mrr@10=0.2788 | hr@20=0.8024 | ndcg@20=0.4052 | mrr@20=0.2915
+2026-07-08 05:16:06 | INFO    |   → Model tốt nhất mới (mrr@20=0.2915)
+2026-07-08 05:16:06 | INFO    |   Epoch 3 (0.5s) Val: hr@10=0.7246 | ndcg@10=0.3865 | mrr@10=0.2823 | hr@20=0.8862 | ndcg@20=0.4278 | mrr@20=0.2938
+2026-07-08 05:16:06 | INFO    |   → Model tốt nhất mới (mrr@20=0.2938)
+2026-07-08 05:16:06 | INFO    |   Test: hr@10=0.7347 | ndcg@10=0.3879 | mrr@10=0.2816 | hr@20=0.8929 | ndcg@20=0.4279 | mrr@20=0.2926
+2026-07-08 05:16:06 | INFO    | [MSGIFSR] Hoàn tất msgifsr_toy.yaml. Test: hr@10=0.7347 | ndcg@10=0.3879 | mrr@10=0.2816 | hr@20=0.8929 | ndcg@20=0.4279 | mrr@20=0.2926

@@ -1,0 +1,78 @@
+# ============================================================================
+# CATSA RESEARCH — mẫu cấu hình đầy đủ, chọn encoder / loss qua YAML
+# Copy file này, đổi encoder_type / cl_type / aux_* rồi thêm vào select.yaml
+# ============================================================================
+
+project:
+  name: retailrocket
+  filename_mode: custom
+  custom_filename: CatSA/research/CatSA_research.log
+
+data:
+  data_dir: data/retailrocket_item_hon_5
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+
+# ----------------------------------------------------------------------------
+# MODEL — chọn encoder_type:
+#   rgcn       : CatSA gốc (hetero graph + SAGEConv)
+#   concat     : item_emb + cat_emb + sequential GNN (baseline)
+#   dual_path  : nhánh sequential + nhánh taxonomy, fusion qua fusion_type
+#   hgt        : HGTConv (relation-aware attention)
+#   retrieval  : RGCN + global category retrieval (cross-session)
+#   transition : sequential GNN + GRU trên chuỗi category
+#   soft_cat   : soft membership item→category + RGCN
+# ----------------------------------------------------------------------------
+model:
+  embedding_dim: 100
+  num_layers: 2
+  use_taxonomy: true
+  dropout: 0.1
+
+  encoder_type: rgcn
+  # dual_path | transition: cross_attn | gate | sum
+  fusion_type: cross_attn
+  n_heads: 2
+  retrieval_topk: 5
+
+augment:
+  strategies: [same, sibling, hybrid]
+  strategy_weights: []
+  eta_aug: 0.3
+  eta_crop: 0.75
+  k_min: 5
+
+# ----------------------------------------------------------------------------
+# TRAINING — cl_type (khi use_cl=true):
+#   infonce    : session-level InfoNCE (CatSA gốc)
+#   prototype  : category prototype contrastive
+#   both       : infonce + prototype
+# aux_cat / aux_parent: auxiliary task dự đoán category/parent item tiếp theo
+# ----------------------------------------------------------------------------
+training:
+  use_cl: true
+  cl_type: infonce
+  lambda_cl: 0.1
+  lambda_proto: 0.1
+  aux_cat: false
+  aux_parent: false
+  lambda_aux_cat: 0.1
+  lambda_aux_parent: 0.1
+  tau: 0.5
+  batch_size: 100
+  learning_rate: 0.001
+  weight_decay: 0.00001
+  max_epochs: 30
+  patience: 5
+  grad_clip: 5.0
+  seed: 42
+  device: auto
+  num_workers: 0
+  checkpoint_dir: checkpoints
+  save_dir: ""
+
+evaluation:
+  top_k: [10, 20]
+  primary_metric: mrr@20

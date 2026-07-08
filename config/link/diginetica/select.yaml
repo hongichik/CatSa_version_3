@@ -1,0 +1,4 @@
+# select.yaml — danh sách version LINK (Diginetica)
+# python LINK/main.py --suite diginetica
+run:
+  - link_diginetica.yaml

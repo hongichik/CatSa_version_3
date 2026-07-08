@@ -1,0 +1,9 @@
+# select.yaml — danh sách version MSGIFSR (RetailRocket)
+# Cây: main/, toy/
+# python MSGIFSR/main.py --suite retailrocket
+# python MSGIFSR/main.py --run main/msgifsr_retailrocket.yaml
+run:
+  - main/msgifsr_retailrocket.yaml
+
+# Smoke:
+#  - toy/msgifsr_toy.yaml

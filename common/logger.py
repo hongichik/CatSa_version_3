@@ -3,10 +3,10 @@
 Log ghi vào <logging.dir>/<project.name>/ (ví dụ Log/retailrocket/):
 - thư mục gốc lấy từ config/common/logging.yaml (dùng chung mọi dự án);
 - tên dự án + cách đặt tên file lấy từ config riêng của dự án
-  (ví dụ config/catsa/project.yaml):
-    * không khai báo => "auto": tên file dạng stt-ngày-tháng-năm-giờ.log,
-      ví dụ 001-04-07-2026-08.log (stt tự tăng trong thư mục log của dự án)
-    * khai báo custom_filename => dùng đúng tên đó
+  (ví dụ config/catsa/retailrocket/baseline/*.yaml):
+    * không khai báo => "auto": tên file dạng stt-ngày-tháng-năm-giờ.log
+    * custom_filename => đường dẫn tương đối trong thư mục log dự án
+      (vd CatSA/baseline/CatSA_v1.log — tạo thư mục con nếu cần)
 """
 
 from __future__ import annotations
@@ -63,10 +63,18 @@ def setup_logger(
         log_dir = Path(cfg.dir) / project.name
         log_dir.mkdir(parents=True, exist_ok=True)
         if project.filename_mode == "custom":
-            filename = project.custom_filename
+            # Cho phép phân cấp: custom_filename = "CatSA/baseline/CatSA_v1.log"
+            rel = Path(project.custom_filename)
+            if rel.is_absolute() or ".." in rel.parts:
+                raise ValueError(
+                    f"project.custom_filename không hợp lệ (chỉ đường dẫn tương đối "
+                    f"trong Log/{project.name}/): {project.custom_filename!r}"
+                )
+            log_path = log_dir / rel
+            log_path.parent.mkdir(parents=True, exist_ok=True)
         else:
             filename = _auto_filename(log_dir)
-        log_path = log_dir / filename
+            log_path = log_dir / filename
         _current_log_path = log_path
 
         file_handler = logging.FileHandler(log_path, encoding="utf-8")

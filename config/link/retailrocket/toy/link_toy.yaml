@@ -1,0 +1,39 @@
+# LINK — smoke test nhanh trên toy dataset (n_items=60), chỉ để kiểm tra pipeline.
+# Chạy: python LINK/main.py --run link_toy.yaml
+project:
+  name: retailrocket
+  filename_mode: custom
+  custom_filename: LINK/toy/LINK_toy.log
+
+data:
+  data_dir: data/toy_link
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+
+link:
+  dataset_name: toy_link
+  reuse_converted: false
+  reuse_teacher: false
+
+  teacher_model: core_trm
+  teacher_epochs: 2
+  train_batch_size: 256
+  eval_batch_size: 256
+  learning_rate: 0.001
+  stopping_step: 5
+
+  reg: 10.0
+  reg_teacher: 100
+  predict_weight: 4.0
+  slis_alpha: 0.9
+  teacher_normalize: true
+  teacher_temperature: 0.1
+
+  gpu_id: 0
+
+evaluation:
+  topk: [5, 10, 20]
+  metrics: [Recall, MRR]
+  valid_metric: MRR@20

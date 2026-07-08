@@ -1,4 +1,6 @@
 # select.yaml — danh sách version CORE (RetailRocket)
+# Cây: main/
 # python CORE/main.py --suite retailrocket
+# python CORE/main.py --run main/core_trm_retailrocket.yaml
 run:
-  - core_trm_retailrocket.yaml
+  - main/core_trm_retailrocket.yaml
