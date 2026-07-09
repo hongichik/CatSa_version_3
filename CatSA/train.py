@@ -21,7 +21,7 @@ from common.tracker import log_metrics, set_summary
 from .augment import CatSAAugmenter, resolve_unk_cat_idx
 from .aux_heads import AuxiliaryHeads
 from .dataset import make_loader
-from .evaluate import evaluate_model
+from .evaluate import evaluate_model, evaluate_dual_length
 from .losses import (
     auxiliary_category_loss,
     auxiliary_parent_loss,
@@ -116,7 +116,89 @@ def _compute_cl(
     return loss
 
 
+def run_length_dual_eval(data: dict, cfg: Config) -> dict[str, float]:
+    """Đánh giá kết hợp 2 checkpoint (short/long) với routing theo len(prefix)."""
+    log = get_logger()
+    tr = cfg.training
+    ev = cfg.evaluation
+    device = resolve_device(tr.device)
+
+    ckpt_short = Path(ev.checkpoint_short)
+    ckpt_long = Path(ev.checkpoint_long)
+    if not ckpt_short.is_file():
+        raise FileNotFoundError(f"checkpoint_short không tồn tại: {ckpt_short}")
+    if not ckpt_long.is_file():
+        raise FileNotFoundError(f"checkpoint_long không tồn tại: {ckpt_long}")
+
+    log.info(
+        "Length-dual eval: threshold=%d | short=%s | long=%s",
+        ev.length_threshold, ckpt_short, ckpt_long,
+    )
+
+    item2cat = data["item2cat"]
+    cat_parent = data["cat_parent"] if cfg.model.use_taxonomy else None
+    max_prefix = int(data.get("max_prefix_length", 50))
+
+    val_loader = make_loader(
+        data["val_sessions"], item2cat, cat_parent, cfg.model.use_taxonomy,
+        tr.batch_size, shuffle=False, num_workers=tr.num_workers,
+        max_prefix_length=max_prefix,
+    )
+    test_loader = make_loader(
+        data["test_sessions"], item2cat, cat_parent, cfg.model.use_taxonomy,
+        tr.batch_size, shuffle=False, num_workers=tr.num_workers,
+        max_prefix_length=max_prefix,
+    )
+
+    model_short = build_encoder(
+        cfg.model, data["n_items"], data["n_cats"],
+        item2cat=item2cat, cat2items=data.get("cat2items"),
+        cat_parent=cat_parent,
+    ).to(device)
+    model_long = build_encoder(
+        cfg.model, data["n_items"], data["n_cats"],
+        item2cat=item2cat, cat2items=data.get("cat2items"),
+        cat_parent=cat_parent,
+    ).to(device)
+
+    _load_checkpoint(ckpt_short, model_short, None, device)
+    _load_checkpoint(ckpt_long, model_long, None, device)
+
+    val_metrics = evaluate_dual_length(
+        model_short, model_long, val_loader, device, ev.top_k, ev.length_threshold,
+    )
+    log.info(
+        "Val (dual): %s | short=%d long=%d",
+        " | ".join(f"{k}={v:.4f}" for k, v in val_metrics.items() if "@" in k and not k.startswith("short_") and not k.startswith("long_")),
+        int(val_metrics.get("n_short", 0)),
+        int(val_metrics.get("n_long", 0)),
+    )
+
+    test_metrics = evaluate_dual_length(
+        model_short, model_long, test_loader, device, ev.top_k, ev.length_threshold,
+    )
+    log.info(
+        "TEST (dual): %s | short=%d long=%d",
+        " | ".join(f"{k}={v:.4f}" for k, v in test_metrics.items() if "@" in k and not k.startswith("short_") and not k.startswith("long_")),
+        int(test_metrics.get("n_short", 0)),
+        int(test_metrics.get("n_long", 0)),
+    )
+    log.info(
+        "  Short bucket: %s",
+        " | ".join(f"{k}={v:.4f}" for k, v in test_metrics.items() if k.startswith("short_")),
+    )
+    log.info(
+        "  Long bucket: %s",
+        " | ".join(f"{k}={v:.4f}" for k, v in test_metrics.items() if k.startswith("long_")),
+    )
+    set_summary({f"test/{k}": v for k, v in test_metrics.items()})
+    return test_metrics
+
+
 def train_model(data: dict, cfg: Config):
+    if cfg.evaluation.mode == "length_dual":
+        return None, run_length_dual_eval(data, cfg)
+
     log = get_logger()
     tr = cfg.training
     mc = cfg.model
@@ -138,25 +220,33 @@ def train_model(data: dict, cfg: Config):
     ) if tr.use_cl and tr.cl_type in ("infonce", "both") else None
 
     max_prefix = int(data.get("max_prefix_length", 50))
+    pl_min, pl_max = tr.prefix_len_min, tr.prefix_len_max
+    if pl_min > 0 or pl_max > 0:
+        log.info("Lọc mẫu theo len(prefix): min=%s max=%s", pl_min or "—", pl_max or "—")
+
     train_loader = make_loader(
         data["train_sessions"], item2cat, cat_parent, cfg.model.use_taxonomy,
         tr.batch_size, shuffle=True, num_workers=tr.num_workers, augmenter=augmenter,
         max_prefix_length=max_prefix,
+        prefix_len_min=pl_min, prefix_len_max=pl_max,
     )
     val_loader = make_loader(
         data["val_sessions"], item2cat, cat_parent, cfg.model.use_taxonomy,
         tr.batch_size, shuffle=False, num_workers=tr.num_workers,
         max_prefix_length=max_prefix,
+        prefix_len_min=pl_min, prefix_len_max=pl_max,
     )
     test_loader = make_loader(
         data["test_sessions"], item2cat, cat_parent, cfg.model.use_taxonomy,
         tr.batch_size, shuffle=False, num_workers=tr.num_workers,
         max_prefix_length=max_prefix,
+        prefix_len_min=pl_min, prefix_len_max=pl_max,
     )
 
     model = build_encoder(
         cfg.model, data["n_items"], data["n_cats"],
         item2cat=item2cat, cat2items=data.get("cat2items"),
+        cat_parent=cat_parent,
     ).to(device)
 
     use_aux = tr.aux_cat or tr.aux_parent

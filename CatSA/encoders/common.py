@@ -12,7 +12,7 @@ from torch_geometric.utils import softmax as scatter_softmax
 
 ENCODER_TYPES = frozenset({
     "rgcn", "concat", "dual_path", "hgt", "retrieval", "transition", "soft_cat",
-    "mg_core",
+    "mg_core", "catsa_plus", "catsa_plus_v2",
 })
 FUSION_TYPES = frozenset({"cross_attn", "gate", "sum"})
 

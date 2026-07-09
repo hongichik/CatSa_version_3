@@ -4,7 +4,7 @@ from .model import CatSAEncoder, build_encoder
 from .augment import CatSAAugmenter
 from .losses import session_level_infonce, category_prototype_loss
 from .train import train_model
-from .evaluate import evaluate_model
+from .evaluate import evaluate_model, evaluate_dual_length
 
 __all__ = [
     "session_to_graph",
@@ -16,4 +16,5 @@ __all__ = [
     "category_prototype_loss",
     "train_model",
     "evaluate_model",
+    "evaluate_dual_length",
 ]

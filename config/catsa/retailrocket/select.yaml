@@ -1,51 +1,28 @@
-# select.yaml — danh sách version CatSA cho RetailRocket
-# Cây thư mục:
-#   baseline/      — v1..v4 + v2_mg_core
-#   sweep/         — hyperparam ablation (eta, dim, batch)
-#   encoder/       — encoder ablation
-#   ablation_len/  — filter độ dài phiên / category-only
-#   research/      — mẫu research đầy đủ
+# select.yaml — CatSA RetailRocket
 #
-# Cách chạy:
-#   python CatSA/main.py                              → lần lượt mọi mục trong run:
-#   python CatSA/main.py --run baseline/catsa_v1.yaml → một bản (đường dẫn tương đối)
-#   python CatSA/main.py --run catsa_v1.yaml          → cũng OK (tìm theo basename)
+# CatSA++ length-aware gate (1 model, gate biết độ dài phiên — xem
+# CatSA/encoders/catsa_plus_v2.py biến thể D):
+# Chạy: python CatSA/main.py --suite retailrocket
 #
-# [2026-07-08] TẠM DỪNG sweep — chuyển sang cải thiện logic model.
+run:
+  - baseline/catsa_plus_v2_len_gate.yaml
 
-run: []
-  # CatSA v2 — bật khi sẵn sàng train logic mới
-  # - baseline/catsa_v2_mg_core.yaml
+# Đã chạy xong (CatSA++ v2 suite):
+# - baseline/catsa_plus_v2.yaml          # Test mrr@20=0.3696
+# - baseline/catsa_plus_v2_bias.yaml     # crash cat_bias
+# - baseline/catsa_plus_v2_proto.yaml    # Test mrr@20=0.3700 (best)
+# - ablation_q3/catsa_v2_c_embed.yaml    # Test 0.3607
+# - ablation_q3/catsa_v2_c_residual.yaml
 
-# baseline item_hon_5
-# - baseline/catsa_v1.yaml
-# - baseline/catsa_v2.yaml
-# - baseline/catsa_v3.yaml
-# - baseline/catsa_v4.yaml
+# CatSA++ length-adaptive (2 model ngắn/dài — đã chạy xong, thay bằng
+# length_aware_gate ở trên vì kết quả tổng thấp hơn model chung do model
+# long thiếu dữ liệu train):
+# - baseline/catsa_plus_v2_len_short.yaml # Test mrr@20=0.4138 (chỉ bucket ngắn)
+# - baseline/catsa_plus_v2_len_long.yaml  # Test mrr@20=0.1775 (chỉ bucket dài)
+# - baseline/catsa_plus_v2_len_dual.yaml  # Test mrr@20=0.3623 (routing 2 model)
 
-# sweep (đã chạy xong)
-# - sweep/catsa_v1_eta_aug_0.2.yaml
-# - sweep/catsa_v1_eta_aug_0.5.yaml
-# - sweep/catsa_v1_eta_crop_0.5.yaml
-# - sweep/catsa_v1_eta_crop_0.9.yaml
-# - sweep/catsa_v1_d64.yaml
-# - sweep/catsa_v1_d128.yaml
-# - sweep/catsa_v1_d64_eta_aug_0.2.yaml
-# - sweep/catsa_v1_d64_eta_aug_0.5.yaml
-# - sweep/catsa_v1_d128_eta_aug_0.2.yaml
-# - sweep/catsa_v1_d128_eta_aug_0.5.yaml
-
-# encoder ablation — tạm dừng
-# - encoder/catsa_enc_concat.yaml
-# - encoder/catsa_enc_dual_path.yaml
-# - encoder/catsa_enc_hgt.yaml
-# - encoder/catsa_enc_retrieval.yaml
-# - encoder/catsa_enc_transition.yaml
-# - encoder/catsa_enc_soft_cat.yaml
-
-# ablation độ dài phiên
-# - ablation_len/catsa_2_5.yaml
-# - ablation_len/catsa_2_7.yaml
-# - ablation_len/catsa_3_6.yaml
-# - ablation_len/catsa_4_7.yaml
-# - ablation_len/catsa_category.yaml
+# Ablation Q3 đầy đủ (bật khi viết bảng paper):
+# - ablation_q3/catsa_v2_a_seq.yaml
+# - ablation_q3/catsa_v2_a2_m1.yaml
+# - ablation_q3/catsa_v2_b_dual.yaml
+# - ablation_q3/catsa_v2_c_full.yaml

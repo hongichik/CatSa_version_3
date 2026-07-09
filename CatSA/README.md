@@ -33,10 +33,30 @@ Danh sách chạy khai báo trong `config/catsa/retailrocket/select.yaml` hoặc
 Chạy từ bất kỳ thư mục nào cũng được — kết quả (log, checkpoint) luôn ghi về
 thư mục gốc dự án. Nếu chưa tiền xử lý, chương trình báo lỗi kèm hướng dẫn.
 
+## CatSA+ (`encoder_type: catsa_plus`) — bản nâng cấp bám May26.pdf
+
+Giữ **đóng góp Q3** (không thay CatSA bằng CORE):
+
+| Thành phần proposal | Trong CatSA+ |
+|---------------------|--------------|
+| Module 1 — hetero session graph | Dual-path GNN (seq + membership + taxonomy) — **encoder chính** |
+| Module 2 — same / sibling / hybrid | `augment:` + `use_cl: true` |
+| Session-level InfoNCE | `training.cl_type: infonce` |
+
+Chỉ mượn từ repo để **hạ tầng ranking** (không claim là contribution): TransNet phụ
+cùng bảng emb + cosine/temperature scoring.
+
+```bash
+python CatSA/main.py --run baseline/catsa_plus.yaml      # đầy đủ (M1+M2+CL)
+python CatSA/main.py --run baseline/catsa_plus_a2.yaml   # A2 = Module 1 only
+```
+
+Các encoder cũ (`rgcn`, `mg_core`, …) vẫn chọn bằng YAML — không bị xoá.
+
 ## Cấu hình liên quan (trong cây `config/`)
 
-Mỗi thí nghiệm CatSA nằm trong **một file version** riêng:
-`config/catsa/retailrocket/catsa_v1.yaml`, ... hoặc `config/catsa/diginetica/`.
+Mỗi thí nghiệm CatSA nằm trong **một file version** riêng dưới
+`config/catsa/retailrocket/{baseline,sweep,encoder,...}/` hoặc `config/catsa/diginetica/`.
 Thêm file mới rồi liệt kê trong `select.yaml` của suite tương ứng.
 
 | Section | Ý nghĩa |

@@ -110,13 +110,14 @@ class ModelConfig:
     num_layers: int
     use_taxonomy: bool
     dropout: float
-    # Encoder: rgcn | concat | dual_path | hgt | retrieval | transition | soft_cat | mg_core
+    # Encoder: rgcn | concat | dual_path | hgt | retrieval | transition | soft_cat
+    #          | mg_core | catsa_plus | catsa_plus_v2
     encoder_type: str
-    # Fusion (dual_path): cross_attn | gate | sum
+    # Fusion (dual_path / catsa_plus Module 1): cross_attn | gate | sum
     fusion_type: str
     n_heads: int
     retrieval_topk: int
-    # mg_core (CatSA v2)
+    # mg_core / catsa_plus / catsa_plus_v2
     max_seq_length: int = 50
     trm_layers: int = 2
     trm_inner_size: int = 256
@@ -125,6 +126,28 @@ class ModelConfig:
     item_dropout: float = 0.2
     extra_rerank: bool = True
     extra_beta: float = 12.0
+    # catsa_plus
+    trm_dropout: float = 0.5
+    use_seq_trm: bool = True
+    # catsa_plus variants: aux residual / taxonomy post-processing
+    use_error_aux: bool = False
+    error_aux_alpha: float = 0.15
+    post_process: bool = False
+    post_same_boost: float = 0.35
+    post_sib_boost: float = 0.12
+    post_other_penalty: float = 0.08
+    # catsa_plus_v2 — fusion đường đi (giữ Module 1/2/InfoNCE)
+    use_module1: bool = True
+    path_fusion: str = "dual_score"   # embed_gate | dual_score | trm_residual
+    dual_score_beta: float = 1.0
+    learn_score_beta: bool = True
+    trm_residual_gamma: float = 0.5
+    use_cat_bias: bool = False
+    # length-aware dual_score gate (chỉ path_fusion=dual_score) — 1 model duy
+    # nhất, gate tự điều chỉnh theo độ dài phiên thay vì tách model short/long.
+    # Mặc định false — không đổi hành vi phiên bản trước.
+    length_aware_gate: bool = False
+    length_gate_max_len: int = 50
 
 
 @dataclass
@@ -160,12 +183,20 @@ class TrainingConfig:
     num_workers: int
     checkpoint_dir: str     # thư mục GỐC (dùng khi save_dir trống)
     save_dir: str           # "" = mặc định theo version; khác "" = lưu đúng chỗ này
+    # Lọc mẫu sliding-window theo len(prefix); 0 = không lọc
+    prefix_len_min: int = 0
+    prefix_len_max: int = 0
 
 
 @dataclass
 class EvaluationConfig:
     top_k: list[int]
     primary_metric: str
+    # standard | length_dual (2 checkpoint short/long, routing theo len prefix)
+    mode: str = "standard"
+    length_threshold: int = 5
+    checkpoint_short: str = ""
+    checkpoint_long: str = ""
 
 
 @dataclass
@@ -763,6 +794,22 @@ def load_config(
             item_dropout=float(model.get("item_dropout", 0.2)),
             extra_rerank=bool(model.get("extra_rerank", True)),
             extra_beta=float(model.get("extra_beta", 12.0)),
+            trm_dropout=float(model.get("trm_dropout", 0.5)),
+            use_seq_trm=bool(model.get("use_seq_trm", True)),
+            use_error_aux=bool(model.get("use_error_aux", False)),
+            error_aux_alpha=float(model.get("error_aux_alpha", 0.15)),
+            post_process=bool(model.get("post_process", False)),
+            post_same_boost=float(model.get("post_same_boost", 0.35)),
+            post_sib_boost=float(model.get("post_sib_boost", 0.12)),
+            post_other_penalty=float(model.get("post_other_penalty", 0.08)),
+            use_module1=bool(model.get("use_module1", True)),
+            path_fusion=str(model.get("path_fusion", "dual_score")).lower(),
+            dual_score_beta=float(model.get("dual_score_beta", 1.0)),
+            learn_score_beta=bool(model.get("learn_score_beta", True)),
+            trm_residual_gamma=float(model.get("trm_residual_gamma", 0.5)),
+            use_cat_bias=bool(model.get("use_cat_bias", False)),
+            length_aware_gate=bool(model.get("length_aware_gate", False)),
+            length_gate_max_len=int(model.get("length_gate_max_len", 50)),
         ),
         augment=AugmentConfig(
             strategies=[str(s) for s in aug.get("strategies", ["same", "sibling", "hybrid"])],
@@ -792,10 +839,16 @@ def load_config(
             num_workers=int(train.get("num_workers", 0)),
             checkpoint_dir=str(train.get("checkpoint_dir", "checkpoints")),
             save_dir=str(train.get("save_dir") or ""),
+            prefix_len_min=int(train.get("prefix_len_min", 0)),
+            prefix_len_max=int(train.get("prefix_len_max", 0)),
         ),
         evaluation=EvaluationConfig(
             top_k=[int(k) for k in ev.get("top_k", [10, 20])],
             primary_metric=str(ev.get("primary_metric", "hr@20")).lower(),
+            mode=str(ev.get("mode", "standard")).lower(),
+            length_threshold=int(ev.get("length_threshold", 5)),
+            checkpoint_short=str(ev.get("checkpoint_short", "")),
+            checkpoint_long=str(ev.get("checkpoint_long", "")),
         ),
         config_dir=str(config_dir),
         # Section "project" nằm trong file version được chọn (vd catsa_v1.yaml)

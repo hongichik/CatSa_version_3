@@ -1,0 +1,155 @@
+2026-07-09 01:12:08 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/retailrocket/CatSA/baseline/CatSA_plus_v2_len_long.log
+2026-07-09 01:12:08 | INFO    | 
+====================================================================
+CẤU HÌNH LÚC CHẠY (config_dir: config | version: catsa_plus_v2_len_long)
+====================================================================
+logging:
+  dir: Log
+  level: INFO
+  console: true
+project:
+  name: retailrocket
+  filename_mode: custom
+  custom_filename: CatSA/baseline/CatSA_plus_v2_len_long.log
+wandb:
+  enabled: true
+  api_key: '***da-che***'
+  project: ''
+  entity: ''
+  run_name: ''
+  mode: online
+dataset:
+  source: kagglehub
+  kagglehub_handle: retailrocket/ecommerce-dataset
+  local_path: data/raw
+  name: retailrocket
+preprocess:
+  output_dir: data/retailrocket_2_5
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+  event_types:
+  - view
+  session_same_day: true
+  session_gap_seconds: 1800
+  dedup_consecutive: false
+  min_item_support: 5
+  min_session_length: 2
+  max_session_length: 5
+  session_length_mode: filter
+  max_prefix_length: 50
+  require_item_category: false
+  val_ratio: 0.1
+  test_ratio: 0.1
+  max_sessions: 0
+data:
+  data_dir: data/retailrocket_item_hon_5
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+model:
+  embedding_dim: 100
+  num_layers: 2
+  use_taxonomy: true
+  dropout: 0.1
+  encoder_type: catsa_plus_v2
+  fusion_type: gate
+  n_heads: 2
+  retrieval_topk: 5
+  max_seq_length: 50
+  trm_layers: 2
+  trm_inner_size: 256
+  temperature: 0.07
+  sess_dropout: 0.2
+  item_dropout: 0.2
+  extra_rerank: false
+  extra_beta: 12.0
+  trm_dropout: 0.5
+  use_seq_trm: true
+  use_error_aux: false
+  error_aux_alpha: 0.15
+  post_process: false
+  post_same_boost: 0.35
+  post_sib_boost: 0.12
+  post_other_penalty: 0.08
+  use_module1: true
+  path_fusion: dual_score
+  dual_score_beta: 1.0
+  learn_score_beta: true
+  trm_residual_gamma: 0.5
+  use_cat_bias: false
+augment:
+  strategies:
+  - same
+  - sibling
+  - hybrid
+  strategy_weights:
+  - 0.4
+  - 0.3
+  - 0.3
+  eta_aug: 0.3
+  eta_crop: 0.75
+  k_min: 5
+training:
+  use_cl: true
+  lambda_cl: 0.05
+  cl_type: both
+  lambda_proto: 0.05
+  aux_cat: true
+  aux_parent: false
+  lambda_aux_cat: 0.05
+  lambda_aux_parent: 0.0
+  tau: 0.2
+  batch_size: 256
+  learning_rate: 0.001
+  weight_decay: 1.0e-05
+  max_epochs: 30
+  patience: 5
+  grad_clip: 5.0
+  seed: 42
+  device: auto
+  num_workers: 0
+  checkpoint_dir: checkpoints
+  save_dir: checkpoints/CatSA/retailrocket/catsa_plus_v2_len_long
+  prefix_len_min: 6
+  prefix_len_max: 0
+evaluation:
+  top_k:
+  - 10
+  - 20
+  primary_metric: mrr@20
+  mode: standard
+  length_threshold: 5
+  checkpoint_short: ''
+  checkpoint_long: ''
+config_dir: config
+version: catsa_plus_v2_len_long
+====================================================================
+2026-07-09 01:12:11 | INFO    | wandb: run 'CatSA_plus_v2_len_long' — https://wandb.ai/hongichik321-aol/retailrocket/runs/aef87g3h
+2026-07-09 01:12:11 | INFO    | Dữ liệu [data/retailrocket_item_hon_5]: |I|=79649, |C|=1185, train=283023 phiên
+2026-07-09 01:12:11 | INFO    | Thiết bị: cuda | encoder=catsa_plus_v2 | fusion=gate | use_cl=True | cl_type=both | aux_cat=True | aux_parent=False
+2026-07-09 01:12:11 | INFO    | Lọc mẫu theo len(prefix): min=6 max=—
+2026-07-09 01:13:54 | INFO    | Epoch 1: total=9.2721, rec=8.7074, cl=0.2605, aux=0.3042 (101.3s)
+2026-07-09 01:13:57 | INFO    |   Val: hr@10=0.2697 | ndcg@10=0.2033 | mrr@10=0.1818 | hr@20=0.2908 | ndcg@20=0.2086 | mrr@20=0.1833
+2026-07-09 01:13:57 | INFO    |   → Model tốt nhất mới (mrr@20=0.1833)
+2026-07-09 01:15:37 | INFO    | Epoch 2: total=7.0407, rec=6.5871, cl=0.2390, aux=0.2146 (100.6s)
+2026-07-09 01:15:41 | INFO    |   Val: hr@10=0.2967 | ndcg@10=0.2139 | mrr@10=0.1877 | hr@20=0.3330 | ndcg@20=0.2230 | mrr@20=0.1902
+2026-07-09 01:15:41 | INFO    |   → Model tốt nhất mới (mrr@20=0.1902)
+2026-07-09 01:17:22 | INFO    | Epoch 3: total=5.8293, rec=5.4096, cl=0.2344, aux=0.1853 (100.8s)
+2026-07-09 01:17:25 | INFO    |   Val: hr@10=0.3041 | ndcg@10=0.2162 | mrr@10=0.1885 | hr@20=0.3482 | ndcg@20=0.2273 | mrr@20=0.1916
+2026-07-09 01:17:25 | INFO    |   → Model tốt nhất mới (mrr@20=0.1916)
+2026-07-09 01:19:06 | INFO    | Epoch 4: total=5.1754, rec=4.7700, cl=0.2315, aux=0.1739 (101.1s)
+2026-07-09 01:19:09 | INFO    |   Val: hr@10=0.3048 | ndcg@10=0.2151 | mrr@10=0.1869 | hr@20=0.3524 | ndcg@20=0.2271 | mrr@20=0.1902
+2026-07-09 01:20:50 | INFO    | Epoch 5: total=4.7877, rec=4.3890, cl=0.2301, aux=0.1685 (101.2s)
+2026-07-09 01:20:53 | INFO    |   Val: hr@10=0.2995 | ndcg@10=0.2101 | mrr@10=0.1821 | hr@20=0.3490 | ndcg@20=0.2226 | mrr@20=0.1855
+2026-07-09 01:22:34 | INFO    | Epoch 6: total=4.5202, rec=4.1248, cl=0.2299, aux=0.1655 (101.4s)
+2026-07-09 01:22:37 | INFO    |   Val: hr@10=0.2922 | ndcg@10=0.2044 | mrr@10=0.1770 | hr@20=0.3449 | ndcg@20=0.2177 | mrr@20=0.1806
+2026-07-09 01:24:19 | INFO    | Epoch 7: total=4.3177, rec=3.9241, cl=0.2298, aux=0.1638 (101.5s)
+2026-07-09 01:24:22 | INFO    |   Val: hr@10=0.2891 | ndcg@10=0.2018 | mrr@10=0.1745 | hr@20=0.3400 | ndcg@20=0.2147 | mrr@20=0.1780
+2026-07-09 01:26:04 | INFO    | Epoch 8: total=4.1524, rec=3.7596, cl=0.2300, aux=0.1628 (101.6s)
+2026-07-09 01:26:07 | INFO    |   Val: hr@10=0.2848 | ndcg@10=0.1982 | mrr@10=0.1711 | hr@20=0.3360 | ndcg@20=0.2111 | mrr@20=0.1747
+2026-07-09 01:26:07 | INFO    | Early stopping tại epoch 8
+2026-07-09 01:26:10 | INFO    | KẾT QUẢ TEST: hr@10=0.2863 | ndcg@10=0.2011 | mrr@10=0.1743 | hr@20=0.3314 | ndcg@20=0.2125 | mrr@20=0.1775
+2026-07-09 01:26:10 | INFO    | [CatSA] Hoàn tất baseline/catsa_plus_v2_len_long.yaml. Test metrics: hr@10=0.2863 | ndcg@10=0.2011 | mrr@10=0.1743 | hr@20=0.3314 | ndcg@20=0.2125 | mrr@20=0.1775

@@ -34,8 +34,25 @@ def expand_session_samples(
 
 
 class SessionDataset(Dataset):
-    def __init__(self, sessions: list[list[int]], max_prefix_length: int = 0):
+    def __init__(
+        self,
+        sessions: list[list[int]],
+        max_prefix_length: int = 0,
+        prefix_len_min: int = 0,
+        prefix_len_max: int = 0,
+    ):
+        """prefix_len_min/max: lọc mẫu theo len(prefix); 0 = không lọc."""
         self.samples = expand_session_samples(sessions, max_prefix_length)
+        if prefix_len_min > 0 or prefix_len_max > 0:
+            filtered: list[tuple[list[int], int]] = []
+            for prefix, target in self.samples:
+                pl = len(prefix)
+                if prefix_len_min > 0 and pl < prefix_len_min:
+                    continue
+                if prefix_len_max > 0 and pl > prefix_len_max:
+                    continue
+                filtered.append((prefix, target))
+            self.samples = filtered
 
     def __len__(self) -> int:
         return len(self.samples)
@@ -89,9 +106,16 @@ def make_loader(
     num_workers: int = 0,
     augmenter: CatSAAugmenter | None = None,
     max_prefix_length: int = 0,
+    prefix_len_min: int = 0,
+    prefix_len_max: int = 0,
 ) -> DataLoader:
     return DataLoader(
-        SessionDataset(sessions, max_prefix_length=max_prefix_length),
+        SessionDataset(
+            sessions,
+            max_prefix_length=max_prefix_length,
+            prefix_len_min=prefix_len_min,
+            prefix_len_max=prefix_len_max,
+        ),
         batch_size=batch_size,
         shuffle=shuffle,
         num_workers=num_workers,
