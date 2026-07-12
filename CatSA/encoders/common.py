@@ -10,10 +10,7 @@ from torch_geometric.nn import global_add_pool
 from torch_geometric.utils import softmax as scatter_softmax
 
 
-ENCODER_TYPES = frozenset({
-    "rgcn", "concat", "dual_path", "hgt", "retrieval", "transition", "soft_cat",
-    "mg_core", "catsa_plus", "catsa_plus_v2",
-})
+ENCODER_TYPES = frozenset({"catsa_plus", "catsa_plus_v2"})
 FUSION_TYPES = frozenset({"cross_attn", "gate", "sum"})
 
 
@@ -29,11 +26,61 @@ class SoftAttentionReadout(nn.Module):
     def forward(self, h_items: torch.Tensor, batch: Batch) -> torch.Tensor:
         item_batch = batch["item"].batch
         ptr = batch["item"].ptr
-        last_global = ptr[:-1] + batch["item"].last_idx.view(-1)
+        last_idx = batch["item"].last_idx.view(-1)
+        num_graphs = ptr.numel() - 1
+        assert last_idx.numel() == num_graphs, (
+            f"last_idx phải có đúng 1 giá trị mỗi graph trong batch "
+            f"(num_graphs={num_graphs}, last_idx.numel()={last_idx.numel()})"
+        )
+        last_global = ptr[:-1] + last_idx
         h_last = h_items[last_global]
         alpha = self.q(torch.tanh(self.W1(h_items) + self.W2(h_last)[item_batch]))
         alpha = scatter_softmax(alpha, item_batch)
         return global_add_pool(alpha * h_items, item_batch)
+
+
+class MultiInterestReadout(nn.Module):
+    """Readout đa-interest (ComiRec/Atten-Mixer style) — thay 1 vector soft-
+    attention duy nhất bằng K "interest head" pool song song rồi gộp lại
+    bằng 1 tầng attention thứ hai (hierarchical: item-level → interest-level).
+
+    Mục đích: với phiên dài, nhiều intent khác nhau dễ bị loãng vào 1 vector
+    duy nhất (SoftAttentionReadout gốc). K head cho phép mỗi head bắt 1 khía
+    cạnh khác nhau của phiên, rồi tầng thứ 2 quyết định trộn theo ngữ cảnh
+    item cuối — không thêm nhánh/loại quan hệ mới vào Module 1, chỉ đổi CÁCH
+    tổng hợp embedding item sau message passing.
+    """
+
+    def __init__(self, d: int, n_interests: int = 4):
+        super().__init__()
+        self.n_interests = n_interests
+        self.W1 = nn.Linear(d, d)
+        self.W2 = nn.Linear(d, d)
+        self.q = nn.Linear(d, n_interests)
+        self.Wc = nn.Linear(d, d)
+        self.Wc2 = nn.Linear(d, d)
+        self.qc = nn.Linear(d, 1)
+
+    def forward(self, h_items: torch.Tensor, batch: Batch) -> torch.Tensor:
+        item_batch = batch["item"].batch
+        ptr = batch["item"].ptr
+        last_global = ptr[:-1] + batch["item"].last_idx.view(-1)
+        h_last = h_items[last_global]
+
+        scores = self.q(torch.tanh(self.W1(h_items) + self.W2(h_last)[item_batch]))
+        alpha = torch.cat(
+            [scatter_softmax(scores[:, k : k + 1], item_batch) for k in range(self.n_interests)],
+            dim=-1,
+        )
+        z_k = torch.stack(
+            [global_add_pool(alpha[:, k : k + 1] * h_items, item_batch) for k in range(self.n_interests)],
+            dim=1,
+        )
+
+        beta = F.softmax(
+            self.qc(torch.tanh(self.Wc(z_k) + self.Wc2(h_last).unsqueeze(1))), dim=1,
+        )
+        return (beta * z_k).sum(dim=1)
 
 
 class EmbeddingTables(nn.Module):
@@ -88,7 +135,10 @@ def init_x_dict(
         "item": emb.item_emb(batch["item"].node_id),
         "category": emb.cat_emb(batch["category"].node_id),
     }
-    if use_taxonomy:
+    # Check "parent" in batch.node_types (không chỉ dựa vào use_taxonomy) —
+    # nhất quán với graph.py has_taxonomy (finding G1/G4): node type "parent"
+    # chỉ tồn tại khi graph builder thực sự tạo ra nó.
+    if use_taxonomy and "parent" in batch.node_types:
         x_dict["parent"] = emb.cat_emb(batch["parent"].node_id)
     return x_dict
 
@@ -101,6 +151,11 @@ def apply_hetero_layers(
 ) -> dict[str, torch.Tensor]:
     for conv in convs:
         out = conv(x_dict, batch.edge_index_dict)
-        x_dict = {k: F.relu(out[k]) if k in out else v for k, v in x_dict.items()}
-        x_dict = {k: dropout(v) for k, v in x_dict.items()}
+        # Dropout chỉ áp lên node type VỪA được cập nhật (finding M4) — tránh
+        # áp dropout chồng lên representation cũ (stale) của type không nhận
+        # message ở layer này.
+        x_dict = {
+            k: dropout(F.relu(out[k])) if k in out else v
+            for k, v in x_dict.items()
+        }
     return x_dict

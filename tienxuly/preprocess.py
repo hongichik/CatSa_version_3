@@ -122,6 +122,107 @@ def _load_diginetica_item2cat(raw_dir: Path) -> dict[int, int]:
     return item2cat
 
 
+def _find_raw_file(raw_dir: Path, filename: str) -> Path:
+    """Tìm file trong raw_dir (kể cả thư mục con — kagglehub/zip hay lồng 1 cấp)."""
+    direct = raw_dir / filename
+    if direct.exists():
+        return direct
+    found = next(raw_dir.rglob(filename), None)
+    if found is None:
+        raise FileNotFoundError(f"Không tìm thấy {filename} trong {raw_dir}")
+    return found
+
+
+def _load_yoochoose_sessions(raw_dir: Path) -> list[tuple[int, list[int]]]:
+    """Đọc yoochoose-clicks.dat (RecSys Challenge 2015) — phiên có sẵn theo
+    session_id. File KHÔNG có header: session_id,timestamp,item_id,category."""
+    log = get_logger()
+    path = _find_raw_file(raw_dir, "yoochoose-clicks.dat")
+    df = pd.read_csv(
+        path, header=None, names=["session_id", "timestamp", "item_id", "category"],
+        dtype={"session_id": "int64", "item_id": "int64", "category": "str"},
+    )
+    log.info("yoochoose-clicks.dat: %d dòng, %d phiên", len(df), df["session_id"].nunique())
+    df["ts"] = pd.to_datetime(df["timestamp"], format="%Y-%m-%dT%H:%M:%S.%fZ").astype("int64") // 10**9
+    df = df.sort_values(["session_id", "ts"], kind="stable")
+
+    sessions: list[tuple[int, list[int]]] = []
+    for _, g in df.groupby("session_id", sort=False):
+        sessions.append((int(g["ts"].iloc[0]), g["item_id"].tolist()))
+    log.info("yoochoose: %d phiên thô", len(sessions))
+    return sessions
+
+
+_YOOCHOOSE_SPECIAL_CAT = -2  # category "S" (special offer) → id sentinel
+
+
+def _load_yoochoose_item2cat(raw_dir: Path) -> dict[int, int]:
+    """item2cat từ cột category của yoochoose-clicks.dat (flat, không taxonomy).
+
+    Giá trị category: "0"=không rõ (bỏ), "S"=special offer, 1-12=category,
+    số dài=brand. Mỗi item lấy giá trị xuất hiện NHIỀU NHẤT (khác "0");
+    item chỉ có "0" → không mapping (cần require_item_category: false)."""
+    log = get_logger()
+    path = _find_raw_file(raw_dir, "yoochoose-clicks.dat")
+    df = pd.read_csv(
+        path, header=None, names=["session_id", "timestamp", "item_id", "category"],
+        usecols=["item_id", "category"],
+        dtype={"item_id": "int64", "category": "str"},
+    )
+    df = df[df["category"] != "0"]
+    mode = df.groupby("item_id")["category"].agg(lambda s: s.mode().iloc[0])
+    item2cat: dict[int, int] = {}
+    for item, cat in mode.items():
+        item2cat[int(item)] = _YOOCHOOSE_SPECIAL_CAT if cat == "S" else int(cat)
+    log.info("yoochoose item2cat: %d item có category (khác '0')", len(item2cat))
+    return item2cat
+
+
+_TMALL_ACTION_MAP = {"click": 0, "view": 0, "cart": 1, "purchase": 2, "buy": 2, "fav": 3}
+
+
+def _load_tmall(raw_dir: Path, cfg: PreprocessConfig) -> tuple[list[tuple[int, list[int]]], dict[int, int]]:
+    """Đọc user_log_format1.csv (Tmall IJCAI-15, tải từ tianchi.aliyun.com/dataset/42).
+
+    Cột: user_id,item_id,cat_id,seller_id,brand_id,time_stamp,action_type.
+    time_stamp chỉ có mmdd (độ mịn NGÀY, năm 2015) → phiên = (user, ngày),
+    thứ tự trong ngày giữ theo thứ tự file. Lọc hành vi qua event_types
+    (click/cart/purchase/fav; rỗng = lấy tất cả). item2cat từ cat_id (flat)."""
+    log = get_logger()
+    path = _find_raw_file(raw_dir, "user_log_format1.csv")
+    df = pd.read_csv(
+        path,
+        usecols=["user_id", "item_id", "cat_id", "time_stamp", "action_type"],
+        dtype={"user_id": "int64", "item_id": "int64", "cat_id": "int32",
+               "time_stamp": "int32", "action_type": "int8"},
+    )
+    log.info("user_log_format1.csv: %d dòng, %d user", len(df), df["user_id"].nunique())
+
+    codes = sorted({_TMALL_ACTION_MAP[e.strip().lower()] for e in cfg.event_types
+                    if e.strip().lower() in _TMALL_ACTION_MAP})
+    if codes:
+        df = df[df["action_type"].isin(codes)]
+        log.info("Sau lọc action_type=%s (%s): %d dòng", codes, cfg.event_types, len(df))
+
+    # item2cat: cat_id xuất hiện nhiều nhất cho mỗi item
+    item2cat = (
+        df.groupby(["item_id", "cat_id"]).size().reset_index(name="n")
+        .sort_values("n").drop_duplicates("item_id", keep="last")
+        .set_index("item_id")["cat_id"].astype(int).to_dict()
+    )
+    log.info("tmall item2cat: %d item có category", len(item2cat))
+
+    # Phiên = (user, ngày mmdd của năm 2015); ts = epoch của ngày đó
+    df = df.sort_values(["user_id", "time_stamp"], kind="stable")
+    sessions: list[tuple[int, list[int]]] = []
+    for (_, mmdd), g in df.groupby(["user_id", "time_stamp"], sort=False):
+        mm, dd = int(mmdd) // 100, int(mmdd) % 100
+        ts = int(datetime.datetime(2015, mm, dd).timestamp())
+        sessions.append((ts, g["item_id"].tolist()))
+    log.info("tmall: %d phiên thô (user × ngày)", len(sessions))
+    return sessions, {int(k): int(v) for k, v in item2cat.items()}
+
+
 # ---------------------------------------------------------------------------
 # Sessionize và lọc
 # ---------------------------------------------------------------------------
@@ -393,6 +494,17 @@ def preprocess(raw_dir: Path, cfg: PreprocessConfig, dataset_name: str = "retail
         log.info("Dataset Diginetica — phiên có sẵn trong train-item-views.csv")
         sessions = _load_diginetica_sessions(raw_dir)
         item2cat_raw = _load_diginetica_item2cat(raw_dir)
+        return _process_sessions(sessions, item2cat_raw, {}, cfg)
+
+    if name == "yoochoose":
+        log.info("Dataset YOOCHOOSE (RecSys 2015) — phiên có sẵn theo session_id")
+        sessions = _load_yoochoose_sessions(raw_dir)
+        item2cat_raw = _load_yoochoose_item2cat(raw_dir)
+        return _process_sessions(sessions, item2cat_raw, {}, cfg)
+
+    if name == "tmall":
+        log.info("Dataset Tmall (IJCAI-15) — phiên = (user, ngày)")
+        sessions, item2cat_raw = _load_tmall(raw_dir, cfg)
         return _process_sessions(sessions, item2cat_raw, {}, cfg)
 
     if name != "retailrocket":

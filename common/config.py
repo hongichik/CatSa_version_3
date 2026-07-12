@@ -148,6 +148,33 @@ class ModelConfig:
     # Mặc định false — không đổi hành vi phiên bản trước.
     length_aware_gate: bool = False
     length_gate_max_len: int = 50
+    # star/virtual node (SGNN-HN, Pan et al. 2020) — mở rộng graph Module 1,
+    # KHÔNG thay cấu trúc sequential/membership/taxonomy hiện có. Giúp thông
+    # tin lan xa (item đầu ↔ item cuối phiên dài) qua 2-hop thay vì cần tăng
+    # n_layers (tránh over-smoothing). Mặc định false.
+    use_star_node: bool = False
+    # multi-interest readout (ComiRec/Atten-Mixer) cho readout_seq — K head
+    # pool song song rồi gộp 2 tầng, thay vì 1 vector soft-attention duy
+    # nhất. Không thêm relation/node mới vào Module 1. Mặc định false.
+    use_multi_interest: bool = False
+    n_interests: int = 4
+    # category-intent branch (M2TRec/MCGNN-style): encode chuỗi CATEGORY của
+    # prefix bằng 1 TRM nhỏ, dự đoán phân phối category kế tiếp, cộng logit
+    # đó vào item thuộc category tương ứng (dùng category tại INFERENCE, không
+    # chỉ aux loss lúc train). Mặc định false — không đổi hành vi cũ.
+    use_cat_intent: bool = False
+    cat_intent_beta: float = 0.3
+    cat_intent_layers: int = 1
+    # gate cat_intent prior theo độ tự tin (1 - entropy chuẩn hoá) của phân
+    # phối category dự đoán — tránh đoán sai category đè logit lên cả loạt
+    # item sai (finding: cat_intent làm hr@20 giảm dù mrr@20 giữ nguyên).
+    # Mặc định false — không đổi hành vi các bản trước.
+    cat_intent_conf_gate: bool = False
+    # repeat-aware boost (RepeatNet-style): bias HỌC ĐƯỢC cộng vào logit của
+    # item đã xuất hiện trong prefix — dữ liệu giữ duplicate liên tiếp nên
+    # P(next ∈ prefix) rất cao. Mặc định false.
+    use_repeat_boost: bool = False
+    repeat_boost_init: float = 2.0
 
 
 @dataclass
@@ -716,6 +743,24 @@ def _build_preprocess_config(pre: dict) -> PreprocessConfig:
     )
 
 
+def _require_tau(train: dict) -> float:
+    """tau KHÔNG có default an toàn (xem CatSA_Correctness_Synthesis, finding L1):
+    tau=0.5 làm softmax InfoNCE phẳng, CL gradient gần như triệt tiêu, model
+    huấn luyện như thể tắt CL trong khi log vẫn hiện cl=... khác 0. Bắt buộc
+    khai báo tường minh trong training.tau của mọi file version.
+    """
+    if "tau" not in train:
+        raise KeyError(
+            "training.tau bắt buộc phải khai báo tường minh (không còn default "
+            "0.5 — xem CatSA_Correctness_Synthesis finding L1/T1). Thêm "
+            "'tau: <giá trị>' vào section training của file version."
+        )
+    tau = float(train["tau"])
+    if tau <= 0:
+        raise ValueError(f"training.tau phải > 0, nhận: {tau}")
+    return tau
+
+
 def load_config(
     config_dir: str | Path = "config",
     catsa_run: str | None = None,
@@ -782,7 +827,7 @@ def load_config(
             num_layers=int(model.get("num_layers", 2)),
             use_taxonomy=bool(model.get("use_taxonomy", True)),
             dropout=float(model.get("dropout", 0.1)),
-            encoder_type=str(model.get("encoder_type", "rgcn")).lower(),
+            encoder_type=str(model.get("encoder_type", "catsa_plus_v2")).lower(),
             fusion_type=str(model.get("fusion_type", "cross_attn")).lower(),
             n_heads=int(model.get("n_heads", 2)),
             retrieval_topk=int(model.get("retrieval_topk", 5)),
@@ -810,6 +855,15 @@ def load_config(
             use_cat_bias=bool(model.get("use_cat_bias", False)),
             length_aware_gate=bool(model.get("length_aware_gate", False)),
             length_gate_max_len=int(model.get("length_gate_max_len", 50)),
+            use_star_node=bool(model.get("use_star_node", False)),
+            use_multi_interest=bool(model.get("use_multi_interest", False)),
+            n_interests=int(model.get("n_interests", 4)),
+            use_cat_intent=bool(model.get("use_cat_intent", False)),
+            cat_intent_beta=float(model.get("cat_intent_beta", 0.3)),
+            cat_intent_layers=int(model.get("cat_intent_layers", 1)),
+            cat_intent_conf_gate=bool(model.get("cat_intent_conf_gate", False)),
+            use_repeat_boost=bool(model.get("use_repeat_boost", False)),
+            repeat_boost_init=float(model.get("repeat_boost_init", 2.0)),
         ),
         augment=AugmentConfig(
             strategies=[str(s) for s in aug.get("strategies", ["same", "sibling", "hybrid"])],
@@ -827,7 +881,7 @@ def load_config(
             aux_parent=bool(train.get("aux_parent", False)),
             lambda_aux_cat=float(train.get("lambda_aux_cat", 0.1)),
             lambda_aux_parent=float(train.get("lambda_aux_parent", 0.1)),
-            tau=float(train.get("tau", 0.5)),
+            tau=_require_tau(train),
             batch_size=int(train.get("batch_size", 100)),
             learning_rate=float(train.get("learning_rate", 0.001)),
             weight_decay=float(train.get("weight_decay", 0.00001)),

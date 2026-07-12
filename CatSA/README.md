@@ -51,7 +51,10 @@ python CatSA/main.py --run baseline/catsa_plus.yaml      # đầy đủ (M1+M2+C
 python CatSA/main.py --run baseline/catsa_plus_a2.yaml   # A2 = Module 1 only
 ```
 
-Các encoder cũ (`rgcn`, `mg_core`, …) vẫn chọn bằng YAML — không bị xoá.
+Các encoder đời v1 (`rgcn`, `mg_core`, `concat`, `dual_path`, `hgt`, `retrieval`,
+`transition`, `soft_cat`) đã bị loại bỏ vì kết quả kém (mrr@20 ≤ 0.30 trên
+retailrocket) — chỉ còn `catsa_plus` và `catsa_plus_v2`. Log của các bản kém
+được lưu tại `Log/retailrocket/CatSA/kem/`.
 
 ## Cấu hình liên quan (trong cây `config/`)
 
@@ -84,18 +87,18 @@ Ngoài ra: `config/common/wandb.yaml` để bật/tắt ghi log lên Weights & B
 
 Xem `config/catsa/retailrocket/catsa_research.yaml` — mẫu đầy đủ các tùy chọn.
 
-**`model.encoder_type`**: `rgcn` | `concat` | `dual_path` | `hgt` | `retrieval` | `transition` | `soft_cat`
+**`model.encoder_type`**: `catsa_plus` | `catsa_plus_v2`
 
-**`model.fusion_type`** (dual_path, transition): `cross_attn` | `gate` | `sum`
+**`model.fusion_type`**: `cross_attn` | `gate` | `sum`
 
 **`training.cl_type`** (khi `use_cl: true`): `infonce` | `prototype` | `both`
 
 **`training.aux_cat` / `aux_parent`**: auxiliary task dự đoán category/parent item tiếp theo.
 
-Ví dụ chạy biến thể dual-path:
+Ví dụ chạy bản tốt nhất hiện tại:
 
 ```bash
-python CatSA/main.py --run catsa_enc_dual_path.yaml
+python CatSA/main.py --run baseline/catsa_plus_v2_len_gate.yaml
 ```
 
 ## Các biến thể thí nghiệm

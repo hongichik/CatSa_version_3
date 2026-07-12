@@ -1,0 +1,35 @@
+[phase3] Xây ma trận SR từ train ...
+[phase3] SR: 795503 cặp khác 0
+[phase3] Load models trên cuda ...
+[phase3] 40 biến thể — VAL ...
+
+[phase3] VAL (87318 mẫu) — top 15:
+  0.4087  hr@20=0.6374  w0.65|rep8|sr0
+  0.4086  hr@20=0.6369  w0.7|rep8|sr0
+  0.4084  hr@20=0.6383  w0.65|rep8|sr0.5
+  0.4084  hr@20=0.6379  w0.7|rep8|sr0.5
+  0.4080  hr@20=0.6360  w0.65|rep6|sr0
+  0.4079  hr@20=0.6356  w0.7|rep6|sr0
+  0.4077  hr@20=0.6350  w0.65|rep5|sr0
+  0.4077  hr@20=0.6369  w0.65|rep6|sr0.5
+  0.4077  hr@20=0.6365  w0.7|rep6|sr0.5
+  0.4076  hr@20=0.6346  w0.7|rep5|sr0
+  0.4075  hr@20=0.6383  w0.7|rep8|sr1
+  0.4074  hr@20=0.6360  w0.65|rep5|sr0.5
+  0.4074  hr@20=0.6356  w0.7|rep5|sr0.5
+  0.4074  hr@20=0.6388  w0.65|rep8|sr1
+  0.4074  hr@20=0.6340  w0.65|rep4|sr0
+
+[phase3] TEST với top-6 theo val ...
+
+[phase3] KẾT QUẢ TEST (81372 mẫu):
+  mrr@20=0.3879  hr@20=0.6140  ndcg@20=0.4396  w0.7|rep8|sr0
+  mrr@20=0.3878  hr@20=0.6143  ndcg@20=0.4396  w0.65|rep8|sr0
+  mrr@20=0.3875  hr@20=0.6131  ndcg@20=0.4392  w0.7|rep6|sr0
+  mrr@20=0.3874  hr@20=0.6133  ndcg@20=0.4391  w0.65|rep6|sr0
+  mrr@20=0.3873  hr@20=0.6149  ndcg@20=0.4395  w0.7|rep8|sr0.5
+  mrr@20=0.3872  hr@20=0.6152  ndcg@20=0.4394  w0.65|rep8|sr0.5
+
+[phase3] Combo chọn theo VAL: w0.65|rep8|sr0
+[phase3] → TEST chính thức: mrr@20=0.3878 | hr@20=0.6143 | ndcg@20=0.4396
+[phase3] Đã ghi checkpoints/ensemble_eval3_result.yaml

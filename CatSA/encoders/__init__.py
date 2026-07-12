@@ -7,24 +7,8 @@ from common.config import ModelConfig
 from .common import ENCODER_TYPES, FUSION_TYPES
 from .catsa_plus import CatSAPlusEncoder
 from .catsa_plus_v2 import CatSAPlusV2Encoder
-from .concat import ConcatEncoder
-from .dual_path import DualPathEncoder
-from .hgt import HGTEncoder
-from .mg_core import MGCoreEncoder
-from .retrieval import RetrievalEncoder
-from .rgcn import RGCNEncoder
-from .soft_cat import SoftCatEncoder
-from .transition import TransitionEncoder
 
 _ENCODER_MAP = {
-    "rgcn": RGCNEncoder,
-    "concat": ConcatEncoder,
-    "dual_path": DualPathEncoder,
-    "hgt": HGTEncoder,
-    "retrieval": RetrievalEncoder,
-    "transition": TransitionEncoder,
-    "soft_cat": SoftCatEncoder,
-    "mg_core": MGCoreEncoder,
     "catsa_plus": CatSAPlusEncoder,
     "catsa_plus_v2": CatSAPlusV2Encoder,
 }
@@ -55,14 +39,6 @@ def build_encoder(
         n_heads=cfg.n_heads,
         retrieval_topk=cfg.retrieval_topk,
     )
-    if enc in ("concat", "transition", "retrieval", "mg_core"):
-        if item2cat is None:
-            raise ValueError(f"encoder {enc} cần item2cat")
-        kwargs["item2cat"] = item2cat
-    if enc in ("retrieval", "mg_core"):
-        if cat2items is None:
-            raise ValueError(f"encoder {enc} cần cat2items")
-        kwargs["cat2items"] = cat2items
     if enc == "catsa_plus":
         if getattr(cfg, "use_error_aux", False) and item2cat is None:
             raise ValueError("catsa_plus use_error_aux cần item2cat")
@@ -77,6 +53,8 @@ def build_encoder(
     if enc == "catsa_plus_v2":
         if getattr(cfg, "use_cat_bias", False) and item2cat is None:
             raise ValueError("catsa_plus_v2 use_cat_bias cần item2cat")
+        if getattr(cfg, "use_cat_intent", False) and item2cat is None:
+            raise ValueError("catsa_plus_v2 use_cat_intent cần item2cat")
         if item2cat is not None:
             kwargs["item2cat"] = item2cat
 
@@ -88,7 +66,10 @@ def build_encoder(
         "post_process", "post_same_boost", "post_sib_boost", "post_other_penalty",
         "use_module1", "path_fusion", "dual_score_beta", "learn_score_beta",
         "trm_residual_gamma", "use_cat_bias",
-        "length_aware_gate", "length_gate_max_len",
+        "length_aware_gate", "length_gate_max_len", "use_star_node",
+        "use_multi_interest", "n_interests",
+        "use_cat_intent", "cat_intent_beta", "cat_intent_layers", "cat_intent_conf_gate",
+        "use_repeat_boost", "repeat_boost_init",
     ):
         if hasattr(cfg, key):
             kwargs[key] = getattr(cfg, key)

@@ -1,0 +1,4 @@
+# select.yaml — danh sách version CORE cho Yoochoose
+# python CORE/main.py --suite yoochoose
+run:
+  - core_trm.yaml

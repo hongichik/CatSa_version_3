@@ -1,0 +1,43 @@
+[repeat_aware] Load models trên cuda ...
+
+[repeat_aware] === catsa_v3_full ===
+  VAL (87318 mẫu) — quét delta:
+    delta=0: mrr@20=0.3914
+    delta=0.5: mrr@20=0.3944
+    delta=1: mrr@20=0.3966
+    delta=1.5: mrr@20=0.3983
+    delta=2: mrr@20=0.3997
+    delta=3: mrr@20=0.4012
+    delta=4: mrr@20=0.4020
+    delta=6: mrr@20=0.4027 ←chọn
+  TEST (81372 mẫu):
+    [gốc, delta=0] mrr@20=0.3697 | hr@20=0.5690 | ndcg@20=0.4151
+        bucket 1_3 (n=55429): mrr@20=0.4379
+        bucket 4_7 (n=12349): mrr@20=0.3000
+        bucket 8_plus (n=13594): mrr@20=0.1548
+    [repeat-aware, delta=6] mrr@20=0.3815 | hr@20=0.5890 | ndcg@20=0.4293
+        bucket 1_3 (n=55429): mrr@20=0.4427
+        bucket 4_7 (n=12349): mrr@20=0.3215
+        bucket 8_plus (n=13594): mrr@20=0.1865
+
+[repeat_aware] === core_trm ===
+  VAL (87318 mẫu) — quét delta:
+    delta=0: mrr@20=0.3931
+    delta=0.5: mrr@20=0.3959
+    delta=1: mrr@20=0.3975
+    delta=1.5: mrr@20=0.3987
+    delta=2: mrr@20=0.3996
+    delta=3: mrr@20=0.4008
+    delta=4: mrr@20=0.4016
+    delta=6: mrr@20=0.4026 ←chọn
+  TEST (81372 mẫu):
+    [gốc, delta=0] mrr@20=0.3718 | hr@20=0.5871 | ndcg@20=0.4208
+        bucket 1_3 (n=55429): mrr@20=0.4355
+        bucket 4_7 (n=12349): mrr@20=0.2998
+        bucket 8_plus (n=13594): mrr@20=0.1777
+    [repeat-aware, delta=6] mrr@20=0.3815 | hr@20=0.6025 | ndcg@20=0.4322
+        bucket 1_3 (n=55429): mrr@20=0.4407
+        bucket 4_7 (n=12349): mrr@20=0.3214
+        bucket 8_plus (n=13594): mrr@20=0.1947
+
+[repeat_aware] Đã ghi checkpoints/repeat_aware_result.yaml

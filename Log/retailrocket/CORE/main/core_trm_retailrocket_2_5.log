@@ -1,0 +1,98 @@
+2026-07-09 12:20:32 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/retailrocket/CORE/main/core_trm_retailrocket_2_5.log
+2026-07-09 12:20:32 | INFO    | 
+====================================================================
+CẤU HÌNH CORE (config_dir: config | version: core_trm_retailrocket_2_5)
+====================================================================
+logging:
+  dir: Log
+  level: INFO
+  console: true
+project:
+  name: retailrocket
+  filename_mode: custom
+  custom_filename: CORE/main/core_trm_retailrocket_2_5.log
+wandb:
+  enabled: true
+  api_key: '***da-che***'
+  project: ''
+  entity: ''
+  run_name: ''
+  mode: online
+data:
+  data_dir: data/retailrocket_2_5
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+core_model:
+  type: trm
+  embedding_size: 100
+  inner_size: 256
+  n_layers: 2
+  n_heads: 2
+  hidden_dropout_prob: 0.5
+  attn_dropout_prob: 0.5
+  hidden_act: gelu
+  layer_norm_eps: 1.0e-12
+  initializer_range: 0.02
+  sess_dropout: 0.2
+  item_dropout: 0.2
+  temperature: 0.07
+  max_seq_length: 50
+core_training:
+  batch_size: 256
+  learning_rate: 0.001
+  weight_decay: 1.0e-05
+  max_epochs: 30
+  patience: 5
+  grad_clip: 5.0
+  seed: 42
+  device: auto
+  num_workers: 0
+  checkpoint_dir: checkpoints
+  save_dir: checkpoints/CORE/retailrocket/core_trm_2_5
+evaluation:
+  top_k:
+  - 10
+  - 20
+  primary_metric: mrr@20
+  mode: standard
+  length_threshold: 5
+  checkpoint_short: ''
+  checkpoint_long: ''
+config_dir: config
+version: core_trm_retailrocket_2_5
+====================================================================
+2026-07-09 12:20:35 | INFO    | wandb: run 'core_trm_retailrocket_2_5' — https://wandb.ai/hongichik321-aol/retailrocket/runs/ihon469y
+2026-07-09 12:20:36 | INFO    | Dữ liệu [data/retailrocket_2_5]: |I|=75790, train=249985 phiên
+2026-07-09 12:20:36 | INFO    | Thiết bị: cuda | model=trm
+2026-07-09 12:20:36 | INFO    | max_prefix_length=50
+2026-07-09 12:20:36 | INFO    | Số mẫu train/val/test (sliding window): 401161 / 49008 / 44226
+2026-07-09 12:20:37 | INFO    | Checkpoint của run này: /home/hongnguyen/demo2/checkpoints/CORE/retailrocket/core_trm_2_5
+2026-07-09 12:20:51 | INFO    | Epoch 1: loss=6.6228 (14.3s)
+2026-07-09 12:20:52 | INFO    |   Val: hr@10=0.5905 | ndcg@10=0.5062 | mrr@10=0.4791 | hr@20=0.6162 | ndcg@20=0.5127 | mrr@20=0.4810
+2026-07-09 12:20:52 | INFO    |   → Model tốt nhất mới (mrr@20=0.4810), lưu checkpoints/CORE/retailrocket/core_trm_2_5/best_model.pt
+2026-07-09 12:21:06 | INFO    | Epoch 2: loss=4.5363 (13.9s)
+2026-07-09 12:21:07 | INFO    |   Val: hr@10=0.6155 | ndcg@10=0.5146 | mrr@10=0.4826 | hr@20=0.6554 | ndcg@20=0.5247 | mrr@20=0.4854
+2026-07-09 12:21:07 | INFO    |   → Model tốt nhất mới (mrr@20=0.4854), lưu checkpoints/CORE/retailrocket/core_trm_2_5/best_model.pt
+2026-07-09 12:21:21 | INFO    | Epoch 3: loss=3.9074 (13.9s)
+2026-07-09 12:21:22 | INFO    |   Val: hr@10=0.6200 | ndcg@10=0.5152 | mrr@10=0.4821 | hr@20=0.6646 | ndcg@20=0.5265 | mrr@20=0.4852
+2026-07-09 12:21:36 | INFO    | Epoch 4: loss=3.6754 (13.9s)
+2026-07-09 12:21:37 | INFO    |   Val: hr@10=0.6224 | ndcg@10=0.5165 | mrr@10=0.4832 | hr@20=0.6696 | ndcg@20=0.5285 | mrr@20=0.4865
+2026-07-09 12:21:37 | INFO    |   → Model tốt nhất mới (mrr@20=0.4865), lưu checkpoints/CORE/retailrocket/core_trm_2_5/best_model.pt
+2026-07-09 12:21:51 | INFO    | Epoch 5: loss=3.5635 (13.9s)
+2026-07-09 12:21:51 | INFO    |   Val: hr@10=0.6222 | ndcg@10=0.5166 | mrr@10=0.4833 | hr@20=0.6707 | ndcg@20=0.5289 | mrr@20=0.4867
+2026-07-09 12:21:52 | INFO    |   → Model tốt nhất mới (mrr@20=0.4867), lưu checkpoints/CORE/retailrocket/core_trm_2_5/best_model.pt
+2026-07-09 12:22:05 | INFO    | Epoch 6: loss=3.4992 (13.9s)
+2026-07-09 12:22:06 | INFO    |   Val: hr@10=0.6227 | ndcg@10=0.5164 | mrr@10=0.4830 | hr@20=0.6711 | ndcg@20=0.5287 | mrr@20=0.4864
+2026-07-09 12:22:20 | INFO    | Epoch 7: loss=3.4576 (13.9s)
+2026-07-09 12:22:21 | INFO    |   Val: hr@10=0.6229 | ndcg@10=0.5160 | mrr@10=0.4823 | hr@20=0.6724 | ndcg@20=0.5285 | mrr@20=0.4857
+2026-07-09 12:22:35 | INFO    | Epoch 8: loss=3.4243 (13.9s)
+2026-07-09 12:22:36 | INFO    |   Val: hr@10=0.6234 | ndcg@10=0.5159 | mrr@10=0.4820 | hr@20=0.6728 | ndcg@20=0.5284 | mrr@20=0.4854
+2026-07-09 12:22:50 | INFO    | Epoch 9: loss=3.4024 (13.9s)
+2026-07-09 12:22:51 | INFO    |   Val: hr@10=0.6229 | ndcg@10=0.5162 | mrr@10=0.4826 | hr@20=0.6724 | ndcg@20=0.5287 | mrr@20=0.4860
+2026-07-09 12:23:05 | INFO    | Epoch 10: loss=3.3832 (13.9s)
+2026-07-09 12:23:06 | INFO    |   Val: hr@10=0.6238 | ndcg@10=0.5151 | mrr@10=0.4808 | hr@20=0.6727 | ndcg@20=0.5274 | mrr@20=0.4842
+2026-07-09 12:23:06 | INFO    | Early stopping tại epoch 10 (mrr@20 không cải thiện 5 epoch)
+2026-07-09 12:23:07 | INFO    | KẾT QUẢ TEST (best model): hr@10=0.6109 | ndcg@10=0.5017 | mrr@10=0.4673 | hr@20=0.6621 | ndcg@20=0.5147 | mrr@20=0.4709
+2026-07-09 12:23:07 | INFO    | [CORE] Hoàn tất main/core_trm_retailrocket_2_5.yaml. Test metrics: hr@10=0.6109 | ndcg@10=0.5017 | mrr@10=0.4673 | hr@20=0.6621 | ndcg@20=0.5147 | mrr@20=0.4709

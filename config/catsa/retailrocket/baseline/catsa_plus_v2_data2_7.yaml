@@ -1,0 +1,75 @@
+# CatSA++ v2 FULL — giống hệt catsa_plus_v2_data2_5.yaml, chỉ đổi data_dir
+# sang retailrocket_2_7 (session_length_mode: filter, min=2 max=7).
+#
+# So sánh với ablation_len/catsa_2_7.yaml cũ (encoder rgcn đời v1,
+# Test mrr@20=0.3470).
+#
+# Chạy: python CatSA/main.py --run baseline/catsa_plus_v2_data2_7.yaml
+project:
+  name: retailrocket
+  filename_mode: custom
+  custom_filename: CatSA/baseline/CatSA_plus_v2_data2_7.log
+
+data:
+  data_dir: data/retailrocket_2_7
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+
+model:
+  embedding_dim: 100
+  num_layers: 2
+  use_taxonomy: true
+  dropout: 0.1
+  encoder_type: catsa_plus_v2
+  fusion_type: gate
+  n_heads: 2
+  retrieval_topk: 5
+  max_seq_length: 50
+  trm_layers: 2
+  trm_inner_size: 256
+  temperature: 0.07
+  sess_dropout: 0.2
+  item_dropout: 0.2
+  trm_dropout: 0.5
+  use_seq_trm: true
+  use_module1: true
+  path_fusion: dual_score
+  dual_score_beta: 1.0
+  learn_score_beta: true
+  use_cat_bias: false
+  extra_rerank: false
+
+augment:
+  strategies: [same, sibling, hybrid]
+  strategy_weights: [0.4, 0.3, 0.3]
+  eta_aug: 0.3
+  eta_crop: 0.75
+  k_min: 5
+
+training:
+  use_cl: true
+  cl_type: both
+  lambda_cl: 0.05
+  lambda_proto: 0.05
+  aux_cat: true
+  aux_parent: false
+  lambda_aux_cat: 0.05
+  lambda_aux_parent: 0.0
+  tau: 0.2
+  batch_size: 256
+  learning_rate: 0.001
+  weight_decay: 0.00001
+  max_epochs: 30
+  patience: 5
+  grad_clip: 5.0
+  seed: 42
+  device: auto
+  num_workers: 0
+  checkpoint_dir: checkpoints
+  save_dir: "checkpoints/CatSA/retailrocket/catsa_plus_v2_data2_7"
+
+evaluation:
+  top_k: [10, 20]
+  primary_metric: mrr@20

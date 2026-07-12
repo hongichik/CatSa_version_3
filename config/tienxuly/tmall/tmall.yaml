@@ -1,0 +1,21 @@
+# tmall — phiên = (user, ngày) vì time_stamp chỉ mịn đến NGÀY (mmdd, năm 2015)
+# Chuẩn SBR phổ biến trên Tmall: chỉ click, support>=5, phiên >=2
+preprocess:
+  output_dir: data/tmall             # thư mục ghi train/val/test + lookup
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+  event_types: [click]               # click|cart|purchase|fav; rỗng = tất cả hành vi
+  session_same_day: true             # không dùng — phiên đã gộp theo (user, ngày)
+  session_gap_seconds: 1800          # không dùng với Tmall
+  dedup_consecutive: false           # false ≈ benchmark chuẩn
+  min_item_support: 5                # item phải xuất hiện >= N lần mới được giữ
+  min_session_length: 2              # phiên ngắn hơn bị loại
+  max_session_length: 50             # chỉ dùng khi session_length_mode=filter
+  session_length_mode: keep          # keep=không cắt phiên
+  max_prefix_length: 50              # giới hạn prefix lúc train/eval
+  require_item_category: true        # Tmall: mọi log đều có cat_id
+  val_ratio: 0.1                     # chia theo thời gian phiên
+  test_ratio: 0.1
+  max_sessions: 0                    # 0=không giới hạn

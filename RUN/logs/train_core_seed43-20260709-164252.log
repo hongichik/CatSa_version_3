@@ -1,0 +1,144 @@
+2026-07-09 16:42:53 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/retailrocket/CORE/main/core_trm_retailrocket_seed43.log
+2026-07-09 16:42:53 | INFO    | 
+====================================================================
+CẤU HÌNH CORE (config_dir: config | version: core_trm_retailrocket_seed43)
+====================================================================
+logging:
+  dir: Log
+  level: INFO
+  console: true
+project:
+  name: retailrocket
+  filename_mode: custom
+  custom_filename: CORE/main/core_trm_retailrocket_seed43.log
+wandb:
+  enabled: true
+  api_key: '***da-che***'
+  project: ''
+  entity: ''
+  run_name: ''
+  mode: online
+data:
+  data_dir: data/retailrocket_item_hon_5
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+core_model:
+  type: trm
+  embedding_size: 100
+  inner_size: 256
+  n_layers: 2
+  n_heads: 2
+  hidden_dropout_prob: 0.5
+  attn_dropout_prob: 0.5
+  hidden_act: gelu
+  layer_norm_eps: 1.0e-12
+  initializer_range: 0.02
+  sess_dropout: 0.2
+  item_dropout: 0.2
+  temperature: 0.07
+  max_seq_length: 50
+core_training:
+  batch_size: 256
+  learning_rate: 0.001
+  weight_decay: 1.0e-05
+  max_epochs: 30
+  patience: 5
+  grad_clip: 5.0
+  seed: 43
+  device: auto
+  num_workers: 0
+  checkpoint_dir: checkpoints
+  save_dir: checkpoints/CORE/retailrocket/core_trm_seed43
+evaluation:
+  top_k:
+  - 10
+  - 20
+  primary_metric: mrr@20
+  mode: standard
+  length_threshold: 5
+  checkpoint_short: ''
+  checkpoint_long: ''
+config_dir: config
+version: core_trm_retailrocket_seed43
+====================================================================
+wandb: [wandb.login()] Using explicit session credentials for https://api.wandb.ai.
+wandb: Appending key for api.wandb.ai to your netrc file: /home/hongnguyen/.netrc
+wandb: Currently logged in as: hongichik321 (hongichik321-aol) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run 0e888rrw
+wandb: Tracking run with wandb version 0.28.0
+wandb: Run data is saved locally in /home/hongnguyen/demo2/wandb/run-20260709_164254-0e888rrw
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run core_trm_retailrocket_seed43
+wandb: ⭐️ View project at https://wandb.ai/hongichik321-aol/retailrocket
+wandb: 🚀 View run at https://wandb.ai/hongichik321-aol/retailrocket/runs/0e888rrw
+2026-07-09 16:42:56 | INFO    | wandb: run 'core_trm_retailrocket_seed43' — https://wandb.ai/hongichik321-aol/retailrocket/runs/0e888rrw
+2026-07-09 16:42:56 | INFO    | Dữ liệu [data/retailrocket_item_hon_5]: |I|=79649, train=283023 phiên
+2026-07-09 16:42:56 | INFO    | Thiết bị: cuda | model=trm
+2026-07-09 16:42:56 | INFO    | max_prefix_length=50
+2026-07-09 16:42:57 | INFO    | Số mẫu train/val/test (sliding window): 764873 / 87318 / 81372
+2026-07-09 16:42:57 | INFO    | Checkpoint của run này: /home/hongnguyen/demo2/checkpoints/CORE/retailrocket/core_trm_seed43
+2026-07-09 16:43:36 | INFO    | Epoch 1: loss=6.5826 (38.4s)
+2026-07-09 16:43:37 | INFO    |   Val: hr@10=0.5302 | ndcg@10=0.4198 | mrr@10=0.3850 | hr@20=0.5800 | ndcg@20=0.4324 | mrr@20=0.3884
+2026-07-09 16:43:37 | INFO    |   → Model tốt nhất mới (mrr@20=0.3884), lưu checkpoints/CORE/retailrocket/core_trm_seed43/best_model.pt
+2026-07-09 16:44:16 | INFO    | Epoch 2: loss=4.7827 (38.2s)
+2026-07-09 16:44:18 | INFO    |   Val: hr@10=0.5420 | ndcg@10=0.4237 | mrr@10=0.3866 | hr@20=0.5994 | ndcg@20=0.4383 | mrr@20=0.3906
+2026-07-09 16:44:18 | INFO    |   → Model tốt nhất mới (mrr@20=0.3906), lưu checkpoints/CORE/retailrocket/core_trm_seed43/best_model.pt
+2026-07-09 16:44:56 | INFO    | Epoch 3: loss=4.4751 (38.2s)
+2026-07-09 16:44:58 | INFO    |   Val: hr@10=0.5436 | ndcg@10=0.4246 | mrr@10=0.3872 | hr@20=0.6029 | ndcg@20=0.4396 | mrr@20=0.3913
+2026-07-09 16:44:58 | INFO    |   → Model tốt nhất mới (mrr@20=0.3913), lưu checkpoints/CORE/retailrocket/core_trm_seed43/best_model.pt
+2026-07-09 16:45:36 | INFO    | Epoch 4: loss=4.3620 (38.1s)
+2026-07-09 16:45:38 | INFO    |   Val: hr@10=0.5446 | ndcg@10=0.4255 | mrr@10=0.3881 | hr@20=0.6062 | ndcg@20=0.4411 | mrr@20=0.3924
+2026-07-09 16:45:38 | INFO    |   → Model tốt nhất mới (mrr@20=0.3924), lưu checkpoints/CORE/retailrocket/core_trm_seed43/best_model.pt
+2026-07-09 16:46:16 | INFO    | Epoch 5: loss=4.3000 (38.1s)
+2026-07-09 16:46:18 | INFO    |   Val: hr@10=0.5458 | ndcg@10=0.4260 | mrr@10=0.3884 | hr@20=0.6069 | ndcg@20=0.4414 | mrr@20=0.3927
+2026-07-09 16:46:18 | INFO    |   → Model tốt nhất mới (mrr@20=0.3927), lưu checkpoints/CORE/retailrocket/core_trm_seed43/best_model.pt
+2026-07-09 16:46:56 | INFO    | Epoch 6: loss=4.2606 (38.1s)
+2026-07-09 16:46:58 | INFO    |   Val: hr@10=0.5448 | ndcg@10=0.4252 | mrr@10=0.3876 | hr@20=0.6076 | ndcg@20=0.4411 | mrr@20=0.3920
+2026-07-09 16:47:36 | INFO    | Epoch 7: loss=4.2340 (38.1s)
+2026-07-09 16:47:38 | INFO    |   Val: hr@10=0.5458 | ndcg@10=0.4260 | mrr@10=0.3884 | hr@20=0.6067 | ndcg@20=0.4414 | mrr@20=0.3927
+2026-07-09 16:47:38 | INFO    |   → Model tốt nhất mới (mrr@20=0.3927), lưu checkpoints/CORE/retailrocket/core_trm_seed43/best_model.pt
+2026-07-09 16:48:16 | INFO    | Epoch 8: loss=4.2134 (38.2s)
+2026-07-09 16:48:18 | INFO    |   Val: hr@10=0.5460 | ndcg@10=0.4259 | mrr@10=0.3882 | hr@20=0.6073 | ndcg@20=0.4414 | mrr@20=0.3925
+2026-07-09 16:48:57 | INFO    | Epoch 9: loss=4.1992 (38.1s)
+2026-07-09 16:48:58 | INFO    |   Val: hr@10=0.5461 | ndcg@10=0.4260 | mrr@10=0.3884 | hr@20=0.6062 | ndcg@20=0.4412 | mrr@20=0.3925
+2026-07-09 16:49:37 | INFO    | Epoch 10: loss=4.1865 (38.2s)
+2026-07-09 16:49:39 | INFO    |   Val: hr@10=0.5460 | ndcg@10=0.4252 | mrr@10=0.3873 | hr@20=0.6068 | ndcg@20=0.4406 | mrr@20=0.3915
+2026-07-09 16:50:17 | INFO    | Epoch 11: loss=4.1777 (38.1s)
+2026-07-09 16:50:19 | INFO    |   Val: hr@10=0.5454 | ndcg@10=0.4258 | mrr@10=0.3883 | hr@20=0.6059 | ndcg@20=0.4411 | mrr@20=0.3925
+2026-07-09 16:50:57 | INFO    | Epoch 12: loss=4.1698 (38.1s)
+2026-07-09 16:50:59 | INFO    |   Val: hr@10=0.5461 | ndcg@10=0.4254 | mrr@10=0.3876 | hr@20=0.6070 | ndcg@20=0.4408 | mrr@20=0.3918
+2026-07-09 16:50:59 | INFO    | Early stopping tại epoch 12 (mrr@20 không cải thiện 5 epoch)
+2026-07-09 16:51:01 | INFO    | KẾT QUẢ TEST (best model): hr@10=0.5248 | ndcg@10=0.4048 | mrr@10=0.3672 | hr@20=0.5865 | ndcg@20=0.4204 | mrr@20=0.3715
+2026-07-09 16:51:01 | INFO    | [CORE] Hoàn tất main/core_trm_retailrocket_seed43.yaml. Test metrics: hr@10=0.5248 | ndcg@10=0.4048 | mrr@10=0.3672 | hr@20=0.5865 | ndcg@20=0.4204 | mrr@20=0.3715
+wandb: updating run metadata
+wandb: uploading output.log; uploading wandb-summary.json; uploading config.yaml
+wandb: uploading history steps 10-11, summary, console lines 34-38
+wandb: 
+wandb: Run history:
+wandb:  train/loss █▃▂▂▁▁▁▁▁▁▁▁
+wandb:   val/hr@10 ▁▆▇▇█▇██████
+wandb:   val/hr@20 ▁▆▇█████████
+wandb:  val/mrr@10 ▁▄▅▇█▆███▆█▆
+wandb:  val/mrr@20 ▁▅▆██▇███▆█▇
+wandb: val/ndcg@10 ▁▅▆▇█▇███▇█▇
+wandb: val/ndcg@20 ▁▆▇██████▇██
+wandb: 
+wandb: Run summary:
+wandb:   test/hr@10 0.52481
+wandb:   test/hr@20 0.58652
+wandb:  test/mrr@10 0.36718
+wandb:  test/mrr@20 0.37147
+wandb: test/ndcg@10 0.40479
+wandb: test/ndcg@20 0.42041
+wandb:   train/loss 4.16977
+wandb:    val/hr@10 0.54606
+wandb:    val/hr@20 0.607
+wandb:   val/mrr@10 0.38759
+wandb:           +3 ...
+wandb: 
+wandb: 🚀 View run core_trm_retailrocket_seed43 at: https://wandb.ai/hongichik321-aol/retailrocket/runs/0e888rrw
+wandb: ⭐️ View project at: https://wandb.ai/hongichik321-aol/retailrocket
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260709_164254-0e888rrw/logs

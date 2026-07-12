@@ -1,0 +1,189 @@
+2026-07-10 11:43:12 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/diginetica/CatSA_plus_v2_len_gate.log
+2026-07-10 11:43:12 | INFO    | 
+====================================================================
+CẤU HÌNH LÚC CHẠY (config_dir: config | version: catsa_plus_v2_len_gate)
+====================================================================
+logging:
+  dir: Log
+  level: INFO
+  console: true
+project:
+  name: diginetica
+  filename_mode: custom
+  custom_filename: CatSA_plus_v2_len_gate.log
+wandb:
+  enabled: true
+  api_key: '***da-che***'
+  project: ''
+  entity: ''
+  run_name: ''
+  mode: online
+dataset:
+  source: kagglehub
+  kagglehub_handle: profalbusdumbledore/diginetica-dataset
+  local_path: data/raw/diginetica
+  name: diginetica
+preprocess:
+  output_dir: data/diginetica
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+  event_types:
+  - view
+  session_same_day: true
+  session_gap_seconds: 1800
+  dedup_consecutive: false
+  min_item_support: 5
+  min_session_length: 2
+  max_session_length: 50
+  session_length_mode: keep
+  max_prefix_length: 50
+  require_item_category: true
+  val_ratio: 0.1
+  test_ratio: 0.1
+  max_sessions: 0
+data:
+  data_dir: data/diginetica
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+model:
+  embedding_dim: 100
+  num_layers: 2
+  use_taxonomy: false
+  dropout: 0.1
+  encoder_type: catsa_plus_v2
+  fusion_type: gate
+  n_heads: 2
+  retrieval_topk: 5
+  max_seq_length: 50
+  trm_layers: 2
+  trm_inner_size: 256
+  temperature: 0.07
+  sess_dropout: 0.2
+  item_dropout: 0.2
+  extra_rerank: false
+  extra_beta: 12.0
+  trm_dropout: 0.5
+  use_seq_trm: true
+  use_error_aux: false
+  error_aux_alpha: 0.15
+  post_process: false
+  post_same_boost: 0.35
+  post_sib_boost: 0.12
+  post_other_penalty: 0.08
+  use_module1: true
+  path_fusion: dual_score
+  dual_score_beta: 1.0
+  learn_score_beta: true
+  trm_residual_gamma: 0.5
+  use_cat_bias: false
+  length_aware_gate: true
+  length_gate_max_len: 50
+  use_star_node: false
+  use_multi_interest: false
+  n_interests: 4
+  use_cat_intent: false
+  cat_intent_beta: 0.3
+  cat_intent_layers: 1
+  cat_intent_conf_gate: false
+  use_repeat_boost: false
+  repeat_boost_init: 2.0
+augment:
+  strategies:
+  - same
+  - sibling
+  - hybrid
+  strategy_weights:
+  - 0.4
+  - 0.3
+  - 0.3
+  eta_aug: 0.3
+  eta_crop: 0.75
+  k_min: 5
+training:
+  use_cl: true
+  lambda_cl: 0.05
+  cl_type: both
+  lambda_proto: 0.05
+  aux_cat: true
+  aux_parent: false
+  lambda_aux_cat: 0.05
+  lambda_aux_parent: 0.0
+  tau: 0.2
+  batch_size: 256
+  learning_rate: 0.001
+  weight_decay: 1.0e-05
+  max_epochs: 30
+  patience: 5
+  grad_clip: 5.0
+  seed: 42
+  device: auto
+  num_workers: 0
+  checkpoint_dir: checkpoints
+  save_dir: checkpoints/CatSA/diginetica/catsa_plus_v2_len_gate
+  prefix_len_min: 0
+  prefix_len_max: 0
+evaluation:
+  top_k:
+  - 10
+  - 20
+  primary_metric: mrr@20
+  mode: standard
+  length_threshold: 5
+  checkpoint_short: ''
+  checkpoint_long: ''
+config_dir: config
+version: catsa_plus_v2_len_gate
+====================================================================
+2026-07-10 11:43:18 | INFO    | wandb: run 'CatSA_plus_v2_len_gate' — https://wandb.ai/hongichik321-aol/diginetica/runs/9y558zli
+2026-07-10 11:43:18 | INFO    | Dữ liệu [data/diginetica]: |I|=44459, |C|=1019, train=164559 phiên
+2026-07-10 11:43:18 | INFO    | Thiết bị: cuda | encoder=catsa_plus_v2 | fusion=gate | use_cl=True | cl_type=both | aux_cat=True | aux_parent=False
+2026-07-10 11:43:18 | WARNING | augment: chiến lược ['sibling'] bị loại (dataset không có taxonomy) — re-normalize trọng số còn lại: {'same': 0.5714, 'hybrid': 0.4286}
+2026-07-10 11:46:45 | INFO    | Epoch 1: total=8.0808, rec=7.7404, cl=0.1729, aux=0.1676 (206.3s)
+2026-07-10 11:46:45 | INFO    |   Augment no-op rate: 0.0046 (2953/637952 lần gọi không tạo thay đổi thật)
+2026-07-10 11:46:54 | INFO    |   Val: hr@10=0.3377 | ndcg@10=0.2019 | mrr@10=0.1603 | hr@20=0.4439 | ndcg@20=0.2288 | mrr@20=0.1677
+2026-07-10 11:46:54 | INFO    |   → Model tốt nhất mới (mrr@20=0.1677)
+2026-07-10 11:50:17 | INFO    | Epoch 2: total=5.6432, rec=5.4013, cl=0.1481, aux=0.0938 (202.6s)
+2026-07-10 11:50:17 | INFO    |   Augment no-op rate: 0.0046 (2964/637952 lần gọi không tạo thay đổi thật)
+2026-07-10 11:50:25 | INFO    |   Val: hr@10=0.3689 | ndcg@10=0.2157 | mrr@10=0.1687 | hr@20=0.4935 | ndcg@20=0.2472 | mrr@20=0.1774
+2026-07-10 11:50:25 | INFO    |   → Model tốt nhất mới (mrr@20=0.1774)
+2026-07-10 11:53:48 | INFO    | Epoch 3: total=5.2178, rec=4.9824, cl=0.1455, aux=0.0900 (202.9s)
+2026-07-10 11:53:48 | INFO    |   Augment no-op rate: 0.0047 (2973/637952 lần gọi không tạo thay đổi thật)
+2026-07-10 11:53:56 | INFO    |   Val: hr@10=0.3772 | ndcg@10=0.2191 | mrr@10=0.1707 | hr@20=0.5051 | ndcg@20=0.2514 | mrr@20=0.1795
+2026-07-10 11:53:56 | INFO    |   → Model tốt nhất mới (mrr@20=0.1795)
+2026-07-10 11:57:19 | INFO    | Epoch 4: total=5.0624, rec=4.8292, cl=0.1442, aux=0.0889 (202.9s)
+2026-07-10 11:57:19 | INFO    |   Augment no-op rate: 0.0047 (2983/637952 lần gọi không tạo thay đổi thật)
+2026-07-10 11:57:27 | INFO    |   Val: hr@10=0.3838 | ndcg@10=0.2221 | mrr@10=0.1725 | hr@20=0.5094 | ndcg@20=0.2537 | mrr@20=0.1812
+2026-07-10 11:57:27 | INFO    |   → Model tốt nhất mới (mrr@20=0.1812)
+2026-07-10 12:00:50 | INFO    | Epoch 5: total=4.9791, rec=4.7472, cl=0.1435, aux=0.0883 (202.7s)
+2026-07-10 12:00:50 | INFO    |   Augment no-op rate: 0.0047 (3004/637952 lần gọi không tạo thay đổi thật)
+2026-07-10 12:00:58 | INFO    |   Val: hr@10=0.3830 | ndcg@10=0.2214 | mrr@10=0.1719 | hr@20=0.5097 | ndcg@20=0.2534 | mrr@20=0.1807
+2026-07-10 12:04:22 | INFO    | Epoch 6: total=4.9249, rec=4.6938, cl=0.1432, aux=0.0880 (203.6s)
+2026-07-10 12:04:22 | INFO    |   Augment no-op rate: 0.0046 (2962/637952 lần gọi không tạo thay đổi thật)
+2026-07-10 12:04:30 | INFO    |   Val: hr@10=0.3841 | ndcg@10=0.2220 | mrr@10=0.1725 | hr@20=0.5092 | ndcg@20=0.2537 | mrr@20=0.1812
+2026-07-10 12:07:53 | INFO    | Epoch 7: total=4.8869, rec=4.6560, cl=0.1431, aux=0.0877 (203.5s)
+2026-07-10 12:07:53 | INFO    |   Augment no-op rate: 0.0047 (2989/637952 lần gọi không tạo thay đổi thật)
+2026-07-10 12:08:01 | INFO    |   Val: hr@10=0.3853 | ndcg@10=0.2229 | mrr@10=0.1731 | hr@20=0.5119 | ndcg@20=0.2548 | mrr@20=0.1819
+2026-07-10 12:08:01 | INFO    |   → Model tốt nhất mới (mrr@20=0.1819)
+2026-07-10 12:11:24 | INFO    | Epoch 8: total=4.8595, rec=4.6288, cl=0.1431, aux=0.0876 (202.5s)
+2026-07-10 12:11:24 | INFO    |   Augment no-op rate: 0.0046 (2945/637952 lần gọi không tạo thay đổi thật)
+2026-07-10 12:11:32 | INFO    |   Val: hr@10=0.3830 | ndcg@10=0.2215 | mrr@10=0.1720 | hr@20=0.5131 | ndcg@20=0.2543 | mrr@20=0.1810
+2026-07-10 12:14:56 | INFO    | Epoch 9: total=4.8362, rec=4.6054, cl=0.1433, aux=0.0875 (203.7s)
+2026-07-10 12:14:56 | INFO    |   Augment no-op rate: 0.0047 (2987/637952 lần gọi không tạo thay đổi thật)
+2026-07-10 12:15:04 | INFO    |   Val: hr@10=0.3849 | ndcg@10=0.2222 | mrr@10=0.1724 | hr@20=0.5124 | ndcg@20=0.2544 | mrr@20=0.1812
+2026-07-10 12:18:27 | INFO    | Epoch 10: total=4.8129, rec=4.5819, cl=0.1435, aux=0.0875 (203.2s)
+2026-07-10 12:18:27 | INFO    |   Augment no-op rate: 0.0047 (2988/637952 lần gọi không tạo thay đổi thật)
+2026-07-10 12:18:35 | INFO    |   Val: hr@10=0.3841 | ndcg@10=0.2219 | mrr@10=0.1723 | hr@20=0.5127 | ndcg@20=0.2543 | mrr@20=0.1811
+2026-07-10 12:21:57 | INFO    | Epoch 11: total=4.7955, rec=4.5643, cl=0.1437, aux=0.0875 (202.0s)
+2026-07-10 12:21:57 | INFO    |   Augment no-op rate: 0.0047 (2968/637952 lần gọi không tạo thay đổi thật)
+2026-07-10 12:22:05 | INFO    |   Val: hr@10=0.3851 | ndcg@10=0.2227 | mrr@10=0.1730 | hr@20=0.5116 | ndcg@20=0.2547 | mrr@20=0.1818
+2026-07-10 12:25:31 | INFO    | Epoch 12: total=4.7771, rec=4.5457, cl=0.1439, aux=0.0876 (206.0s)
+2026-07-10 12:25:31 | INFO    |   Augment no-op rate: 0.0047 (2967/637952 lần gọi không tạo thay đổi thật)
+2026-07-10 12:25:39 | INFO    |   Val: hr@10=0.3825 | ndcg@10=0.2215 | mrr@10=0.1722 | hr@20=0.5102 | ndcg@20=0.2537 | mrr@20=0.1811
+2026-07-10 12:25:39 | INFO    | Early stopping tại epoch 12
+2026-07-10 12:25:48 | INFO    | KẾT QUẢ TEST: hr@10=0.3862 | ndcg@10=0.2237 | mrr@10=0.1739 | hr@20=0.5108 | ndcg@20=0.2552 | mrr@20=0.1825
+2026-07-10 12:25:56 | INFO    |   Sub-population theo độ dài phiên: 1_3_hr@10=0.4012 | 1_3_ndcg@10=0.2367 | 1_3_mrr@10=0.1862 | 1_3_hr@20=0.5238 | 1_3_ndcg@20=0.2677 | 1_3_mrr@20=0.1947 | 1_3_n_samples=45915.0000 | 4_7_hr@10=0.3775 | 4_7_ndcg@10=0.2125 | 4_7_mrr@10=0.1620 | 4_7_hr@20=0.5043 | 4_7_ndcg@20=0.2445 | 4_7_mrr@20=0.1708 | 4_7_n_samples=21424.0000 | 8_plus_hr@10=0.3391 | 8_plus_ndcg@10=0.1904 | 8_plus_mrr@10=0.1448 | 8_plus_hr@20=0.4677 | 8_plus_ndcg@20=0.2228 | 8_plus_mrr@20=0.1536 | 8_plus_n_samples=10649.0000
+2026-07-10 12:25:56 | INFO    | [CatSA] Hoàn tất catsa_plus_v2_len_gate.yaml. Test metrics: hr@10=0.3862 | ndcg@10=0.2237 | mrr@10=0.1739 | hr@20=0.5108 | ndcg@20=0.2552 | mrr@20=0.1825

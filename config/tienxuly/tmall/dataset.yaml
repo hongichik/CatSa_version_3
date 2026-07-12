@@ -1,0 +1,14 @@
+# dataset.yaml — nguồn dữ liệu thô Tmall / IJCAI-15 (tienxuly/download.py)
+#
+# KHÔNG có mirror công khai trên Kaggle (đã kiểm tra 07/2026) → phải tải TAY:
+#   1. Đăng nhập https://tianchi.aliyun.com/dataset/42  (IJCAI-15 Repeat Buyers)
+#   2. Tải data_format1.zip, giải nén lấy user_log_format1.csv
+#   3. Đặt vào: data/raw/tmall/user_log_format1.csv
+#
+# Cột: user_id,item_id,cat_id,seller_id,brand_id,time_stamp(mmdd),action_type
+# action_type: 0=click, 1=cart, 2=purchase, 3=fav | category flat (không taxonomy)
+dataset:
+  source: local                      # bắt buộc local — không có trên Kaggle
+  kagglehub_handle: ""
+  local_path: data/raw/tmall         # thư mục chứa user_log_format1.csv
+  name: tmall

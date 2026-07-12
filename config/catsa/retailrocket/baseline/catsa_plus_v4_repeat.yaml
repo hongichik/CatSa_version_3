@@ -1,0 +1,84 @@
+# CatSA++ v4 "repeat" — cô lập đóng góp CỦA RIÊNG use_repeat_boost, học
+# end-to-end (khác ensemble_eval phase 1: delta=2 CỐ ĐỊNH post-hoc, không
+# lan gradient qua repeat_delta).
+#
+# Bối cảnh: catsa_plus_v3_cat_intent.yaml đã bật SẴN use_repeat_boost=true
+# nhưng gộp cùng use_cat_intent (vốn làm hr@20 giảm — cat_intent đẩy nhầm
+# cả loạt item sai category lên khi đoán category sai) → mrr@20=0.3700 chỉ
+# ngang len_gate (0.3704), gain thật của repeat_boost bị cat_intent che mất.
+# Bản này TÁCH RIÊNG repeat_boost, giữ nguyên mọi thứ khác của len_gate
+# (bản đơn tốt nhất hiện tại, Test mrr@20=0.3704) — để đo đúng đóng góp.
+#
+# Chạy: python CatSA/main.py --run baseline/catsa_plus_v4_repeat.yaml
+project:
+  name: retailrocket
+  filename_mode: custom
+  custom_filename: CatSA/baseline/CatSA_plus_v4_repeat.log
+
+data:
+  data_dir: data/retailrocket_item_hon_5
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+
+model:
+  embedding_dim: 100
+  num_layers: 2
+  use_taxonomy: true
+  dropout: 0.1
+  encoder_type: catsa_plus_v2
+  fusion_type: gate
+  n_heads: 2
+  retrieval_topk: 5
+  max_seq_length: 50
+  trm_layers: 2
+  trm_inner_size: 256
+  temperature: 0.07
+  sess_dropout: 0.2
+  item_dropout: 0.2
+  trm_dropout: 0.5
+  use_seq_trm: true
+  use_module1: true
+  path_fusion: dual_score
+  dual_score_beta: 1.0
+  learn_score_beta: true
+  use_cat_bias: false
+  extra_rerank: false
+  length_aware_gate: true
+  length_gate_max_len: 50
+  use_repeat_boost: true
+  repeat_boost_init: 2.0
+
+augment:
+  strategies: [same, sibling, hybrid]
+  strategy_weights: [0.4, 0.3, 0.3]
+  eta_aug: 0.3
+  eta_crop: 0.75
+  k_min: 5
+
+training:
+  use_cl: true
+  cl_type: both
+  lambda_cl: 0.05
+  lambda_proto: 0.05
+  aux_cat: true
+  aux_parent: false
+  lambda_aux_cat: 0.05
+  lambda_aux_parent: 0.0
+  tau: 0.2
+  batch_size: 256
+  learning_rate: 0.001
+  weight_decay: 0.00001
+  max_epochs: 30
+  patience: 5
+  grad_clip: 5.0
+  seed: 42
+  device: auto
+  num_workers: 0
+  checkpoint_dir: checkpoints
+  save_dir: "checkpoints/CatSA/retailrocket/catsa_plus_v4_repeat"
+
+evaluation:
+  top_k: [10, 20]
+  primary_metric: mrr@20

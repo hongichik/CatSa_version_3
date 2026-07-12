@@ -1,0 +1,204 @@
+2026-07-09 04:38:51 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/retailrocket/CatSA/baseline/CatSA_plus_v2_len_gate.log
+2026-07-09 04:38:51 | INFO    | 
+====================================================================
+CẤU HÌNH LÚC CHẠY (config_dir: config | version: catsa_plus_v2_len_gate)
+====================================================================
+logging:
+  dir: Log
+  level: INFO
+  console: true
+project:
+  name: retailrocket
+  filename_mode: custom
+  custom_filename: CatSA/baseline/CatSA_plus_v2_len_gate.log
+wandb:
+  enabled: true
+  api_key: '***da-che***'
+  project: ''
+  entity: ''
+  run_name: ''
+  mode: online
+dataset:
+  source: kagglehub
+  kagglehub_handle: retailrocket/ecommerce-dataset
+  local_path: data/raw
+  name: retailrocket
+preprocess:
+  output_dir: data/retailrocket_2_5
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+  event_types:
+  - view
+  session_same_day: true
+  session_gap_seconds: 1800
+  dedup_consecutive: false
+  min_item_support: 5
+  min_session_length: 2
+  max_session_length: 5
+  session_length_mode: filter
+  max_prefix_length: 50
+  require_item_category: false
+  val_ratio: 0.1
+  test_ratio: 0.1
+  max_sessions: 0
+data:
+  data_dir: data/retailrocket_item_hon_5
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+model:
+  embedding_dim: 100
+  num_layers: 2
+  use_taxonomy: true
+  dropout: 0.1
+  encoder_type: catsa_plus_v2
+  fusion_type: gate
+  n_heads: 2
+  retrieval_topk: 5
+  max_seq_length: 50
+  trm_layers: 2
+  trm_inner_size: 256
+  temperature: 0.07
+  sess_dropout: 0.2
+  item_dropout: 0.2
+  extra_rerank: false
+  extra_beta: 12.0
+  trm_dropout: 0.5
+  use_seq_trm: true
+  use_error_aux: false
+  error_aux_alpha: 0.15
+  post_process: false
+  post_same_boost: 0.35
+  post_sib_boost: 0.12
+  post_other_penalty: 0.08
+  use_module1: true
+  path_fusion: dual_score
+  dual_score_beta: 1.0
+  learn_score_beta: true
+  trm_residual_gamma: 0.5
+  use_cat_bias: false
+  length_aware_gate: true
+  length_gate_max_len: 50
+augment:
+  strategies:
+  - same
+  - sibling
+  - hybrid
+  strategy_weights:
+  - 0.4
+  - 0.3
+  - 0.3
+  eta_aug: 0.3
+  eta_crop: 0.75
+  k_min: 5
+training:
+  use_cl: true
+  lambda_cl: 0.05
+  cl_type: both
+  lambda_proto: 0.05
+  aux_cat: true
+  aux_parent: false
+  lambda_aux_cat: 0.05
+  lambda_aux_parent: 0.0
+  tau: 0.2
+  batch_size: 256
+  learning_rate: 0.001
+  weight_decay: 1.0e-05
+  max_epochs: 30
+  patience: 5
+  grad_clip: 5.0
+  seed: 42
+  device: auto
+  num_workers: 0
+  checkpoint_dir: checkpoints
+  save_dir: checkpoints/CatSA/retailrocket/catsa_plus_v2_len_gate
+  prefix_len_min: 0
+  prefix_len_max: 0
+evaluation:
+  top_k:
+  - 10
+  - 20
+  primary_metric: mrr@20
+  mode: standard
+  length_threshold: 5
+  checkpoint_short: ''
+  checkpoint_long: ''
+config_dir: config
+version: catsa_plus_v2_len_gate
+====================================================================
+wandb: [wandb.login()] Using explicit session credentials for https://api.wandb.ai.
+wandb: Appending key for api.wandb.ai to your netrc file: /home/hongnguyen/.netrc
+wandb: Currently logged in as: hongichik321 (hongichik321-aol) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.28.0
+wandb: Run data is saved locally in /home/hongnguyen/demo2/wandb/run-20260709_043853-qb3trclm
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run CatSA_plus_v2_len_gate
+wandb: ⭐️ View project at https://wandb.ai/hongichik321-aol/retailrocket
+wandb: 🚀 View run at https://wandb.ai/hongichik321-aol/retailrocket/runs/qb3trclm
+2026-07-09 04:38:54 | INFO    | wandb: run 'CatSA_plus_v2_len_gate' — https://wandb.ai/hongichik321-aol/retailrocket/runs/qb3trclm
+2026-07-09 04:38:54 | INFO    | Dữ liệu [data/retailrocket_item_hon_5]: |I|=79649, |C|=1185, train=283023 phiên
+2026-07-09 04:38:54 | INFO    | Thiết bị: cuda | encoder=catsa_plus_v2 | fusion=gate | use_cl=True | cl_type=both | aux_cat=True | aux_parent=False
+2026-07-09 04:44:46 | INFO    | Epoch 1: total=7.2506, rec=6.8029, cl=0.2566, aux=0.1911 (350.4s)
+2026-07-09 04:44:58 | INFO    |   Val: hr@10=0.5144 | ndcg@10=0.4108 | mrr@10=0.3780 | hr@20=0.5646 | ndcg@20=0.4235 | mrr@20=0.3815
+2026-07-09 04:44:58 | INFO    |   → Model tốt nhất mới (mrr@20=0.3815)
+2026-07-09 04:50:39 | INFO    | Epoch 2: total=5.0252, rec=4.6571, cl=0.2392, aux=0.1289 (341.2s)
+2026-07-09 04:50:52 | INFO    |   Val: hr@10=0.5387 | ndcg@10=0.4223 | mrr@10=0.3858 | hr@20=0.5964 | ndcg@20=0.4369 | mrr@20=0.3898
+2026-07-09 04:50:52 | INFO    |   → Model tốt nhất mới (mrr@20=0.3898)
+2026-07-09 04:56:44 | INFO    | Epoch 3: total=4.5403, rec=4.1795, cl=0.2363, aux=0.1245 (351.4s)
+2026-07-09 04:56:56 | INFO    |   Val: hr@10=0.5430 | ndcg@10=0.4238 | mrr@10=0.3864 | hr@20=0.6027 | ndcg@20=0.4390 | mrr@20=0.3906
+2026-07-09 04:56:56 | INFO    |   → Model tốt nhất mới (mrr@20=0.3906)
+2026-07-09 05:02:38 | INFO    | Epoch 4: total=4.3639, rec=4.0054, cl=0.2354, aux=0.1231 (342.1s)
+2026-07-09 05:02:51 | INFO    |   Val: hr@10=0.5464 | ndcg@10=0.4250 | mrr@10=0.3869 | hr@20=0.6072 | ndcg@20=0.4405 | mrr@20=0.3911
+2026-07-09 05:02:51 | INFO    |   → Model tốt nhất mới (mrr@20=0.3911)
+2026-07-09 05:08:45 | INFO    | Epoch 5: total=4.2695, rec=3.9120, cl=0.2350, aux=0.1225 (353.5s)
+2026-07-09 05:08:57 | INFO    |   Val: hr@10=0.5480 | ndcg@10=0.4255 | mrr@10=0.3871 | hr@20=0.6098 | ndcg@20=0.4412 | mrr@20=0.3914
+2026-07-09 05:08:57 | INFO    |   → Model tốt nhất mới (mrr@20=0.3914)
+2026-07-09 05:14:39 | INFO    | Epoch 6: total=4.2079, rec=3.8512, cl=0.2346, aux=0.1221 (341.5s)
+2026-07-09 05:14:52 | INFO    |   Val: hr@10=0.5476 | ndcg@10=0.4250 | mrr@10=0.3865 | hr@20=0.6089 | ndcg@20=0.4405 | mrr@20=0.3907
+2026-07-09 05:20:45 | INFO    | Epoch 7: total=4.1657, rec=3.8092, cl=0.2347, aux=0.1218 (353.7s)
+2026-07-09 05:20:58 | INFO    |   Val: hr@10=0.5450 | ndcg@10=0.4225 | mrr@10=0.3840 | hr@20=0.6082 | ndcg@20=0.4385 | mrr@20=0.3884
+2026-07-09 05:26:41 | INFO    | Epoch 8: total=4.1322, rec=3.7759, cl=0.2346, aux=0.1217 (343.5s)
+2026-07-09 05:26:54 | INFO    |   Val: hr@10=0.5469 | ndcg@10=0.4232 | mrr@10=0.3843 | hr@20=0.6088 | ndcg@20=0.4389 | mrr@20=0.3886
+2026-07-09 05:32:46 | INFO    | Epoch 9: total=4.1055, rec=3.7495, cl=0.2344, aux=0.1216 (352.0s)
+2026-07-09 05:32:59 | INFO    |   Val: hr@10=0.5454 | ndcg@10=0.4215 | mrr@10=0.3826 | hr@20=0.6073 | ndcg@20=0.4371 | mrr@20=0.3869
+2026-07-09 05:38:41 | INFO    | Epoch 10: total=4.0813, rec=3.7250, cl=0.2347, aux=0.1216 (342.2s)
+2026-07-09 05:38:54 | INFO    |   Val: hr@10=0.5437 | ndcg@10=0.4215 | mrr@10=0.3832 | hr@20=0.6055 | ndcg@20=0.4372 | mrr@20=0.3875
+2026-07-09 05:38:54 | INFO    | Early stopping tại epoch 10
+2026-07-09 05:39:06 | INFO    | KẾT QUẢ TEST: hr@10=0.5249 | ndcg@10=0.4040 | mrr@10=0.3661 | hr@20=0.5867 | ndcg@20=0.4197 | mrr@20=0.3704
+2026-07-09 05:39:06 | INFO    | [CatSA] Hoàn tất baseline/catsa_plus_v2_len_gate.yaml. Test metrics: hr@10=0.5249 | ndcg@10=0.4040 | mrr@10=0.3661 | hr@20=0.5867 | ndcg@20=0.4197 | mrr@20=0.3704
+wandb: updating run metadata
+wandb: uploading config.yaml; uploading output.log; uploading wandb-summary.json
+wandb: uploading history steps 9-9, summary, console lines 29-30
+wandb: 
+wandb: Run history:
+wandb:   train/loss_aux █▂▁▁▁▁▁▁▁▁
+wandb:    train/loss_cl █▃▂▁▁▁▁▁▁▁
+wandb:   train/loss_rec █▃▂▂▁▁▁▁▁▁
+wandb: train/loss_total █▃▂▂▁▁▁▁▁▁
+wandb:        val/hr@10 ▁▆▇███▇█▇▇
+wandb:        val/hr@20 ▁▆▇██████▇
+wandb:       val/mrr@10 ▁▇▇███▆▆▅▅
+wandb:       val/mrr@20 ▁▇▇███▆▆▅▅
+wandb:      val/ndcg@10 ▁▆▇███▇▇▆▆
+wandb:      val/ndcg@20 ▁▆▇███▇▇▆▆
+wandb: 
+wandb: Run summary:
+wandb:       test/hr@10 0.52495
+wandb:       test/hr@20 0.58669
+wandb:      test/mrr@10 0.36607
+wandb:      test/mrr@20 0.37036
+wandb:     test/ndcg@10 0.40404
+wandb:     test/ndcg@20 0.41966
+wandb:   train/loss_aux 0.12156
+wandb:    train/loss_cl 0.23468
+wandb:   train/loss_rec 3.72504
+wandb: train/loss_total 4.08128
+wandb:               +6 ...
+wandb: 
+wandb: 🚀 View run CatSA_plus_v2_len_gate at: https://wandb.ai/hongichik321-aol/retailrocket/runs/qb3trclm
+wandb: ⭐️ View project at: https://wandb.ai/hongichik321-aol/retailrocket
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260709_043853-qb3trclm/logs

@@ -1,0 +1,482 @@
+2026-07-11 12:22:22 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/yoochoose/CatSA_plus_v2_len_gate.log
+2026-07-11 12:22:22 | INFO    | 
+====================================================================
+CẤU HÌNH LÚC CHẠY (config_dir: config | version: catsa_plus_v2_len_gate)
+====================================================================
+logging:
+  dir: Log
+  level: INFO
+  console: true
+project:
+  name: yoochoose
+  filename_mode: custom
+  custom_filename: CatSA_plus_v2_len_gate.log
+wandb:
+  enabled: true
+  api_key: '***da-che***'
+  project: ''
+  entity: ''
+  run_name: ''
+  mode: online
+dataset:
+  source: kagglehub
+  kagglehub_handle: chadgostopp/recsys-challenge-2015
+  local_path: data/raw/yoochoose
+  name: yoochoose
+preprocess:
+  output_dir: data/yoochoose
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+  event_types:
+  - view
+  session_same_day: true
+  session_gap_seconds: 1800
+  dedup_consecutive: false
+  min_item_support: 5
+  min_session_length: 2
+  max_session_length: 50
+  session_length_mode: keep
+  max_prefix_length: 50
+  require_item_category: false
+  val_ratio: 0.1
+  test_ratio: 0.1
+  max_sessions: 0
+data:
+  data_dir: data/yoochoose
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+model:
+  embedding_dim: 100
+  num_layers: 2
+  use_taxonomy: false
+  dropout: 0.1
+  encoder_type: catsa_plus_v2
+  fusion_type: gate
+  n_heads: 2
+  retrieval_topk: 5
+  max_seq_length: 50
+  trm_layers: 2
+  trm_inner_size: 256
+  temperature: 0.07
+  sess_dropout: 0.2
+  item_dropout: 0.2
+  extra_rerank: false
+  extra_beta: 12.0
+  trm_dropout: 0.5
+  use_seq_trm: true
+  use_error_aux: false
+  error_aux_alpha: 0.15
+  post_process: false
+  post_same_boost: 0.35
+  post_sib_boost: 0.12
+  post_other_penalty: 0.08
+  use_module1: true
+  path_fusion: dual_score
+  dual_score_beta: 1.0
+  learn_score_beta: true
+  trm_residual_gamma: 0.5
+  use_cat_bias: false
+  length_aware_gate: true
+  length_gate_max_len: 50
+  use_star_node: false
+  use_multi_interest: false
+  n_interests: 4
+  use_cat_intent: false
+  cat_intent_beta: 0.3
+  cat_intent_layers: 1
+  cat_intent_conf_gate: false
+  use_repeat_boost: false
+  repeat_boost_init: 2.0
+augment:
+  strategies:
+  - same
+  - sibling
+  - hybrid
+  strategy_weights:
+  - 0.4
+  - 0.3
+  - 0.3
+  eta_aug: 0.3
+  eta_crop: 0.75
+  k_min: 5
+training:
+  use_cl: true
+  lambda_cl: 0.05
+  cl_type: both
+  lambda_proto: 0.05
+  aux_cat: true
+  aux_parent: false
+  lambda_aux_cat: 0.05
+  lambda_aux_parent: 0.0
+  tau: 0.2
+  batch_size: 256
+  learning_rate: 0.001
+  weight_decay: 1.0e-05
+  max_epochs: 30
+  patience: 5
+  grad_clip: 5.0
+  seed: 42
+  device: auto
+  num_workers: 0
+  checkpoint_dir: checkpoints
+  save_dir: checkpoints/CatSA/yoochoose/catsa_plus_v2_len_gate
+  prefix_len_min: 0
+  prefix_len_max: 0
+evaluation:
+  top_k:
+  - 10
+  - 20
+  primary_metric: mrr@20
+  mode: standard
+  length_threshold: 5
+  checkpoint_short: ''
+  checkpoint_long: ''
+config_dir: config
+version: catsa_plus_v2_len_gate
+====================================================================
+2026-07-11 12:22:24 | INFO    | wandb: run 'CatSA_plus_v2_len_gate' — https://wandb.ai/hongichik321-aol/yoochoose/runs/0o4lgtcx
+2026-07-11 12:22:31 | INFO    | Dữ liệu [data/yoochoose]: |I|=37452, |C|=73, train=6385772 phiên
+2026-07-11 12:22:31 | INFO    | Thiết bị: cuda | encoder=catsa_plus_v2 | fusion=gate | use_cl=True | cl_type=both | aux_cat=True | aux_parent=False
+2026-07-11 12:22:31 | WARNING | augment: chiến lược ['sibling'] bị loại (dataset không có taxonomy) — re-normalize trọng số còn lại: {'same': 0.5714, 'hybrid': 0.4286}
+2026-07-11 14:00:16 | INFO    | Epoch 1: total=4.9431, rec=4.7123, cl=0.1838, aux=0.0470 (5852.0s)
+2026-07-11 14:00:16 | INFO    |   Augment no-op rate: 0.0109 (205506/18827008 lần gọi không tạo thay đổi thật)
+2026-07-11 14:04:19 | INFO    |   Val: hr@10=0.4432 | ndcg@10=0.2933 | mrr@10=0.2464 | hr@20=0.5075 | ndcg@20=0.3096 | mrr@20=0.2509
+2026-07-11 14:04:19 | INFO    |   → Model tốt nhất mới (mrr@20=0.2509)
+2026-07-11 15:26:47 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/yoochoose/CatSA_plus_v2_len_gate.log
+2026-07-11 15:26:47 | INFO    | 
+====================================================================
+CẤU HÌNH LÚC CHẠY (config_dir: config | version: catsa_plus_v2_len_gate)
+====================================================================
+logging:
+  dir: Log
+  level: INFO
+  console: true
+project:
+  name: yoochoose
+  filename_mode: custom
+  custom_filename: CatSA_plus_v2_len_gate.log
+wandb:
+  enabled: true
+  api_key: '***da-che***'
+  project: ''
+  entity: ''
+  run_name: ''
+  mode: online
+dataset:
+  source: kagglehub
+  kagglehub_handle: chadgostopp/recsys-challenge-2015
+  local_path: data/raw/yoochoose
+  name: yoochoose
+preprocess:
+  output_dir: data/yoochoose
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+  event_types:
+  - view
+  session_same_day: true
+  session_gap_seconds: 1800
+  dedup_consecutive: false
+  min_item_support: 5
+  min_session_length: 2
+  max_session_length: 50
+  session_length_mode: keep
+  max_prefix_length: 50
+  require_item_category: false
+  val_ratio: 0.1
+  test_ratio: 0.1
+  max_sessions: 0
+data:
+  data_dir: data/yoochoose
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+model:
+  embedding_dim: 100
+  num_layers: 2
+  use_taxonomy: false
+  dropout: 0.1
+  encoder_type: catsa_plus_v2
+  fusion_type: gate
+  n_heads: 2
+  retrieval_topk: 5
+  max_seq_length: 50
+  trm_layers: 2
+  trm_inner_size: 256
+  temperature: 0.07
+  sess_dropout: 0.2
+  item_dropout: 0.2
+  extra_rerank: false
+  extra_beta: 12.0
+  trm_dropout: 0.5
+  use_seq_trm: true
+  use_error_aux: false
+  error_aux_alpha: 0.15
+  post_process: false
+  post_same_boost: 0.35
+  post_sib_boost: 0.12
+  post_other_penalty: 0.08
+  use_module1: true
+  path_fusion: dual_score
+  dual_score_beta: 1.0
+  learn_score_beta: true
+  trm_residual_gamma: 0.5
+  use_cat_bias: false
+  length_aware_gate: true
+  length_gate_max_len: 50
+  use_star_node: false
+  use_multi_interest: false
+  n_interests: 4
+  use_cat_intent: false
+  cat_intent_beta: 0.3
+  cat_intent_layers: 1
+  cat_intent_conf_gate: false
+  use_repeat_boost: false
+  repeat_boost_init: 2.0
+augment:
+  strategies:
+  - same
+  - sibling
+  - hybrid
+  strategy_weights:
+  - 0.4
+  - 0.3
+  - 0.3
+  eta_aug: 0.3
+  eta_crop: 0.75
+  k_min: 5
+training:
+  use_cl: true
+  lambda_cl: 0.05
+  cl_type: both
+  lambda_proto: 0.05
+  aux_cat: true
+  aux_parent: false
+  lambda_aux_cat: 0.05
+  lambda_aux_parent: 0.0
+  tau: 0.2
+  batch_size: 1024
+  learning_rate: 0.001
+  weight_decay: 1.0e-05
+  max_epochs: 30
+  patience: 5
+  grad_clip: 5.0
+  seed: 42
+  device: auto
+  num_workers: 8
+  checkpoint_dir: checkpoints
+  save_dir: checkpoints/CatSA/yoochoose/catsa_plus_v2_len_gate
+  prefix_len_min: 0
+  prefix_len_max: 0
+evaluation:
+  top_k:
+  - 10
+  - 20
+  primary_metric: mrr@20
+  mode: standard
+  length_threshold: 5
+  checkpoint_short: ''
+  checkpoint_long: ''
+config_dir: config
+version: catsa_plus_v2_len_gate
+====================================================================
+2026-07-11 15:26:50 | INFO    | wandb: run 'CatSA_plus_v2_len_gate' — https://wandb.ai/hongichik321-aol/yoochoose/runs/ejv70wny
+2026-07-11 15:26:56 | INFO    | Dữ liệu [data/yoochoose]: |I|=37452, |C|=73, train=6385772 phiên
+2026-07-11 15:26:56 | INFO    | Thiết bị: cuda | encoder=catsa_plus_v2 | fusion=gate | use_cl=True | cl_type=both | aux_cat=True | aux_parent=False
+2026-07-11 15:26:56 | WARNING | augment: chiến lược ['sibling'] bị loại (dataset không có taxonomy) — re-normalize trọng số còn lại: {'same': 0.5714, 'hybrid': 0.4286}
+2026-07-11 15:57:18 | INFO    | Epoch 1: total=5.0349, rec=4.7200, cl=0.2652, aux=0.0498 (1808.9s)
+2026-07-11 15:57:18 | INFO    |   Augment no-op rate: 0.0000 (0/0 lần gọi không tạo thay đổi thật)
+2026-07-11 23:58:51 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/yoochoose/CatSA_plus_v2_len_gate.log
+2026-07-11 23:58:51 | INFO    | 
+====================================================================
+CẤU HÌNH LÚC CHẠY (config_dir: config | version: catsa_plus_v2_len_gate)
+====================================================================
+logging:
+  dir: Log
+  level: INFO
+  console: true
+project:
+  name: yoochoose
+  filename_mode: custom
+  custom_filename: CatSA_plus_v2_len_gate.log
+wandb:
+  enabled: true
+  api_key: '***da-che***'
+  project: ''
+  entity: ''
+  run_name: ''
+  mode: online
+dataset:
+  source: kagglehub
+  kagglehub_handle: chadgostopp/recsys-challenge-2015
+  local_path: data/raw/yoochoose
+  name: yoochoose
+preprocess:
+  output_dir: data/yoochoose
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+  event_types:
+  - view
+  session_same_day: true
+  session_gap_seconds: 1800
+  dedup_consecutive: false
+  min_item_support: 5
+  min_session_length: 2
+  max_session_length: 50
+  session_length_mode: keep
+  max_prefix_length: 50
+  require_item_category: false
+  val_ratio: 0.1
+  test_ratio: 0.1
+  max_sessions: 0
+data:
+  data_dir: data/yoochoose
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+model:
+  embedding_dim: 100
+  num_layers: 2
+  use_taxonomy: false
+  dropout: 0.1
+  encoder_type: catsa_plus_v2
+  fusion_type: gate
+  n_heads: 2
+  retrieval_topk: 5
+  max_seq_length: 50
+  trm_layers: 2
+  trm_inner_size: 256
+  temperature: 0.07
+  sess_dropout: 0.2
+  item_dropout: 0.2
+  extra_rerank: false
+  extra_beta: 12.0
+  trm_dropout: 0.5
+  use_seq_trm: true
+  use_error_aux: false
+  error_aux_alpha: 0.15
+  post_process: false
+  post_same_boost: 0.35
+  post_sib_boost: 0.12
+  post_other_penalty: 0.08
+  use_module1: true
+  path_fusion: dual_score
+  dual_score_beta: 1.0
+  learn_score_beta: true
+  trm_residual_gamma: 0.5
+  use_cat_bias: false
+  length_aware_gate: true
+  length_gate_max_len: 50
+  use_star_node: false
+  use_multi_interest: false
+  n_interests: 4
+  use_cat_intent: false
+  cat_intent_beta: 0.3
+  cat_intent_layers: 1
+  cat_intent_conf_gate: false
+  use_repeat_boost: false
+  repeat_boost_init: 2.0
+augment:
+  strategies:
+  - same
+  - sibling
+  - hybrid
+  strategy_weights:
+  - 0.4
+  - 0.3
+  - 0.3
+  eta_aug: 0.3
+  eta_crop: 0.75
+  k_min: 5
+training:
+  use_cl: true
+  lambda_cl: 0.05
+  cl_type: both
+  lambda_proto: 0.05
+  aux_cat: true
+  aux_parent: false
+  lambda_aux_cat: 0.05
+  lambda_aux_parent: 0.0
+  tau: 0.2
+  batch_size: 1024
+  learning_rate: 0.001
+  weight_decay: 1.0e-05
+  max_epochs: 30
+  patience: 5
+  grad_clip: 5.0
+  seed: 42
+  device: auto
+  num_workers: 4
+  checkpoint_dir: checkpoints
+  save_dir: checkpoints/CatSA/yoochoose/catsa_plus_v2_len_gate
+  prefix_len_min: 0
+  prefix_len_max: 0
+evaluation:
+  top_k:
+  - 10
+  - 20
+  primary_metric: mrr@20
+  mode: standard
+  length_threshold: 5
+  checkpoint_short: ''
+  checkpoint_long: ''
+config_dir: config
+version: catsa_plus_v2_len_gate
+====================================================================
+2026-07-11 23:58:54 | INFO    | wandb: run 'CatSA_plus_v2_len_gate' — https://wandb.ai/hongichik321-aol/yoochoose/runs/ksbzs3gg
+2026-07-11 23:59:00 | INFO    | Dữ liệu [data/yoochoose]: |I|=37452, |C|=73, train=6385772 phiên
+2026-07-11 23:59:00 | INFO    | Thiết bị: cuda | encoder=catsa_plus_v2 | fusion=gate | use_cl=True | cl_type=both | aux_cat=True | aux_parent=False
+2026-07-11 23:59:00 | WARNING | augment: chiến lược ['sibling'] bị loại (dataset không có taxonomy) — re-normalize trọng số còn lại: {'same': 0.5714, 'hybrid': 0.4286}
+2026-07-12 00:29:34 | INFO    | Epoch 1: total=5.0351, rec=4.7200, cl=0.2653, aux=0.0498 (1819.4s)
+2026-07-12 00:29:34 | INFO    |   Augment no-op rate: 0.0000 (0/0 lần gọi không tạo thay đổi thật)
+2026-07-12 00:31:04 | INFO    |   Val: hr@10=0.4533 | ndcg@10=0.2990 | mrr@10=0.2508 | hr@20=0.5209 | ndcg@20=0.3162 | mrr@20=0.2555
+2026-07-12 00:31:04 | INFO    |   → Model tốt nhất mới (mrr@20=0.2555)
+2026-07-12 01:01:54 | INFO    | Epoch 2: total=4.8016, rec=4.5015, cl=0.2548, aux=0.0452 (1849.8s)
+2026-07-12 01:01:54 | INFO    |   Augment no-op rate: 0.0000 (0/0 lần gọi không tạo thay đổi thật)
+2026-07-12 01:03:22 | INFO    |   Val: hr@10=0.4539 | ndcg@10=0.2988 | mrr@10=0.2502 | hr@20=0.5215 | ndcg@20=0.3159 | mrr@20=0.2549
+2026-07-12 01:37:44 | INFO    | Epoch 3: total=4.7852, rec=4.4861, cl=0.2540, aux=0.0451 (2062.7s)
+2026-07-12 01:37:44 | INFO    |   Augment no-op rate: 0.0000 (0/0 lần gọi không tạo thay đổi thật)
+2026-07-12 01:39:18 | INFO    |   Val: hr@10=0.4593 | ndcg@10=0.3017 | mrr@10=0.2525 | hr@20=0.5293 | ndcg@20=0.3195 | mrr@20=0.2574
+2026-07-12 01:39:18 | INFO    |   → Model tốt nhất mới (mrr@20=0.2574)
+2026-07-12 02:10:14 | INFO    | Epoch 4: total=4.7766, rec=4.4778, cl=0.2538, aux=0.0450 (1856.3s)
+2026-07-12 02:10:14 | INFO    |   Augment no-op rate: 0.0000 (0/0 lần gọi không tạo thay đổi thật)
+2026-07-12 02:11:51 | INFO    |   Val: hr@10=0.4543 | ndcg@10=0.2998 | mrr@10=0.2516 | hr@20=0.5227 | ndcg@20=0.3172 | mrr@20=0.2564
+2026-07-12 02:42:47 | INFO    | Epoch 5: total=4.7711, rec=4.4725, cl=0.2536, aux=0.0450 (1856.3s)
+2026-07-12 02:42:47 | INFO    |   Augment no-op rate: 0.0000 (0/0 lần gọi không tạo thay đổi thật)
+2026-07-12 02:44:18 | INFO    |   Val: hr@10=0.4556 | ndcg@10=0.3003 | mrr@10=0.2518 | hr@20=0.5238 | ndcg@20=0.3176 | mrr@20=0.2566
+2026-07-12 03:36:31 | INFO    | Epoch 6: total=4.7672, rec=4.4687, cl=0.2536, aux=0.0450 (3133.7s)
+2026-07-12 03:36:31 | INFO    |   Augment no-op rate: 0.0000 (0/0 lần gọi không tạo thay đổi thật)
+2026-07-12 03:42:15 | INFO    |   Val: hr@10=0.4596 | ndcg@10=0.3022 | mrr@10=0.2529 | hr@20=0.5262 | ndcg@20=0.3191 | mrr@20=0.2576
+2026-07-12 03:42:15 | INFO    |   → Model tốt nhất mới (mrr@20=0.2576)
+2026-07-12 04:28:12 | INFO    | Epoch 7: total=4.7643, rec=4.4659, cl=0.2535, aux=0.0450 (2757.4s)
+2026-07-12 04:28:12 | INFO    |   Augment no-op rate: 0.0000 (0/0 lần gọi không tạo thay đổi thật)
+2026-07-12 04:29:45 | INFO    |   Val: hr@10=0.4597 | ndcg@10=0.3021 | mrr@10=0.2529 | hr@20=0.5285 | ndcg@20=0.3195 | mrr@20=0.2577
+2026-07-12 04:29:45 | INFO    |   → Model tốt nhất mới (mrr@20=0.2577)
+2026-07-12 05:00:41 | INFO    | Epoch 8: total=4.7620, rec=4.4636, cl=0.2534, aux=0.0450 (1856.5s)
+2026-07-12 05:00:41 | INFO    |   Augment no-op rate: 0.0000 (0/0 lần gọi không tạo thay đổi thật)
+2026-07-12 05:02:09 | INFO    |   Val: hr@10=0.4608 | ndcg@10=0.3025 | mrr@10=0.2529 | hr@20=0.5269 | ndcg@20=0.3192 | mrr@20=0.2576
+2026-07-12 05:33:02 | INFO    | Epoch 9: total=4.7602, rec=4.4620, cl=0.2533, aux=0.0449 (1852.3s)
+2026-07-12 05:33:02 | INFO    |   Augment no-op rate: 0.0000 (0/0 lần gọi không tạo thay đổi thật)
+2026-07-12 05:34:32 | INFO    |   Val: hr@10=0.4570 | ndcg@10=0.3008 | mrr@10=0.2519 | hr@20=0.5233 | ndcg@20=0.3176 | mrr@20=0.2566
+2026-07-12 06:05:22 | INFO    | Epoch 10: total=4.7584, rec=4.4602, cl=0.2533, aux=0.0449 (1850.0s)
+2026-07-12 06:05:22 | INFO    |   Augment no-op rate: 0.0000 (0/0 lần gọi không tạo thay đổi thật)
+2026-07-12 06:06:55 | INFO    |   Val: hr@10=0.4588 | ndcg@10=0.3017 | mrr@10=0.2526 | hr@20=0.5259 | ndcg@20=0.3187 | mrr@20=0.2573
+2026-07-12 06:37:46 | INFO    | Epoch 11: total=4.7570, rec=4.4588, cl=0.2533, aux=0.0449 (1850.7s)
+2026-07-12 06:37:46 | INFO    |   Augment no-op rate: 0.0000 (0/0 lần gọi không tạo thay đổi thật)
+2026-07-12 06:39:13 | INFO    |   Val: hr@10=0.4543 | ndcg@10=0.2988 | mrr@10=0.2503 | hr@20=0.5223 | ndcg@20=0.3161 | mrr@20=0.2551
+2026-07-12 07:10:01 | INFO    | Epoch 12: total=4.7554, rec=4.4572, cl=0.2533, aux=0.0449 (1847.5s)
+2026-07-12 07:10:01 | INFO    |   Augment no-op rate: 0.0000 (0/0 lần gọi không tạo thay đổi thật)
+2026-07-12 07:11:31 | INFO    |   Val: hr@10=0.4567 | ndcg@10=0.3004 | mrr@10=0.2515 | hr@20=0.5256 | ndcg@20=0.3178 | mrr@20=0.2563
+2026-07-12 07:11:31 | INFO    | Early stopping tại epoch 12
+2026-07-12 07:12:52 | INFO    | KẾT QUẢ TEST: hr@10=0.3649 | ndcg@10=0.2582 | mrr@10=0.2248 | hr@20=0.4153 | ndcg@20=0.2710 | mrr@20=0.2283
+2026-07-12 07:14:18 | INFO    |   Sub-population theo độ dài phiên: 1_3_hr@10=0.3878 | 1_3_ndcg@10=0.2876 | 1_3_mrr@10=0.2562 | 1_3_hr@20=0.4309 | 1_3_ndcg@20=0.2985 | 1_3_mrr@20=0.2592 | 1_3_n_samples=1396592.0000 | 4_7_hr@10=0.3371 | 4_7_ndcg@10=0.2199 | 4_7_mrr@10=0.1834 | 4_7_hr@20=0.3959 | 4_7_ndcg@20=0.2348 | 4_7_mrr@20=0.1875 | 4_7_n_samples=466767.0000 | 8_plus_hr@10=0.3099 | 8_plus_ndcg@10=0.1907 | 8_plus_mrr@10=0.1538 | 8_plus_hr@20=0.3786 | 8_plus_ndcg@20=0.2081 | 8_plus_mrr@20=0.1586 | 8_plus_n_samples=343814.0000
+2026-07-12 07:14:19 | INFO    | [CatSA] Hoàn tất catsa_plus_v2_len_gate.yaml. Test metrics: hr@10=0.3649 | ndcg@10=0.2582 | mrr@10=0.2248 | hr@20=0.4153 | ndcg@20=0.2710 | mrr@20=0.2283

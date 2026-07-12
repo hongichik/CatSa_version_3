@@ -7,10 +7,30 @@ import torch.nn.functional as F
 
 
 def session_level_infonce(
-    z_s: torch.Tensor, z_s_tilde: torch.Tensor, tau: float = 0.5,
+    z_s: torch.Tensor, z_s_tilde: torch.Tensor, tau: float,
 ) -> torch.Tensor:
-    """Session-level InfoNCE symmetric (SimCLR-style)."""
+    """Session-level InfoNCE symmetric (SimCLR-style).
+
+    tau KHÔNG có default — bắt buộc truyền tường minh (xem
+    CatSA_Correctness_Synthesis, finding L1): tau=0.5 làm softmax phẳng,
+    gradient CL gần như triệt tiêu, tương đương chạy backbone không CL.
+
+    Biến thể negative sampling (finding L4): B-1 negative CHỈ từ view kia
+    (z_s[i] so với z_s_tilde[j≠i], và đối xứng ngược lại) — không phải
+    full-SimCLR 2B-2 (vốn coi cả z_s[j≠i] LẪN z_s_tilde[j≠i] là âm). Ghi rõ
+    trong Method section để không mô tả nhầm số lượng negative.
+
+    Chính sách false-negative trong batch (finding L2): CHẤP NHẬN nhiễu —
+    không mask các cặp session trùng/gần trùng nội dung trong batch (rất có
+    thể xảy ra với phiên ngắn phổ biến trên RetailRocket). Lý do không mask:
+    cần xác định "trùng nội dung" theo id hay theo item list, và việc mask
+    làm phức tạp thêm implementation mà chưa có bằng chứng đo được mức độ
+    ảnh hưởng. Nếu cần đo, so sánh tỷ lệ trùng lặp phiên trong 1 batch qua
+    train/loss_cl có bất thường (tăng đột biến) hay không.
+    """
+    assert tau > 0, f"tau phải > 0, nhận: {tau}"
     B = z_s.size(0)
+    assert B >= 2, f"session_level_infonce cần batch >= 2, nhận B={B}"
     z_s = F.normalize(z_s, dim=1)
     z_s_tilde = F.normalize(z_s_tilde, dim=1)
     sim = torch.mm(z_s, z_s_tilde.T) / tau
@@ -24,11 +44,15 @@ def category_prototype_loss(
     z_s: torch.Tensor,
     targets: torch.Tensor,
     item2cat: dict[int, int],
-    tau: float = 0.5,
+    tau: float,
     cat_parent: dict[int, int] | None = None,
     sibling_negatives: bool = True,
 ) -> torch.Tensor:
-    """Kéo z_s về prototype category của target; âm từ category khác trong batch."""
+    """Kéo z_s về prototype category của target; âm từ category khác trong batch.
+
+    tau KHÔNG có default — cùng lý do với session_level_infonce (L1).
+    """
+    assert tau > 0, f"tau phải > 0, nhận: {tau}"
     z = F.normalize(z_s, dim=1)
     target_cats = torch.tensor(
         [item2cat.get(int(t), 0) for t in targets.tolist()],

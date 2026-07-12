@@ -1,6 +1,11 @@
 # select.yaml — danh sách version CORE (RetailRocket)
 # Cây: main/
+# So sánh CORE với CatSA trên đúng cùng dữ liệu đã lọc độ dài phiên
+# (retailrocket_2_5 / retailrocket_2_7 — đối chiếu catsa_plus_v2_data2_5/7).
 # python CORE/main.py --suite retailrocket
-# python CORE/main.py --run main/core_trm_retailrocket.yaml
 run:
-  - main/core_trm_retailrocket.yaml
+  - main/core_trm_retailrocket_2_5.yaml
+  - main/core_trm_retailrocket_2_7.yaml
+
+# Đã chạy (hoặc đang chạy) riêng qua --run:
+# - main/core_trm_retailrocket.yaml (data/retailrocket_item_hon_5, full — baseline chính so với CatSA)

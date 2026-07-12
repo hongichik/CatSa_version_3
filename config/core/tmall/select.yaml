@@ -1,0 +1,4 @@
+# select.yaml — danh sách version CORE cho Tmall
+# python CORE/main.py --suite tmall
+run:
+  - core_trm.yaml

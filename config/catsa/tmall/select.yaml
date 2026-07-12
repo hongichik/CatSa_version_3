@@ -1,0 +1,3 @@
+# select.yaml — version CatSA sẽ chạy cho suite này
+run:
+  - catsa_plus_v2_len_gate.yaml

@@ -1,0 +1,15 @@
+[CatSA_Max] (1/6) train v2 ...
+2026-07-10 11:36:52 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/retailrocket/CatSA_Max/v2.log
+2026-07-10 11:36:52 | INFO    | === CatSA_Max member: v2 ===
+wandb: [wandb.login()] Using explicit session credentials for https://api.wandb.ai.
+wandb: Appending key for api.wandb.ai to your netrc file: /home/hongnguyen/.netrc
+wandb: Currently logged in as: hongichik321 (hongichik321-aol) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run db129fu2
+wandb: Tracking run with wandb version 0.28.0
+wandb: Run data is saved locally in /home/hongnguyen/demo2/wandb/run-20260710_113654-db129fu2
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run v2
+wandb: ⭐️ View project at https://wandb.ai/hongichik321-aol/retailrocket
+wandb: 🚀 View run at https://wandb.ai/hongichik321-aol/retailrocket/runs/db129fu2
+2026-07-10 11:36:56 | INFO    | wandb: run 'v2' — https://wandb.ai/hongichik321-aol/retailrocket/runs/db129fu2
+2026-07-10 11:36:56 | INFO    | Thiết bị: cuda | encoder=catsa_plus_v2 | fusion=gate | use_cl=True | cl_type=infonce | aux_cat=True | aux_parent=False

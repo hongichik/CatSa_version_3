@@ -1,0 +1,40 @@
+[phase2] Load models trên cuda ...
+[phase2] 180 biến thể — VAL ...
+
+[phase2] VAL (87318 mẫu) — top 20:
+  0.4080  hr@20=0.6360  w0.65|rep6|last0|flat
+  0.4080  hr@20=0.6357  w0.6|rep6|last0|flat
+  0.4079  hr@20=0.6356  w0.7|rep6|last0|flat
+  0.4079  hr@20=0.6353  w0.75|rep6|last0|flat
+  0.4077  hr@20=0.6350  w0.65|rep5|last0|flat
+  0.4077  hr@20=0.6349  w0.8|rep6|last0|flat
+  0.4077  hr@20=0.6347  w0.6|rep5|last0|flat
+  0.4076  hr@20=0.6346  w0.7|rep5|last0|flat
+  0.4076  hr@20=0.6342  w0.75|rep5|last0|flat
+  0.4074  hr@20=0.6340  w0.65|rep4|last0|flat
+  0.4074  hr@20=0.6338  w0.8|rep5|last0|flat
+  0.4073  hr@20=0.6336  w0.6|rep4|last0|flat
+  0.4073  hr@20=0.6335  w0.7|rep4|last0|flat
+  0.4073  hr@20=0.6331  w0.75|rep4|last0|flat
+  0.4073  hr@20=0.6346  w0.65|rep3|last0|cnt
+  0.4071  hr@20=0.6342  w0.7|rep3|last0|cnt
+  0.4071  hr@20=0.6339  w0.75|rep3|last0|cnt
+  0.4071  hr@20=0.6343  w0.6|rep3|last0|cnt
+  0.4071  hr@20=0.6326  w0.65|rep3|last0|flat
+  0.4071  hr@20=0.6328  w0.8|rep4|last0|flat
+
+[phase2] TEST với top-8 theo val ...
+
+[phase2] KẾT QUẢ TEST (81372 mẫu):
+  mrr@20=0.3875  hr@20=0.6131  ndcg@20=0.4392  w0.7|rep6|last0|flat
+  mrr@20=0.3874  hr@20=0.6133  ndcg@20=0.4391  w0.65|rep6|last0|flat
+  mrr@20=0.3873  hr@20=0.6123  ndcg@20=0.4388  w0.7|rep5|last0|flat
+  mrr@20=0.3873  hr@20=0.6130  ndcg@20=0.4390  w0.75|rep6|last0|flat
+  mrr@20=0.3872  hr@20=0.6126  ndcg@20=0.4388  w0.65|rep5|last0|flat
+  mrr@20=0.3872  hr@20=0.6126  ndcg@20=0.4388  w0.8|rep6|last0|flat
+  mrr@20=0.3872  hr@20=0.6134  ndcg@20=0.4390  w0.6|rep6|last0|flat
+  mrr@20=0.3871  hr@20=0.6126  ndcg@20=0.4387  w0.6|rep5|last0|flat
+
+[phase2] Combo chọn theo VAL: w0.65|rep6|last0|flat
+[phase2] → TEST chính thức: mrr@20=0.3874 | hr@20=0.6133 | ndcg@20=0.4391
+[phase2] Đã ghi checkpoints/ensemble_eval2_result.yaml

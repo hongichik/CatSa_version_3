@@ -1925,3 +1925,63 @@ ValueError: Job 'train_catsa': after='train_core' — job phụ thuộc chưa đ
 2026-07-08 01:31:43 |   - train_catsa: 'python CatSA/main.py' lúc 2026-07-08 01:31:43
 2026-07-08 01:31:43 | ĐÃ CHẠY job 'train_catsa' (pid=3601049) — output: /home/hongnguyen/demo2/RUN/logs/train_catsa-20260708-013143.log
 2026-07-08 01:31:43 | Runner xong: mọi job đã được khởi chạy (job cuối vẫn có thể đang chạy nền).
+2026-07-09 04:38:49 | Runner khởi động (pid=21898) — 1 job:
+2026-07-09 04:38:49 |   - train_catsa: 'python CatSA/main.py --run baseline/catsa_plus_v2_len_gate.yaml' lúc 2026-07-09 04:38:49
+2026-07-09 04:38:49 | ĐÃ CHẠY job 'train_catsa' (pid=21899) — output: /home/hongnguyen/demo2/RUN/logs/train_catsa-20260709-043849.log
+2026-07-09 04:38:49 | Runner xong: mọi job đã được khởi chạy (job cuối vẫn có thể đang chạy nền).
+2026-07-09 05:47:10 | Runner khởi động (pid=46509) — 1 job:
+2026-07-09 05:47:10 |   - train_catsa: 'python CatSA/main.py --run baseline/catsa_plus_v2_star.yaml' lúc 2026-07-09 05:47:10
+2026-07-09 05:47:10 | ĐÃ CHẠY job 'train_catsa' (pid=46510) — output: /home/hongnguyen/demo2/RUN/logs/train_catsa-20260709-054710.log
+2026-07-09 05:47:10 | Runner xong: mọi job đã được khởi chạy (job cuối vẫn có thể đang chạy nền).
+2026-07-09 07:02:23 | Runner khởi động (pid=73262) — 1 job:
+2026-07-09 07:02:23 |   - train_catsa: 'python CatSA/main.py --run baseline/catsa_plus_v2_reg.yaml' lúc 2026-07-09 07:02:23
+2026-07-09 07:02:23 | ĐÃ CHẠY job 'train_catsa' (pid=73263) — output: /home/hongnguyen/demo2/RUN/logs/train_catsa-20260709-070223.log
+2026-07-09 07:02:23 | Runner xong: mọi job đã được khởi chạy (job cuối vẫn có thể đang chạy nền).
+2026-07-09 08:43:22 | Runner khởi động (pid=109699) — 1 job:
+2026-07-09 08:43:22 |   - train_catsa: 'python CatSA/main.py --run baseline/catsa_plus_v2_multi.yaml' lúc 2026-07-09 08:43:22
+2026-07-09 08:43:22 | ĐÃ CHẠY job 'train_catsa' (pid=109700) — output: /home/hongnguyen/demo2/RUN/logs/train_catsa-20260709-084322.log
+2026-07-09 08:43:22 | Runner xong: mọi job đã được khởi chạy (job cuối vẫn có thể đang chạy nền).
+2026-07-09 11:20:19 | Runner khởi động (pid=163953) — 1 job:
+2026-07-09 11:20:19 |   - train_catsa: 'python CatSA/main.py --suite retailrocket' lúc 2026-07-09 11:20:19
+2026-07-09 11:20:19 | ĐÃ CHẠY job 'train_catsa' (pid=163954) — output: /home/hongnguyen/demo2/RUN/logs/train_catsa-20260709-112019.log
+2026-07-09 11:20:19 | Runner xong: mọi job đã được khởi chạy (job cuối vẫn có thể đang chạy nền).
+2026-07-09 12:10:35 | Runner khởi động (pid=182318) — 1 job:
+2026-07-09 12:10:35 |   - train_catsa: 'python CORE/main.py --run main/core_trm_retailrocket.yaml' lúc 2026-07-09 12:10:35
+2026-07-09 12:10:35 | ĐÃ CHẠY job 'train_catsa' (pid=182319) — output: /home/hongnguyen/demo2/RUN/logs/train_catsa-20260709-121035.log
+2026-07-09 12:10:35 | Runner xong: mọi job đã được khởi chạy (job cuối vẫn có thể đang chạy nền).
+2026-07-09 12:20:31 | Runner khởi động (pid=186302) — 1 job:
+2026-07-09 12:20:31 |   - train_catsa: 'python CORE/main.py --suite retailrocket' lúc 2026-07-09 12:20:31
+2026-07-09 12:20:31 | ĐÃ CHẠY job 'train_catsa' (pid=186303) — output: /home/hongnguyen/demo2/RUN/logs/train_catsa-20260709-122031.log
+2026-07-09 12:20:31 | Runner xong: mọi job đã được khởi chạy (job cuối vẫn có thể đang chạy nền).
+2026-07-09 12:53:02 | Runner khởi động (pid=198895) — 1 job:
+2026-07-09 12:53:02 |   - train_catsa: 'python CatSA/main.py --run baseline/catsa_plus_v2_len_gate.yaml' lúc 2026-07-09 12:53:02
+2026-07-09 12:53:02 | ĐÃ CHẠY job 'train_catsa' (pid=198896) — output: /home/hongnguyen/demo2/RUN/logs/train_catsa-20260709-125302.log
+2026-07-09 12:53:02 | Runner xong: mọi job đã được khởi chạy (job cuối vẫn có thể đang chạy nền).
+2026-07-09 14:04:50 | Runner khởi động (pid=221861) — 1 job:
+2026-07-09 14:04:50 |   - train_catsa: 'python CatSA/main.py --run baseline/catsa_plus_v2_len_gate.yaml' lúc 2026-07-09 14:04:50
+2026-07-09 14:04:50 | ĐÃ CHẠY job 'train_catsa' (pid=221862) — output: /home/hongnguyen/demo2/RUN/logs/train_catsa-20260709-140450.log
+2026-07-09 14:04:50 | Runner xong: mọi job đã được khởi chạy (job cuối vẫn có thể đang chạy nền).
+2026-07-09 15:30:24 | Runner khởi động (pid=223260) — 1 job:
+2026-07-09 15:30:24 |   - train_catsa: 'python CatSA/main.py --run baseline/catsa_plus_v3_cat_intent.yaml' lúc 2026-07-09 15:30:24
+2026-07-09 15:30:24 | ĐÃ CHẠY job 'train_catsa' (pid=223261) — output: /home/hongnguyen/demo2/RUN/logs/train_catsa-20260709-153024.log
+2026-07-09 15:30:24 | Runner xong: mọi job đã được khởi chạy (job cuối vẫn có thể đang chạy nền).
+2026-07-09 16:42:52 | Runner khởi động (pid=223812) — 1 job:
+2026-07-09 16:42:52 |   - train_core_seed43: 'python CORE/main.py --suite retailrocket --run main/core_trm_retailrocket_seed43.yaml' lúc 2026-07-09 16:42:52
+2026-07-09 16:42:52 | ĐÃ CHẠY job 'train_core_seed43' (pid=223813) — output: /home/hongnguyen/demo2/RUN/logs/train_core_seed43-20260709-164252.log
+2026-07-09 16:42:52 | Runner xong: mọi job đã được khởi chạy (job cuối vẫn có thể đang chạy nền).
+2026-07-09 17:28:50 | Runner khởi động (pid=224142) — 1 job:
+2026-07-09 17:28:50 |   - train_lengate_seed43: 'python CatSA/main.py --run baseline/catsa_plus_v2_len_gate_seed43.yaml' lúc 2026-07-09 17:28:50
+2026-07-09 17:28:50 | ĐÃ CHẠY job 'train_lengate_seed43' (pid=224143) — output: /home/hongnguyen/demo2/RUN/logs/train_lengate_seed43-20260709-172850.log
+2026-07-09 17:28:50 | Runner xong: mọi job đã được khởi chạy (job cuối vẫn có thể đang chạy nền).
+2026-07-09 23:42:12 | Runner khởi động (pid=226605) — 1 job:
+2026-07-09 23:42:12 |   - train_v3_full: 'python CatSA/main.py --run baseline/catsa_plus_v3_full.yaml' lúc 2026-07-09 23:42:12
+2026-07-09 23:42:12 | ĐÃ CHẠY job 'train_v3_full' (pid=226606) — output: /home/hongnguyen/demo2/RUN/logs/train_v3_full-20260709-234212.log
+2026-07-09 23:42:12 | Runner xong: mọi job đã được khởi chạy (job cuối vẫn có thể đang chạy nền).
+2026-07-10 11:36:50 | Runner khởi động (pid=279313) — 1 job:
+2026-07-10 11:36:50 |   - catsa_max: 'python CatSA_Max/main.py' lúc 2026-07-10 11:36:50
+2026-07-10 11:36:50 | ĐÃ CHẠY job 'catsa_max' (pid=279316) — output: /home/hongnguyen/demo2/RUN/logs/catsa_max-20260710-113650.log
+2026-07-10 11:36:50 | Runner xong: mọi job đã được khởi chạy (job cuối vẫn có thể đang chạy nền).
+2026-07-10 11:43:10 | Runner khởi động (pid=279666) — 1 job:
+2026-07-10 11:43:10 |   - catsa_diginetica: 'python CatSA/main.py --suite diginetica --run catsa_plus_v2_len_gate.yaml' lúc 2026-07-10 11:43:10
+2026-07-10 11:43:10 | ĐÃ CHẠY job 'catsa_diginetica' (pid=279669) — output: /home/hongnguyen/demo2/RUN/logs/catsa_diginetica-20260710-114310.log
+2026-07-10 11:43:10 | Runner xong: mọi job đã được khởi chạy (job cuối vẫn có thể đang chạy nền).

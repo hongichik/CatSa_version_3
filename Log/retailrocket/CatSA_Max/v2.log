@@ -1,0 +1,4 @@
+2026-07-10 11:36:52 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/retailrocket/CatSA_Max/v2.log
+2026-07-10 11:36:52 | INFO    | === CatSA_Max member: v2 ===
+2026-07-10 11:36:56 | INFO    | wandb: run 'v2' — https://wandb.ai/hongichik321-aol/retailrocket/runs/db129fu2
+2026-07-10 11:36:56 | INFO    | Thiết bị: cuda | encoder=catsa_plus_v2 | fusion=gate | use_cl=True | cl_type=infonce | aux_cat=True | aux_parent=False

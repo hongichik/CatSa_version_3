@@ -102,7 +102,7 @@ def main() -> None:
     parser.add_argument(
         "--suite",
         default="retailrocket",
-        choices=["retailrocket", "diginetica"],
+        choices=["retailrocket", "diginetica", "tmall", "yoochoose"],
         help="Chạy select.yaml trong config/catsa/<suite>/ (mặc định: retailrocket)",
     )
     args = parser.parse_args()

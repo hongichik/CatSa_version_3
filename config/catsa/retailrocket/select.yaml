@@ -1,18 +1,34 @@
 # select.yaml — CatSA RetailRocket
 #
-# CatSA++ length-aware gate (1 model, gate biết độ dài phiên — xem
-# CatSA/encoders/catsa_plus_v2.py biến thể D):
-# Chạy: python CatSA/main.py --suite retailrocket
+# So sánh công bằng: CÙNG kiến trúc catsa_plus_v2 full (như proto — không
+# length_aware_gate/star/multi) chạy trên 2 dataset đã lọc session-level
+# theo độ dài (retailrocket_2_5, retailrocket_2_7) — đối chiếu với kết quả
+# ablation_len cũ (encoder rgcn đời v1) để tách bạch: chênh lệch trước đó
+# đến từ kiến trúc hay từ cách lọc dữ liệu theo độ dài phiên.
+# Chạy tuần tự: python CatSA/main.py --suite retailrocket
 #
 run:
-  - baseline/catsa_plus_v2_len_gate.yaml
+  - baseline/catsa_plus_v2_data2_5.yaml
+  - baseline/catsa_plus_v2_data2_7.yaml
 
 # Đã chạy xong (CatSA++ v2 suite):
 # - baseline/catsa_plus_v2.yaml          # Test mrr@20=0.3696
 # - baseline/catsa_plus_v2_bias.yaml     # crash cat_bias
-# - baseline/catsa_plus_v2_proto.yaml    # Test mrr@20=0.3700 (best)
+# - baseline/catsa_plus_v2_proto.yaml    # Test mrr@20=0.3700 (best cho tới len_gate)
 # - ablation_q3/catsa_v2_c_embed.yaml    # Test 0.3607
 # - ablation_q3/catsa_v2_c_residual.yaml
+# - baseline/catsa_plus_v2_len_gate.yaml # Test mrr@20=0.3704 (length_aware_gate, best hiện tại)
+# - baseline/catsa_plus_v2_star.yaml     # Test mrr@20=0.3696 (+star node SGNN-HN, TỆ hơn len_gate
+#                                           — xác nhận vấn đề là overfitting, không phải thiếu capacity)
+# - baseline/catsa_plus_v2_reg.yaml      # Test mrr@20=0.3641 (regularization mạnh hơn, TỆ hơn nữa
+#                                           — xác nhận underfit, quá tay, không phải hướng đúng)
+# - baseline/catsa_plus_v2_multi.yaml    # Test mrr@20=0.3696 (multi-interest readout K=4, quỹ đạo
+#                                           val gần trùng len_gate — đổi pooling cũng không giúp)
+
+# So sánh cùng kiến trúc catsa_plus_v2 full trên dataset lọc theo độ dài
+# (đối chiếu ablation_len cũ dùng encoder rgcn đời v1):
+# - baseline/catsa_plus_v2_data2_5.yaml  # data/retailrocket_2_5 — so với catsa_2_5 cũ (rgcn: 0.3667)
+# - baseline/catsa_plus_v2_data2_7.yaml  # data/retailrocket_2_7 — so với catsa_2_7 cũ (rgcn: 0.3470)
 
 # CatSA++ length-adaptive (2 model ngắn/dài — đã chạy xong, thay bằng
 # length_aware_gate ở trên vì kết quả tổng thấp hơn model chung do model

@@ -1,0 +1,47 @@
+[ensemble] Load 4 CatSA + CORE trên cuda ...
+[ensemble] 49 tổ hợp × 4 delta — đánh giá trên VAL ...
+
+[ensemble] VAL (87318 mẫu) — top 15 theo mrr@20:
+  0.4062  hr@20=0.6303  catsa_mean*0.7+core*0.3|d2
+  0.4062  hr@20=0.6303  catsa_mean*0.6+core*0.4|d2
+  0.4062  hr@20=0.6299  multi+v2+core|d2
+  0.4061  hr@20=0.6298  catsa_mean*0.5+core*0.5|d2
+  0.4061  hr@20=0.6290  len_gate+multi+v2+core|d2
+  0.4060  hr@20=0.6300  proto+multi+v2+core|d2
+  0.4060  hr@20=0.6295  len_gate+proto+multi+v2+core|d2
+  0.4060  hr@20=0.6295  catsa_mean*0.8+core*0.2|d2
+  0.4059  hr@20=0.6285  len_gate+v2+core|d2
+  0.4058  hr@20=0.6290  len_gate+proto+v2+core|d2
+  0.4057  hr@20=0.6288  len_gate+multi+core|d2
+  0.4057  hr@20=0.6291  proto+v2+core|d2
+  0.4057  hr@20=0.6291  len_gate+proto+multi+core|d2
+  0.4057  hr@20=0.6291  catsa_mean*0.4+core*0.6|d2
+  0.4056  hr@20=0.6272  v2+core|d2
+
+[ensemble] Đánh giá TEST với 10 combo × delta [0.0, 2.0] ...
+
+[ensemble] KẾT QUẢ TEST (81372 mẫu):
+  mrr@20=0.3858  hr@20=0.6085  ndcg@20=0.4367  catsa_mean*0.7+core*0.3|d2 ★
+  mrr@20=0.3857  hr@20=0.6073  ndcg@20=0.4363  len_gate+multi+v2+core|d2 ★
+  mrr@20=0.3856  hr@20=0.6069  ndcg@20=0.4362  multi+v2+core|d2 ★
+  mrr@20=0.3855  hr@20=0.6088  ndcg@20=0.4366  catsa_mean*0.6+core*0.4|d2 ★
+  mrr@20=0.3852  hr@20=0.6083  ndcg@20=0.4362  catsa_mean*0.5+core*0.5|d2 ★
+  mrr@20=0.3808  hr@20=0.5945  ndcg@20=0.4297  multi|d2
+  mrr@20=0.3806  hr@20=0.5945  ndcg@20=0.4295  len_gate|d2
+  mrr@20=0.3803  hr@20=0.6018  ndcg@20=0.4308  catsa_mean*0.7+core*0.3|d0
+  mrr@20=0.3803  hr@20=0.5949  ndcg@20=0.4294  proto|d2
+  mrr@20=0.3803  hr@20=0.6019  ndcg@20=0.4307  catsa_mean*0.6+core*0.4|d0
+  mrr@20=0.3802  hr@20=0.5934  ndcg@20=0.4289  v2|d2
+  mrr@20=0.3801  hr@20=0.6012  ndcg@20=0.4304  catsa_mean*0.5+core*0.5|d0
+  mrr@20=0.3798  hr@20=0.5999  ndcg@20=0.4299  multi+v2+core|d0
+  mrr@20=0.3796  hr@20=0.6007  ndcg@20=0.4299  len_gate+multi+v2+core|d0
+  mrr@20=0.3787  hr@20=0.5955  ndcg@20=0.4283  core|d2
+  mrr@20=0.3718  hr@20=0.5871  ndcg@20=0.4208  core|d0
+  mrr@20=0.3702  hr@20=0.5860  ndcg@20=0.4194  len_gate|d0
+  mrr@20=0.3700  hr@20=0.5868  ndcg@20=0.4195  proto|d0
+  mrr@20=0.3696  hr@20=0.5848  ndcg@20=0.4186  v2|d0
+  mrr@20=0.3696  hr@20=0.5864  ndcg@20=0.4190  multi|d0
+
+[ensemble] Combo chọn theo VAL: catsa_mean*0.7+core*0.3|d2
+[ensemble] → TEST chính thức: mrr@20=0.3858 | hr@20=0.6085 | ndcg@20=0.4367
+[ensemble] Đã ghi checkpoints/ensemble_eval_result.yaml

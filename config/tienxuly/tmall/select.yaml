@@ -1,0 +1,5 @@
+# select.yaml — danh sách version preprocess Tmall sẽ chạy
+# Trước khi chạy: tải user_log_format1.csv về data/raw/tmall/ (xem dataset.yaml)
+# python tienxuly/main.py --suite tmall
+run:
+  - tmall.yaml

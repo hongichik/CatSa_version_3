@@ -1,0 +1,33 @@
+[phase4] Load 4 CatSA cũ + bản A + CORE trên cuda ...
+[phase4] 48 biến thể — VAL ...
+
+[phase4] VAL (87318 mẫu) — top 15:
+  0.4107  hr@20=0.6403  old0.4|A0.3|core0.3|rep10
+  0.4106  hr@20=0.6402  old0.35|A0.3|core0.35|rep10
+  0.4106  hr@20=0.6409  old0.4|A0.3|core0.3|rep8
+  0.4106  hr@20=0.6409  old0.35|A0.3|core0.35|rep8
+  0.4105  hr@20=0.6401  old0.5|A0.3|core0.2|rep10
+  0.4105  hr@20=0.6400  old0.55|A0.15|core0.3|rep10
+  0.4105  hr@20=0.6399  old0.5|A0.15|core0.35|rep10
+  0.4105  hr@20=0.6407  old0.5|A0.3|core0.2|rep8
+  0.4104  hr@20=0.6398  old0.65|A0.15|core0.2|rep10
+  0.4103  hr@20=0.6385  old0.35|A0.45|core0.2|rep10
+  0.4103  hr@20=0.6392  old0.35|A0.45|core0.2|rep8
+  0.4103  hr@20=0.6392  old0.25|A0.45|core0.3|rep10
+  0.4103  hr@20=0.6399  old0.25|A0.45|core0.3|rep8
+  0.4102  hr@20=0.6403  old0.5|A0.15|core0.35|rep8
+  0.4102  hr@20=0.6404  old0.55|A0.15|core0.3|rep8
+
+[phase4] TEST với top-6 theo val ...
+
+[phase4] KẾT QUẢ TEST (81372 mẫu):
+  mrr@20=0.3898  hr@20=0.6173  ndcg@20=0.4419  old0.5|A0.3|core0.2|rep10
+  mrr@20=0.3896  hr@20=0.6173  ndcg@20=0.4418  old0.35|A0.3|core0.35|rep10
+  mrr@20=0.3896  hr@20=0.6177  ndcg@20=0.4419  old0.4|A0.3|core0.3|rep10
+  mrr@20=0.3896  hr@20=0.6180  ndcg@20=0.4419  old0.35|A0.3|core0.35|rep8
+  mrr@20=0.3896  hr@20=0.6184  ndcg@20=0.4419  old0.4|A0.3|core0.3|rep8
+  mrr@20=0.3892  hr@20=0.6171  ndcg@20=0.4414  old0.55|A0.15|core0.3|rep10
+
+[phase4] Combo chọn theo VAL: old0.4|A0.3|core0.3|rep10
+[phase4] → TEST chính thức: mrr@20=0.3896 | hr@20=0.6177 | ndcg@20=0.4419
+[phase4] Đã ghi checkpoints/ensemble_eval4_result.yaml

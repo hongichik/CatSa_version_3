@@ -1,0 +1,178 @@
+2026-07-09 12:53:04 | INFO    | Log được ghi tại: /home/hongnguyen/demo2/Log/retailrocket/CatSA/baseline/CatSA_plus_v2_len_gate.log
+2026-07-09 12:53:04 | INFO    | 
+====================================================================
+CẤU HÌNH LÚC CHẠY (config_dir: config | version: catsa_plus_v2_len_gate)
+====================================================================
+logging:
+  dir: Log
+  level: INFO
+  console: true
+project:
+  name: retailrocket
+  filename_mode: custom
+  custom_filename: CatSA/baseline/CatSA_plus_v2_len_gate.log
+wandb:
+  enabled: true
+  api_key: '***da-che***'
+  project: ''
+  entity: ''
+  run_name: ''
+  mode: online
+dataset:
+  source: kagglehub
+  kagglehub_handle: retailrocket/ecommerce-dataset
+  local_path: data/raw
+  name: retailrocket
+preprocess:
+  output_dir: data/retailrocket_2_5
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+  event_types:
+  - view
+  session_same_day: true
+  session_gap_seconds: 1800
+  dedup_consecutive: false
+  min_item_support: 5
+  min_session_length: 2
+  max_session_length: 5
+  session_length_mode: filter
+  max_prefix_length: 50
+  require_item_category: false
+  val_ratio: 0.1
+  test_ratio: 0.1
+  max_sessions: 0
+data:
+  data_dir: data/retailrocket_item_hon_5
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+model:
+  embedding_dim: 100
+  num_layers: 2
+  use_taxonomy: true
+  dropout: 0.1
+  encoder_type: catsa_plus_v2
+  fusion_type: gate
+  n_heads: 2
+  retrieval_topk: 5
+  max_seq_length: 50
+  trm_layers: 2
+  trm_inner_size: 256
+  temperature: 0.07
+  sess_dropout: 0.2
+  item_dropout: 0.2
+  extra_rerank: false
+  extra_beta: 12.0
+  trm_dropout: 0.5
+  use_seq_trm: true
+  use_error_aux: false
+  error_aux_alpha: 0.15
+  post_process: false
+  post_same_boost: 0.35
+  post_sib_boost: 0.12
+  post_other_penalty: 0.08
+  use_module1: true
+  path_fusion: dual_score
+  dual_score_beta: 1.0
+  learn_score_beta: true
+  trm_residual_gamma: 0.5
+  use_cat_bias: false
+  length_aware_gate: true
+  length_gate_max_len: 50
+  use_star_node: false
+  use_multi_interest: false
+  n_interests: 4
+augment:
+  strategies:
+  - same
+  - sibling
+  - hybrid
+  strategy_weights:
+  - 0.4
+  - 0.3
+  - 0.3
+  eta_aug: 0.3
+  eta_crop: 0.75
+  k_min: 5
+training:
+  use_cl: true
+  lambda_cl: 0.05
+  cl_type: both
+  lambda_proto: 0.05
+  aux_cat: true
+  aux_parent: false
+  lambda_aux_cat: 0.05
+  lambda_aux_parent: 0.0
+  tau: 0.2
+  batch_size: 256
+  learning_rate: 0.001
+  weight_decay: 1.0e-05
+  max_epochs: 30
+  patience: 5
+  grad_clip: 5.0
+  seed: 42
+  device: auto
+  num_workers: 0
+  checkpoint_dir: checkpoints
+  save_dir: checkpoints/CatSA/retailrocket/catsa_plus_v2_len_gate
+  prefix_len_min: 0
+  prefix_len_max: 0
+evaluation:
+  top_k:
+  - 10
+  - 20
+  primary_metric: mrr@20
+  mode: standard
+  length_threshold: 5
+  checkpoint_short: ''
+  checkpoint_long: ''
+config_dir: config
+version: catsa_plus_v2_len_gate
+====================================================================
+wandb: [wandb.login()] Using explicit session credentials for https://api.wandb.ai.
+wandb: Appending key for api.wandb.ai to your netrc file: /home/hongnguyen/.netrc
+wandb: Currently logged in as: hongichik321 (hongichik321-aol) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run iv971uyc
+wandb: Tracking run with wandb version 0.28.0
+wandb: Run data is saved locally in /home/hongnguyen/demo2/wandb/run-20260709_125306-iv971uyc
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run CatSA_plus_v2_len_gate
+wandb: ⭐️ View project at https://wandb.ai/hongichik321-aol/retailrocket
+wandb: 🚀 View run at https://wandb.ai/hongichik321-aol/retailrocket/runs/iv971uyc
+2026-07-09 12:53:08 | INFO    | wandb: run 'CatSA_plus_v2_len_gate' — https://wandb.ai/hongichik321-aol/retailrocket/runs/iv971uyc
+2026-07-09 12:53:08 | INFO    | Dữ liệu [data/retailrocket_item_hon_5]: |I|=79649, |C|=1185, train=283023 phiên
+2026-07-09 12:53:08 | INFO    | Thiết bị: cuda | encoder=catsa_plus_v2 | fusion=gate | use_cl=True | cl_type=both | aux_cat=True | aux_parent=False
+2026-07-09 12:59:04 | INFO    | Epoch 1: total=7.2496, rec=6.8028, cl=0.2557, aux=0.1911 (355.4s)
+2026-07-09 12:59:04 | INFO    |   Augment no-op rate: 0.0267 (20397/764873 lần gọi không tạo thay đổi thật)
+2026-07-09 12:59:17 | INFO    |   Val: hr@10=0.5165 | ndcg@10=0.4121 | mrr@10=0.3792 | hr@20=0.5652 | ndcg@20=0.4244 | mrr@20=0.3826
+2026-07-09 12:59:17 | INFO    |   → Model tốt nhất mới (mrr@20=0.3826)
+2026-07-09 13:05:04 | INFO    | Epoch 2: total=5.0240, rec=4.6568, cl=0.2385, aux=0.1287 (346.5s)
+2026-07-09 13:05:04 | INFO    |   Augment no-op rate: 0.0267 (20392/764873 lần gọi không tạo thay đổi thật)
+2026-07-09 13:05:17 | INFO    |   Val: hr@10=0.5381 | ndcg@10=0.4215 | mrr@10=0.3849 | hr@20=0.5965 | ndcg@20=0.4363 | mrr@20=0.3889
+2026-07-09 13:05:17 | INFO    |   → Model tốt nhất mới (mrr@20=0.3889)
+2026-07-09 13:11:14 | INFO    | Epoch 3: total=4.5385, rec=4.1786, cl=0.2355, aux=0.1244 (356.9s)
+2026-07-09 13:11:14 | INFO    |   Augment no-op rate: 0.0266 (20379/764873 lần gọi không tạo thay đổi thật)
+2026-07-09 13:11:27 | INFO    |   Val: hr@10=0.5438 | ndcg@10=0.4243 | mrr@10=0.3867 | hr@20=0.6040 | ndcg@20=0.4395 | mrr@20=0.3909
+2026-07-09 13:11:27 | INFO    |   → Model tốt nhất mới (mrr@20=0.3909)
+2026-07-09 13:17:14 | INFO    | Epoch 4: total=4.3620, rec=4.0043, cl=0.2347, aux=0.1231 (346.5s)
+2026-07-09 13:17:14 | INFO    |   Augment no-op rate: 0.0266 (20381/764873 lần gọi không tạo thay đổi thật)
+2026-07-09 13:17:27 | INFO    |   Val: hr@10=0.5451 | ndcg@10=0.4233 | mrr@10=0.3851 | hr@20=0.6069 | ndcg@20=0.4390 | mrr@20=0.3894
+2026-07-09 13:23:24 | INFO    | Epoch 5: total=4.2691, rec=3.9123, cl=0.2342, aux=0.1225 (357.0s)
+2026-07-09 13:23:24 | INFO    |   Augment no-op rate: 0.0267 (20407/764873 lần gọi không tạo thay đổi thật)
+2026-07-09 13:23:37 | INFO    |   Val: hr@10=0.5485 | ndcg@10=0.4243 | mrr@10=0.3853 | hr@20=0.6103 | ndcg@20=0.4400 | mrr@20=0.3897
+2026-07-09 13:29:23 | INFO    | Epoch 6: total=4.2087, rec=3.8527, cl=0.2339, aux=0.1222 (346.0s)
+2026-07-09 13:29:23 | INFO    |   Augment no-op rate: 0.0266 (20358/764873 lần gọi không tạo thay đổi thật)
+2026-07-09 13:29:36 | INFO    |   Val: hr@10=0.5481 | ndcg@10=0.4254 | mrr@10=0.3869 | hr@20=0.6092 | ndcg@20=0.4409 | mrr@20=0.3912
+2026-07-09 13:29:36 | INFO    |   → Model tốt nhất mới (mrr@20=0.3912)
+2026-07-09 13:35:33 | INFO    | Epoch 7: total=4.1625, rec=3.8066, cl=0.2340, aux=0.1220 (356.6s)
+2026-07-09 13:35:33 | INFO    |   Augment no-op rate: 0.0267 (20420/764873 lần gọi không tạo thay đổi thật)
+2026-07-09 13:35:46 | INFO    |   Val: hr@10=0.5472 | ndcg@10=0.4247 | mrr@10=0.3863 | hr@20=0.6099 | ndcg@20=0.4406 | mrr@20=0.3906
+2026-07-09 13:41:33 | INFO    | Epoch 8: total=4.1309, rec=3.7750, cl=0.2339, aux=0.1219 (347.3s)
+2026-07-09 13:41:33 | INFO    |   Augment no-op rate: 0.0267 (20425/764873 lần gọi không tạo thay đổi thật)
+2026-07-09 13:41:46 | INFO    |   Val: hr@10=0.5469 | ndcg@10=0.4231 | mrr@10=0.3842 | hr@20=0.6085 | ndcg@20=0.4387 | mrr@20=0.3885
+2026-07-09 13:47:43 | INFO    | Epoch 9: total=4.1041, rec=3.7487, cl=0.2337, aux=0.1218 (356.4s)
+2026-07-09 13:47:43 | INFO    |   Augment no-op rate: 0.0266 (20381/764873 lần gọi không tạo thay đổi thật)
+2026-07-09 13:47:55 | INFO    |   Val: hr@10=0.5472 | ndcg@10=0.4231 | mrr@10=0.3842 | hr@20=0.6088 | ndcg@20=0.4387 | mrr@20=0.3885

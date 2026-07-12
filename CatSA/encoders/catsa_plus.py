@@ -24,7 +24,20 @@ from CORE.models.core_trm import TransNet
 
 from ..augment import compute_siblings
 from .common import SoftAttentionReadout, fuse_vectors
-from .transition import _session_cat_tensor
+
+
+def _session_cat_tensor(
+    sessions: list[list[int]], item2cat: dict[int, int], device: torch.device,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    """Pad chuỗi category theo session prefix; trả về (B, L), lengths (B,)."""
+    cat_seqs = [[item2cat.get(it, 0) for it in s] for s in sessions]
+    lengths = torch.tensor([len(s) for s in cat_seqs], dtype=torch.long, device=device)
+    max_len = max(int(lengths.max()), 1)
+    padded = torch.zeros(len(cat_seqs), max_len, dtype=torch.long, device=device)
+    for i, seq in enumerate(cat_seqs):
+        if seq:
+            padded[i, : len(seq)] = torch.tensor(seq, dtype=torch.long, device=device)
+    return padded, lengths
 
 
 def _sessions_to_trm_tensor(

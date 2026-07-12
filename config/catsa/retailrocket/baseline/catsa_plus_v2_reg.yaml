@@ -1,0 +1,84 @@
+# CatSA++ regularization — chẩn đoán từ 3 lần chạy trước (proto 0.3700,
+# len_gate 0.3704, star 0.3696): cả 3 đều overfit sớm (val mrr@20 đạt đỉnh
+# epoch 3-5 rồi giảm dần dù train loss vẫn tiếp tục giảm đều — dấu hiệu kinh
+# điển của overfitting, KHÔNG phải thiếu năng lực biểu diễn). Thêm kiến trúc
+# (star node) chỉ làm tăng tham số → overfit nhanh hơn (0.3696 < 0.3704).
+#
+# Hướng thử: TĂNG regularization (dropout Module 1, weight_decay) trên nền
+# len_gate (bỏ star node vì không giúp) — để model học chậm hơn, giảm
+# khoảng cách train/val, hy vọng đỉnh val cao hơn và bền hơn trước khi suy
+# giảm. Không thêm kiến trúc mới — vẫn giữ nguyên Module 1 + Module 2 +
+# Session-level InfoNCE + length_aware_gate.
+#
+# Chạy: python CatSA/main.py --run baseline/catsa_plus_v2_reg.yaml
+project:
+  name: retailrocket
+  filename_mode: custom
+  custom_filename: CatSA/baseline/CatSA_plus_v2_reg.log
+
+data:
+  data_dir: data/retailrocket_item_hon_5
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+
+model:
+  embedding_dim: 100
+  num_layers: 2
+  use_taxonomy: true
+  dropout: 0.3
+  encoder_type: catsa_plus_v2
+  fusion_type: gate
+  n_heads: 2
+  retrieval_topk: 5
+  max_seq_length: 50
+  trm_layers: 2
+  trm_inner_size: 256
+  temperature: 0.07
+  sess_dropout: 0.3
+  item_dropout: 0.3
+  trm_dropout: 0.5
+  use_seq_trm: true
+  use_module1: true
+  path_fusion: dual_score
+  dual_score_beta: 1.0
+  learn_score_beta: true
+  use_cat_bias: false
+  extra_rerank: false
+  length_aware_gate: true
+  length_gate_max_len: 50
+  use_star_node: false
+
+augment:
+  strategies: [same, sibling, hybrid]
+  strategy_weights: [0.4, 0.3, 0.3]
+  eta_aug: 0.3
+  eta_crop: 0.75
+  k_min: 5
+
+training:
+  use_cl: true
+  cl_type: both
+  lambda_cl: 0.05
+  lambda_proto: 0.05
+  aux_cat: true
+  aux_parent: false
+  lambda_aux_cat: 0.05
+  lambda_aux_parent: 0.0
+  tau: 0.2
+  batch_size: 256
+  learning_rate: 0.001
+  weight_decay: 0.0005
+  max_epochs: 30
+  patience: 7
+  grad_clip: 5.0
+  seed: 42
+  device: auto
+  num_workers: 0
+  checkpoint_dir: checkpoints
+  save_dir: "checkpoints/CatSA/retailrocket/catsa_plus_v2_reg"
+
+evaluation:
+  top_k: [10, 20]
+  primary_metric: mrr@20

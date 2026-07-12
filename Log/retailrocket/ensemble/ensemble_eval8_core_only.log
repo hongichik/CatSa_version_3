@@ -1,0 +1,15 @@
+[core-only] Load 2 CORE trên cuda ...
+[core-only] 10 biến thể × 3 bucket — VAL ...
+
+[core-only] Chọn trọng số riêng từng bucket (val mrr@20):
+  bucket 1_3 (n=58975): w42_0.5|rep12 — val mrr@20=0.4661
+  bucket 4_7 (n=13607): w42_0.6|rep12 — val mrr@20=0.3462
+  bucket 8_plus (n=14736): w42_0.7|rep8 — val mrr@20=0.2148
+
+[core-only] TEST với bộ trọng số ghép ...
+
+[core-only] KẾT QUẢ TEST (81372 mẫu):
+  hr@10=0.5472 | ndcg@10=0.4196 | mrr@10=0.3792 | hr@20=0.6095 | ndcg@20=0.4353 | mrr@20=0.3835
+
+[core-only] → TEST chính thức: mrr@20=0.3835
+[core-only] Đã ghi checkpoints/ensemble_eval8_core_only_result.yaml

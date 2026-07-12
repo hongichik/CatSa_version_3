@@ -17,13 +17,10 @@ data:
 
 # ----------------------------------------------------------------------------
 # MODEL — chọn encoder_type:
-#   rgcn       : CatSA gốc (hetero graph + SAGEConv)
-#   concat     : item_emb + cat_emb + sequential GNN (baseline)
-#   dual_path  : nhánh sequential + nhánh taxonomy, fusion qua fusion_type
-#   hgt        : HGTConv (relation-aware attention)
-#   retrieval  : RGCN + global category retrieval (cross-session)
-#   transition : sequential GNN + GRU trên chuỗi category
-#   soft_cat   : soft membership item→category + RGCN
+#   catsa_plus    : CatSA+ (Module 1 + TRM, fusion embed_gate cũ)
+#   catsa_plus_v2 : CatSA++ v2 (dual_score/len_gate — bản tốt nhất hiện tại)
+# (các encoder đời v1: rgcn/concat/dual_path/hgt/retrieval/transition/soft_cat/
+#  mg_core đã loại bỏ vì kết quả kém — log lưu ở Log/retailrocket/CatSA/kem/)
 # ----------------------------------------------------------------------------
 model:
   embedding_dim: 100
@@ -31,9 +28,8 @@ model:
   use_taxonomy: true
   dropout: 0.1
 
-  encoder_type: rgcn
-  # dual_path | transition: cross_attn | gate | sum
-  fusion_type: cross_attn
+  encoder_type: catsa_plus_v2
+  fusion_type: gate
   n_heads: 2
   retrieval_topk: 5
 

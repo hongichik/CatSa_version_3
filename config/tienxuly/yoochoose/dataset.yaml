@@ -1,0 +1,8 @@
+# dataset.yaml — nguồn dữ liệu thô YOOCHOOSE / RecSys Challenge 2015 (tienxuly/download.py)
+# File chính: yoochoose-clicks.dat (session_id,timestamp,item_id,category — KHÔNG header)
+# Category flat (không taxonomy): "0"=không rõ, "S"=special offer, 1-12=category, số dài=brand
+dataset:
+  source: kagglehub                                 # tải tự động qua kagglehub
+  kagglehub_handle: chadgostopp/recsys-challenge-2015
+  local_path: data/raw/yoochoose                    # dùng khi source: local
+  name: yoochoose

@@ -1,0 +1,90 @@
+# CatSA++ v4 "cat_intent_gated" — sửa cat_intent để hết hại HR bằng
+# confidence gate (cat_intent_conf_gate=true, mới thêm vào catsa_plus_v2.py).
+#
+# Vấn đề của catsa_plus_v3_cat_intent.yaml: cat_intent cộng CÙNG một prior
+# cho MỌI item trong category dự đoán — khi model đoán sai category, nó đè
+# nhầm cả loạt item sai lên trên, hr@20 giảm 0.5867 → 0.5733 dù mrr@20 giữ
+# nguyên (0.3700). Ở đây: nhân thêm hệ số confidence = 1 − entropy chuẩn
+# hoá của phân phối category dự đoán → cat_intent chỉ tác động mạnh khi
+# model THỰC SỰ chắc chắn về category, tắt gần hết khi không chắc.
+#
+# Nền: giống hệt catsa_plus_v3_cat_intent.yaml (đã có sẵn use_repeat_boost)
+# — chỉ thêm cat_intent_conf_gate=true để cô lập đúng 1 thay đổi.
+#
+# Chạy: python CatSA/main.py --run baseline/catsa_plus_v4_cat_intent_gated.yaml
+project:
+  name: retailrocket
+  filename_mode: custom
+  custom_filename: CatSA/baseline/CatSA_plus_v4_cat_intent_gated.log
+
+data:
+  data_dir: data/retailrocket_item_hon_5
+  train_file: train.txt
+  val_file: val.txt
+  test_file: test.txt
+  lookup_file: lookup_tables.pkl
+
+model:
+  embedding_dim: 100
+  num_layers: 2
+  use_taxonomy: true
+  dropout: 0.1
+  encoder_type: catsa_plus_v2
+  fusion_type: gate
+  n_heads: 2
+  retrieval_topk: 5
+  max_seq_length: 50
+  trm_layers: 2
+  trm_inner_size: 256
+  temperature: 0.07
+  sess_dropout: 0.2
+  item_dropout: 0.2
+  trm_dropout: 0.5
+  use_seq_trm: true
+  use_module1: true
+  path_fusion: dual_score
+  dual_score_beta: 1.0
+  learn_score_beta: true
+  use_cat_bias: false
+  extra_rerank: false
+  length_aware_gate: true
+  length_gate_max_len: 50
+  use_cat_intent: true
+  cat_intent_beta: 0.3
+  cat_intent_layers: 1
+  cat_intent_conf_gate: true
+  use_repeat_boost: true
+  repeat_boost_init: 2.0
+
+augment:
+  strategies: [same, sibling, hybrid]
+  strategy_weights: [0.4, 0.3, 0.3]
+  eta_aug: 0.3
+  eta_crop: 0.75
+  k_min: 5
+
+training:
+  use_cl: true
+  cl_type: both
+  lambda_cl: 0.05
+  lambda_proto: 0.05
+  aux_cat: true
+  aux_parent: false
+  lambda_aux_cat: 0.05
+  lambda_aux_parent: 0.0
+  tau: 0.2
+  batch_size: 256
+  learning_rate: 0.001
+  weight_decay: 0.00001
+  max_epochs: 30
+  patience: 5
+  grad_clip: 5.0
+  seed: 42
+  device: auto
+  num_workers: 0
+  checkpoint_dir: checkpoints
+  save_dir: "checkpoints/CatSA/retailrocket/catsa_plus_v4_cat_intent_gated"
+
+evaluation:
+  top_k: [10, 20]
+  primary_metric: mrr@20

@@ -1,0 +1,16 @@
+[phase6] len_gate_seed43 sẵn sàng: False
+[phase6] Load models trên cuda ...
+[phase6] 32 biến thể × 3 bucket — VAL ...
+
+[phase6] Chọn trọng số riêng từng bucket (theo val mrr@20):
+  bucket 1_3 (n=58975): old0.5|A0.2|rest0.3|rep12 — val mrr@20=0.4733
+  bucket 4_7 (n=13607): old0.4|A0.3|rest0.3|rep12 — val mrr@20=0.3513
+  bucket 8_plus (n=14736): old0.2|A0.4|rest0.4|rep8 — val mrr@20=0.2180
+
+[phase6] TEST với bộ trọng số ghép theo bucket ...
+
+[phase6] KẾT QUẢ TEST (81372 mẫu):
+  hr@10=0.5554 | ndcg@10=0.4263 | mrr@10=0.3856 | hr@20=0.6191 | ndcg@20=0.4424 | mrr@20=0.3900
+
+[phase6] → TEST chính thức: mrr@20=0.3900
+[phase6] Đã ghi checkpoints/ensemble_eval6_result.yaml

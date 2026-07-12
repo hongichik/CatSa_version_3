@@ -1,0 +1,5 @@
+# select.yaml — danh sách version preprocess YOOCHOOSE sẽ chạy
+# python tienxuly/main.py --suite yoochoose        → chạy lần lượt tất cả
+# python tienxuly/main.py --run yoochoose.yaml --suite yoochoose
+run:
+  - yoochoose.yaml
